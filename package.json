@@ -4,6 +4,10 @@
   "author": "qsniyg",
   "license": "Apache-2.0",
   "private": true,
+  "main": "userscript.user.js",
+  "bin": {
+    "maxurl": "index.js"
+  },
   "devDependencies": {
     "concurrently": "^7.0.0",
     "crx3": "^1.1.3",
