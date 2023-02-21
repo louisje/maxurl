@@ -3,7 +3,7 @@
   "version": "0.19.6",
   "author": "qsniyg",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "main": "userscript.user.js",
   "bin": {
     "maxurl": "index.js"
