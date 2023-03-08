@@ -1,6 +1,6 @@
 {
   "name": "image-max-url",
-  "version": "0.19.6",
+  "version": "2023.2.0",
   "author": "qsniyg",
   "license": "Apache-2.0",
   "private": false,
@@ -19,7 +19,7 @@
     "watch-js": "node ./tools/remcomments.js",
     "build-js": "node ./tools/remcomments.js userscript.user.js nowatch",
     "watch": "npx concurrently -k \"npm:watch-tsc\" \"npm:watch-js\"",
-    "build": "npm run build-tsc; npm run build-js",
+    "build": "npm run build-tsc && npm run build-js",
     "build-libs": "./tools/build_libs.sh",
     "package": "./tools/package_extension.sh",
     "package-release": "./tools/package_extension.sh release"
