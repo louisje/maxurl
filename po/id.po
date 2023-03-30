@@ -12,9 +12,9 @@ msgstr ""
 msgid "$language_native$"
 msgstr ""
 
-#. English: Finds larger or original versions of images and videos for 8000+ websites, including a powerful media popup and download feature
+#. English: Finds larger or original versions of images and videos for 8200+ websites, including a powerful media popup and download feature
 msgid "$description$"
-msgstr "Menemukan versi gambar dan video yang lebih besar atau orisinal untuk lebih dari 8000 situs web"
+msgstr "Menemukan versi gambar dan video yang lebih besar atau orisinal untuk lebih dari 8200 situs web"
 
 #. English: Options
 msgid "options_header"
@@ -1015,6 +1015,14 @@ msgstr ""
 
 #. popup_video_screenshot_format.options.jpg.name
 msgid "JPG"
+msgstr ""
+
+#. popup_enable_subtitles.name
+msgid "Enable subtitles"
+msgstr ""
+
+#. popup_enable_subtitles.description
+msgid "Enables subtitles to be overlayed on top of the video"
 msgstr ""
 
 #. mouseover_ui.name
@@ -2595,12 +2603,6 @@ msgstr ""
 
 #. instagram_use_app_api.description
 msgid "Uses Instagram's native API if possible, requires you to be logged into Instagram. This usually allows for higher resolution images (1440x*) to be returned."
-msgstr ""
-
-#. instagram_use_app_api.warning.true
-msgid ""
-"As of a recent (May 2021) Instagram update, this option may flag your account when requesting too often.\n"
-"Please consider using a backup account if enabling this option."
 msgstr ""
 
 #. instagram_dont_use_web.name

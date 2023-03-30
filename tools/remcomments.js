@@ -25,7 +25,7 @@ for (var i = 3; i < process.argv.length; i++) {
 }
 
 var get_multidomain = function(name, userscript) {
-	var multidomain_text = "common_functions\\." + name + "\\s*=\\s*function\\s*\\(.*?\\)\\s*{\\s*(?://.*\\n\\s*)*return\\s+([\\s\\S]*?);\\s*};";
+	var multidomain_text = "common_functions(?:\\.|\\[\")" + name + "(?:\"\\])?\\s*=\\s*function\\s*\\(.*?\\)\\s*{\\s*(?://.*\\n\\s*)*return\\s+([\\s\\S]*?);\\s*};";
 	var multidomain_regex = new RegExp(multidomain_text);
 	var match = userscript.match(multidomain_regex);
 	if (!match) return null;
@@ -37,7 +37,7 @@ var replace_multidomain = function(call, prevchar, line, userscript) {
 	// comment
 	if (prevchar === "/") return null;
 
-	var multidomain_name = call.replace(/^common_functions\.(.*?)\s*\(.*/, "$1");
+	var multidomain_name = call.replace(/^common_functions(?:\.|\[")(.*?)(?:"\])?\s*\(.*/, "$1");
 	var is_host = /\(\s*host_domain/.test(call);
 
 	var multidomain_text = get_multidomain(multidomain_name, userscript);
@@ -76,9 +76,24 @@ var normalize_tsstyle = function(script) {
 		.replace(/}\n\s*((?:catch|else)\s)/g, "} $1");
 }
 
+var move_awaiter_generator = function(script) {
+	let ag_regex = /\n(var __awaiter = [\s\S]*?\n};\nvar __generator = [\s\S]*?\n};)\r*\n/;
+	let ag_match = script.match(ag_regex);
+	if (!ag_match) {
+		console.warn("Unable to find __awaiter and __generator");
+		return script;
+	}
+	let ag_script = ag_match[1];
+	script = script
+		.replace(ag_regex, "\n")
+		.replace(/(\n\(function\(\) {\n(?:\s*\/\/.*\r*\n)*)/, "$1" + ag_script + "\n");
+	return script;
+}
+
 function build_userscript_user_js(tsout) {
 	var userscript = fs.readFileSync(tsout).toString();
 	userscript = normalize_tsstyle(userscript);
+	userscript = move_awaiter_generator(userscript);
 	var lines = spaces_to_tabs(userscript.split("\n"));
 
 	var newlines = [];
@@ -164,11 +179,11 @@ function update() {
 		// Slight performance improvement, because of e.g. nir_debug(..., deepcopy(...))
 		line = line.replace(/^(\s*)(nir_debug\()/, "$1if (_nir_debug_) $2");
 
-		var multidomain_match = line.match(/(.)(common_functions\.multidomain__[_a-z]+\(.*?\))/);
+		var multidomain_match = line.match(/(.)(common_functions(?:\.|\[")multidomain__[_a-z]+(?:"\])?\(.*?\))/);
 		if (multidomain_match) {
 			var new_text = replace_multidomain(multidomain_match[2], multidomain_match[1], line, userscript);
 			if (new_text) {
-				line = line.replace(/common_functions\.multidomain__[_a-z]+\(.*?\)/, new_text);
+				line = line.replace(/common_functions(?:\.|\[")multidomain__[_a-z]+(?:"\])?\(.*?\)/, new_text);
 			} else {
 				console.log("not replacing", line);
 			}
