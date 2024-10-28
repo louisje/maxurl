@@ -12,7 +12,7 @@ msgstr ""
 msgid "$language_native$"
 msgstr "简体中文"
 
-#. English: Finds larger or original versions of images and videos for 8200+ websites, including a powerful media popup and download feature
+#. English: Finds larger or original versions of images and videos for 9400+ websites, including a powerful media popup and download feature
 msgid "$description$"
 msgstr "在近万个网站上查找尺寸更大或原版的图像/视频，提供媒体文件小弹窗和下载功能"
 
@@ -178,6 +178,10 @@ msgstr "替换图像"
 msgid "subcategory_highlightimages"
 msgstr "高亮图像"
 
+#. English: Custom Gallery
+msgid "subcategory_customgallery"
+msgstr ""
+
 msgid "General"
 msgstr "通用"
 
@@ -216,6 +220,10 @@ msgstr "意大利语"
 #. language.options.ko.name
 msgid "한국어"
 msgstr "韩语"
+
+#. language.options.pt-BR.name
+msgid "Português (Brasil)"
+msgstr ""
 
 #. language.options.ru.name
 msgid "Русский"
@@ -526,14 +534,14 @@ msgid "Redirect for HTML pages too"
 msgstr "同时重定向 HTML 页面"
 
 #. redirect_host_html.description
-msgid "Tries redirection even if the host page is HTML. This option might be useful for dead links. However, this will also result in many normal pages being redirected to images/video, so please avoid enabling this by default!"
-msgstr "尝试重定向，即使主页是 HTML。此选项可能对失效链接有用。但是，这也会导致许多正常的页面被重定向到图像/视频，所以请避免默认启用这个！"
+msgid "Tries redirection even if the host page is HTML. This option might be useful for dead links. However, this will also result in many normal pages being redirected to images/video, so use with caution."
+msgstr ""
 
 #. redirect_host_html.warning.true
 msgid ""
 "This will result in many pages being redirected to images/videos.\n"
-"I'd recommend only enabling this for the media you need it for, then disabling it after."
-msgstr "这将导致许多页面被重定向到图像/视频。我建议只为您需要的媒体启用它，然后再禁用它。"
+"I'd recommend only either enabling this for the media you need it for then disabling it after, or using the black/whitelist feature below to only allow it to run for specified websites."
+msgstr ""
 
 #. mouseover.name
 #. English: Enable image popup
@@ -720,38 +728,6 @@ msgstr "“禁止”指针持续时间"
 #. mouseover_notallowed_duration.description
 msgid "How long the `not-allowed` cursor should last"
 msgstr "“禁止”指针的显示持续多久"
-
-#. mouseover_exclude_page_bg.name
-msgid "Exclude page background"
-msgstr "排除页面背景"
-
-#. mouseover_exclude_page_bg.description
-msgid "Excludes the page background for the popup"
-msgstr "避免为页面背景显示弹窗"
-
-#. mouseover_minimum_size.name
-msgid "Minimum size"
-msgstr "最小尺寸"
-
-#. mouseover_minimum_size.description
-msgid "Smallest size acceptable for the popup to open (this option is ignored for background images). This refers to the size of the media to be popped up, which may differ from the source media."
-msgstr "允许多小的图像显示弹窗。背景图像不被此选项涵盖。这指将要弹窗显示的媒体大小，这可能与源媒体不同。"
-
-#. popup_maximum_source_size.name
-msgid "Maximum source size"
-msgstr "最大源尺寸"
-
-#. popup_maximum_source_size.description
-msgid "Maximum size (width/height) for the source media to allow popping up (this option is ignored for background images). Set to `0` for any size."
-msgstr "以源媒体显示弹窗的最大尺寸（宽度/高度）（对背景图像来说此选项无效)。设为 0 表示任意大小。"
-
-#. mouseover_exclude_backgroundimages.name
-msgid "Exclude `background-image`s"
-msgstr "排除背景图像"
-
-#. mouseover_exclude_backgroundimages.description
-msgid "Excludes `background-image`s for the popup. Might prevent the popup from working on many images"
-msgstr "不为背景图像显示弹窗。可能使很多图像上不显示弹窗"
 
 #. mouseover_exclude_imagetab.name
 msgid "Exclude image tabs"
@@ -1369,6 +1345,14 @@ msgstr "添加弹出的链接到历史记录"
 msgid "Adds the image/video link opened through the popup to the browser's history"
 msgstr "将通过弹窗打开的图像/视频链接添加到浏览器的历史记录"
 
+#. mouseover_add_thumbnail_to_history.name
+msgid "Add thumbnail link to history"
+msgstr ""
+
+#. mouseover_add_thumbnail_to_history.description
+msgid "Adds the original media link opened through the popup to the browser's history"
+msgstr ""
+
 #. allow_remote.name
 msgid "Allow inter-frame communication"
 msgstr "允许框架间通信"
@@ -1488,10 +1472,6 @@ msgstr "最小拖拽起始"
 #. mouseover_drag_min.description
 msgid "How many pixels the mouse should move to start a drag"
 msgstr "鼠标移动多少像素才开始拖拽"
-
-#. mouseover_minimum_size.number_unit, mouseover_jitter_threshold.number_unit, mouseover_drag_min.number_unit, popup_maximum_source_size.number_unit
-msgid "pixels"
-msgstr "像素"
 
 #. mouseover_scrolly_behavior.name
 msgid "Vertical scroll action"
@@ -1772,10 +1752,8 @@ msgstr "启用 HLS/DASH 流媒体的下载"
 #. enable_stream_download.description
 msgid ""
 "Downloads and muxes the contents of the streams rather than the stream information file.\n"
-"This currently does not work under Firefox."
+"This currently does not work under modern browsers due to `SharedArrayBuffer` restrictions."
 msgstr ""
-"下载和组合流的内容，代替流信息文件。\n"
-"目前不能在 Firefox 中使用。"
 
 #. stream_mux_mp4_over_mkv.name
 msgid "Prefer MP4 over MKV"
@@ -2262,12 +2240,12 @@ msgid "This option popping up for source media with blacklisted URLs. If this is
 msgstr "如果禁用此选项，即便源地址被列入黑名单，只要末端网址没有列入黑名单，就打开弹窗。"
 
 #. apply_blacklist_host.name
-msgid "Apply blacklist for host websites"
-msgstr "对网站应用黑名单"
+msgid "Use media blacklist for host websites"
+msgstr ""
 
 #. apply_blacklist_host.description
-msgid "This option prevents the script from opening any popups to host websites that are in the blacklist. For example, adding `twitter.com` to the blacklist would prevent any popup from opening on twitter.com. If disabled, this option only applies to image URLs (such as twimg.com), not host URLs"
-msgstr "此选项决定是否不为黑名单中的网站打开任何弹窗。例如，将 twitter.com 添加到黑名单中可以避免在 twitter.com 上出现任何弹窗。如果禁用，黑名单仅应用于图像网址（如 twimg.com）而不针对网页网址"
+msgid "Overrides the host blacklist to use the media blacklist (specified under Rules)"
+msgstr ""
 
 #. mouseover_matching_media_types.name
 msgid "Don't popup different media type"
@@ -2421,6 +2399,27 @@ msgstr "YouTube"
 msgid "Instagram (downloading)"
 msgstr "Instagram (下载)"
 
+#. bypass_csp_for_lib.name
+msgid "Bypass CSP for libraries"
+msgstr ""
+
+#. bypass_csp_for_lib.description
+msgid ""
+"Tries loading the 3rd-party libraries using a `<script>` tag if a page's CSP prevents it from being loaded normally.\n"
+"This option currently carries an increased security risk when combined with \"Custom XHR for libraries\", and should only be enabled if absolutely necessary."
+msgstr ""
+
+#. bypass_csp_for_lib.warning.true
+msgid ""
+"This can potentially be extremely insecure if \"Custom XHR for libraries\" is also enabled.\n"
+"A malicious website could gain extension-level permissions and perform arbitrary requests (your online accounts could get hacked).\n"
+"If you need to use this option, please disable it as soon as possible."
+msgstr ""
+
+#. bypass_csp_for_lib.example_websites[0]
+msgid "Snapchat"
+msgstr ""
+
 #. use_webarchive_for_lib.name
 msgid "Use Web Archive for libraries"
 msgstr "为程序库使用 Web Archive 版本"
@@ -2525,6 +2524,18 @@ msgstr "可能扩增尺寸的图像"
 msgid "Enables rules that return images that are possibly upscaled"
 msgstr "启用规则：返回可能已扩增尺寸的图像"
 
+#. allow_uncropped.name
+msgid "Uncropped images"
+msgstr ""
+
+#. allow_uncropped.description
+msgid "Enables rules that return possibly undesirable uncropped images"
+msgstr ""
+
+#. allow_uncropped.example_websites[0]
+msgid "Mobile wallpaper websites (returns the full version of the wallpaper image)"
+msgstr ""
+
 #. allow_thirdparty.name
 msgid "Rules using 3rd-party websites"
 msgstr "使用第三方网站的规则"
@@ -2600,6 +2611,14 @@ msgstr "启用需要凭借蛮力（二进制搜索）找到原始图像的规则
 #. allow_bruteforce.example_websites[0]
 msgid "Deezer"
 msgstr "Deezer"
+
+#. allow_webarchive.name
+msgid "Web Archive support"
+msgstr ""
+
+#. allow_webarchive.description
+msgid "Allows rules to be run under archive.org's Wayback Machine."
+msgstr ""
 
 #. browser_cookies.name
 msgid "Use browser cookies"
@@ -2701,6 +2720,14 @@ msgstr ""
 msgid "Redirects media stored on Teddit to Reddit's servers. Disabling this may prevent finding original images because Teddit's image servers will only cache images fetched from posts, which are deleted after a few minutes."
 msgstr ""
 
+#. tiktok_app_api.name
+msgid "TikTok: Use app API"
+msgstr ""
+
+#. tiktok_app_api.description
+msgid "Uses TikTok's app API to find video information."
+msgstr ""
+
 #. tiktok_no_watermarks.name
 msgid "TikTok: Don't use watermarked videos"
 msgstr "TikTok: 不使用带水印的视频"
@@ -2779,15 +2806,71 @@ msgstr "Twitter: 使用扩展名"
 msgid "Prefers `.jpg?name=orig` over `?format=jpg&name=orig`. This will possibly incur extra requests before succeeding. Note that there is no difference in image quality."
 msgstr "首选 `.jpg?name=orig` 而不是 `?format=jpg&name=orig`。这可能在成功前产生额外的请求。注意，图像质量上没有差异。"
 
+#. youtube_replace_n.name
+msgid "YouTube: Enable faster speeds"
+msgstr ""
+
+#. youtube_replace_n.description
+msgid "Increases the download bandwidth for YouTube videos by replacing the `n` parameter. Note that this may execute untrusted Javascript."
+msgstr ""
+
 #. bigimage_blacklist.name
-msgid "Blacklist"
-msgstr "黑名单"
+msgid "Media blacklist"
+msgstr ""
 
 #. bigimage_blacklist.description
 msgid "A list of URLs (one per line) that are blacklisted from being processed"
 msgstr "处理过程的黑名单网址列表（每行一条）"
 
-#. bigimage_blacklist.documentation.value
+#. bigimage_blacklist_mode.name
+msgid "Media blacklist mode"
+msgstr ""
+
+#. bigimage_blacklist_mode.description
+msgid "Whether the media blacklist should act as a blacklist or a whitelist"
+msgstr ""
+
+#. bigimage_blacklist_engine.name
+msgid "Blacklist engine"
+msgstr "黑名单引擎"
+
+#. bigimage_blacklist_engine.description
+msgid "How blacklists should be processed"
+msgstr ""
+
+#. bigimage_blacklist_engine.options.glob.name
+msgid "Simple (glob)"
+msgstr "简易 (glob)"
+
+#. bigimage_blacklist_engine.options.regex.name
+msgid "Regex"
+msgstr "正则表达式"
+
+#. host_blacklist.name
+msgid "Host blacklist"
+msgstr ""
+
+#. host_blacklist.description
+msgid "A list of host URLs (one per line) that the popup is blacklisted from. For example, adding `twitter.com` to this blacklist would prevent any popup from opening on twitter.com."
+msgstr ""
+
+#. host_blacklist_mode.name
+msgid "Host blacklist mode"
+msgstr ""
+
+#. host_blacklist_mode.description
+msgid "Whether the host blacklist should act as a blacklist or a whitelist"
+msgstr ""
+
+#. host_html_blacklist.name
+msgid "HTML page blacklist"
+msgstr ""
+
+#. host_html_blacklist.description
+msgid "A list of URLs (one per line) that are blacklisted from being redirected."
+msgstr ""
+
+#. bigimage_blacklist.documentation.value, host_blacklist.documentation.value, host_html_blacklist.documentation.value
 msgid ""
 "The examples below are written for the simple (glob) engine, not the regex engine. The glob engine is generally based on the UNIX glob syntax.<br />\n"
 "<ul><br />\n"
@@ -2821,21 +2904,21 @@ msgstr ""
 "<li><code>g[0-9]ogle.com</code> 将屏蔽 https://g0ogle.com/, https://g1ogle.com/ 等。 (up to https://g9ogle.com/)</li>\n"
 "</ul>"
 
-#. bigimage_blacklist_engine.name
-msgid "Blacklist engine"
-msgstr "黑名单引擎"
+#. host_html_blacklist_mode.name
+msgid "HTML page blacklist mode"
+msgstr ""
 
-#. bigimage_blacklist_engine.description
-msgid "How the blacklist should be processed"
-msgstr "应如何处理黑名单"
+#. host_html_blacklist_mode.description
+msgid "Whether the HTML page blacklist should act as a blacklist or a whitelist"
+msgstr ""
 
-#. bigimage_blacklist_engine.options.glob.name
-msgid "Simple (glob)"
-msgstr "简易 (glob)"
+#. bigimage_blacklist_mode.options.whitelist.name, host_blacklist_mode.options.whitelist.name, host_html_blacklist_mode.options.whitelist.name
+msgid "Whitelist"
+msgstr ""
 
-#. bigimage_blacklist_engine.options.regex.name
-msgid "Regex"
-msgstr "正则表达式"
+#. bigimage_blacklist_mode.options.blacklist.name, host_blacklist_mode.options.blacklist.name, host_html_blacklist_mode.options.blacklist.name
+msgid "Blacklist"
+msgstr "黑名单"
 
 #. filename_format.name
 msgid "Filename format"
@@ -2845,7 +2928,7 @@ msgstr "文件名格式"
 msgid "Format string(s) for the filename"
 msgstr "文件名格式化要用到的字符串"
 
-#. mouseover_styles.documentation.title, bigimage_blacklist.documentation.title, filename_format.documentation.title
+#. mouseover_styles.documentation.title, bigimage_blacklist.documentation.title, filename_format.documentation.title, host_blacklist.documentation.title, host_html_blacklist.documentation.title
 msgid "Documentation"
 msgstr "文档"
 
@@ -3137,25 +3220,9 @@ msgstr "简单进度条"
 msgid "Uses a simpler progress bar that has a fixed size for all media. This is useful to see how many images are replaced, rather than the ETA"
 msgstr "对所有媒体使用固定大小的简单进度条。这能看到有多少图像已替换，而不是只有剩余时间"
 
-#. replaceimgs_enable_keybinding.name, highlightimgs_enable_keybinding.name
-msgid "Enable trigger key"
-msgstr "启用触发键"
-
-#. replaceimgs_enable_keybinding.description, highlightimgs_enable_keybinding.description
-msgid "Enables the use of the trigger key to run it without needing to use the menu"
-msgstr "允许使用触发键来运行，无需使用菜单"
-
-#. replaceimgs_keybinding.name, highlightimgs_keybinding.name
-msgid "Trigger key"
-msgstr "触发键"
-
 #. highlightimgs_keybinding.description
 msgid "Trigger keybinding that will run the Highlight Images function"
 msgstr "用来运行“高亮图像”功能的触发键"
-
-#. highlightimgs_enable.name
-msgid "Enable button"
-msgstr "启用按钮"
 
 #. highlightimgs_enable.description
 msgid "Enables the 'Highlight Images' button"
@@ -3201,6 +3268,54 @@ msgstr "高亮 CSS"
 msgid "CSS style to apply for highlight. See the documentation for Popup CSS style for more information (the thumb/full URL variables aren't supported here)"
 msgstr "高亮时使用的 CSS 样式。更多信息详见“弹窗 CSS 样式”文档（此处不支持 thumb/full URL 变量）"
 
+#. replaceimgs_enable_keybinding.name, highlightimgs_enable_keybinding.name, customgallery_enable_keybinding.name
+msgid "Enable trigger key"
+msgstr "启用触发键"
+
+#. replaceimgs_enable_keybinding.description, highlightimgs_enable_keybinding.description, customgallery_enable_keybinding.description
+msgid "Enables the use of the trigger key to run it without needing to use the menu"
+msgstr "允许使用触发键来运行，无需使用菜单"
+
+#. replaceimgs_keybinding.name, highlightimgs_keybinding.name, customgallery_keybinding.name
+msgid "Trigger key"
+msgstr "触发键"
+
+#. customgallery_keybinding.description
+msgid "Trigger keybinding that will run the Custom Gallery function"
+msgstr ""
+
+#. highlightimgs_enable.name, customgallery_enable_button.name
+msgid "Enable button"
+msgstr "启用按钮"
+
+#. customgallery_enable_button.description
+msgid "Enables the 'Custom Gallery' button"
+msgstr ""
+
+#. customgallery_apply_key.name
+msgid "Apply key"
+msgstr ""
+
+#. customgallery_apply_key.description
+msgid "Triggers the gallery when pressed"
+msgstr ""
+
+#. customgallery_bg_css.name
+msgid "Background CSS"
+msgstr ""
+
+#. customgallery_bg_css.description
+msgid "CSS style to apply for the background"
+msgstr ""
+
+#. customgallery_outline_css.name
+msgid "Outline CSS"
+msgstr ""
+
+#. customgallery_outline_css.description
+msgid "CSS style to apply for element outlines"
+msgstr ""
+
 #. mouseover_open_behavior.name, t2_mouseover_open_behavior.name, t3_mouseover_open_behavior.name
 #. English: Popup action
 msgid "Mouseover popup action"
@@ -3233,6 +3348,42 @@ msgstr "复制链接"
 #. mouseover_open_behavior.options.replace.name, t2_mouseover_open_behavior.options.replace.name, t3_mouseover_open_behavior.options.replace.name
 msgid "Replace"
 msgstr "替换"
+
+#. mouseover_exclude_page_bg.name, t2_mouseover_exclude_page_bg.name, t3_mouseover_exclude_page_bg.name
+msgid "Exclude page background"
+msgstr "排除页面背景"
+
+#. mouseover_exclude_page_bg.description, t2_mouseover_exclude_page_bg.description, t3_mouseover_exclude_page_bg.description
+msgid "Excludes the page background for the popup"
+msgstr "避免为页面背景显示弹窗"
+
+#. mouseover_minimum_size.name, t2_mouseover_minimum_size.name, t3_mouseover_minimum_size.name
+msgid "Minimum size"
+msgstr "最小尺寸"
+
+#. mouseover_minimum_size.description, t2_mouseover_minimum_size.description, t3_mouseover_minimum_size.description
+msgid "Smallest size acceptable for the popup to open (this option is ignored for background images). This refers to the size of the media to be popped up, which may differ from the source media."
+msgstr "允许多小的图像显示弹窗。背景图像不被此选项涵盖。这指将要弹窗显示的媒体大小，这可能与源媒体不同。"
+
+#. popup_maximum_source_size.name, t2_popup_maximum_source_size.name, t3_popup_maximum_source_size.name
+msgid "Maximum source size"
+msgstr "最大源尺寸"
+
+#. popup_maximum_source_size.description, t2_popup_maximum_source_size.description, t3_popup_maximum_source_size.description
+msgid "Maximum size (width/height) for the source media to allow popping up (this option is ignored for background images). Set to `0` for any size."
+msgstr "以源媒体显示弹窗的最大尺寸（宽度/高度）（对背景图像来说此选项无效)。设为 0 表示任意大小。"
+
+#. mouseover_minimum_size.number_unit, mouseover_jitter_threshold.number_unit, mouseover_drag_min.number_unit, popup_maximum_source_size.number_unit, t2_mouseover_minimum_size.number_unit, t3_mouseover_minimum_size.number_unit, t2_popup_maximum_source_size.number_unit, t3_popup_maximum_source_size.number_unit
+msgid "pixels"
+msgstr "像素"
+
+#. mouseover_exclude_backgroundimages.name, t2_mouseover_exclude_backgroundimages.name, t3_mouseover_exclude_backgroundimages.name
+msgid "Exclude `background-image`s"
+msgstr "排除背景图像"
+
+#. mouseover_exclude_backgroundimages.description, t2_mouseover_exclude_backgroundimages.description, t3_mouseover_exclude_backgroundimages.description
+msgid "Excludes `background-image`s for the popup. Might prevent the popup from working on many images"
+msgstr "不为背景图像显示弹窗。可能使很多图像上不显示弹窗"
 
 #. mouseover_allow_video.name, t2_mouseover_allow_video.name, t3_mouseover_allow_video.name
 msgid "Enable videos"

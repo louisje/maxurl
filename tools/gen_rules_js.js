@@ -13,6 +13,7 @@ var variables_list = [
 	"Math_max",
 	"Math_min",
 	"Math_abs",
+	"Math_pow",
 	"get_random_text",
 	"console_log",
 	"console_error",
@@ -21,6 +22,7 @@ var variables_list = [
 	"JSON_stringify",
 	"JSON_parse",
 	"base64_decode",
+	"base64_decode_urlsafe",
 	"base64_encode",
 	"is_array",
 	"array_indexof",
@@ -52,6 +54,7 @@ var variables_list = [
 	"new_set",
 	"set_add",
 	"set_has",
+	"set_remove",
 	"real_api_cache",
 	"real_api_query",
 	"real_website_query",
@@ -62,6 +65,7 @@ var variables_list = [
 	"fillobj",
 	"fillobj_urls",
 	"add_full_extensions",
+	"add_full_extensions2",
 	"add_extensions",
 	"add_extensions_jpeg",
 	"add_extensions_with_jpeg",
@@ -110,7 +114,8 @@ var variables_list = [
 	"looks_like_valid_link",
 	"IMUCache",
 	"url_basename",
-	"parse_int"
+	"parse_int",
+	"get_localstorage"
 ];
 
 var get_random_text = function(length) {

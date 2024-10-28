@@ -12,9 +12,9 @@ msgstr ""
 msgid "$language_native$"
 msgstr "Русский"
 
-#. English: Finds larger or original versions of images and videos for 8200+ websites, including a powerful media popup and download feature
+#. English: Finds larger or original versions of images and videos for 9400+ websites, including a powerful media popup and download feature
 msgid "$description$"
-msgstr "Находит увеличенные или оригинальные версии изображений и видео для 8200+ сайтов. Имеет мощную функцию всплывающего окна и скачивание медиафайлов."
+msgstr "Находит увеличенные или оригинальные версии изображений и видео для 9400+ сайтов. Имеет мощную функцию всплывающего окна и скачивание медиафайлов."
 
 #. English: Options
 msgid "options_header"
@@ -178,6 +178,10 @@ msgstr "Замена изображений"
 msgid "subcategory_highlightimages"
 msgstr "Выделение изображений"
 
+#. English: Custom Gallery
+msgid "subcategory_customgallery"
+msgstr ""
+
 msgid "General"
 msgstr "Общие"
 
@@ -216,6 +220,10 @@ msgstr "Итальянский"
 #. language.options.ko.name
 msgid "한국어"
 msgstr "Корейский"
+
+#. language.options.pt-BR.name
+msgid "Português (Brasil)"
+msgstr ""
 
 #. language.options.ru.name
 msgid "Русский"
@@ -526,16 +534,14 @@ msgid "Redirect for HTML pages too"
 msgstr "Перенаправлять для HTML-страниц тоже"
 
 #. redirect_host_html.description
-msgid "Tries redirection even if the host page is HTML. This option might be useful for dead links. However, this will also result in many normal pages being redirected to images/video, so please avoid enabling this by default!"
-msgstr "Пытается перенаправить, даже если хост является страницой HTML. Этот параметр может быть полезен для мёртвых ссылок. Однако, это также приведёт к тому, что многие обычные страницы будут перенаправлены на изображения/видео, поэтому, не включайте это по умолчанию!"
+msgid "Tries redirection even if the host page is HTML. This option might be useful for dead links. However, this will also result in many normal pages being redirected to images/video, so use with caution."
+msgstr ""
 
 #. redirect_host_html.warning.true
 msgid ""
 "This will result in many pages being redirected to images/videos.\n"
-"I'd recommend only enabling this for the media you need it for, then disabling it after."
+"I'd recommend only either enabling this for the media you need it for then disabling it after, or using the black/whitelist feature below to only allow it to run for specified websites."
 msgstr ""
-"В результате многие страницы будут перенаправлены на изображения/видео.\n"
-"Рекомендуется включать это только для тех медиа, для которых это нужно, а после снова отключить."
 
 #. mouseover.name
 #. English: Enable image popup
@@ -722,38 +728,6 @@ msgstr "Длительность курсора `запрещено`"
 #. mouseover_notallowed_duration.description
 msgid "How long the `not-allowed` cursor should last"
 msgstr "Как долго отображается курсор `запрещено`"
-
-#. mouseover_exclude_page_bg.name
-msgid "Exclude page background"
-msgstr "Исключать фон страницы"
-
-#. mouseover_exclude_page_bg.description
-msgid "Excludes the page background for the popup"
-msgstr "Исключает фон страницы для всплывающего окна."
-
-#. mouseover_minimum_size.name
-msgid "Minimum size"
-msgstr "Минимальный размер"
-
-#. mouseover_minimum_size.description
-msgid "Smallest size acceptable for the popup to open (this option is ignored for background images). This refers to the size of the media to be popped up, which may differ from the source media."
-msgstr "Наименьший размер, допустимый для открытия всплывающего окна (этот параметр игнорируется для фоновых изображений). Это относится к размеру всплывающего медиа, который может отличаться от оригинала."
-
-#. popup_maximum_source_size.name
-msgid "Maximum source size"
-msgstr "Максимальный размер источника"
-
-#. popup_maximum_source_size.description
-msgid "Maximum size (width/height) for the source media to allow popping up (this option is ignored for background images). Set to `0` for any size."
-msgstr "Максимальный размер (ширина/высота) исходного медиафайла для разрешения всплытия (этот параметр игнорируется для фоновых изображений). `0` - любой размер."
-
-#. mouseover_exclude_backgroundimages.name
-msgid "Exclude `background-image`s"
-msgstr "Исключать `background-image`"
-
-#. mouseover_exclude_backgroundimages.description
-msgid "Excludes `background-image`s for the popup. Might prevent the popup from working on many images"
-msgstr "Исключает `background-image` для всплывающего окна. Это может помешать всплывающему окну работать со многими изображениями."
 
 #. mouseover_exclude_imagetab.name
 msgid "Exclude image tabs"
@@ -1371,6 +1345,14 @@ msgstr "Добавлять всплывающую ссылку в историю
 msgid "Adds the image/video link opened through the popup to the browser's history"
 msgstr "Добавляет ссылку на изображение/видео в историю браузера, открытые через всплывающее окно."
 
+#. mouseover_add_thumbnail_to_history.name
+msgid "Add thumbnail link to history"
+msgstr ""
+
+#. mouseover_add_thumbnail_to_history.description
+msgid "Adds the original media link opened through the popup to the browser's history"
+msgstr ""
+
 #. allow_remote.name
 msgid "Allow inter-frame communication"
 msgstr "Разрешить межфреймовую связь"
@@ -1490,10 +1472,6 @@ msgstr "Минимальное количество для перетаскив�
 #. mouseover_drag_min.description
 msgid "How many pixels the mouse should move to start a drag"
 msgstr "На сколько пикселей мышь должна переместиться, чтобы начать перетаскивание."
-
-#. mouseover_minimum_size.number_unit, mouseover_jitter_threshold.number_unit, mouseover_drag_min.number_unit, popup_maximum_source_size.number_unit
-msgid "pixels"
-msgstr "пикс."
 
 #. mouseover_scrolly_behavior.name
 msgid "Vertical scroll action"
@@ -1774,10 +1752,8 @@ msgstr "Включить скачивание потоков HLS/DASH"
 #. enable_stream_download.description
 msgid ""
 "Downloads and muxes the contents of the streams rather than the stream information file.\n"
-"This currently does not work under Firefox."
+"This currently does not work under modern browsers due to `SharedArrayBuffer` restrictions."
 msgstr ""
-"Скачивает и мультиплексирует содержимое потоков, а не информационный файл потока.\n"
-"В настоящее время не работает в Firefox."
 
 #. stream_mux_mp4_over_mkv.name
 msgid "Prefer MP4 over MKV"
@@ -2264,12 +2240,12 @@ msgid "This option popping up for source media with blacklisted URLs. If this is
 msgstr "Этот параметр всплывает для оригинальных медиа с URL-адресами в чёрный список. Если этот параметр отключен, всплывающее окно откроется, если конечный URL-адрес не внесён в чёрный список, независимо от того, внесен ли источник в чёрный список."
 
 #. apply_blacklist_host.name
-msgid "Apply blacklist for host websites"
-msgstr "Применять чёрный список для хост-сайтов"
+msgid "Use media blacklist for host websites"
+msgstr ""
 
 #. apply_blacklist_host.description
-msgid "This option prevents the script from opening any popups to host websites that are in the blacklist. For example, adding `twitter.com` to the blacklist would prevent any popup from opening on twitter.com. If disabled, this option only applies to image URLs (such as twimg.com), not host URLs"
-msgstr "Этот параметр не позволяет скрипту открывать любые всплывающие окна сайтам, которые находятся в чёрном списке. Например, добавление `twitter.com` в чёрный список предотвратит открытие всплывающих окон на twitter.com. Если этот параметр отключен, он применяется только к URL-адресам изображений (например, twimg.com), а не URL-адресам хостов."
+msgid "Overrides the host blacklist to use the media blacklist (specified under Rules)"
+msgstr ""
 
 #. mouseover_matching_media_types.name
 msgid "Don't popup different media type"
@@ -2423,6 +2399,27 @@ msgstr "YouTube"
 msgid "Instagram (downloading)"
 msgstr "Instagram (скачивание)"
 
+#. bypass_csp_for_lib.name
+msgid "Bypass CSP for libraries"
+msgstr ""
+
+#. bypass_csp_for_lib.description
+msgid ""
+"Tries loading the 3rd-party libraries using a `<script>` tag if a page's CSP prevents it from being loaded normally.\n"
+"This option currently carries an increased security risk when combined with \"Custom XHR for libraries\", and should only be enabled if absolutely necessary."
+msgstr ""
+
+#. bypass_csp_for_lib.warning.true
+msgid ""
+"This can potentially be extremely insecure if \"Custom XHR for libraries\" is also enabled.\n"
+"A malicious website could gain extension-level permissions and perform arbitrary requests (your online accounts could get hacked).\n"
+"If you need to use this option, please disable it as soon as possible."
+msgstr ""
+
+#. bypass_csp_for_lib.example_websites[0]
+msgid "Snapchat"
+msgstr ""
+
 #. use_webarchive_for_lib.name
 msgid "Use Web Archive for libraries"
 msgstr "Использовать веб-архив для библиотек"
@@ -2527,6 +2524,18 @@ msgstr "Возможно, увеличенные изображения"
 msgid "Enables rules that return images that are possibly upscaled"
 msgstr "Включает правила, возвращающие изображения, которые могут быть увеличены."
 
+#. allow_uncropped.name
+msgid "Uncropped images"
+msgstr ""
+
+#. allow_uncropped.description
+msgid "Enables rules that return possibly undesirable uncropped images"
+msgstr ""
+
+#. allow_uncropped.example_websites[0]
+msgid "Mobile wallpaper websites (returns the full version of the wallpaper image)"
+msgstr ""
+
 #. allow_thirdparty.name
 msgid "Rules using 3rd-party websites"
 msgstr "Правила использования сторонних сайтов"
@@ -2602,6 +2611,14 @@ msgstr "Включает правила, требующие использова
 #. allow_bruteforce.example_websites[0]
 msgid "Deezer"
 msgstr "Deezer"
+
+#. allow_webarchive.name
+msgid "Web Archive support"
+msgstr ""
+
+#. allow_webarchive.description
+msgid "Allows rules to be run under archive.org's Wayback Machine."
+msgstr ""
 
 #. browser_cookies.name
 msgid "Use browser cookies"
@@ -2703,6 +2720,14 @@ msgstr ""
 msgid "Redirects media stored on Teddit to Reddit's servers. Disabling this may prevent finding original images because Teddit's image servers will only cache images fetched from posts, which are deleted after a few minutes."
 msgstr ""
 
+#. tiktok_app_api.name
+msgid "TikTok: Use app API"
+msgstr ""
+
+#. tiktok_app_api.description
+msgid "Uses TikTok's app API to find video information."
+msgstr ""
+
 #. tiktok_no_watermarks.name
 msgid "TikTok: Don't use watermarked videos"
 msgstr "TikTok: Не использовать видео с водяными знаками"
@@ -2781,15 +2806,71 @@ msgstr "Twitter: Использовать расширение"
 msgid "Prefers `.jpg?name=orig` over `?format=jpg&name=orig`. This will possibly incur extra requests before succeeding. Note that there is no difference in image quality."
 msgstr "Предпочитать `.jpg?name=orig` поверх `?format=jpg&name=orig`. Это, возможно, повлечет за собой дополнительные запросы, прежде чем добиться успеха. Обратите внимание, что нет никакой разницы в качестве изображения."
 
+#. youtube_replace_n.name
+msgid "YouTube: Enable faster speeds"
+msgstr ""
+
+#. youtube_replace_n.description
+msgid "Increases the download bandwidth for YouTube videos by replacing the `n` parameter. Note that this may execute untrusted Javascript."
+msgstr ""
+
 #. bigimage_blacklist.name
-msgid "Blacklist"
-msgstr "Чёрный список"
+msgid "Media blacklist"
+msgstr ""
 
 #. bigimage_blacklist.description
 msgid "A list of URLs (one per line) that are blacklisted from being processed"
 msgstr "Список URL-адресов (по одному на строку), которые занесены в чёрный список для обработки."
 
-#. bigimage_blacklist.documentation.value
+#. bigimage_blacklist_mode.name
+msgid "Media blacklist mode"
+msgstr ""
+
+#. bigimage_blacklist_mode.description
+msgid "Whether the media blacklist should act as a blacklist or a whitelist"
+msgstr ""
+
+#. bigimage_blacklist_engine.name
+msgid "Blacklist engine"
+msgstr "Движок чёрного списка"
+
+#. bigimage_blacklist_engine.description
+msgid "How blacklists should be processed"
+msgstr ""
+
+#. bigimage_blacklist_engine.options.glob.name
+msgid "Simple (glob)"
+msgstr "Простой (glob)"
+
+#. bigimage_blacklist_engine.options.regex.name
+msgid "Regex"
+msgstr "Регулярное выражение"
+
+#. host_blacklist.name
+msgid "Host blacklist"
+msgstr ""
+
+#. host_blacklist.description
+msgid "A list of host URLs (one per line) that the popup is blacklisted from. For example, adding `twitter.com` to this blacklist would prevent any popup from opening on twitter.com."
+msgstr ""
+
+#. host_blacklist_mode.name
+msgid "Host blacklist mode"
+msgstr ""
+
+#. host_blacklist_mode.description
+msgid "Whether the host blacklist should act as a blacklist or a whitelist"
+msgstr ""
+
+#. host_html_blacklist.name
+msgid "HTML page blacklist"
+msgstr ""
+
+#. host_html_blacklist.description
+msgid "A list of URLs (one per line) that are blacklisted from being redirected."
+msgstr ""
+
+#. bigimage_blacklist.documentation.value, host_blacklist.documentation.value, host_html_blacklist.documentation.value
 msgid ""
 "The examples below are written for the simple (glob) engine, not the regex engine. The glob engine is generally based on the UNIX glob syntax.<br />\n"
 "<ul><br />\n"
@@ -2823,21 +2904,21 @@ msgstr ""
 "<li><code>g[0-9]ogle.com</code> будет блокировать https://g0ogle.com/, https://g1ogle.com/, и т.д. (вплоть до https://g9ogle.com/)</li>\n"
 "</ul>"
 
-#. bigimage_blacklist_engine.name
-msgid "Blacklist engine"
-msgstr "Движок чёрного списка"
+#. host_html_blacklist_mode.name
+msgid "HTML page blacklist mode"
+msgstr ""
 
-#. bigimage_blacklist_engine.description
-msgid "How the blacklist should be processed"
-msgstr "Как следует обрабатывать чёрный список."
+#. host_html_blacklist_mode.description
+msgid "Whether the HTML page blacklist should act as a blacklist or a whitelist"
+msgstr ""
 
-#. bigimage_blacklist_engine.options.glob.name
-msgid "Simple (glob)"
-msgstr "Простой (glob)"
+#. bigimage_blacklist_mode.options.whitelist.name, host_blacklist_mode.options.whitelist.name, host_html_blacklist_mode.options.whitelist.name
+msgid "Whitelist"
+msgstr ""
 
-#. bigimage_blacklist_engine.options.regex.name
-msgid "Regex"
-msgstr "Регулярное выражение"
+#. bigimage_blacklist_mode.options.blacklist.name, host_blacklist_mode.options.blacklist.name, host_html_blacklist_mode.options.blacklist.name
+msgid "Blacklist"
+msgstr "Чёрный список"
 
 #. filename_format.name
 msgid "Filename format"
@@ -2847,7 +2928,7 @@ msgstr "Формат имени файла"
 msgid "Format string(s) for the filename"
 msgstr "Формат строк(и) для имени файла."
 
-#. mouseover_styles.documentation.title, bigimage_blacklist.documentation.title, filename_format.documentation.title
+#. mouseover_styles.documentation.title, bigimage_blacklist.documentation.title, filename_format.documentation.title, host_blacklist.documentation.title, host_html_blacklist.documentation.title
 msgid "Documentation"
 msgstr "Документация"
 
@@ -3139,25 +3220,9 @@ msgstr "Простой прогресс"
 msgid "Uses a simpler progress bar that has a fixed size for all media. This is useful to see how many images are replaced, rather than the ETA"
 msgstr "Использует более простую шкалу прогресса, которая имеет фиксированный размер для всех медиа. Это полезно для того, чтобы увидеть, сколько изображений заменено, а не ждать."
 
-#. replaceimgs_enable_keybinding.name, highlightimgs_enable_keybinding.name
-msgid "Enable trigger key"
-msgstr "Включить клавишу действия"
-
-#. replaceimgs_enable_keybinding.description, highlightimgs_enable_keybinding.description
-msgid "Enables the use of the trigger key to run it without needing to use the menu"
-msgstr "Позволяет использовать клавишу действия для запуска без необходимости использования меню."
-
-#. replaceimgs_keybinding.name, highlightimgs_keybinding.name
-msgid "Trigger key"
-msgstr "Клавиша действия"
-
 #. highlightimgs_keybinding.description
 msgid "Trigger keybinding that will run the Highlight Images function"
 msgstr "Привязка клавиши действия, которое будет запускать функцию подсветки изображений."
-
-#. highlightimgs_enable.name
-msgid "Enable button"
-msgstr "Включить кнопку"
 
 #. highlightimgs_enable.description
 msgid "Enables the 'Highlight Images' button"
@@ -3203,6 +3268,54 @@ msgstr "CSS подсветка"
 msgid "CSS style to apply for highlight. See the documentation for Popup CSS style for more information (the thumb/full URL variables aren't supported here)"
 msgstr "Стилизация CSS, для применения к подсветке. Дополнительные сведения смотрите в документации 'Стилизация CSS всплывающего окна' (здесь не поддерживаются переменные URL thumb/full)."
 
+#. replaceimgs_enable_keybinding.name, highlightimgs_enable_keybinding.name, customgallery_enable_keybinding.name
+msgid "Enable trigger key"
+msgstr "Включить клавишу действия"
+
+#. replaceimgs_enable_keybinding.description, highlightimgs_enable_keybinding.description, customgallery_enable_keybinding.description
+msgid "Enables the use of the trigger key to run it without needing to use the menu"
+msgstr "Позволяет использовать клавишу действия для запуска без необходимости использования меню."
+
+#. replaceimgs_keybinding.name, highlightimgs_keybinding.name, customgallery_keybinding.name
+msgid "Trigger key"
+msgstr "Клавиша действия"
+
+#. customgallery_keybinding.description
+msgid "Trigger keybinding that will run the Custom Gallery function"
+msgstr ""
+
+#. highlightimgs_enable.name, customgallery_enable_button.name
+msgid "Enable button"
+msgstr "Включить кнопку"
+
+#. customgallery_enable_button.description
+msgid "Enables the 'Custom Gallery' button"
+msgstr ""
+
+#. customgallery_apply_key.name
+msgid "Apply key"
+msgstr ""
+
+#. customgallery_apply_key.description
+msgid "Triggers the gallery when pressed"
+msgstr ""
+
+#. customgallery_bg_css.name
+msgid "Background CSS"
+msgstr ""
+
+#. customgallery_bg_css.description
+msgid "CSS style to apply for the background"
+msgstr ""
+
+#. customgallery_outline_css.name
+msgid "Outline CSS"
+msgstr ""
+
+#. customgallery_outline_css.description
+msgid "CSS style to apply for element outlines"
+msgstr ""
+
 #. mouseover_open_behavior.name, t2_mouseover_open_behavior.name, t3_mouseover_open_behavior.name
 #. English: Popup action
 msgid "Mouseover popup action"
@@ -3235,6 +3348,42 @@ msgstr "Копировать ссылку"
 #. mouseover_open_behavior.options.replace.name, t2_mouseover_open_behavior.options.replace.name, t3_mouseover_open_behavior.options.replace.name
 msgid "Replace"
 msgstr "Заменить"
+
+#. mouseover_exclude_page_bg.name, t2_mouseover_exclude_page_bg.name, t3_mouseover_exclude_page_bg.name
+msgid "Exclude page background"
+msgstr "Исключать фон страницы"
+
+#. mouseover_exclude_page_bg.description, t2_mouseover_exclude_page_bg.description, t3_mouseover_exclude_page_bg.description
+msgid "Excludes the page background for the popup"
+msgstr "Исключает фон страницы для всплывающего окна."
+
+#. mouseover_minimum_size.name, t2_mouseover_minimum_size.name, t3_mouseover_minimum_size.name
+msgid "Minimum size"
+msgstr "Минимальный размер"
+
+#. mouseover_minimum_size.description, t2_mouseover_minimum_size.description, t3_mouseover_minimum_size.description
+msgid "Smallest size acceptable for the popup to open (this option is ignored for background images). This refers to the size of the media to be popped up, which may differ from the source media."
+msgstr "Наименьший размер, допустимый для открытия всплывающего окна (этот параметр игнорируется для фоновых изображений). Это относится к размеру всплывающего медиа, который может отличаться от оригинала."
+
+#. popup_maximum_source_size.name, t2_popup_maximum_source_size.name, t3_popup_maximum_source_size.name
+msgid "Maximum source size"
+msgstr "Максимальный размер источника"
+
+#. popup_maximum_source_size.description, t2_popup_maximum_source_size.description, t3_popup_maximum_source_size.description
+msgid "Maximum size (width/height) for the source media to allow popping up (this option is ignored for background images). Set to `0` for any size."
+msgstr "Максимальный размер (ширина/высота) исходного медиафайла для разрешения всплытия (этот параметр игнорируется для фоновых изображений). `0` - любой размер."
+
+#. mouseover_minimum_size.number_unit, mouseover_jitter_threshold.number_unit, mouseover_drag_min.number_unit, popup_maximum_source_size.number_unit, t2_mouseover_minimum_size.number_unit, t3_mouseover_minimum_size.number_unit, t2_popup_maximum_source_size.number_unit, t3_popup_maximum_source_size.number_unit
+msgid "pixels"
+msgstr "пикс."
+
+#. mouseover_exclude_backgroundimages.name, t2_mouseover_exclude_backgroundimages.name, t3_mouseover_exclude_backgroundimages.name
+msgid "Exclude `background-image`s"
+msgstr "Исключать `background-image`"
+
+#. mouseover_exclude_backgroundimages.description, t2_mouseover_exclude_backgroundimages.description, t3_mouseover_exclude_backgroundimages.description
+msgid "Excludes `background-image`s for the popup. Might prevent the popup from working on many images"
+msgstr "Исключает `background-image` для всплывающего окна. Это может помешать всплывающему окну работать со многими изображениями."
 
 #. mouseover_allow_video.name, t2_mouseover_allow_video.name, t3_mouseover_allow_video.name
 msgid "Enable videos"

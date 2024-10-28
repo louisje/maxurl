@@ -12,9 +12,9 @@ msgstr ""
 msgid "$language_native$"
 msgstr ""
 
-#. English: Finds larger or original versions of images and videos for 8200+ websites, including a powerful media popup and download feature
+#. English: Finds larger or original versions of images and videos for 9400+ websites, including a powerful media popup and download feature
 msgid "$description$"
-msgstr "Vyhledá větší nebo původní verze obrázků a videí pro více než 8200 webů"
+msgstr "Vyhledá větší nebo původní verze obrázků a videí pro více než 9400 webů"
 
 #. English: Options
 msgid "options_header"
@@ -178,6 +178,10 @@ msgstr ""
 msgid "subcategory_highlightimages"
 msgstr ""
 
+#. English: Custom Gallery
+msgid "subcategory_customgallery"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
@@ -215,6 +219,10 @@ msgstr ""
 
 #. language.options.ko.name
 msgid "한국어"
+msgstr ""
+
+#. language.options.pt-BR.name
+msgid "Português (Brasil)"
 msgstr ""
 
 #. language.options.ru.name
@@ -526,13 +534,13 @@ msgid "Redirect for HTML pages too"
 msgstr ""
 
 #. redirect_host_html.description
-msgid "Tries redirection even if the host page is HTML. This option might be useful for dead links. However, this will also result in many normal pages being redirected to images/video, so please avoid enabling this by default!"
+msgid "Tries redirection even if the host page is HTML. This option might be useful for dead links. However, this will also result in many normal pages being redirected to images/video, so use with caution."
 msgstr ""
 
 #. redirect_host_html.warning.true
 msgid ""
 "This will result in many pages being redirected to images/videos.\n"
-"I'd recommend only enabling this for the media you need it for, then disabling it after."
+"I'd recommend only either enabling this for the media you need it for then disabling it after, or using the black/whitelist feature below to only allow it to run for specified websites."
 msgstr ""
 
 #. mouseover.name
@@ -715,38 +723,6 @@ msgstr ""
 
 #. mouseover_notallowed_duration.description
 msgid "How long the `not-allowed` cursor should last"
-msgstr ""
-
-#. mouseover_exclude_page_bg.name
-msgid "Exclude page background"
-msgstr ""
-
-#. mouseover_exclude_page_bg.description
-msgid "Excludes the page background for the popup"
-msgstr ""
-
-#. mouseover_minimum_size.name
-msgid "Minimum size"
-msgstr ""
-
-#. mouseover_minimum_size.description
-msgid "Smallest size acceptable for the popup to open (this option is ignored for background images). This refers to the size of the media to be popped up, which may differ from the source media."
-msgstr ""
-
-#. popup_maximum_source_size.name
-msgid "Maximum source size"
-msgstr ""
-
-#. popup_maximum_source_size.description
-msgid "Maximum size (width/height) for the source media to allow popping up (this option is ignored for background images). Set to `0` for any size."
-msgstr ""
-
-#. mouseover_exclude_backgroundimages.name
-msgid "Exclude `background-image`s"
-msgstr ""
-
-#. mouseover_exclude_backgroundimages.description
-msgid "Excludes `background-image`s for the popup. Might prevent the popup from working on many images"
 msgstr ""
 
 #. mouseover_exclude_imagetab.name
@@ -1345,6 +1321,14 @@ msgstr ""
 msgid "Adds the image/video link opened through the popup to the browser's history"
 msgstr ""
 
+#. mouseover_add_thumbnail_to_history.name
+msgid "Add thumbnail link to history"
+msgstr ""
+
+#. mouseover_add_thumbnail_to_history.description
+msgid "Adds the original media link opened through the popup to the browser's history"
+msgstr ""
+
 #. allow_remote.name
 msgid "Allow inter-frame communication"
 msgstr ""
@@ -1463,10 +1447,6 @@ msgstr ""
 
 #. mouseover_drag_min.description
 msgid "How many pixels the mouse should move to start a drag"
-msgstr ""
-
-#. mouseover_minimum_size.number_unit, mouseover_jitter_threshold.number_unit, mouseover_drag_min.number_unit, popup_maximum_source_size.number_unit
-msgid "pixels"
 msgstr ""
 
 #. mouseover_scrolly_behavior.name
@@ -1748,7 +1728,7 @@ msgstr ""
 #. enable_stream_download.description
 msgid ""
 "Downloads and muxes the contents of the streams rather than the stream information file.\n"
-"This currently does not work under Firefox."
+"This currently does not work under modern browsers due to `SharedArrayBuffer` restrictions."
 msgstr ""
 
 #. stream_mux_mp4_over_mkv.name
@@ -2212,11 +2192,11 @@ msgid "This option popping up for source media with blacklisted URLs. If this is
 msgstr ""
 
 #. apply_blacklist_host.name
-msgid "Apply blacklist for host websites"
+msgid "Use media blacklist for host websites"
 msgstr ""
 
 #. apply_blacklist_host.description
-msgid "This option prevents the script from opening any popups to host websites that are in the blacklist. For example, adding `twitter.com` to the blacklist would prevent any popup from opening on twitter.com. If disabled, this option only applies to image URLs (such as twimg.com), not host URLs"
+msgid "Overrides the host blacklist to use the media blacklist (specified under Rules)"
 msgstr ""
 
 #. mouseover_matching_media_types.name
@@ -2369,6 +2349,27 @@ msgstr ""
 msgid "Instagram (downloading)"
 msgstr ""
 
+#. bypass_csp_for_lib.name
+msgid "Bypass CSP for libraries"
+msgstr ""
+
+#. bypass_csp_for_lib.description
+msgid ""
+"Tries loading the 3rd-party libraries using a `<script>` tag if a page's CSP prevents it from being loaded normally.\n"
+"This option currently carries an increased security risk when combined with \"Custom XHR for libraries\", and should only be enabled if absolutely necessary."
+msgstr ""
+
+#. bypass_csp_for_lib.warning.true
+msgid ""
+"This can potentially be extremely insecure if \"Custom XHR for libraries\" is also enabled.\n"
+"A malicious website could gain extension-level permissions and perform arbitrary requests (your online accounts could get hacked).\n"
+"If you need to use this option, please disable it as soon as possible."
+msgstr ""
+
+#. bypass_csp_for_lib.example_websites[0]
+msgid "Snapchat"
+msgstr ""
+
 #. use_webarchive_for_lib.name
 msgid "Use Web Archive for libraries"
 msgstr ""
@@ -2471,6 +2472,18 @@ msgstr ""
 msgid "Enables rules that return images that are possibly upscaled"
 msgstr ""
 
+#. allow_uncropped.name
+msgid "Uncropped images"
+msgstr ""
+
+#. allow_uncropped.description
+msgid "Enables rules that return possibly undesirable uncropped images"
+msgstr ""
+
+#. allow_uncropped.example_websites[0]
+msgid "Mobile wallpaper websites (returns the full version of the wallpaper image)"
+msgstr ""
+
 #. allow_thirdparty.name
 msgid "Rules using 3rd-party websites"
 msgstr ""
@@ -2543,6 +2556,14 @@ msgstr ""
 
 #. allow_bruteforce.example_websites[0]
 msgid "Deezer"
+msgstr ""
+
+#. allow_webarchive.name
+msgid "Web Archive support"
+msgstr ""
+
+#. allow_webarchive.description
+msgid "Allows rules to be run under archive.org's Wayback Machine."
 msgstr ""
 
 #. browser_cookies.name
@@ -2645,6 +2666,14 @@ msgstr ""
 msgid "Redirects media stored on Teddit to Reddit's servers. Disabling this may prevent finding original images because Teddit's image servers will only cache images fetched from posts, which are deleted after a few minutes."
 msgstr ""
 
+#. tiktok_app_api.name
+msgid "TikTok: Use app API"
+msgstr ""
+
+#. tiktok_app_api.description
+msgid "Uses TikTok's app API to find video information."
+msgstr ""
+
 #. tiktok_no_watermarks.name
 msgid "TikTok: Don't use watermarked videos"
 msgstr ""
@@ -2720,15 +2749,71 @@ msgstr ""
 msgid "Prefers `.jpg?name=orig` over `?format=jpg&name=orig`. This will possibly incur extra requests before succeeding. Note that there is no difference in image quality."
 msgstr ""
 
+#. youtube_replace_n.name
+msgid "YouTube: Enable faster speeds"
+msgstr ""
+
+#. youtube_replace_n.description
+msgid "Increases the download bandwidth for YouTube videos by replacing the `n` parameter. Note that this may execute untrusted Javascript."
+msgstr ""
+
 #. bigimage_blacklist.name
-msgid "Blacklist"
+msgid "Media blacklist"
 msgstr ""
 
 #. bigimage_blacklist.description
 msgid "A list of URLs (one per line) that are blacklisted from being processed"
 msgstr ""
 
-#. bigimage_blacklist.documentation.value
+#. bigimage_blacklist_mode.name
+msgid "Media blacklist mode"
+msgstr ""
+
+#. bigimage_blacklist_mode.description
+msgid "Whether the media blacklist should act as a blacklist or a whitelist"
+msgstr ""
+
+#. bigimage_blacklist_engine.name
+msgid "Blacklist engine"
+msgstr ""
+
+#. bigimage_blacklist_engine.description
+msgid "How blacklists should be processed"
+msgstr ""
+
+#. bigimage_blacklist_engine.options.glob.name
+msgid "Simple (glob)"
+msgstr ""
+
+#. bigimage_blacklist_engine.options.regex.name
+msgid "Regex"
+msgstr ""
+
+#. host_blacklist.name
+msgid "Host blacklist"
+msgstr ""
+
+#. host_blacklist.description
+msgid "A list of host URLs (one per line) that the popup is blacklisted from. For example, adding `twitter.com` to this blacklist would prevent any popup from opening on twitter.com."
+msgstr ""
+
+#. host_blacklist_mode.name
+msgid "Host blacklist mode"
+msgstr ""
+
+#. host_blacklist_mode.description
+msgid "Whether the host blacklist should act as a blacklist or a whitelist"
+msgstr ""
+
+#. host_html_blacklist.name
+msgid "HTML page blacklist"
+msgstr ""
+
+#. host_html_blacklist.description
+msgid "A list of URLs (one per line) that are blacklisted from being redirected."
+msgstr ""
+
+#. bigimage_blacklist.documentation.value, host_blacklist.documentation.value, host_html_blacklist.documentation.value
 msgid ""
 "The examples below are written for the simple (glob) engine, not the regex engine. The glob engine is generally based on the UNIX glob syntax.<br />\n"
 "<ul><br />\n"
@@ -2747,20 +2832,20 @@ msgid ""
 "</ul>"
 msgstr ""
 
-#. bigimage_blacklist_engine.name
-msgid "Blacklist engine"
+#. host_html_blacklist_mode.name
+msgid "HTML page blacklist mode"
 msgstr ""
 
-#. bigimage_blacklist_engine.description
-msgid "How the blacklist should be processed"
+#. host_html_blacklist_mode.description
+msgid "Whether the HTML page blacklist should act as a blacklist or a whitelist"
 msgstr ""
 
-#. bigimage_blacklist_engine.options.glob.name
-msgid "Simple (glob)"
+#. bigimage_blacklist_mode.options.whitelist.name, host_blacklist_mode.options.whitelist.name, host_html_blacklist_mode.options.whitelist.name
+msgid "Whitelist"
 msgstr ""
 
-#. bigimage_blacklist_engine.options.regex.name
-msgid "Regex"
+#. bigimage_blacklist_mode.options.blacklist.name, host_blacklist_mode.options.blacklist.name, host_html_blacklist_mode.options.blacklist.name
+msgid "Blacklist"
 msgstr ""
 
 #. filename_format.name
@@ -2771,7 +2856,7 @@ msgstr ""
 msgid "Format string(s) for the filename"
 msgstr ""
 
-#. mouseover_styles.documentation.title, bigimage_blacklist.documentation.title, filename_format.documentation.title
+#. mouseover_styles.documentation.title, bigimage_blacklist.documentation.title, filename_format.documentation.title, host_blacklist.documentation.title, host_html_blacklist.documentation.title
 msgid "Documentation"
 msgstr ""
 
@@ -2999,24 +3084,8 @@ msgstr ""
 msgid "Uses a simpler progress bar that has a fixed size for all media. This is useful to see how many images are replaced, rather than the ETA"
 msgstr ""
 
-#. replaceimgs_enable_keybinding.name, highlightimgs_enable_keybinding.name
-msgid "Enable trigger key"
-msgstr ""
-
-#. replaceimgs_enable_keybinding.description, highlightimgs_enable_keybinding.description
-msgid "Enables the use of the trigger key to run it without needing to use the menu"
-msgstr ""
-
-#. replaceimgs_keybinding.name, highlightimgs_keybinding.name
-msgid "Trigger key"
-msgstr ""
-
 #. highlightimgs_keybinding.description
 msgid "Trigger keybinding that will run the Highlight Images function"
-msgstr ""
-
-#. highlightimgs_enable.name
-msgid "Enable button"
 msgstr ""
 
 #. highlightimgs_enable.description
@@ -3063,6 +3132,54 @@ msgstr ""
 msgid "CSS style to apply for highlight. See the documentation for Popup CSS style for more information (the thumb/full URL variables aren't supported here)"
 msgstr ""
 
+#. replaceimgs_enable_keybinding.name, highlightimgs_enable_keybinding.name, customgallery_enable_keybinding.name
+msgid "Enable trigger key"
+msgstr ""
+
+#. replaceimgs_enable_keybinding.description, highlightimgs_enable_keybinding.description, customgallery_enable_keybinding.description
+msgid "Enables the use of the trigger key to run it without needing to use the menu"
+msgstr ""
+
+#. replaceimgs_keybinding.name, highlightimgs_keybinding.name, customgallery_keybinding.name
+msgid "Trigger key"
+msgstr ""
+
+#. customgallery_keybinding.description
+msgid "Trigger keybinding that will run the Custom Gallery function"
+msgstr ""
+
+#. highlightimgs_enable.name, customgallery_enable_button.name
+msgid "Enable button"
+msgstr ""
+
+#. customgallery_enable_button.description
+msgid "Enables the 'Custom Gallery' button"
+msgstr ""
+
+#. customgallery_apply_key.name
+msgid "Apply key"
+msgstr ""
+
+#. customgallery_apply_key.description
+msgid "Triggers the gallery when pressed"
+msgstr ""
+
+#. customgallery_bg_css.name
+msgid "Background CSS"
+msgstr ""
+
+#. customgallery_bg_css.description
+msgid "CSS style to apply for the background"
+msgstr ""
+
+#. customgallery_outline_css.name
+msgid "Outline CSS"
+msgstr ""
+
+#. customgallery_outline_css.description
+msgid "CSS style to apply for element outlines"
+msgstr ""
+
 #. mouseover_open_behavior.name, t2_mouseover_open_behavior.name, t3_mouseover_open_behavior.name
 #. English: Popup action
 msgid "Mouseover popup action"
@@ -3094,6 +3211,42 @@ msgstr ""
 
 #. mouseover_open_behavior.options.replace.name, t2_mouseover_open_behavior.options.replace.name, t3_mouseover_open_behavior.options.replace.name
 msgid "Replace"
+msgstr ""
+
+#. mouseover_exclude_page_bg.name, t2_mouseover_exclude_page_bg.name, t3_mouseover_exclude_page_bg.name
+msgid "Exclude page background"
+msgstr ""
+
+#. mouseover_exclude_page_bg.description, t2_mouseover_exclude_page_bg.description, t3_mouseover_exclude_page_bg.description
+msgid "Excludes the page background for the popup"
+msgstr ""
+
+#. mouseover_minimum_size.name, t2_mouseover_minimum_size.name, t3_mouseover_minimum_size.name
+msgid "Minimum size"
+msgstr ""
+
+#. mouseover_minimum_size.description, t2_mouseover_minimum_size.description, t3_mouseover_minimum_size.description
+msgid "Smallest size acceptable for the popup to open (this option is ignored for background images). This refers to the size of the media to be popped up, which may differ from the source media."
+msgstr ""
+
+#. popup_maximum_source_size.name, t2_popup_maximum_source_size.name, t3_popup_maximum_source_size.name
+msgid "Maximum source size"
+msgstr ""
+
+#. popup_maximum_source_size.description, t2_popup_maximum_source_size.description, t3_popup_maximum_source_size.description
+msgid "Maximum size (width/height) for the source media to allow popping up (this option is ignored for background images). Set to `0` for any size."
+msgstr ""
+
+#. mouseover_minimum_size.number_unit, mouseover_jitter_threshold.number_unit, mouseover_drag_min.number_unit, popup_maximum_source_size.number_unit, t2_mouseover_minimum_size.number_unit, t3_mouseover_minimum_size.number_unit, t2_popup_maximum_source_size.number_unit, t3_popup_maximum_source_size.number_unit
+msgid "pixels"
+msgstr ""
+
+#. mouseover_exclude_backgroundimages.name, t2_mouseover_exclude_backgroundimages.name, t3_mouseover_exclude_backgroundimages.name
+msgid "Exclude `background-image`s"
+msgstr ""
+
+#. mouseover_exclude_backgroundimages.description, t2_mouseover_exclude_backgroundimages.description, t3_mouseover_exclude_backgroundimages.description
+msgid "Excludes `background-image`s for the popup. Might prevent the popup from working on many images"
 msgstr ""
 
 #. mouseover_allow_video.name, t2_mouseover_allow_video.name, t3_mouseover_allow_video.name

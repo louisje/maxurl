@@ -1,7 +1,204 @@
-2023.5.0 (in-development)
+2024.9.0 (in-dev)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including YouTube)
+
+Special thanks to nimbuz, remlap, Solus, immewnity, Froktime, billkewl, Broly, fyhtma, vscum, acidzab, sn3akyb3ar, ValiumBear, fireattack, NeverForgotten, liamengland1, mantou, siloricity, adz for their contributions and reports for this release
+
+---
+
+2024.8.0
 
 New features:
 
+ * Brazilian Portuguese translation by thiagojramos
+ * Add custom blacklist for HTML page redirects (#773)
+ * Support for ~200 new websites (using ~125 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Flickr, iTunes, Patreon, Soundcloud, Spotify, Threads, TikTok, Tumblr)
+ * Improve parsing for <picture> elements
+
+Bugfixes:
+
+ * Fix browser download replacing current page on non-same-origin URLs
+ * Fix GM_download headers for Tampermonkey and Violentmonkey
+ * Fix header parsing for Tampermonkey BETA (thanks to Broly for reporting)
+
+Special thanks to thiagojramos, fireattack, nimbuz, Froktime, fyhtma, SakalliTavernaci, TheLastZombie, oifj34f34f, Solus, sn3akyb3ar, n0stal6ic, nyahgust, vscum, TristanWasTaken, BlindWanda, SUPER7X, n0099, remlap, CetaceanNation, bsydow, tathastu871, roi, ItsProyal, lazybookwyrm, James Joint, Machou, Broly, siloricity, ValiumBear, evilxsloth, leoli1110, ljcool2006 for their contributions and reports for this release
+
+---
+
+2024.3.0
+
+New features:
+
+ * Support for ~45 new websites (using ~30 new rules)
+ * Option to enable faster speeds on YouTube (disabled by default)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including SmugMug)
+
+Special thanks to f2005, VS, Froktime, Viper33, barry, snek, fireattack, leoli1110, billkewl, TristanWasTaken for their contributions and reports for this release
+
+---
+
+2024.2.1
+
+New features:
+
+ * Support for ~45 new websites (using ~25 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Discord, SmugMug)
+
+Special thanks to roi, rEnr3n, beeznutsonly, f2005, Froktime, neckothy, nimbuz, fireattack, Lerortle, barry for their contributions and reports for this release
+
+---
+
+2024.2.0
+
+New features:
+
+ * Support for ~45 new websites (using ~35 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including TikTok, Tumblr)
+
+Bugfixes
+
+ * Fix crash when redirecting to blacklisted URLs
+
+Special thanks to fireattack, aslian, remlap, uwuceo, TristanWasTaken, Froktime, karpuzikov, nimbuz, Shaggy, hosadokha, happysurf for their contributions and reports for this release
+
+---
+
+2024.1.1
+
+New features:
+
+ * Support for ~25 new websites (using ~15 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules
+ * Significantly improve popup performance under YouTube when using uBlock Origin
+
+Bugfixes:
+
+ * Fix a regression where alternate image URLs failed to load (thanks to posnipy for reporting)
+
+Special thanks to Froktime, aslian, posnipy for their contributions and reports for this release
+
+---
+
+2024.1.0
+
+New features:
+
+ * Option to add thumbnail link to history (#749, thanks to madman06 for the idea)
+ * Support for ~80 new websites (using ~40 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Discord, Patreon)
+
+Bugfixes:
+
+ * Fix remote messages failing under Firefox (thanks to Tulsow for reporting)
+ * Fix duplicate "Options" and "Request support for site" menu items for userscript (thanks to fireattack for reporting)
+ * Prevent rare infinite loop with bad images
+
+Special madman06, nimbuz, Broly, Tulsow, jonestly, fireattack, TristanWasTaken, pointy, oifj34f34f, Viper33, vscum, karpuzikov, sn3akyb3ar, Froktime, neckothy, Harmony, watatomo for their contributions and reports for this release
+
+---
+
+2023.12.0
+
+New features:
+
+ * "Custom Gallery" button, allowing you create galleries from picked images (disabled by default)
+ * Extension now supports all userscript-specific menu actions
+ * Option for a separate host blacklist (#773)
+ * Option to turn blacklists into whitelists (#302)
+ * Support for ~35 new websites (using ~20 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including BBC, Wordpress, TikTok)
+
+Bugfixes:
+
+ * Fix SVGs not popping up under Firefox (#1243, thanks to Rasmus Malver for reporting)
+
+Special thanks to nimbuz, vscum, karpuzikov, fireattack, ljcool2006, newuser999, Rasmus Malver, Harmony, schleeb, tacohitbox, Noober for their contributions and reports for this release
+
+---
+
+2023.11.1
+
+New features:
+
+ * Support for ~15 new websites (using ~10 new rules)
+
+Bugfixes:
+
+ * Fix endless loading cursor in some cases (thanks to fireattack and oifj34f34f for reporting)
+
+Special thanks to jonestly, fireattack, karpuzikov, ljcool2006, meloner, oifj34f34f for their contributions and reports for this release
+
+---
+
+2023.11.0
+
+New features:
+
+ * Support for ~60 new websites (using ~40 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Cloudinary, Google, Nitter, Patreon, PeerTube)
+ * Significantly improve zip performance
+
+Special thanks to sn3akyb3ar, fireattack, oifj34f34f, doio, Rotes!, ValiumBear, bigdiff, remlap, Flame, puddyplexer, Anon_Ymou5 for their contributions and reports for this release
+
+---
+
+2023.10.0
+
+New features:
+
+ * Support for ~135 new websites (using ~100 new rules)
+ * Support for images stored within SVG tags (#268)
+ * Option to allow rules to be run under archive.org's Wayback Machine (disabled by default)
+ * Option to bypass CSP restrictions when loading 3rd-party libraries from the userscript (disabled by default)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Flickr, Instagram, Reddit, Shopify, Snapchat, TikTok, Twitch)
+
+Bugfixes:
+
+ * Fix delay on initial load when HLS/DASH stream quality is changed
+ * Fix subtitles for HLS/DASH streams
+ * Fix iframes crashing when the userscript is enabled on some websites (#1213, thanks to fireattack on discord for reporting)
+ * Fix bad URLs being ignored after the first try
+ * Fix parsing srcsets without candidate strings
+
+Special thanks to Flame, TheOne, fyhtma, Tenome, Freso, IZeeLikeEyeZee, TristanWasTaken, sn3akyb3ar, remlap, fireattack, ValiumBear, sn3akyb3ar, desdesifre, karpuzikov, jonestly, Klewas for their contributions and reports for this release
+
+---
+
+2023.8.0
+
+New features:
+
+ * Support ~550 new websites (using ~200 new rules)
  * Option to toggle video subtitles (enabled by default)
  * Option to control returning uncropped images (enabled by default)
  * Userscript menu option to request support for a website
@@ -13,8 +210,9 @@ Improvements:
 Bugfixes:
 
  * Fix audio/video redirects (#1050, thanks to MarvNC on github for reporting)
+ * Fix userscript under Guerilla Scripting (Pale Moon)
 
-Special thanks to roi, jonestly, Puk0, sn3akyb3ar, pointydev, Adrthegamedev, karpuzikov, Broly, contextnerror, tathastu871, jedikalimero, allr8, vscum, aslian, eightyy8, fireattack, ayunami2000, TheLastZombie, Andy8r0X, MarvNC, talizea, kidonng, n0099, xyliaa, eighty8, JustLurkingHere, TristanWasTaken, ljcool2006, louthecute, f2005, Drflash55, Luke-L, meloner for their contributions and reports for this release
+Special thanks to roi, jonestly, Puk0, sn3akyb3ar, pointydev, Adrthegamedev, karpuzikov, Broly, contextnerror, tathastu871, jedikalimero, allr8, vscum, aslian, eightyy8, fireattack, ayunami2000, TheLastZombie, Andy8r0X, MarvNC, talizea, kidonng, n0099, xyliaa, eighty8, JustLurkingHere, TristanWasTaken, ljcool2006, louthecute, f2005, Drflash55, Luke-L, meloner, Harmony, fyhtma, kooper100, InSimpleTermsJordan for their contributions and reports for this release
 
 ---
 

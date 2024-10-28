@@ -15,14 +15,42 @@ get_userscript_version() {
 
 USERVERSION=`get_userscript_version userscript.user.js`
 MANIFESTVERSION=`cat manifest.json | grep '"version": *"[0-9.]*", *$' | sed 's/.*"version": *"\([0-9.]*\)", *$/\1/g'`
+PACKAGEVERSION=`cat package.json | grep '"version": *"[0-9.]*", *$' | sed 's/.*"version": *"\([0-9.]*\)", *$/\1/g'`
 
-if [ -z "$USERVERSION" -o -z "$MANIFESTVERSION" ]; then
+HASCHANGELOG=0
+CHANGELOGVERSION=
+if [ -f CHANGELOG.txt ]; then
+    CHANGELOGVERSION=`cat CHANGELOG.txt | head -n1`
+    HASCHANGELOG=1
+fi
+
+if [ -z "$USERVERSION" -o -z "$MANIFESTVERSION" -o -z "$PACKAGEVERSION" ]; then
     echo Broken version regex
     exit 1
 fi
 
 if [ "$USERVERSION" != "$MANIFESTVERSION" ]; then
     echo 'Conflicting versions (userscript and manifest)'
+    echo "Userscript: $USERVERSION"
+    echo "Manifest: $MANIFESTVERSION"
+    exit 1
+fi
+
+if [ "$USERVERSION" != "$PACKAGEVERSION" ]; then
+    echo 'Conflicting versions (userscript and npm package)'
+    echo "Userscript: $USERVERSION"
+    echo "Package: $PACKAGEVERSION"
+    exit 1
+fi
+
+if [ $HASCHANGELOG -eq 1 ] && [ "$USERVERSION" != "$CHANGELOGVERSION" ]; then
+    echo 'Conflicting versions (userscript and changelog)'
+    exit 1
+fi
+
+ps -ef | grep -v grep | grep 'maxurl/.*/concurrently.*npm:' >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo 'Kill watcher before running this'
     exit 1
 fi
 
@@ -135,8 +163,8 @@ echo Building Firefox extension
 
 BASEFILES="LICENSE.txt manifest.json userscript.user.js resources/logo_40.png resources/logo_48.png resources/logo_96.png resources/disabled_40.png resources/disabled_48.png resources/disabled_96.png extension/background.js extension/options.css extension/options.html extension/popup.js extension/popup.html"
 NONFFFILES="lib/ffmpeg.js lib/stream_parser.js"
-NONAMOFILES="lib/testcookie_slowaes.js lib/cryptojs_aes.js lib/jszip.js lib/shaka.debug.js"
-AMOFILES="lib/orig/slowaes.js lib/orig/cryptojs_aes.js lib/orig/jszip.js lib/orig/mux.js lib/orig/shaka-player.compiled.debug.js"
+NONAMOFILES="lib/testcookie_slowaes.js lib/cryptojs_aes.js lib/jszip.js lib/shaka.debug.js lib/acorn_interpreter.js lib/BigInteger.js"
+AMOFILES="lib/orig/slowaes.js lib/orig/cryptojs_aes.js lib/orig/jszip.js lib/orig/mux.js lib/orig/shaka-player.compiled.debug.js lib/orig/acorn_interpreter.js lib/orig/BigInteger.min.js"
 SOURCEFILES="tools/fetch_libs.sh tools/build_libs.sh lib/libs.txt EXTENSION_README.txt tools/package_extension.sh tools/remcomments.js tools/util.js tools/patch_libs.js tools/watch_tsc.sh src/userscript.ts src/module.d.ts package.json tsconfig.json"
 DIRS="extension lib lib/orig resources tools src"
 
@@ -356,15 +384,21 @@ if [ ! -z $RELEASE ]; then
     echo "Release checklist:"
     echo
     echo ' * Ensure translation strings are updated'
-    echo ' * Ensure xx00+ count is updated (userscript - greasyfork/oujs, reddit post, mozilla/opera, website)'
+    echo '  * node tools/update_sitesnum.js'
+    echo '  * node tools/update_strings.js'
+    echo '  * node tools/gen_po.js'
+    echo '  * node tools/update_from_po.js'
     echo ' * Ensure CHANGELOG.txt is updated'
-    echo ' * git add userscript.user.js userscript_smaller.user.js userscript.meta.js CHANGELOG.txt build/userscript_extr.user.js build/userscript_extr_min.user.js build/ImageMaxURL_crx3.crx build/ImageMaxURL_unsigned.xpi extension/updates.xml manifest.json sites.txt'
+    echo '  * Sites added: ./tools/get_old_userscript.sh && node site/about.js olduserscript'
+    echo ' * Update xx00+ count (oujs, reddit post, firefox, website)'
+    echo ' * git add src/userscript.ts userscript.user.js userscript_smaller.user.js userscript.meta.js CHANGELOG.txt build/userscript_extr.user.js build/userscript_extr_min.user.js build/ImageMaxURL_crx3.crx build/ImageMaxURL_unsigned.xpi extension/updates.xml manifest.json package.json sites.txt'
     echo ' * git commit ('$USERVERSION')'
-    echo ' * Update greasyfork, oujs, firefox, opera, changelog.txt'
-    echo ' * git tag v'$USERVERSION
-    echo ' * Update userscript.user.js for site (but check about.js for site count before)'
+    echo ' * Update firefox addon'
+    echo ' * Update site userscript'
     echo ' * Update Discord changelog'
     echo ' * Update build/ImageMaxURL_signed.xpi'
+    echo '  * ./tools/update_signed_xpi.sh'
+    echo ' * git tag v'$USERVERSION' && git push origin v'$USERVERSION
 else
     echo
     echo "Non-maintainer build finished"

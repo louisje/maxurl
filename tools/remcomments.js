@@ -90,10 +90,30 @@ var move_awaiter_generator = function(script) {
 	return script;
 }
 
+var fill_current_version = function(script) {
+	let versionmatch = script.match(/\/\/\s+@version\s+([0-9.]+)\s+\/\//);
+	if (!versionmatch) {
+		console.warn("Unable to find @version match");
+		return script;
+	}
+
+	let v = versionmatch[1];
+
+	let cvregex = /(var current_version = )null(;)/
+	if (!cvregex.test(script)) {
+		console.warn("Unable to find current_version match");
+		return script;
+	}
+
+	script = script.replace(cvregex, "$1\"" + v + "\"$2");
+	return script;
+}
+
 function build_userscript_user_js(tsout) {
 	var userscript = fs.readFileSync(tsout).toString();
 	userscript = normalize_tsstyle(userscript);
 	userscript = move_awaiter_generator(userscript);
+	userscript = fill_current_version(userscript);
 	var lines = spaces_to_tabs(userscript.split("\n"));
 
 	var newlines = [];
@@ -246,7 +266,12 @@ function update() {
 
 	var newcontents = newlines.join("\n");
 
-	newcontents = newcontents.replace(/(\n\t\tif \(domain(?:_[a-z]+)? === "[^"]+"\)) {\n\t\t\t(return src\.replace\(\/[\S]+\/, "[^"]+"\);)\n\t\t}\n/g, "$1 $2\n");
+	while (true) {
+		let newcontents1 = newcontents.replace(/(\n\t\tif \(domain(?:_[a-z]+)? === "[^"]+"\)) {\n\t\t\t(return src\.replace\(\/[\S]+\/, "[^"]+"\);)\n\t\t}\n/g, "$1 $2\n");
+		if (newcontents1 === newcontents)
+			break;
+		newcontents = newcontents1;
+	}
 
 	fs.writeFileSync("userscript_smaller.user.js", newcontents);
 
