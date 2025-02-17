@@ -12,3 +12,4 @@ maxurl.zip
 *.sig
 build/tsout.js
 package-lock.json
+yarn.lock

@@ -34,40 +34,40 @@
 // @name:zh-CN        Image Max URL
 // @name:zh-TW        Image Max URL
 // @name:zh-HK        Image Max URL
-// @description       Finds larger or original versions of images and videos for 9400+ websites, including a powerful media popup and download feature
-// @description:en    Finds larger or original versions of images and videos for 9400+ websites, including a powerful media popup and download feature
-// @description:ar    البحث عن نسخ أكبر أو أصلية من الصور لأكثر من 9400 موقع ويب
-// @description:cs    Vyhledá větší nebo původní verze obrázků a videí pro více než 9400 webů
-// @description:da    Finder større eller originale versioner af billeder og videoer til mere end 9400 websteder
-// @description:de    Sucht nach größeren oder originalen Versionen von Bildern und Videos für mehr als 9400 Websites
-// @description:el    Βρίσκει μεγαλύτερες ή πρωτότυπες εκδόσεις εικόνων και βίντεο για περισσότερους από 9400 ιστότοπους
-// @description:eo    Trovas pli grandajn aŭ originalajn versiojn de bildoj kaj filmetoj por pli ol 9400 retejoj
-// @description:es    Encuentra imágenes más grandes y originales para más de 9400 sitios
-// @description:fi    Etsii suurempia tai alkuperäisiä versioita kuvista ja videoista yli 9400 verkkosivustolle
-// @description:fr    Trouve des versions plus grandes ou originales d'images et de vidéos pour plus de 9 400 sites web, y compris une puissante fonction de popup média
-// @description:fr-CA Trouve des versions plus grandes ou originales d'images et de vidéos pour plus de 9 400 sites web, y compris une puissante fonction de popup média
-// @description:he    מוצא גרסאות גדולות יותר או מקוריות של תמונות וסרטונים עבור יותר מ-9400 אתרים
-// @description:hi    9400 से अधिक वेबसाइटों के लिए फ़ोटो और वीडियो के बड़े या मूल संस्करण ढूँढता है
-// @description:hu    Több mint 9400 webhely képének és videóinak nagyobb vagy eredeti változatát találja
-// @description:id    Menemukan versi gambar dan video yang lebih besar atau orisinal untuk lebih dari 9400 situs web
-// @description:it    Trova versioni più grandi o originali di immagini e video per oltre 9400 siti web
-// @description:ja    9400以上のウェブサイトで高画質や原本画像を見つけ出します
-// @description:ko    9400개 이상의 사이트에 대해 고화질이나 원본 이미지를 찾아드립니다
-// @description:nb    Finner større eller originale versjoner av bilder og videoer for mer enn 9400 nettsteder
-// @description:nl    Vindt grotere of originele versies van foto's en video's voor meer dan 9400 websites
-// @description:pl    Wyszukuje większe lub oryginalne wersje obrazów i filmów dla ponad 9400 stron internetowych
-// @description:pt-BR Encontra versões maiores ou originais de imagens e vídeos para mais de 9400 sites
-// @description:ru    Находит увеличенные или оригинальные версии изображений и видео для 9400+ сайтов. Имеет мощную функцию всплывающего окна и скачивание медиафайлов.
-// @description:bg    Намира увеличени или оригинални версии на изображения за повече от 9400 уеб сайтове
-// @description:uk    Знаходить збільшені або оригінальні версії зображень для більш ніж 9400 веб-сайтів
-// @description:th    หาที่ใหญ่กว่าหรือเวอร์ชั่นดั้งเดิมของภาพทั้งหมดและวีดีโอสำหรับมากกว่า 9400 งเว็บไซต์
-// @description:tr    9400'den fazla web sitesi için resim ve videoların daha büyük veya orijinal sürümlerini bulur
-// @description:vi    Tìm phiên bản lớn hơn hoặc phiên bản gốc của hình ảnh và video cho hơn 9400 trang web
+// @description       Finds larger or original versions of images and videos for 9700+ websites, including a powerful media popup and download feature
+// @description:en    Finds larger or original versions of images and videos for 9700+ websites, including a powerful media popup and download feature
+// @description:ar    البحث عن نسخ أكبر أو أصلية من الصور لأكثر من 9700 موقع ويب
+// @description:cs    Vyhledá větší nebo původní verze obrázků a videí pro více než 9700 webů
+// @description:da    Finder større eller originale versioner af billeder og videoer til mere end 9700 websteder
+// @description:de    Sucht nach größeren oder originalen Versionen von Bildern und Videos für mehr als 9700 Websites
+// @description:el    Βρίσκει μεγαλύτερες ή πρωτότυπες εκδόσεις εικόνων και βίντεο για περισσότερους από 9700 ιστότοπους
+// @description:eo    Trovas pli grandajn aŭ originalajn versiojn de bildoj kaj filmetoj por pli ol 9700 retejoj
+// @description:es    Encuentra imágenes más grandes y originales para más de 9700 sitios
+// @description:fi    Etsii suurempia tai alkuperäisiä versioita kuvista ja videoista yli 9700 verkkosivustolle
+// @description:fr    Trouve des versions plus grandes ou originales d'images et de vidéos pour plus de 9 700 sites web, y compris une puissante fonction de popup média
+// @description:fr-CA Trouve des versions plus grandes ou originales d'images et de vidéos pour plus de 9 700 sites web, y compris une puissante fonction de popup média
+// @description:he    מוצא גרסאות גדולות יותר או מקוריות של תמונות וסרטונים עבור יותר מ-9700 אתרים
+// @description:hi    9700 से अधिक वेबसाइटों के लिए फ़ोटो और वीडियो के बड़े या मूल संस्करण ढूँढता है
+// @description:hu    Több mint 9700 webhely képének és videóinak nagyobb vagy eredeti változatát találja
+// @description:id    Menemukan versi gambar dan video yang lebih besar atau orisinal untuk lebih dari 9700 situs web
+// @description:it    Trova versioni più grandi o originali di immagini e video per oltre 9700 siti web
+// @description:ja    9700以上のウェブサイトで高画質や原本画像を見つけ出します
+// @description:ko    9700개 이상의 사이트에 대해 고화질이나 원본 이미지를 찾아드립니다
+// @description:nb    Finner større eller originale versjoner av bilder og videoer for mer enn 9700 nettsteder
+// @description:nl    Vindt grotere of originele versies van foto's en video's voor meer dan 9700 websites
+// @description:pl    Wyszukuje większe lub oryginalne wersje obrazów i filmów dla ponad 9700 stron internetowych
+// @description:pt-BR Encontra versões maiores ou originais de imagens e vídeos para mais de 9700 sites
+// @description:ru    Находит увеличенные или оригинальные версии изображений и видео для 9700+ сайтов. Имеет мощную функцию всплывающего окна и скачивание медиафайлов.
+// @description:bg    Намира увеличени или оригинални версии на изображения за повече от 9700 уеб сайтове
+// @description:uk    Знаходить збільшені або оригінальні версії зображень для більш ніж 9700 веб-сайтів
+// @description:th    หาที่ใหญ่กว่าหรือเวอร์ชั่นดั้งเดิมของภาพทั้งหมดและวีดีโอสำหรับมากกว่า 9700 งเว็บไซต์
+// @description:tr    9700'den fazla web sitesi için resim ve videoların daha büyük veya orijinal sürümlerini bulur
+// @description:vi    Tìm phiên bản lớn hơn hoặc phiên bản gốc của hình ảnh và video cho hơn 9700 trang web
 // @description:zh-CN 在近万个网站上查找尺寸更大或原版的图像/视频，提供媒体文件小弹窗和下载功能
-// @description:zh-TW 為9400多個網站查找更大或原始圖像
-// @description:zh-HK 為9400多個網站查找更大或原始圖像
+// @description:zh-TW 為9700多個網站查找更大或原始圖像
+// @description:zh-HK 為9700多個網站查找更大或原始圖像
 // @namespace         http://tampermonkey.net/
-// @version           2024.8.0
+// @version           2025.2.0
 // @author            qsniyg
 // @homepageURL       https://qsniyg.github.io/maxurl/options.html
 // @supportURL        https://github.com/qsniyg/maxurl/issues
@@ -149,10 +149,10 @@ var $$IMU_EXPORT$$;
 			// channels
 			map: false,
 			cache: false,
-			bigimage_recursive: false,
+			bigimage_recursive: true,
 			input: false,
 			check_image_get: false,
-			find_source: true
+			find_source: false
 		};
 
 		console.log("Loaded");
@@ -1078,13 +1078,13 @@ var $$IMU_EXPORT$$;
 	};
 	get_compat_functions();
 
-	var force_array = function<T>(arrayornot:T):Array<T>|T {
+	var force_array = function<T>(arrayornot:T):Array<T> | T {
 		if (!is_array(arrayornot)) {
 			return [arrayornot];
 		} else {
 			return arrayornot;
 		}
-	}
+	};
 
 	var array_extend = function(array:Array<any>, other:Array<any>):void {
 		other = force_array(other);
@@ -1434,7 +1434,7 @@ var $$IMU_EXPORT$$;
 	};
 	get_compat_math();
 
-	var get_random_text = function(length:number, num?:boolean) {
+	var get_random_text = function(length:number, num?:boolean|"both") {
 		var text = "";
 
 		while (text.length < length) {
@@ -1443,6 +1443,8 @@ var $$IMU_EXPORT$$;
 			var newtext:string;
 			if (!num) {
 				newtext = newnum.toString(26);
+			} else if (num === "both") {
+				newtext = newnum.toString(36);
 			} else {
 				newtext = newnum.toString(10);
 			}
@@ -1967,6 +1969,104 @@ var $$IMU_EXPORT$$;
 		}
 	} else if (typeof(GM) !== "undefined" && typeof(GM.xmlHttpRequest) !== "undefined") {
 		do_request_raw = GM.xmlHttpRequest;
+	} else if (is_node) {
+		do_request_raw = function(request) {
+			if (_nir_debug_) {
+				console_log("do_request_node", request);
+			}
+
+			let http = require("http");
+			let https = require("https");
+
+			var method = request.method || "GET";
+
+			let our_http = http;
+			if (/^https:/.test(request.url))
+				our_http = https;
+
+			let hostinfo = request.url.match(/^[a-z]+:\/\/([^/]+)(?:\/+.*)?$/)[1];
+			let port = void 0;
+			let hostname = hostinfo;
+			let portmatch = hostinfo.match(/^(.*):([0-9]+)$/);
+			if (portmatch) {
+				hostname = portmatch[1];
+				port = portmatch[2]|0;
+			}
+			let path = request.url.match(/^[a-z]+:\/\/[^/]+(\/.*)?$/)[1] || "/";
+
+			let req = our_http.request({
+				hostname: hostname,
+				port: port,
+				method: method,
+				path: path,
+				// FIXME: add realistic browser headers, cookie jar
+				headers: request.headers
+			}, res => {
+				let chunks = [];
+				res.on("data", chunk => {
+					chunks.push(chunk);
+				});
+				let done_final = false;
+				let finalcb = () => {
+					if (done_final)
+						return;
+					done_final = true;
+
+					let rawdata = Buffer.concat(chunks);
+
+					let headersstrs = [];
+					for (let i = 0; i < res.rawHeaders.length; i += 2) {
+						headersstrs.push([res.rawHeaders[i] + ": " + res.rawHeaders[i+1]].join(""));
+					}
+					let headersstr = headersstrs.join("\r\n");
+
+					let resp = {
+						readyState: 4,
+						finalUrl: request.url, // FIXME
+						responseHeaders: headersstr,
+						responseType: "buffer",
+						response: null,
+						responseText: null,
+						status: res.statusCode,
+						statusText: res.statusMessage
+					};
+
+					resp.response = rawdata;
+
+					try {
+						resp.responseText = rawdata.toString("utf8"); // FIXME
+					} catch (e) {}
+
+					if (req.destroyed) {
+						request.onabort();
+					} else if (!req.complete) {
+						request.onerror(resp);
+					} else {
+						// FIXME: more onerror?
+						request.onload(resp);
+					}
+				};
+				// TODO: onprogress
+				// TODO: ontimeout
+				res.on("close", () => {
+					finalcb();
+				});
+				res.on("end", () => {
+					finalcb();
+				});
+			});
+
+			if (request.data)
+				req.write(request.data);
+
+			req.end();
+
+			return {
+				abort: function() {
+					req.abort();
+				}
+			};
+		};
 	}
 
 	if (is_extension && !is_extension_bg) {
@@ -3668,37 +3768,37 @@ var $$IMU_EXPORT$$;
 			"zh-CN": "\u7B80\u4F53\u4E2D\u6587"
 		},
 		"$description$": {
-			"en": "Finds larger or original versions of images and videos for 9400+ websites, including a powerful media popup and download feature",
-			"ar": "\u0627\u0644\u0628\u062D\u062B \u0639\u0646 \u0646\u0633\u062E \u0623\u0643\u0628\u0631 \u0623\u0648 \u0623\u0635\u0644\u064A\u0629 \u0645\u0646 \u0627\u0644\u0635\u0648\u0631 \u0644\u0623\u0643\u062B\u0631 \u0645\u0646 9400 \u0645\u0648\u0642\u0639 \u0648\u064A\u0628",
-			"bg": "\u041D\u0430\u043C\u0438\u0440\u0430 \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438 \u0438\u043B\u0438 \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u043D\u0438 \u0432\u0435\u0440\u0441\u0438\u0438 \u043D\u0430 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0437\u0430 \u043F\u043E\u0432\u0435\u0447\u0435 \u043E\u0442 9400 \u0443\u0435\u0431 \u0441\u0430\u0439\u0442\u043E\u0432\u0435",
-			"cs": "Vyhled\u00E1 v\u011Bt\u0161\u00ED nebo p\u016Fvodn\u00ED verze obr\u00E1zk\u016F a vide\u00ED pro v\u00EDce ne\u017E 9400 web\u016F",
-			"da": "Finder st\u00F8rre eller originale versioner af billeder og videoer til mere end 9400 websteder",
-			"de": "Sucht nach gr\u00F6\u00DFeren oder originalen Versionen von Bildern und Videos f\u00FCr mehr als 9400 Websites",
-			"el": "\u0392\u03C1\u03AF\u03C3\u03BA\u03B5\u03B9 \u03BC\u03B5\u03B3\u03B1\u03BB\u03CD\u03C4\u03B5\u03C1\u03B5\u03C2 \u03AE \u03C0\u03C1\u03C9\u03C4\u03CC\u03C4\u03C5\u03C0\u03B5\u03C2 \u03B5\u03BA\u03B4\u03CC\u03C3\u03B5\u03B9\u03C2 \u03B5\u03B9\u03BA\u03CC\u03BD\u03C9\u03BD \u03BA\u03B1\u03B9 \u03B2\u03AF\u03BD\u03C4\u03B5\u03BF \u03B3\u03B9\u03B1 \u03C0\u03B5\u03C1\u03B9\u03C3\u03C3\u03CC\u03C4\u03B5\u03C1\u03BF\u03C5\u03C2 \u03B1\u03C0\u03CC 9400 \u03B9\u03C3\u03C4\u03CC\u03C4\u03BF\u03C0\u03BF\u03C5\u03C2",
-			"eo": "Trovas pli grandajn a\u016D originalajn versiojn de bildoj kaj filmetoj por pli ol 9400 retejoj",
-			"es": "Encuentra im\u00E1genes m\u00E1s grandes y originales para m\u00E1s de 9400 sitios",
-			"fi": "Etsii suurempia tai alkuper\u00E4isi\u00E4 versioita kuvista ja videoista yli 9400 verkkosivustolle",
-			"fr": "Trouve des versions plus grandes ou originales d'images et de vid\u00E9os pour plus de 9 400 sites web, y compris une puissante fonction de popup m\u00E9dia",
-			"fr-CA": "Trouve des versions plus grandes ou originales d'images et de vid\u00E9os pour plus de 9 400 sites web, y compris une puissante fonction de popup m\u00E9dia",
-			"he": "\u05DE\u05D5\u05E6\u05D0 \u05D2\u05E8\u05E1\u05D0\u05D5\u05EA \u05D2\u05D3\u05D5\u05DC\u05D5\u05EA \u05D9\u05D5\u05EA\u05E8 \u05D0\u05D5 \u05DE\u05E7\u05D5\u05E8\u05D9\u05D5\u05EA \u05E9\u05DC \u05EA\u05DE\u05D5\u05E0\u05D5\u05EA \u05D5\u05E1\u05E8\u05D8\u05D5\u05E0\u05D9\u05DD \u05E2\u05D1\u05D5\u05E8 \u05D9\u05D5\u05EA\u05E8 \u05DE-9400 \u05D0\u05EA\u05E8\u05D9\u05DD",
-			"hi": "9400 \u0938\u0947 \u0905\u0927\u093F\u0915 \u0935\u0947\u092C\u0938\u093E\u0907\u091F\u094B\u0902 \u0915\u0947 \u0932\u093F\u090F \u092B\u093C\u094B\u091F\u094B \u0914\u0930 \u0935\u0940\u0921\u093F\u092F\u094B \u0915\u0947 \u092C\u0921\u093C\u0947 \u092F\u093E \u092E\u0942\u0932 \u0938\u0902\u0938\u094D\u0915\u0930\u0923 \u0922\u0942\u0901\u0922\u0924\u093E \u0939\u0948",
-			"hu": "T\u00F6bb mint 9400 webhely k\u00E9p\u00E9nek \u00E9s vide\u00F3inak nagyobb vagy eredeti v\u00E1ltozat\u00E1t tal\u00E1lja",
-			"id": "Menemukan versi gambar dan video yang lebih besar atau orisinal untuk lebih dari 9400 situs web",
-			"it": "Trova versioni pi\u00F9 grandi o originali di immagini e video per oltre 9400 siti web",
-			"ja": "9400\u4EE5\u4E0A\u306E\u30A6\u30A7\u30D6\u30B5\u30A4\u30C8\u3067\u9AD8\u753B\u8CEA\u3084\u539F\u672C\u753B\u50CF\u3092\u898B\u3064\u3051\u51FA\u3057\u307E\u3059",
-			"ko": "9400\uAC1C \uC774\uC0C1\uC758 \uC0AC\uC774\uD2B8\uC5D0 \uB300\uD574 \uACE0\uD654\uC9C8\uC774\uB098 \uC6D0\uBCF8 \uC774\uBBF8\uC9C0\uB97C \uCC3E\uC544\uB4DC\uB9BD\uB2C8\uB2E4",
-			"nb": "Finner st\u00F8rre eller originale versjoner av bilder og videoer for mer enn 9400 nettsteder",
-			"nl": "Vindt grotere of originele versies van foto's en video's voor meer dan 9400 websites",
-			"pl": "Wyszukuje wi\u0119ksze lub oryginalne wersje obraz\u00F3w i film\u00F3w dla ponad 9400 stron internetowych",
-			"pt-BR": "Encontra vers\u00F5es maiores ou originais de imagens e v\u00EDdeos para mais de 9400 sites",
-			"ru": "\u041D\u0430\u0445\u043E\u0434\u0438\u0442 \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u043D\u044B\u0435 \u0438\u043B\u0438 \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0432\u0435\u0440\u0441\u0438\u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0438 \u0432\u0438\u0434\u0435\u043E \u0434\u043B\u044F 9400+ \u0441\u0430\u0439\u0442\u043E\u0432. \u0418\u043C\u0435\u0435\u0442 \u043C\u043E\u0449\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u044E\u0449\u0435\u0433\u043E \u043E\u043A\u043D\u0430 \u0438 \u0441\u043A\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u0435 \u043C\u0435\u0434\u0438\u0430\u0444\u0430\u0439\u043B\u043E\u0432.",
-			"th": "\u0E2B\u0E32\u0E17\u0E35\u0E48\u0E43\u0E2B\u0E0D\u0E48\u0E01\u0E27\u0E48\u0E32\u0E2B\u0E23\u0E37\u0E2D\u0E40\u0E27\u0E2D\u0E23\u0E4C\u0E0A\u0E31\u0E48\u0E19\u0E14\u0E31\u0E49\u0E07\u0E40\u0E14\u0E34\u0E21\u0E02\u0E2D\u0E07\u0E20\u0E32\u0E1E\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E41\u0E25\u0E30\u0E27\u0E35\u0E14\u0E35\u0E42\u0E2D\u0E2A\u0E33\u0E2B\u0E23\u0E31\u0E1A\u0E21\u0E32\u0E01\u0E01\u0E27\u0E48\u0E32 9400 \u0E07\u0E40\u0E27\u0E47\u0E1A\u0E44\u0E0B\u0E15\u0E4C",
-			"tr": "9400'den fazla web sitesi i\u00E7in resim ve videolar\u0131n daha b\u00FCy\u00FCk veya orijinal s\u00FCr\u00FCmlerini bulur",
-			"uk": "\u0417\u043D\u0430\u0445\u043E\u0434\u0438\u0442\u044C \u0437\u0431\u0456\u043B\u044C\u0448\u0435\u043D\u0456 \u0430\u0431\u043E \u043E\u0440\u0438\u0433\u0456\u043D\u0430\u043B\u044C\u043D\u0456 \u0432\u0435\u0440\u0441\u0456\u0457 \u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u044C \u0434\u043B\u044F \u0431\u0456\u043B\u044C\u0448 \u043D\u0456\u0436 9400 \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u0456\u0432",
-			"vi": "T\u00ECm phi\u00EAn b\u1EA3n l\u1EDBn h\u01A1n ho\u1EB7c phi\u00EAn b\u1EA3n g\u1ED1c c\u1EE7a h\u00ECnh \u1EA3nh v\u00E0 video cho h\u01A1n 9400 trang web",
+			"en": "Finds larger or original versions of images and videos for 9700+ websites, including a powerful media popup and download feature",
+			"ar": "\u0627\u0644\u0628\u062D\u062B \u0639\u0646 \u0646\u0633\u062E \u0623\u0643\u0628\u0631 \u0623\u0648 \u0623\u0635\u0644\u064A\u0629 \u0645\u0646 \u0627\u0644\u0635\u0648\u0631 \u0644\u0623\u0643\u062B\u0631 \u0645\u0646 9700 \u0645\u0648\u0642\u0639 \u0648\u064A\u0628",
+			"bg": "\u041D\u0430\u043C\u0438\u0440\u0430 \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438 \u0438\u043B\u0438 \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u043D\u0438 \u0432\u0435\u0440\u0441\u0438\u0438 \u043D\u0430 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0437\u0430 \u043F\u043E\u0432\u0435\u0447\u0435 \u043E\u0442 9700 \u0443\u0435\u0431 \u0441\u0430\u0439\u0442\u043E\u0432\u0435",
+			"cs": "Vyhled\u00E1 v\u011Bt\u0161\u00ED nebo p\u016Fvodn\u00ED verze obr\u00E1zk\u016F a vide\u00ED pro v\u00EDce ne\u017E 9700 web\u016F",
+			"da": "Finder st\u00F8rre eller originale versioner af billeder og videoer til mere end 9700 websteder",
+			"de": "Sucht nach gr\u00F6\u00DFeren oder originalen Versionen von Bildern und Videos f\u00FCr mehr als 9700 Websites",
+			"el": "\u0392\u03C1\u03AF\u03C3\u03BA\u03B5\u03B9 \u03BC\u03B5\u03B3\u03B1\u03BB\u03CD\u03C4\u03B5\u03C1\u03B5\u03C2 \u03AE \u03C0\u03C1\u03C9\u03C4\u03CC\u03C4\u03C5\u03C0\u03B5\u03C2 \u03B5\u03BA\u03B4\u03CC\u03C3\u03B5\u03B9\u03C2 \u03B5\u03B9\u03BA\u03CC\u03BD\u03C9\u03BD \u03BA\u03B1\u03B9 \u03B2\u03AF\u03BD\u03C4\u03B5\u03BF \u03B3\u03B9\u03B1 \u03C0\u03B5\u03C1\u03B9\u03C3\u03C3\u03CC\u03C4\u03B5\u03C1\u03BF\u03C5\u03C2 \u03B1\u03C0\u03CC 9700 \u03B9\u03C3\u03C4\u03CC\u03C4\u03BF\u03C0\u03BF\u03C5\u03C2",
+			"eo": "Trovas pli grandajn a\u016D originalajn versiojn de bildoj kaj filmetoj por pli ol 9700 retejoj",
+			"es": "Encuentra im\u00E1genes m\u00E1s grandes y originales para m\u00E1s de 9700 sitios",
+			"fi": "Etsii suurempia tai alkuper\u00E4isi\u00E4 versioita kuvista ja videoista yli 9700 verkkosivustolle",
+			"fr": "Trouve des versions plus grandes ou originales d'images et de vid\u00E9os pour plus de 9 700 sites web, y compris une puissante fonction de popup m\u00E9dia",
+			"fr-CA": "Trouve des versions plus grandes ou originales d'images et de vid\u00E9os pour plus de 9 700 sites web, y compris une puissante fonction de popup m\u00E9dia",
+			"he": "\u05DE\u05D5\u05E6\u05D0 \u05D2\u05E8\u05E1\u05D0\u05D5\u05EA \u05D2\u05D3\u05D5\u05DC\u05D5\u05EA \u05D9\u05D5\u05EA\u05E8 \u05D0\u05D5 \u05DE\u05E7\u05D5\u05E8\u05D9\u05D5\u05EA \u05E9\u05DC \u05EA\u05DE\u05D5\u05E0\u05D5\u05EA \u05D5\u05E1\u05E8\u05D8\u05D5\u05E0\u05D9\u05DD \u05E2\u05D1\u05D5\u05E8 \u05D9\u05D5\u05EA\u05E8 \u05DE-9700 \u05D0\u05EA\u05E8\u05D9\u05DD",
+			"hi": "9700 \u0938\u0947 \u0905\u0927\u093F\u0915 \u0935\u0947\u092C\u0938\u093E\u0907\u091F\u094B\u0902 \u0915\u0947 \u0932\u093F\u090F \u092B\u093C\u094B\u091F\u094B \u0914\u0930 \u0935\u0940\u0921\u093F\u092F\u094B \u0915\u0947 \u092C\u0921\u093C\u0947 \u092F\u093E \u092E\u0942\u0932 \u0938\u0902\u0938\u094D\u0915\u0930\u0923 \u0922\u0942\u0901\u0922\u0924\u093E \u0939\u0948",
+			"hu": "T\u00F6bb mint 9700 webhely k\u00E9p\u00E9nek \u00E9s vide\u00F3inak nagyobb vagy eredeti v\u00E1ltozat\u00E1t tal\u00E1lja",
+			"id": "Menemukan versi gambar dan video yang lebih besar atau orisinal untuk lebih dari 9700 situs web",
+			"it": "Trova versioni pi\u00F9 grandi o originali di immagini e video per oltre 9700 siti web",
+			"ja": "9700\u4EE5\u4E0A\u306E\u30A6\u30A7\u30D6\u30B5\u30A4\u30C8\u3067\u9AD8\u753B\u8CEA\u3084\u539F\u672C\u753B\u50CF\u3092\u898B\u3064\u3051\u51FA\u3057\u307E\u3059",
+			"ko": "9700\uAC1C \uC774\uC0C1\uC758 \uC0AC\uC774\uD2B8\uC5D0 \uB300\uD574 \uACE0\uD654\uC9C8\uC774\uB098 \uC6D0\uBCF8 \uC774\uBBF8\uC9C0\uB97C \uCC3E\uC544\uB4DC\uB9BD\uB2C8\uB2E4",
+			"nb": "Finner st\u00F8rre eller originale versjoner av bilder og videoer for mer enn 9700 nettsteder",
+			"nl": "Vindt grotere of originele versies van foto's en video's voor meer dan 9700 websites",
+			"pl": "Wyszukuje wi\u0119ksze lub oryginalne wersje obraz\u00F3w i film\u00F3w dla ponad 9700 stron internetowych",
+			"pt-BR": "Encontra vers\u00F5es maiores ou originais de imagens e v\u00EDdeos para mais de 9700 sites",
+			"ru": "\u041D\u0430\u0445\u043E\u0434\u0438\u0442 \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u043D\u044B\u0435 \u0438\u043B\u0438 \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0432\u0435\u0440\u0441\u0438\u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0438 \u0432\u0438\u0434\u0435\u043E \u0434\u043B\u044F 9700+ \u0441\u0430\u0439\u0442\u043E\u0432. \u0418\u043C\u0435\u0435\u0442 \u043C\u043E\u0449\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u044E\u0449\u0435\u0433\u043E \u043E\u043A\u043D\u0430 \u0438 \u0441\u043A\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u0435 \u043C\u0435\u0434\u0438\u0430\u0444\u0430\u0439\u043B\u043E\u0432.",
+			"th": "\u0E2B\u0E32\u0E17\u0E35\u0E48\u0E43\u0E2B\u0E0D\u0E48\u0E01\u0E27\u0E48\u0E32\u0E2B\u0E23\u0E37\u0E2D\u0E40\u0E27\u0E2D\u0E23\u0E4C\u0E0A\u0E31\u0E48\u0E19\u0E14\u0E31\u0E49\u0E07\u0E40\u0E14\u0E34\u0E21\u0E02\u0E2D\u0E07\u0E20\u0E32\u0E1E\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E41\u0E25\u0E30\u0E27\u0E35\u0E14\u0E35\u0E42\u0E2D\u0E2A\u0E33\u0E2B\u0E23\u0E31\u0E1A\u0E21\u0E32\u0E01\u0E01\u0E27\u0E48\u0E32 9700 \u0E07\u0E40\u0E27\u0E47\u0E1A\u0E44\u0E0B\u0E15\u0E4C",
+			"tr": "9700'den fazla web sitesi i\u00E7in resim ve videolar\u0131n daha b\u00FCy\u00FCk veya orijinal s\u00FCr\u00FCmlerini bulur",
+			"uk": "\u0417\u043D\u0430\u0445\u043E\u0434\u0438\u0442\u044C \u0437\u0431\u0456\u043B\u044C\u0448\u0435\u043D\u0456 \u0430\u0431\u043E \u043E\u0440\u0438\u0433\u0456\u043D\u0430\u043B\u044C\u043D\u0456 \u0432\u0435\u0440\u0441\u0456\u0457 \u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u044C \u0434\u043B\u044F \u0431\u0456\u043B\u044C\u0448 \u043D\u0456\u0436 9700 \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u0456\u0432",
+			"vi": "T\u00ECm phi\u00EAn b\u1EA3n l\u1EDBn h\u01A1n ho\u1EB7c phi\u00EAn b\u1EA3n g\u1ED1c c\u1EE7a h\u00ECnh \u1EA3nh v\u00E0 video cho h\u01A1n 9700 trang web",
 			"zh-CN": "\u5728\u8FD1\u4E07\u4E2A\u7F51\u7AD9\u4E0A\u67E5\u627E\u5C3A\u5BF8\u66F4\u5927\u6216\u539F\u7248\u7684\u56FE\u50CF/\u89C6\u9891\uFF0C\u63D0\u4F9B\u5A92\u4F53\u6587\u4EF6\u5C0F\u5F39\u7A97\u548C\u4E0B\u8F7D\u529F\u80FD",
-			"zh-HK": "\u70BA9400\u591A\u500B\u7DB2\u7AD9\u67E5\u627E\u66F4\u5927\u6216\u539F\u59CB\u5716\u50CF",
-			"zh-TW": "\u70BA9400\u591A\u500B\u7DB2\u7AD9\u67E5\u627E\u66F4\u5927\u6216\u539F\u59CB\u5716\u50CF"
+			"zh-HK": "\u70BA9700\u591A\u500B\u7DB2\u7AD9\u67E5\u627E\u66F4\u5927\u6216\u539F\u59CB\u5716\u50CF",
+			"zh-TW": "\u70BA9700\u591A\u500B\u7DB2\u7AD9\u67E5\u627E\u66F4\u5927\u6216\u539F\u59CB\u5716\u50CF"
 		},
 		"options_header": {
 			"en": "Options",
@@ -5991,6 +6091,26 @@ var $$IMU_EXPORT$$;
 			"pt-BR": "Reproduzir automaticamente quando o pop-up for aberto",
 			"ru": "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0441\u044F \u043F\u043E\u0441\u043B\u0435 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u044E\u0449\u0435\u0433\u043E \u043E\u043A\u043D\u0430.",
 			"zh-CN": "\u5F39\u7A97\u6253\u5F00\u540E\u81EA\u52A8\u64AD\u653E"
+		},
+		"If active tab": {
+			"_info": {
+				"instances": [
+					{
+						"setting": "mouseover_video_autoplay",
+						"field": "options.active.name"
+					}
+				]
+			}
+		},
+		"Disabled": {
+			"_info": {
+				"instances": [
+					{
+						"setting": "mouseover_video_autoplay",
+						"field": "options.disabled.name"
+					}
+				]
+			}
 		},
 		"Show video controls": {
 			"_info": {
@@ -12752,7 +12872,7 @@ var $$IMU_EXPORT$$;
 			"ru": "\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u0446\u0438\u044F",
 			"zh-CN": "\u6587\u6863"
 		},
-		"<p>Variables are specified between curly brackets (<code>{}</code>).</p>\n<p>Below is a list of valid variables:</p>\n<ul><br />\n<li><code>filename</code> - Original filename (with extension, if applicable)</li>\n<li><code>filename_noext</code> - Original filename (without extension, if applicable)</li>\n<li><code>ext</code> - Extension (with <code>.</code> prefixed)</li>\n<li><code>caption</code> - Popup caption</li>\n<li><code>author_username</code> - Author's username</li>\n<li><code>id</code> - Post ID</li>\n<li><code>host_title</code> - Title of the current tab/window</li>\n<li><code>host_url</code> - URL of the host webpage</li>\n<li><code>host_domain</code> - Domain of the host webpage</li>\n<li><code>host_domain_nosub</code> - Domain (without subdomains) of the host webpage</li>\n<li><code>url</code> - URL of the media</li>\n<li><code>domain</code> - Domain of the media</li>\n<li><code>domain_nosub</code> - Domain (without subdomains) of the media</li>\n<li><code>is_screenshot</code> - Blank, the line will only be processed when screenshotting a video</li>\n<li><code>prefix</code>, <code>suffix</code> - Blank by default, these variables will be automatically prefixed/suffixed to the filename if set using <code>:=</code></li>\n<li><code>created_...</code> - Created date (see note on Date objects below)</li>\n<li><code>updated_...</code> - Updated date, this will use the <code>Last-Modified</code> header if not otherwise specified by the rule (see note on Date objects below)</li>\n<li><code>download_...</code> - Download date (see note on Date objects below)</li>\n<li><code>date_...</code> - Created/updated date (see note on Date objects below)</li>\n</ul><br />\n<p>You can truncate the value of a variable by adding <code>:(number)</code> before the end bracket (<code>}</code>). For example:</p>\n<ul><br />\n<li><code>{caption:10}</code> - Truncates the caption to be at most 10 characters long</li>\n<li><code>{caption:10.}</code> - Same, but will add an ellipsis (\u2026) if the caption was truncated</li>\n</ul><br />\n<p>If a variable doesn't exist, by default it will ignore the current format string and use the one on the next line, unless <code>?</code> is added before the end bracket. For example:</p>\n<ul><br />\n<li><code>{ext?}</code> - Will be replaced with nothing if <code>ext</code> doesn't exist</li>\n<li><code>{caption?no caption}</code> - Will be replaced with <code>no caption</code> if <code>caption</code> doesn't exist</li>\n</ul><br />\n<p>You can check for equality and inequality with <code>==</code> and <code>!=</code> operators respectively. For example:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{author_username} {id}</code> - Will only run the current format (<code>{author_username} {id}</code> in this case) if the domain is cdninstagram.com</li>\n</ul><br />\n<p>You can check if a variable contains a string with <code>/=</code> (<code>!/=</code> for the opposite). It also supports two flags, <code>r</code> (regex) and <code>c</code> (case-sensitive), if added between <code>/</code> and <code>=</code>. For example:</p>\n<ul><br />\n<li><code>{domain/=instagram}{id}</code> - Will only run the current format (<code>{id}</code>) if the domain contains <code>instagram</code></li>\n<li><code>{domain!/=instagram}{id}</code> - Likewise, but only if the domain does not contain <code>instagram</code></li>\n<li><code>{domain/r=inst.*ram}{id}</code> - Likewise, but only if the domain matches the regex <code>inst.*ram</code></li>\n<li><code>{window_title/c=Instagram}{id}</code> - Likewise, but only if the window's title contains <code>Instagram</code> (case-sensitively)</li>\n<li><code>{window_title!/rc=Inst.*ram}{id}</code> - Likewise, but only if the window's title does not match the case-sensitive regex <code>Inst.*ram</code></li>\n</ul><br />\n<p>You can set a custom variable with <code>:=</code>. For example:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{foo:=bar}</code> - Sets the variable <code>foo</code> to <code>bar</code> if the domain is <code>cdninstagram.com</code>. The variable can then be accessed with e.g. <code>{foo}</code></li>\n</ul><br />\n<p>Date objects are accessible through a number of properties. Each property can be suffixed with <code>_utc</code> to get the UTC/GMT equivalent.</p>\n<ul><br />\n<li><code>..._iso</code> - Date in ISO format (e.g. <code>2019-12-31T23-30-56</code>). Note that <code>:</code> is replaced with <code>-</code> to avoid issues with paths under NTFS.</li>\n<li><code>..._ago</code> - Human-readable representation of the time elapsed since the date (e.g. <code>1 year and 10 months ago</code>, <code>5 months and 20 days ago</code>)</li>\n<li><code>..._unix</code> - Unix timestamp (e.g. <code>1577912345</code>)</li>\n<li><code>..._unix_ms</code> - Unix timestamp with millisecond accuracy (e.g. <code>1577912345678</code>)</li>\n<li><code>..._yyyymmdd</code> - Date in YYYYMMDD format (e.g. <code>20191230</code>)</li>\n<li><code>..._hhmmss</code> - Time in HHMMSS format (e.g. <code>233056</code>)</li>\n<li><code>..._year</code> - Full year (e.g. <code>2019</code>)</li>\n<li><code>..._month</code> - Zero-padded month (e.g. <code>12</code>)</li>\n<li><code>..._day</code> - Zero-padded day (e.g. <code>31</code>)</li>\n<li><code>..._hours</code> - Zero-padded hours in military/24-hour format (e.g. <code>23</code>)</li>\n<li><code>..._minutes</code> - Zero-padded minutes (e.g. <code>30</code>)</li>\n<li><code>..._seconds</code> - Zero-padded seconds (e.g. <code>56</code>)</li>\n</ul>": {
+		"<p>Variables are specified between curly brackets (<code>{}</code>).</p>\n<p>Below is a list of valid variables:</p>\n<ul><br />\n<li><code>filename</code> - Original filename (with extension, if applicable)</li>\n<li><code>filename_noext</code> - Original filename (without extension, if applicable)</li>\n<li><code>ext</code> - Extension (with <code>.</code> prefixed)</li>\n<li><code>caption</code> - Popup caption</li>\n<li><code>author_username</code> - Author's username</li>\n<li><code>id</code> - Post ID</li>\n<li><code>host_title</code> - Title of the current tab/window</li>\n<li><code>host_url</code> - URL of the host webpage</li>\n<li><code>host_domain</code> - Domain of the host webpage</li>\n<li><code>host_domain_nosub</code> - Domain (without subdomains) of the host webpage</li>\n<li><code>url</code> - URL of the media</li>\n<li><code>domain</code> - Domain of the media</li>\n<li><code>domain_nosub</code> - Domain (without subdomains) of the media</li>\n<li><code>is_screenshot</code> - Blank, the line will only be processed when screenshotting a video</li>\n<li><code>prefix</code>, <code>suffix</code> - Blank by default, these variables will be automatically prefixed/suffixed to the filename if set using <code>:=</code></li>\n<li><code>created_...</code> - Created date (see note on Date objects below)</li>\n<li><code>updated_...</code> - Updated date, this will use the <code>Last-Modified</code> header if not otherwise specified by the rule (see note on Date objects below)</li>\n<li><code>download_...</code> - Download date (see note on Date objects below)</li>\n<li><code>date_...</code> - Created/updated date (see note on Date objects below)</li>\n</ul><br />\n<p>You can modify the variable's value using regex by adding <code>/(match)/(replace)/[c]</code> before the end bracket (<code>}</code>). For example:</p>\n<ul><br />\n<li><code>{caption/foo/bar/}</code> - Replaces <code>foo</code> / <code>FOO</code> / <code>FoO</code> with <code>bar</code> (case-insensitively)</li>\n<li><code>{caption/FoO/bar/c}</code> - Replaces <code>FoO</code> with <code>bar</code> (case-sensitively)</li>\n</ul><br />\n<p>Note that curly brackets in regex expressions must be escaped:</p>\n<ul><br />\n<li><code>{caption/[a-z]\\{5,7\\}/abcdefg/}</code> - Replaces alphabetic sequences from 5-7 characters with <code>abcdefg</code></li>\n</ul><br />\n<p>You can also truncate the value of a variable by adding <code>:(number)</code> before the end bracket. For example:</p>\n<ul><br />\n<li><code>{caption:10}</code> - Truncates the caption to be at most 10 characters long</li>\n<li><code>{caption:10.}</code> - Same, but will add an ellipsis (\u2026) if the caption was truncated</li>\n<li><code>{caption/foo/bar/:10}</code> - Replaces <code>foo</code> with <code>bar</code> and truncates the caption to be at most 10 characters long</li>\n</ul><br />\n<p>If a variable doesn't exist, by default it will ignore the current format string and use the one on the next line, unless <code>?</code> is added before the end bracket. For example:</p>\n<ul><br />\n<li><code>{ext?}</code> - Will be replaced with nothing if <code>ext</code> doesn't exist</li>\n<li><code>{caption?no caption}</code> - Will be replaced with <code>no caption</code> if <code>caption</code> doesn't exist</li>\n</ul><br />\n<p>You can check for equality and inequality with <code>==</code> and <code>!=</code> operators respectively. For example:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{author_username} {id}</code> - Will only run the current format (<code>{author_username} {id}</code> in this case) if the domain is cdninstagram.com</li>\n</ul><br />\n<p>You can check if a variable contains a string with <code>/=</code> (<code>!/=</code> for the opposite). It also supports two flags, <code>r</code> (regex) and <code>c</code> (case-sensitive), if added between <code>/</code> and <code>=</code>. For example:</p>\n<ul><br />\n<li><code>{domain/=instagram}{id}</code> - Will only run the current format (<code>{id}</code>) if the domain contains <code>instagram</code></li>\n<li><code>{domain!/=instagram}{id}</code> - Likewise, but only if the domain does not contain <code>instagram</code></li>\n<li><code>{domain/r=inst.*ram}{id}</code> - Likewise, but only if the domain matches the regex <code>inst.*ram</code></li>\n<li><code>{window_title/c=Instagram}{id}</code> - Likewise, but only if the window's title contains <code>Instagram</code> (case-sensitively)</li>\n<li><code>{window_title!/rc=Inst.*ram}{id}</code> - Likewise, but only if the window's title does not match the case-sensitive regex <code>Inst.*ram</code></li>\n</ul><br />\n<p>You can set a custom variable with <code>:=</code>. For example:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{foo:=bar}</code> - Sets the variable <code>foo</code> to <code>bar</code> if the domain is <code>cdninstagram.com</code>. The variable can then be accessed with e.g. <code>{foo}</code></li>\n</ul><br />\n<p>Date objects are accessible through a number of properties. Each property can be suffixed with <code>_utc</code> to get the UTC/GMT equivalent.</p>\n<ul><br />\n<li><code>..._iso</code> - Date in ISO format (e.g. <code>2019-12-31T23-30-56</code>). Note that <code>:</code> is replaced with <code>-</code> to avoid issues with paths under NTFS.</li>\n<li><code>..._ago</code> - Human-readable representation of the time elapsed since the date (e.g. <code>1 year and 10 months ago</code>, <code>5 months and 20 days ago</code>)</li>\n<li><code>..._unix</code> - Unix timestamp (e.g. <code>1577912345</code>)</li>\n<li><code>..._unix_ms</code> - Unix timestamp with millisecond accuracy (e.g. <code>1577912345678</code>)</li>\n<li><code>..._yyyymmdd</code> - Date in YYYYMMDD format (e.g. <code>20191230</code>)</li>\n<li><code>..._hhmmss</code> - Time in HHMMSS format (e.g. <code>233056</code>)</li>\n<li><code>..._year</code> - Full year (e.g. <code>2019</code>)</li>\n<li><code>..._month</code> - Zero-padded month (e.g. <code>12</code>)</li>\n<li><code>..._day</code> - Zero-padded day (e.g. <code>31</code>)</li>\n<li><code>..._hours</code> - Zero-padded hours in military/24-hour format (e.g. <code>23</code>)</li>\n<li><code>..._minutes</code> - Zero-padded minutes (e.g. <code>30</code>)</li>\n<li><code>..._seconds</code> - Zero-padded seconds (e.g. <code>56</code>)</li>\n</ul>": {
 			"_info": {
 				"instances": [
 					{
@@ -12760,10 +12880,7 @@ var $$IMU_EXPORT$$;
 						"field": "documentation.value"
 					}
 				]
-			},
-			"pt-BR": "As vari\u00E1veis s\u00E3o especificadas entre chaves (<code>{}</code>).</p>\n<p>Abaixo est\u00E1 uma lista de vari\u00E1veis v\u00E1lidas:</p>\n<ul><br />\n<li><code>filename</code> - Nome do arquivo original (com extens\u00E3o, se aplic\u00E1vel)</li>\n<li><code>filename_noext</code> - Nome do arquivo original (sem extens\u00E3o, se aplic\u00E1vel)</li>\n<li><code>ext</code> - Extens\u00E3o (prefixada com <code>.</code>)</li>\n<li><code>caption</code> - Legenda do popup</li>\n<li><code>author_username</code> - Nome de usu\u00E1rio do autor</li>\n<li><code>id</code> - ID do post</li>\n<li><code>host_title</code> - T\u00EDtulo da aba/janela atual</li>\n<li><code>host_url</code> - URL da p\u00E1gina de hospedagem</li>\n<li><code>host_domain</code> - Dom\u00EDnio da p\u00E1gina de hospedagem</li>\n<li><code>host_domain_nosub</code> - Dom\u00EDnio (sem subdom\u00EDnios) da p\u00E1gina de hospedagem</li>\n<li><code>url</code> - URL da m\u00EDdia</li>\n<li><code>domain</code> - Dom\u00EDnio da m\u00EDdia</li>\n<li><code>domain_nosub</code> - Dom\u00EDnio (sem subdom\u00EDnios) da m\u00EDdia</li>\n<li><code>is_screenshot</code> - Em branco, a linha s\u00F3 ser\u00E1 processada ao fazer uma captura de tela de um v\u00EDdeo</li>\n<li><code>prefix</code>, <code>suffix</code> - Em branco por padr\u00E3o, essas vari\u00E1veis ser\u00E3o automaticamente prefixadas/sufixadas ao nome do arquivo se definidas usando <code>:=</code></li>\n<li><code>created_...</code> - Data de cria\u00E7\u00E3o (veja a nota sobre objetos de data abaixo)</li>\n<li><code>updated_...</code> - Data de atualiza\u00E7\u00E3o, usar\u00E1 o cabe\u00E7alho <code>Last-Modified</code> se n\u00E3o especificado de outra forma pela regra (veja a nota sobre objetos de data abaixo)</li>\n<li><code>download_...</code> - Data de download (veja a nota sobre objetos de data abaixo)</li>\n<li><code>date_...</code> - Data de cria\u00E7\u00E3o/atualiza\u00E7\u00E3o (veja a nota sobre objetos de data abaixo)</li>\n</ul><br />\n<p>Voc\u00EA pode truncar o valor de uma vari\u00E1vel adicionando <code>:(n\u00FAmero)</code> antes da chave de fechamento (<code>}</code>). Por exemplo:</p>\n<ul><br />\n<li><code>{caption:10}</code> - Trunca a legenda para ter no m\u00E1ximo 10 caracteres</li>\n<li><code>{caption:10.}</code> - O mesmo, mas adicionar\u00E1 uma retic\u00EAncia (\u2026) se a legenda for truncada</li>\n</ul><br />\n<p>Se uma vari\u00E1vel n\u00E3o existir, por padr\u00E3o ignorar\u00E1 a string de formato atual e usar\u00E1 a pr\u00F3xima linha, a menos que <code>?</code> seja adicionado antes da chave de fechamento. Por exemplo:</p>\n<ul><br />\n<li><code>{ext?}</code> - Ser\u00E1 substitu\u00EDdo por nada se <code>ext</code> n\u00E3o existir</li>\n<li><code>{caption?sem legenda}</code> - Ser\u00E1 substitu\u00EDdo por <code>sem legenda</code> se <code>caption</code> n\u00E3o existir</li>\n</ul><br />\n<p>Voc\u00EA pode verificar igualdade e desigualdade com os operadores <code>==</code> e <code>!=</code> respectivamente. Por exemplo:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{author_username} {id}</code> - Executar\u00E1 o formato atual (<code>{author_username} {id}</code> neste caso) apenas se o dom\u00EDnio for cdninstagram.com</li>\n</ul><br />\n<p>Voc\u00EA pode verificar se uma vari\u00E1vel cont\u00E9m uma string com <code>/=</code> (<code>!/=</code> para o oposto). Tamb\u00E9m suporta duas flags, <code>r</code> (regex) e <code>c</code> (case-sensitive), se adicionadas entre <code>/</code> e <code>=</code>. Por exemplo:</p>\n<ul><br />\n<li><code>{domain/=instagram}{id}</code> - Executar\u00E1 o formato atual (<code>{id}</code>) apenas se o dom\u00EDnio contiver <code>instagram</code></li>\n<li><code>{domain!/=instagram}{id}</code> - Da mesma forma, mas apenas se o dom\u00EDnio n\u00E3o contiver <code>instagram</code></li>\n<li><code>{domain/r=inst.*ram}{id}</code> - Da mesma forma, mas apenas se o dom\u00EDnio corresponder ao regex <code>inst.*ram</code></li>\n<li><code>{window_title/c=Instagram}{id}</code> - Da mesma forma, mas apenas se o t\u00EDtulo da janela contiver <code>Instagram</code> (diferencia\u00E7\u00E3o de mai\u00FAsculas e min\u00FAsculas)</li>\n<li><code>{window_title!/rc=Inst.*ram}{id}</code> - Da mesma forma, mas apenas se o t\u00EDtulo da janela n\u00E3o corresponder ao regex case-sensitive <code>Inst.*ram</code></li>\n</ul><br />\n<p>Voc\u00EA pode definir uma vari\u00E1vel personalizada com <code>:=</code>. Por exemplo:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{foo:=bar}</code> - Define a vari\u00E1vel <code>foo</code> como <code>bar</code> se o dom\u00EDnio for <code>cdninstagram.com</code>. A vari\u00E1vel pode ent\u00E3o ser acessada com, por exemplo, <code>{foo}</code></li>\n</ul><br />\n<p>Objetos de data s\u00E3o acess\u00EDveis atrav\u00E9s de v\u00E1rias propriedades. Cada propriedade pode ser sufixada com <code>_utc</code> para obter o equivalente UTC/GMT.</p>\n<ul><br />\n<li><code>..._iso</code> - Data em formato ISO (ex.: <code>2019-12-31T23-30-56</code>). Observe que <code>:</code> \u00E9 substitu\u00EDdo por <code>-</code> para evitar problemas com caminhos no NTFS.</li>\n<li><code>..._ago</code> - Representa\u00E7\u00E3o leg\u00EDvel do tempo decorrido desde a data (ex.: <code>1 ano e 10 meses atr\u00E1s</code>, <code>5 meses e 20 dias atr\u00E1s</code>)</li>\n<li><code>..._unix</code> - Timestamp Unix (ex.: <code>1577912345</code>)</li>\n<li><code>..._unix_ms</code> - Timestamp Unix com precis\u00E3o de milissegundos (ex.: <code>1577912345678</code>)</li>\n<li><code>..._yyyymmdd</code> - Data em formato YYYYMMDD (ex.: <code>20191230</code>)</li>\n<li><code>..._hhmmss</code> - Hora em formato HHMMSS (ex.: <code>233056</code>)</li>\n<li><code>..._year</code> - Ano completo (ex.: <code>2019</code>)</li>\n<li><code>..._month</code> - M\u00EAs com zero \u00E0 esquerda (ex.: <code>12</code>)</li>\n<li><code>..._day</code> - Dia com zero \u00E0 esquerda (ex.: <code>31</code>)</li>\n<li><code>..._hours</code> - Horas com zero \u00E0 esquerda no formato militar/24 horas (ex.: <code>23</code>)</li>\n<li><code>..._minutes</code> - Minutos com zero \u00E0 esquerda (ex.: <code>30</code>)</li>\n<li><code>..._seconds</code> - Segundos com zero \u00E0 esquerda (ex.: <code>56</code>)</li>\n</ul>",
-			"ru": "<p>\u041F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0435 \u0443\u043A\u0430\u0437\u044B\u0432\u0430\u044E\u0442\u0441\u044F \u043C\u0435\u0436\u0434\u0443 \u0444\u0438\u0433\u0443\u0440\u043D\u044B\u043C\u0438 \u0441\u043A\u043E\u0431\u043A\u0430\u043C\u0438 (<code>{}</code>).</p>\n<p>\u041D\u0438\u0436\u0435 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u043D \u0441\u043F\u0438\u0441\u043E\u043A \u0434\u043E\u043F\u0443\u0441\u0442\u0438\u043C\u044B\u0445 \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0445:</p>\n<ul><br />\n<li><code>filename</code> - \u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u043E\u0435 \u0438\u043C\u044F \u0444\u0430\u0439\u043B\u0430 (\u0441 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435\u043C, \u0435\u0441\u043B\u0438 \u043F\u0440\u0438\u043C\u0435\u043D\u0438\u043C\u043E)</li>\n<li><code>filename_noext</code> - \u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u043E\u0435 \u0438\u043C\u044F \u0444\u0430\u0439\u043B\u0430 (\u0431\u0435\u0437 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u044F, \u0435\u0441\u043B\u0438 \u043F\u0440\u0438\u043C\u0435\u043D\u0438\u043C\u043E)</li>\n<li><code>ext</code> - \u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 (\u0441 \u043F\u0440\u0435\u0444\u0438\u043A\u0441\u043E\u043C <code>.</code>)</li>\n<li><code>caption</code> - \u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u044E\u0449\u0435\u0433\u043E \u043E\u043A\u043D\u0430</li>\n<li><code>author_username</code> - \u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0430\u0432\u0442\u043E\u0440\u0430</li>\n<li><code>id</code> - ID \u0437\u0430\u043F\u0438\u0441\u0438</li>\n<li><code>host_title</code> - \u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0442\u0435\u043A\u0443\u0449\u0435\u0439 \u0432\u043A\u043B\u0430\u0434\u043A\u0438/\u043E\u043A\u043D\u0430</li>\n<li><code>host_url</code> - URL-\u0430\u0434\u0440\u0435\u0441 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0445\u043E\u0441\u0442\u0430</li>\n<li><code>host_domain</code> - \u0414\u043E\u043C\u0435\u043D \u0433\u043B\u0430\u0432\u043D\u043E\u0439 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B</li>\n<li><code>host_domain_nosub</code> - \u0414\u043E\u043C\u0435\u043D (\u0431\u0435\u0437 \u0441\u0443\u0431\u0434\u043E\u043C\u0435\u043D\u043E\u0432) \u0433\u043B\u0430\u0432\u043D\u043E\u0439 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B</li>\n<li><code>url</code> - URL-\u0430\u0434\u0440\u0435\u0441 \u043C\u0435\u0434\u0438\u0430</li>\n<li><code>domain</code> - \u0414\u043E\u043C\u0435\u043D \u043C\u0435\u0434\u0438\u0430</li>\n<li><code>domain_nosub</code> - \u0414\u043E\u043C\u0435\u043D (\u0431\u0435\u0437 \u0441\u0443\u0431\u0434\u043E\u043C\u0435\u043D\u043E\u0432) \u043C\u0435\u0434\u0438\u0430</li>\n<li><code>is_screenshot</code> - \u041F\u0443\u0441\u0442\u043E, \u0441\u0442\u0440\u043E\u043A\u0430 \u0431\u0443\u0434\u0435\u0442 \u043E\u0431\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0442\u044C\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0441\u043A\u0440\u0438\u043D\u0448\u043E\u0442\u0435 \u0432\u0438\u0434\u0435\u043E.</li>\n<li><code>prefix</code>, <code>suffix</code> - \u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043F\u0443\u0441\u0442\u044B\u0435, \u044D\u0442\u0438 \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0435 \u0431\u0443\u0434\u0443\u0442 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u043F\u0440\u0438\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C\u0441\u044F \u043A \u0438\u043C\u0435\u043D\u0438 \u0444\u0430\u0439\u043B\u0430, \u0435\u0441\u043B\u0438 \u043E\u043D\u0438 \u0437\u0430\u0434\u0430\u043D\u044B \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E <code>:=</code></li>\n<li><code>created_...</code> - \u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F (\u0441\u043C. \u043F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435 \u043A \u043E\u0431\u044A\u0435\u043A\u0442\u0430\u043C Date \u043D\u0438\u0436\u0435)</li>\n<li><code>updated_...</code> - \u0414\u0430\u0442\u0430 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0431\u0443\u0434\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A <code>Last-Modified,</code> \u0435\u0441\u043B\u0438 \u043F\u0440\u0430\u0432\u0438\u043B\u043E \u043D\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043E \u0438\u043D\u044B\u043C \u043E\u0431\u0440\u0430\u0437\u043E\u043C (\u0441\u043C. \u043F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435 \u043A \u043E\u0431\u044A\u0435\u043A\u0442\u0430\u043C Date \u043D\u0438\u0436\u0435)</li>\n<li><code>download_...</code> - \u0414\u0430\u0442\u0430 \u0441\u043A\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u044F (\u0441\u043C. \u043F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435 \u043E\u0431 \u043E\u0431\u044A\u0435\u043A\u0442\u0430\u0445 Date \u043D\u0438\u0436\u0435)</li>\n<li><code>date_...</code> - \u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F/\u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F (\u0441\u043C. \u043F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435 \u043E\u0431 \u043E\u0431\u044A\u0435\u043A\u0442\u0430\u0445 Date \u043D\u0438\u0436\u0435)</li>\n</ul><br />\n<p>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0443\u0441\u0435\u0447\u044C \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439, \u0434\u043E\u0431\u0430\u0432\u0438\u0432 <code>:(number)</code> \u043F\u0435\u0440\u0435\u0434 \u0437\u0430\u043A\u0440\u044B\u0432\u0430\u044E\u0449\u0435\u0439 \u0441\u043A\u043E\u0431\u043A\u043E\u0439 (<code>}</code>). \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440:</p>\n<ul><br />\n<li><code>{caption:10}</code> - \u041E\u0431\u0440\u0435\u0437\u0430\u0435\u0442 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0434\u043E 10 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432</li>\n<li><code>{caption:10.}</code> - \u0422\u043E \u0436\u0435 \u0441\u0430\u043C\u043E\u0435, \u043D\u043E \u0441 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043C\u043D\u043E\u0433\u043E\u0442\u043E\u0447\u0438\u044F (\u2026), \u0435\u0441\u043B\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0431\u044B\u043B \u043E\u0431\u0440\u0435\u0437\u0430\u043D</li>\n</ul><br />\n<p>\u0415\u0441\u043B\u0438 \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442, \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043E\u043D\u0430 \u0431\u0443\u0434\u0435\u0442 \u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0443\u044E \u0441\u0442\u0440\u043E\u043A\u0443 \u0444\u043E\u0440\u043C\u0430\u0442\u0430 \u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0441\u044F \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0439 \u0441\u0442\u0440\u043E\u043A\u0435, \u0435\u0441\u043B\u0438 \u0442\u043E\u043B\u044C\u043A\u043E <code>?</code> \u043D\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043F\u0435\u0440\u0435\u0434 \u0437\u0430\u043A\u0440\u044B\u0432\u0430\u044E\u0449\u0435\u0439 \u0441\u043A\u043E\u0431\u043A\u043E\u0439. \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440:</p>\n<ul><br />\n<li><code>{ext?}</code> - \u0411\u0443\u0434\u0435\u0442 \u0437\u0430\u043C\u0435\u043D\u0435\u043D \u043D\u0438\u0447\u0435\u043C, \u0435\u0441\u043B\u0438 <code>ext</code> \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442</li>\n<li><code>{caption?no caption}</code> - \u0411\u0443\u0434\u0435\u0442 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u043E \u043D\u0430 <code>no caption</code>, \u0435\u0441\u043B\u0438 <code>caption</code> \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442</li>\n</ul><br />\n<p>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u0440\u0430\u0432\u0435\u043D\u0441\u0442\u0432\u043E \u0438 \u043D\u0435\u0440\u0430\u0432\u0435\u043D\u0441\u0442\u0432\u043E \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u043E\u043F\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u0432 <code>==</code> \u0438 <code>!=</code> \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043D\u043D\u043E. \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{author_username} {id}</code> - \u0411\u0443\u0434\u0435\u0442 \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0442\u0435\u043A\u0443\u0449\u0435\u043C \u0444\u043E\u0440\u043C\u0430\u0442\u0435 (\u0432 \u0434\u0430\u043D\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 <code>{author_username} {id}</code>), \u0435\u0441\u043B\u0438 \u0434\u043E\u043C\u0435\u043D cdninstagram.com</li>\n</ul><br />\n<p>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C, \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 \u043B\u0438 \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u0441\u0442\u0440\u043E\u043A\u0443 \u0441 <code>/=</code> (<code>!/=</code> \u0434\u043B\u044F \u043F\u0440\u043E\u0442\u0438\u0432\u043E\u043F\u043E\u043B\u043E\u0436\u043D\u043E\u0433\u043E). \u041E\u043D \u0442\u0430\u043A\u0436\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442 \u0434\u0432\u0430 \u0444\u043B\u0430\u0433\u0430, <code>r</code> (regex) \u0438 <code>c</code> (\u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u043A \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0443), \u0435\u0441\u043B\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043C\u0435\u0436\u0434\u0443 <code>/</code> \u0438 <code>=</code>. \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440:</p>\n<ul><br />\n<li><code>{domain/=instagram}{id}</code> - \u0411\u0443\u0434\u0435\u0442 \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0442\u0435\u043A\u0443\u0449\u0435\u043C \u0444\u043E\u0440\u043C\u0430\u0442\u0435 (<code>{id}),</code> \u0435\u0441\u043B\u0438 \u0434\u043E\u043C\u0435\u043D \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 <code>instagram</code></li>\n<li><code>{domain!/=instagram}{id}</code> - \u0410\u043D\u0430\u043B\u043E\u0433\u0438\u0447\u043D\u043E, \u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0434\u043E\u043C\u0435\u043D \u043D\u0435 \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 <code>instagram</code></li>\n<li><code>{domain/r=inst.*ram}{id}</code> - \u0410\u043D\u0430\u043B\u043E\u0433\u0438\u0447\u043D\u043E, \u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0442\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435, \u0435\u0441\u043B\u0438 \u0434\u043E\u043C\u0435\u043D \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u0435\u0442 regex <code>inst.*ram</code></li>\n<li><code>{window_title/c=Instagram}{id}</code> - \u0410\u043D\u0430\u043B\u043E\u0433\u0438\u0447\u043D\u043E, \u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043E\u043A\u043D\u0430 \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 <code>Instagram</code> (\u0441 \u0443\u0447\u0451\u0442\u043E\u043C \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430)</li>\n<li><code>{window_title!/rc=Inst.*ram}{id}</code> - \u0410\u043D\u0430\u043B\u043E\u0433\u0438\u0447\u043D\u043E, \u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0442\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435, \u0435\u0441\u043B\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043E\u043A\u043D\u0430 \u043D\u0435 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u0435\u0442 regex <code>Inst.*ram</code> \u0441 \u0443\u0447\u0451\u0442\u043E\u043C \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430</li>\n</ul><br />\n<p>\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0443\u044E \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u0443\u044E \u043C\u043E\u0436\u043D\u043E \u0437\u0430\u0434\u0430\u0442\u044C \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E <code>:=</code>. \u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440:</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{foo:=bar}</code> - \u0423\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442 \u0434\u043B\u044F \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 <code>foo</code> \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 <code>bar</code>, \u0435\u0441\u043B\u0438 \u0434\u043E\u043C\u0435\u043D\u043E\u043C \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F <code>cdninstagram.com</code>. \u0417\u0430\u0442\u0435\u043C \u043A \u043F\u0435\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>{foo}</code></li>\n</ul><br />\n<p>\u041E\u0431\u044A\u0435\u043A\u0442\u044B Date \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B \u0447\u0435\u0440\u0435\u0437 \u0440\u044F\u0434 \u0441\u0432\u043E\u0439\u0441\u0442\u0432. \u041A\u0430\u0436\u0434\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0441\u0443\u0444\u0444\u0438\u043A\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u0441 <code>_utc</code>, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u044D\u043A\u0432\u0438\u0432\u0430\u043B\u0435\u043D\u0442 UTC/GMT.</p>\n<ul><br />\n<li><code>..._iso</code> - \u0414\u0430\u0442\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 ISO (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, <code>2019-12-31T23-30-56</code>). \u041E\u0431\u0440\u0430\u0442\u0438\u0442\u0435 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435, \u0447\u0442\u043E <code>:</code> \u0437\u0430\u043C\u0435\u043D\u044F\u0435\u0442\u0441\u044F \u043D\u0430 <code>-</code> \u0432\u043E \u0438\u0437\u0431\u0435\u0436\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C \u0441 \u043F\u0443\u0442\u044F\u043C\u0438 \u043F\u043E\u0434 NTFS.</li>\n<li><code>..._ago</code> - \u0423\u0434\u043E\u0431\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u043E\u0435 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0432\u0440\u0435\u043C\u0435\u043D\u0438, \u043F\u0440\u043E\u0448\u0435\u0434\u0448\u0435\u0433\u043E \u0441 \u0434\u0430\u0442\u044B (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, <code>1 \u0433\u043E\u0434 \u0438 10 \u043C\u0435\u0441\u044F\u0446\u0435\u0432 \u043D\u0430\u0437\u0430\u0434</code>, <code>5 \u043C\u0435\u0441\u044F\u0446\u0435\u0432 \u0438 20 \u0434\u043D\u0435\u0439 \u043D\u0430\u0437\u0430\u0434</code>)</li>\n<li><code>..._unix</code> - \u041E\u0442\u043C\u0435\u0442\u043A\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 Unix (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>1577912345</code>)</li>\n<li><code>..._unix_ms</code> - \u041E\u0442\u043C\u0435\u0442\u043A\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 Unix \u0441 \u0442\u043E\u0447\u043D\u043E\u0441\u0442\u044C\u044E \u0434\u043E \u043C\u0438\u043B\u043B\u0438\u0441\u0435\u043A\u0443\u043D\u0434\u044B (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>1577912345678</code>)</li>\n<li><code>..._yyyymmdd</code> - \u0414\u0430\u0442\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 YYYYMMDD (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>20191230</code>)</li>\n<li><code>..._hhmmss</code> - \u0412\u0440\u0435\u043C\u044F \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 HHMMSS (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>233056</code>)</li>\n<li><code>..._year</code> - \u041F\u043E\u043B\u043D\u044B\u0439 \u0433\u043E\u0434 (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>2019</code>)</li>\n<li><code>..._month</code> - \u041C\u0435\u0441\u044F\u0446 \u0441 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043D\u0443\u043B\u044F (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>12</code>)</li>\n<li><code>..._day</code> - \u0414\u0435\u043D\u044C \u0441 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043D\u0443\u043B\u044F (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>31</code>)</li>\n<li><code>..._hours</code> - \u0427\u0430\u0441\u044B \u0441 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043D\u0443\u043B\u044F \u0432 \u0432\u043E\u0435\u043D\u043D\u043E\u043C/24-\u0447\u0430\u0441\u043E\u0432\u043E\u043C \u0444\u043E\u0440\u043C\u0430\u0442\u0435 (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>23</code>)</li>\n<li><code>..._minutes</code> - \u041C\u0438\u043D\u0443\u0442\u044B \u0441 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043D\u0443\u043B\u044F (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>30</code>)</li>\n<li><code>..._seconds</code> - \u0421\u0435\u043A\u0443\u043D\u0434\u044B \u0441 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043D\u0443\u043B\u044F (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 <code>56</code>)</li>\n</ul>",
-			"zh-CN": "<p>\u5927\u62EC\u53F7\u95F4\u53EF\u4F7F\u7528\u7684\u53D8\u91CF\uFF08<code>{}</code>\uFF09\u3002</p>\n<p>\u4E0B\u8FF0\u4E3A\u6709\u6548\u53D8\u91CF\u5217\u8868\uFF1A</p>\n<ul><br />\n<li><code>filename</code> - \u539F\u59CB\u6587\u4EF6\u540D\uFF08\u542B\u6269\u5C55\u540D\uFF0C\u5982\u9002\u7528\uFF09</li>\n<li><code>filename_noext</code> - \u539F\u59CB\u6587\u4EF6\u540D\uFF08\u65E0\u6269\u5C55\u540D\uFF0C\u5982\u9002\u7528\uFF09</li>\n<li><code>ext</code> - \u6269\u5C55\u540D\uFF08\u542B <code>.</code> \u524D\u7F00\uFF09</li>\n<li><code>caption</code> - \u5F39\u7A97\u7684\u6807\u9898</li>\n<li><code>author_username</code> - \u4F5C\u8005\u7684\u7528\u6237\u540D</li>\n<li><code>id</code> - \u5E16\u5B50 ID</li>\n<li><code>host_title</code> - \u5F53\u524D\u6807\u7B7E\u9875/\u7A97\u53E3\u7684\u6807\u9898</li>\n<li><code>host_url</code> - \u6258\u7BA1\u7F51\u9875\u7684\u7F51\u5740</li>\n<li><code>host_domain</code> - \u6258\u7BA1\u7F51\u9875\u7684\u57DF\u540D</li>\n<li><code>host_domain_nosub</code> - \u6258\u7BA1\u7F51\u9875\u7684\u57DF\u540D\uFF08\u4E0D\u542B\u5B50\u57DF\u540D\uFF09</li>\n<li><code>url</code> - \u5A92\u4F53\uFF08\u6587\u4EF6\uFF09\u7684\u7F51\u5740</li>\n<li><code>domain</code> - \u5A92\u4F53\uFF08\u6587\u4EF6\uFF09\u7684\u57DF\u540D</li>\n<li><code>domain_nosub</code> - \u5A92\u4F53\u7684\u57DF\u540D\uFF08\u4E0D\u542B\u5B50\u57DF\u540D\uFF09</li>\n<li><code>is_screenshot</code> - \u7A7A\u767D\uFF0C\u6B64\u884C\u4EC5\u5728\u5BF9\u89C6\u9891\u622A\u56FE\u65F6\u5904\u7406</li>\n<li><code>prefix</code>, <code>suffix</code> - \u9ED8\u8BA4\u7A7A\u767D\uFF0C\u8FD9\u4E9B\u53D8\u91CF\u5728\u4F7F\u7528 <code>:=</code> \u65F6\u81EA\u52A8\u4F5C\u4E3A\u6587\u4EF6\u540D\u7684\u524D\u7F00/\u540E\u7F00</li>\n<li><code>created_...</code> - \u521B\u5EFA\u65E5\u671F\uFF08\u8BE6\u89C1\u4E0B\u6587\u201C\u65E5\u671F\u201D\u5BF9\u8C61\uFF09</li>\n<li><code>updated_...</code> - \u66F4\u65B0\u65E5\u671F\uFF0C\u89C4\u5219\u672A\u53E6\u884C\u6307\u5B9A\u65F6\u5C06\u4F7F\u7528 <code>Last-Modified</code> \u5934\uFF08\u8BE6\u89C1\u4E0B\u6587\u201C\u65E5\u671F\u201D\u5BF9\u8C61\uFF09</li>\n<li><code>download_...</code> - \u4E0B\u8F7D\u65E5\u671F\uFF08\u8BE6\u89C1\u4E0B\u6587\u201C\u65E5\u671F\u201D\u5BF9\u8C61\uFF09</li>\n<li><code>date_...</code> - \u521B\u5EFA/\u66F4\u65B0\u65E5\u671F\uFF08\u8BE6\u89C1\u4E0B\u6587\u201C\u65E5\u671F\u201D\u5BF9\u8C61\uFF09</li>\n</ul><br />\n<p>\u60A8\u53EF\u4EE5\u5728\u53D8\u91CF\u7684\u53F3\u62EC\u53F7\uFF08<code>}</code>\uFF09\u524D\u6DFB\u52A0 <code>:(number)</code> \u6765\u622A\u65AD\u503C\u3002\u4F8B\u5982\uFF1A</p>\n<ul><br />\n<li><code>{caption:10}</code> - \u5C06\u6807\u9898\u622A\u65AD\u4E3A\u6700\u591A 10 \u4E2A\u5B57\u7B26</li>\n<li><code>{caption:10.}</code> - \u540C\u4E0A\uFF0C\u4F46\u5F53\u6807\u9898\u88AB\u622A\u65AD\u65F6\u8FFD\u52A0\u4E00\u4E2A\u7701\u7565\u53F7\uFF08\u2026\uFF09</li>\n</ul><br />\n<p>\u5982\u679C\u53D8\u91CF\u4E0D\u5B58\u5728\uFF0C\u9ED8\u8BA4\u5C06\u5FFD\u7565\u5F53\u524D\u7684\u683C\u5F0F\u5316\u5B57\u7B26\u4E32\uFF0C\u5E76\u4F7F\u7528\u4E0B\u4E00\u884C\uFF0C\u9664\u975E\u53F3\u62EC\u53F7\u524D\u6DFB\u52A0\u4E86 <code>?</code>\u3002\u4F8B\u5982\uFF1A</p>\n<ul><br />\n<li><code>{ext?}</code> - \u5728 <code>ext</code> \u4E0D\u5B58\u5728\u65F6\u53D8\u4E3A\u7A7A</li>\n<li><code>{caption?\u65E0\u6807\u9898}</code> - <code>caption</code> \u4E0D\u5B58\u5728\u65F6\u53D8\u4E3A <code>\u65E0\u6807\u9898</code></li>\n</ul><br />\n<p>\u53EF\u4EE5\u5206\u522B\u4F7F\u7528 <code>==</code> \u548C <code>!=</code> \u64CD\u4F5C\u7B26\u68C0\u67E5\u76F8\u7B49\u548C\u4E0D\u7B49\u5F0F\u3002\u4F8B\u5982\uFF1A</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{author_username} {id}</code> - \u4EC5\u5728\u57DF\u540D\u4E3A cdninstagram.com \u65F6\u91C7\u7528\u8FD9\u6761\u683C\u5F0F\uFF08<code>{author_username} {id}</code>\uFF09</li>\n</ul><br />\n<p>\u53EF\u4EE5\u7528 <code>/=</code> \u68C0\u67E5\u53D8\u91CF\u662F\u5426\u5305\u542B\u6307\u5B9A\u5B57\u7B26\u4E32\uFF08<code>!/=</code> \u68C0\u67E5\u662F\u5426\u4E0D\u5305\u542B\uFF09\u3002\u5B83\u8FD8\u652F\u6301\u4E24\u4E2A\u6807\u5FD7\uFF0C<code>r</code>\uFF08\u6B63\u5219\u8868\u8FBE\u5F0F\uFF09\u548C <code>c</code>\uFF08\u533A\u5206\u5927\u5C0F\u5199\uFF09\uFF0C\u52A0\u5728 <code>/</code> \u4E0E <code>=</code> \u4E4B\u95F4\u3002\u4F8B\u5982\uFF1A</p>\n<ul><br />\n<li><code>{domain/=instagram}{id}</code> - \u4EC5\u5728\u57DF\u540D\u5305\u542B <code>instagram</code> \u65F6\u91C7\u7528\u683C\u5F0F\uFF08<code>{id}</code>\uFF09</li>\n<li><code>{domain!/=instagram}{id}</code> - \u4EC5\u5728\u57DF\u540D\u4E0D\u5305\u542B <code>instagram</code> \u65F6</li>\n<li><code>{domain/r=inst.*ram}{id}</code> - \u4EC5\u5728\u57DF\u540D\u5339\u914D\u6B63\u5219\u8868\u8FBE\u5F0F <code>inst.*ram</code> \u65F6</li>\n<li><code>{window_title/c=Instagram}{id}</code> - \u4EC5\u5728\u7A97\u53E3\u6807\u9898\u5305\u542B <code>Instagram</code> \u65F6\uFF08\u533A\u5206\u5927\u5C0F\u5199\uFF09</li>\n<li><code>{window_title!/rc=Inst.*ram}{id}</code> - \u4EC5\u5728\u7A97\u53E3\u6807\u9898\u4E0D\u5339\u914D\u533A\u5206\u5927\u5C0F\u5199\u7684\u6B63\u5219\u8868\u8FBE\u5F0F <code>Inst.*ram</code> \u65F6</li>\n</ul><br />\n<p>\u53EF\u4EE5\u7528 <code>:=</code> \u8BBE\u7F6E\u4E00\u4E2A\u81EA\u5B9A\u4E49\u53D8\u91CF\u3002\u4F8B\u5982\uFF1A</p>\n<ul><br />\n<li><code>{domain_nosub==cdninstagram.com}{foo:=bar}</code> - \u5982\u679C\u57DF\u540D\u662F <code>cdninstagram.com</code>\uFF0C\u8BBE\u7F6E\u53D8\u91CF <code>foo</code> \u4E3A <code>bar</code>\u3002\u53D8\u91CF\u7684\u8BBF\u95EE\u65B9\u5F0F\u5982 <code>{foo}</code></li>\n</ul><br />\n<p>\u65E5\u671F\u5BF9\u8C61\u53EF\u901A\u8FC7\u4F17\u591A\u5C5E\u6027\u8BBF\u95EE\u3002\u6BCF\u4E2A\u5C5E\u6027\u90FD\u53EF\u4EE5\u540E\u7F00 <code>_utc</code> \u6765\u83B7\u53D6\u7B49\u6548\u7684 UTC/GMT \u65F6\u95F4\u3002</p>\n<ul><br />\n<li><code>..._iso</code> - ISO \u683C\u5F0F\u7684\u65E5\u671F\uFF08\u4F8B\u5982 <code>2019-12-31T23-30-56</code>\uFF09\u3002\u6CE8\u610F\uFF0C<code>:</code> \u88AB\u66FF\u6362\u4E3A <code>-</code> \u4EE5\u907F\u514D\u8FDD\u53CD NTFS \u8DEF\u5F84\u7EA6\u675F\u3002</li>\n<li><code>..._ago</code> - \u6613\u4E8E\u9605\u8BFB\u7684\u5DF2\u7ECF\u8FC7\u65F6\u95F4\uFF08\u4F8B\u5982 <code>1 year and 10 months ago</code>\u3001<code>5 months and 20 days ago</code>\uFF09</li>\n<li><code>..._unix</code> - Unix \u65F6\u95F4\u6233\uFF08\u4F8B\u5982 <code>1577912345</code>\uFF09</li>\n<li><code>..._unix_ms</code> - Unix \u65F6\u95F4\u6233\uFF0C\u6BEB\u79D2\u7CBE\u5EA6\uFF08\u4F8B\u5982 <code>1577912345678</code>\uFF09</li>\n<li><code>..._yyyymmdd</code> - YYYYMMDD \u683C\u5F0F\u65E5\u671F\uFF08\u4F8B\u5982 <code>20191230</code>\uFF09</li>\n<li><code>..._hhmmss</code> - HHMMSS \u683C\u5F0F\u65F6\u95F4\uFF08\u4F8B\u5982 <code>233056</code>\uFF09</li>\n<li><code>..._year</code> - \u5B8C\u6574\u5E74\u4EFD\uFF08\u4F8B\u5982 <code>2019</code>\uFF09</li>\n<li><code>..._month</code> - \u8865\u96F6\u6708\u4EFD\uFF08\u4F8B\u5982 <code>12</code>\uFF09</li>\n<li><code>..._day</code> - \u8865\u96F6\u7684\u65E5\uFF08\u4F8B\u5982 <code>31</code>\uFF09</li>\n<li><code>..._hours</code> - \u8865\u96F6\u7684\u5C0F\u65F6\uFF0C24\u5C0F\u65F6\u5236\uFF08\u4F8B\u5982 <code>23</code>\uFF09</li>\n<li><code>..._minutes</code> - \u8865\u96F6\u7684\u5206\u949F\uFF08\u4F8B\u5982 <code>30</code>\uFF09</li>\n<li><code>..._seconds</code> - \u8865\u96F6\u7684\u79D2\uFF08\u4F8B\u5982 <code>56</code>\uFF09</li>\n</ul>"
+			}
 		},
 		"Replace special characters with underscores": {
 			"_info": {
@@ -13385,6 +13502,10 @@ var $$IMU_EXPORT$$;
 					},
 					{
 						"setting": "gallery_jd_referer",
+						"field": "options.always.name"
+					},
+					{
+						"setting": "mouseover_video_autoplay",
 						"field": "options.always.name"
 					}
 				]
@@ -14470,7 +14591,8 @@ var $$IMU_EXPORT$$;
 		hls_dash_use_max: true,
 		max_video_quality: null,
 		// thanks to Noodlers on discord for the idea: https://github.com/qsniyg/maxurl/issues/642
-		mouseover_video_autoplay: true,
+		// thanks to Gooberpatrol66 on github for the idea: https://github.com/qsniyg/maxurl/issues/1399
+		mouseover_video_autoplay: "always",
 		mouseover_video_controls: false,
 		mouseover_video_controls_key: ["c"],
 		mouseover_video_loop: true,
@@ -15541,6 +15663,18 @@ var $$IMU_EXPORT$$;
 			requires: {
 				_condition: "action:popup",
 				mouseover_allow_video: true
+			},
+			options: {
+				_type: "combo",
+				"always": {
+					name: "Always"
+				},
+				"active": {
+					name: "If active tab"
+				},
+				"disabled": {
+					name: "Disabled"
+				}
 			},
 			category: "popup",
 			subcategory: "video"
@@ -18066,10 +18200,20 @@ var $$IMU_EXPORT$$;
 					"<li><code>download_...</code> - Download date (see note on Date objects below)</li>",
 					"<li><code>date_...</code> - Created/updated date (see note on Date objects below)</li>",
 					"</ul><br />",
-					"<p>You can truncate the value of a variable by adding <code>:(number)</code> before the end bracket (<code>}</code>). For example:</p>",
+					"<p>You can modify the variable's value using regex by adding <code>/(match)/(replace)/[c]</code> before the end bracket (<code>}</code>). For example:</p>",
+					"<ul><br />",
+					"<li><code>{caption/foo/bar/}</code> - Replaces <code>foo</code> / <code>FOO</code> / <code>FoO</code> with <code>bar</code> (case-insensitively)</li>",
+					"<li><code>{caption/FoO/bar/c}</code> - Replaces <code>FoO</code> with <code>bar</code> (case-sensitively)</li>",
+					"</ul><br />",
+					"<p>Note that curly brackets in regex expressions must be escaped:</p>",
+					"<ul><br />",
+					"<li><code>{caption/[a-z]\\{5,7\\}/abcdefg/}</code> - Replaces alphabetic sequences from 5-7 characters with <code>abcdefg</code></li>",
+					"</ul><br />",
+					"<p>You can also truncate the value of a variable by adding <code>:(number)</code> before the end bracket. For example:</p>",
 					"<ul><br />",
 					"<li><code>{caption:10}</code> - Truncates the caption to be at most 10 characters long</li>",
 					"<li><code>{caption:10.}</code> - Same, but will add an ellipsis (\u2026) if the caption was truncated</li>",
+					"<li><code>{caption/foo/bar/:10}</code> - Replaces <code>foo</code> with <code>bar</code> and truncates the caption to be at most 10 characters long</li>",
 					"</ul><br />",
 					"<p>If a variable doesn't exist, by default it will ignore the current format string and use the one on the next line, unless <code>?</code> is added before the end bracket. For example:</p>",
 					"<ul><br />",
@@ -19374,7 +19518,20 @@ var $$IMU_EXPORT$$;
 			.replace(/^([a-z]+:\/\/[^/]+\.[^/]+)\.([?#/].*)?$/, "$1$2");
 	};
 
-	function urljoin(a:string, b:string, browser?:boolean):string {
+	var get_base = function(document:string|HTMLDocument, url?:string) {
+		if (typeof document === "string") {
+			let match = document.match(/<base\s+[^>]*href=["']([^'"]+)["']/);
+			if (match) {
+				return decode_entities(match[1]);
+			} else {
+				return url;
+			}
+		} else {
+			return document.baseURI || url;
+		}
+	}
+
+	function urljoin(a:string, b:string, browser?:boolean|"real"):string {
 		if (b.length === 0)
 			return a;
 		if (b.match(/^[-a-z]*:\/\//) || b.match(/^(?:data|x-raw-image|blob|about|javascript):/))
@@ -19397,6 +19554,12 @@ var $$IMU_EXPORT$$;
 			// urljoin("http://site.com/index.html", "file.png") = "http://site.com/index.html/file.png"
 			return a.replace(/\/*$/, "") + "/" + b.replace(/^\/*/, "");
 		} else {
+			if (browser === "real") {
+				if (is_interactive && !is_extension_bg && typeof document === "object") {
+					a = get_base(document, a);
+				}
+			}
+
 			if (b.length >= 2 && b.slice(0, 2) === "//")
 				return protocol + ":" + b;
 			if (b.length >= 1 && b.slice(0, 1) === "/")
@@ -19446,7 +19609,7 @@ var $$IMU_EXPORT$$;
 		var match;
 		if (options.known_ext) {
 			// todo: factor out?
-			match = basename.match(/(.*?)\.(mp4|mpe?g|jpe?g|jfif|png|tiff|og[agv]|m4[av]|web[pm]|mkv|avi|gif|mpd|m3u8|zip)$/i);
+			match = basename.match(/(.*?)\.(mp4|mpe?g|jpe?g|jfif|png|tiff|og[agv]|m4[av]|web[pm]|mkv|mov|avi|gif|mpd|m3u8|zip)$/i);
 		} else {
 			match = basename.match(/(.*)\.([^.]*)$/);
 		}
@@ -19596,7 +19759,12 @@ var $$IMU_EXPORT$$;
 		return result;
 	};
 
-	var add_full_extensions2 = function(url:string, options?) {
+	type AddFullExtensions2Options = {
+		extensions?: Array<string>,
+		prefer_order?: boolean,
+		add_video?: boolean
+	};
+	var add_full_extensions2 = function(url:string, options?:AddFullExtensions2Options) {
 		if (!options) {
 			options = {};
 		}
@@ -19607,11 +19775,19 @@ var $$IMU_EXPORT$$;
 		let new_urls = add_full_extensions(url, options.extensions, options.prefer_order);
 		if (options.add_video) {
 			for (let i = 0; i < new_urls.length; i++) {
-				if (/\.(?:mp4|webm)$/.test(new_urls[i])) {
-					new_urls[i] = {
-						url: new_urls[i],
-						video: true
-					};
+				let src = new_urls[i];
+				if (typeof src !== "string")
+					src = src.url;
+
+				if (/\.(?:mp4|webm)(?:[?#].*)?$/i.test(src)) {
+					if (typeof new_urls[i] === "string") {
+						new_urls[i] = {
+							url: src,
+							video: true
+						};
+					} else {
+						new_urls[i].video = true;
+					}
 				}
 			}
 		}
@@ -20518,7 +20694,8 @@ var $$IMU_EXPORT$$;
 
 	var contenttype_map = {
 		"image/jpeg": "jpg",
-		"application/dash+xml": "mpd"
+		"application/dash+xml": "mpd",
+		"video/quicktime": "mov"
 	};
 
 	var get_ext_from_contenttype = function(contenttype) {
@@ -20839,13 +21016,13 @@ var $$IMU_EXPORT$$;
 	};
 
 	var new_function = function(scriptbody:string, data:InjectedFunctionData, cb):any {
+		let func = null;
+
 		try {
 			if (!data) {
-				let func = new Function(scriptbody)();
-				cb(func);
+				func = new Function(scriptbody)();
 			} else {
-				let func = new Function(data.varname, scriptbody)(data.data);
-				cb(func);
+				func = new Function(data.varname, scriptbody)(data.data);
 			}
 		} catch (e) {
 			// blocked by csp?
@@ -20857,6 +21034,11 @@ var $$IMU_EXPORT$$;
 				return cb(null);
 			}
 		}
+
+		if (!func)
+			console_error("new_function: Unknown error occurred", {func});
+
+		cb(func);
 	};
 
 	var run_sandboxed_lib = function(fdata, xhr, cb) {
@@ -20988,6 +21170,7 @@ var $$IMU_EXPORT$$;
 		var lib_obj = lib_urls[name];
 
 		if (is_scripttag) {
+			console_warn("Refusing to request library " + name + " because we are being run in a <script> tag");
 			return cb(null);
 		} else if (is_node) {
 			try {
@@ -21973,7 +22156,9 @@ var $$IMU_EXPORT$$;
 		} else {
 			real_api_query(api_cache, do_request, "deviantart_url_from_id:" + id, {
 				method: "HEAD",
-				url: "http://fav.me/" + id, // https doesn't work
+				// use /deviation/ to find the original page instead of fav.me (which only supported http)
+				// thanks to litterbox1 on discord for reporting
+				url: "https://deviantart.com/deviation/" + id,
 				cookie_url: "https://www.deviantart.com/" // workaround
 			}, cb, function(done, resp, cache_key) {
 				done(resp.finalUrl, 6*60*60);
@@ -22841,7 +23026,9 @@ var $$IMU_EXPORT$$;
 		};
 
 		var app_api_call = function (url, cb) {
-			return web_api_call(url, cb); // FIXME: for testing only
+			if (true) {
+				return web_api_call(url, cb); // FIXME: for testing only
+			}
 
 			if (!do_request) {
 				return cb(null);
@@ -22879,24 +23066,72 @@ var $$IMU_EXPORT$$;
 			});
 		};
 
+		let get_www_claim = function(cb) {
+			if (get_localstorage) {
+				// https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/...
+				get_localstorage("https://www.instagram.com/", ["www-claim-v2"], function(data) {
+					if (data && data["www-claim-v2"]) {
+						cb(data["www-claim-v2"]);
+					} else {
+						cb(null);
+					}
+				}, {storage: "session"});
+			} else {
+				cb(null);
+			}
+		};
+
+		let get_ig_csrftoken = function(cb) {
+			if (get_cookies) {
+				get_cookies("https://www.instagram.com/", function(cookies) {
+					if (cookies) {
+						cookies = headers_list_to_dict(cookies);
+						cb(cookies.csrftoken || null);
+					} else {
+						cb(null);
+					}
+				});
+			} else {
+				cb(null);
+			}
+		};
+
+		let get_ig_websessionid = function(cb) {
+			let cache_key = "instagram_web_session_id";
+			api_cache.fetch(cache_key, cb, function(done) {
+				let websessionid = get_random_text(6, "both") + ":" + get_random_text(6, "both") + ":" + get_random_text(6, "both");
+				done(websessionid, 60*60);
+			});
+		};
+
 		var web_api_call = function(url, cb) {
 			if (!do_request) {
 				return cb(null);
 			}
 
-			var run_request = function() {
+			var run_request = function(wwwclaim, csrftoken, websessionid) {
 				if (!wwwclaim) {
 					console_warn("Unable to find value for x-ig-www-claim header");
+				}
+
+				if (!csrftoken) {
+					console_warn("Unable to find value for csrftoken");
+				}
+
+				if (!websessionid) {
+					console_warn("Unable to find value for x-web-session-id");
 				}
 
 				// https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/...
 				var headers = {
 					"Accept": "*/*",
-					"X-ASBD-ID": "198387", // .ASBD_ID, todo: fetch! -- same as of june 28 2022
+					"X-ASBD-ID": "129477", // .ASBD_ID, todo: fetch! -- same as of june 28 2022
 						// not always sent though?
 						// id as of august 10 2023: 129477
+						// same as of jan 26 2025
 					// TODO: x-csrftoken (csrftoken cookie)
 					"X-IG-App-ID": "936619743392459", // instagramWebDesktopFBAppId
+					"X-Requested-With": "XMLHttpRequest",
 					"Origin": "https://www.instagram.com",
 					"Referer": "https://www.instagram.com/",
 					"Sec-Fetch-Site": "same-site",
@@ -22908,6 +23143,14 @@ var $$IMU_EXPORT$$;
 					headers["X-IG-WWW-Claim"] = wwwclaim;
 				}
 
+				if (csrftoken) {
+					headers["X-CSRFToken"] = csrftoken;
+				}
+
+				if (websessionid) {
+					headers["X-Web-Session-ID"] = websessionid;
+				}
+
 				do_request({
 					method: "GET",
 					url: url,
@@ -22916,19 +23159,13 @@ var $$IMU_EXPORT$$;
 				});
 			};
 
-			var wwwclaim = null;
-			if (get_localstorage) {
-				// https://www.instagram.com/static/bundles/es6/ConsumerLibCommons.js/...
-				get_localstorage("https://www.instagram.com/", ["www-claim-v2"], function(data) {
-					if (data && data["www-claim-v2"]) {
-						wwwclaim = data["www-claim-v2"];
-					}
-
-					run_request();
-				}, {storage: "session"});
-			} else {
-				run_request();
-			}
+			get_www_claim(function(wwwclaim) {
+				get_ig_csrftoken(function(csrftoken) {
+					get_ig_websessionid(function(websessionid) {
+						run_request(wwwclaim, csrftoken, websessionid);
+					});
+				})
+			});
 		};
 
 		var mediainfo_api = function(id, cb) {
@@ -22972,7 +23209,8 @@ var $$IMU_EXPORT$$;
 		};
 
 		var get_all_stories_api = function(uid, cb) {
-			return get_all_stories_webapi(uid, cb);
+			if (true)
+				return get_all_stories_webapi(uid, cb);
 
 			if (!use_app_api)
 				return cb(null);
@@ -23751,10 +23989,10 @@ var $$IMU_EXPORT$$;
 			// the PostPage result differs quite significantly from the ProfilePage result
 			return;
 
-			var shortcode = get_shortcode(edge);
+			/*var shortcode = get_shortcode(edge);
 			if (shortcode) {
 				api_cache.set("graphql_ig_post:" + shortcode, edge);
-			}
+			}*/
 		};
 
 		var fill_graphql_cache_with_postpage = function(postpage_text) {
@@ -25734,48 +25972,115 @@ var $$IMU_EXPORT$$;
 		return urls;
 	};
 
-	common_functions["parse_mediadefinition"] = function(src, data, cache_key) {
+	common_functions["parse_mediadefinition"] = function(api_cache, options, src, data, cache_key, cb) {
 		if (!data) {
 			return null;
 		}
 
+		let final = function(defs) {
+			try {
+				defs.sort((a, b) => {
+					if (a.format !== b.format) {
+						if (a.format === "hls")
+							return -1;
+						if (b.format === "hls")
+							return 1;
+					}
+
+					let diff = (b.quality|0) - (a.quality|0);
+					if (diff)
+						return diff;
+
+					let a_dims = (a.height||1) * (a.width||1);
+					let b_dims = (b.height||1) * (b.width||1);
+					return b_dims - a_dims;
+				});
+
+				let urls = [];
+
+				for (let def of defs) {
+					// the queries constantly change, so to avoid constantly refreshing, let's make sure the base URL is different
+					// the domain can also change (cv/ev) so remove that as well
+					let newsrc = def.videoUrl;
+					let noq = src.replace(/[?#].*$/, "").replace(/^[a-z]+:\/\/[^/]+\/+/, "");
+					let newnoq = newsrc.replace(/[?#].*$/, "").replace(/^[a-z]+:\/\/[^/]+\/+/, "");
+
+					if (noq === newnoq)
+						newsrc = src;
+
+					let video:any = true;
+					if (def.format === "hls")
+						video = "hls";
+
+					urls.push({
+						url: newsrc,
+						extra: {
+							page: data.link_url,
+							caption: data.video_title
+						},
+						headers: {
+							Referer: data.link_url
+						},
+						video: video,
+						is_private: true // linked to IP
+					});
+				}
+
+				cb(urls);
+			} catch (e) {
+				console_error(cache_key, e);
+			}
+		};
+
 		try {
-			var maxdef = 0;
-			var maxobj = null;
-			for (var i = 0; i < data.mediaDefinition.length; i++) {
-				var def = data.mediaDefinition[i];
+			let defs = [];
+			let waiting = 0;
+			let videourls = new_set();
+
+			let mediadef = data.mediaDefinition;
+			if (!mediadef)
+				mediadef = data.mediaDefinitions; // redtube
+
+			for (let def of mediadef) {
 				// e.g. 2160/1440p videos for non-logged in members
 				if (!def.videoUrl)
 					continue;
 
-				def.quality = parse_int(def.quality);
-				if (def.quality > maxdef) {
-					maxdef = def.quality;
-					maxobj = def;
+				// redtube
+				def.videoUrl = urljoin(data.link_url, def.videoUrl, true);
+
+				if (set_has(videourls, def.videoUrl))
+					continue;
+
+				set_add(videourls, def.videoUrl);
+
+				if (!def.quality) {
+					real_api_query(api_cache, options.do_request, cache_key + ":" + def.videoUrl, {
+						url: def.videoUrl,
+						headers: {
+							Referer: data.link_url
+						},
+						json: true
+					}, function(data) {
+						if (data)
+							array_extend(defs, data);
+
+						waiting -= 1;
+						if (waiting <= 0) {
+							final(defs);
+						}
+					}, function(done, resp, cache_key) {
+						done(resp, 60*60);
+					});
+
+					waiting += 1;
+				} else {
+					defs.push(def);
 				}
 			}
 
-			// the queries constantly change, so to avoid constantly refreshing, let's make sure the base URL is different
-			// the domain can also change (cv/ev) so remove that as well
-			var newsrc = maxobj.videoUrl;
-			var noq = src.replace(/[?#].*$/, "").replace(/^[a-z]+:\/\/[^/]+\/+/, "");
-			var newnoq = newsrc.replace(/[?#].*$/, "").replace(/^[a-z]+:\/\/[^/]+\/+/, "");
-
-			if (noq === newnoq)
-				newsrc = src;
-
-			return {
-				url: newsrc,
-				extra: {
-					page: data.link_url,
-					caption: data.video_title
-				},
-				headers: {
-					Referer: data.link_url
-				},
-				video: true,
-				is_private: true // linked to IP
-			};
+			if (waiting <= 0)
+				final(defs);
 		} catch(e) {
 			console_error(cache_key, e);
 		}
@@ -26054,7 +26359,7 @@ var $$IMU_EXPORT$$;
 		}
 
 		var add_source = function(parsed) {
-			parsed.name = parsed.args.title || null;
+			parsed.name = parsed.args.res || parsed.args.title || parsed.args.label || null;
 			parsed.url = parsed.args.src;
 			sources.video.push(parsed);
 		};
@@ -26218,6 +26523,8 @@ var $$IMU_EXPORT$$;
 		else
 			page = resp.finalUrl;
 
+		let baseurl = get_base(resp.responseText, page);
+
 		var obj:BigImageInfoSObject = {
 			headers: {
 				Referer: page
@@ -26241,7 +26548,7 @@ var $$IMU_EXPORT$$;
 
 		var video_urls = [];
 		array_foreach(sources.video, function(source) {
-			video_urls.push(urljoin(page, source.url, true));
+			video_urls.push(urljoin(baseurl, source.url, true));
 		});
 
 		let subs = null;
@@ -26249,7 +26556,7 @@ var $$IMU_EXPORT$$;
 			subs = [];
 			for (let subtitle of sources.subtitles) {
 				let baseobj = deepcopy(subtitle);
-				baseobj.url = urljoin(page, subtitle.url, true);
+				baseobj.url = urljoin(baseurl, subtitle.url, true);
 				subs.push(baseobj);
 			}
 		}
@@ -26257,25 +26564,25 @@ var $$IMU_EXPORT$$;
 		if (options.ogvideo) {
 			var ogvideo = get_meta(resp.responseText, "og:video");
 			if (ogvideo) {
-				array_upush(video_urls, urljoin(page, ogvideo, true));
+				array_upush(video_urls, urljoin(baseurl, ogvideo, true));
 			}
 		}
 
 		var image_urls = [];
 		array_foreach(sources.image, function(image) {
-			image_urls.push(urljoin(page, image, true));
+			image_urls.push(urljoin(baseurl, image, true));
 		});
 
 		if (options.ogimage) {
 			var ogimage = get_meta(resp.responseText, "og:image");
 			if (ogimage) {
-				array_upush(image_urls, urljoin(page, ogimage, true));
+				array_upush(image_urls, urljoin(baseurl, ogimage, true));
 			}
 		}
 
 		var urls = [];
 		array_foreach(video_urls, function(url) {
-			let obj = {
+			let obj:BigImageInfoSObject = {
 				url: url,
 				video: true
 			};
@@ -26295,6 +26602,9 @@ var $$IMU_EXPORT$$;
 	};
 
 	common_functions["update_album_info_links"] = function(obj, cmp) {
+		if (!obj.album_info)
+			return obj;
+
 		var links = obj.album_info.links;
 
 		var found = false;
@@ -27151,6 +27461,7 @@ var $$IMU_EXPORT$$;
 			domain === "twitr.gq" ||
 			domain === "nitter.koyu.space" ||
 			domain === "nitter.dark.fail" ||
+			domain === "nitter.poast.org" ||
 			//domain === "t.maisputain.ovh" ||
 			//domain === "nitter.weaponizedhumiliation.com" ||
 			domain === "nitter.snopyta.org";
@@ -27307,7 +27618,7 @@ var $$IMU_EXPORT$$;
 
 	common_functions["flickr_find_api_info"] = function(options, api_cache, cb) {
 		api_cache.fetch("flickr_api_info", cb, function (done) {
-			common_functions["do_flickr_request"](options, "https://www.flickr.com/", function (resp) {
+			common_functions["do_flickr_request"](options, "https://www.flickr.com/explore", function (resp) {
 				var regex = /root\.YUI_config\.flickr\.api\.site_key\s*=\s*['"]([0-9a-f]+)['"]\s*;/;
 				var matchobj = resp.responseText.match(regex);
 				if (!matchobj) {
@@ -27323,7 +27634,7 @@ var $$IMU_EXPORT$$;
 
 				regex = /root\.auth\s*=\s*({.*?});/;
 				matchobj = resp.responseText.match(regex);
-				var auth = {};
+				var auth:any = {};
 				if (!matchobj) {
 					console_error("Unable to find Flickr auth info");
 				} else {
@@ -27589,6 +27900,11 @@ var $$IMU_EXPORT$$;
 	var looks_like_valid_link = function(src, el) {
 		if (/\.(?:jpe?g|png|web[mp]|gif|mp4|mkv|og[gv]|svg)(?:[?#].*)?$/i.test(src))
 			return true;
+
+		if (el === true) {
+			el = document_createElement("IMG");
+			el.src = src;
+		}
 
 		if (el && check_highlightimgs_supported_image(el))
 			return true;
@@ -29377,6 +29693,10 @@ var $$IMU_EXPORT$$;
 			//
 			// https://wx4.sinaimg.cn/large/008gKD25ly1grw0kvjdhhj34na672b2l.jpg -- 6022x8030
 			//   https://wx4.sinaimg.cn/original/008gKD25ly1grw0kvjdhhj34na672b2l.jpg -- same file
+			//
+			// other:
+			// thanks to anonymous for reporting:
+			// https://k.sinaimg.cn/n/translate/535/w750h585/20180323/HnGv-fysnevm3405529.jpg/w700d1q75cms.jpg
 			if (src.match(/:\/\/[^/]*\/+max(?:width|height)\.[0-9]+\//)) {
 				return {
 					url: src.replace(/(:\/\/[^/]*\/+)[^/]*\//, "$1original/"),
@@ -30023,12 +30343,26 @@ var $$IMU_EXPORT$$;
 			// https://images.crunchbase.com/image/upload/c_pad,h_512,w_512,f_auto,b_white,q_auto:eco,dpr_2/gjtsg7wocebhdu7bzf6v
 			//   https://images.crunchbase.com/image/upload/gjtsg7wocebhdu7bzf6v
 			domain === "images.crunchbase.com" ||
+			// thanks to anonymous for reporting:
+			// https://rvb-img.reverb.com/image/upload/s--9aSZevpV--/a_exif,c_limit,e_unsharp_mask:80,f_auto,fl_progressive,g_south,h_620,q_90,w_620/v1489766866/oditmsrdg3qrtlduhxnc.jpg
+			//   https://rvb-img.reverb.com/image/upload/s--9aSZevpV--/oditmsrdg3qrtlduhxnc.jpg
+			domain === "rvb-img.reverb.com" ||
+			// thanks to anonymous for reporting:
+			// https://asset.swarovski.com/images/c_crop,g_xy_center,w_2826,h_2826,x_1413,y_1635/dpr_1.0,f_auto,q_auto,c_lfill,w_960,h_960/swa-cms/2025_T1_BRAND_ANNOUNCEMENT_KV1_ARIANA-GRANDE_200dpi/.jpg
+			//   https://asset.swarovski.com/images/swa-cms/2025_T1_BRAND_ANNOUNCEMENT_KV1_ARIANA-GRANDE_200dpi/.jpg
+			domain === "asset.swarovski.com" ||
+			// thanks to anonymous for reporting:
+			// https://media.castingnetworks.com/cn-hot/image/upload/if_ar_gt_1,c_pad,h_360,w_450/if_else,c_pad,h_450,w_360/b_white,f_auto,q_100/0d17cd7a-5247-11ee-b31a-8ba226a1cc37
+			//   https://media.castingnetworks.com/cn-hot/image/upload/if_ar_gt_1,c_pad,h_360,w_450/0d17cd7a-5247-11ee-b31a-8ba226a1cc37
+			//   https://media.castingnetworks.com/cn-hot/image/upload/0d17cd7a-5247-11ee-b31a-8ba226a1cc37
+			(domain === "media.castingnetworks.com" && /\/image\/+upload\//.test(src)) ||
 			// thanks to karpuzikov on github: https://github.com/qsniyg/maxurl/issues/1066
 			// https://resource.logitechg.com/w_677,ar_1:1,c_limit,b_rgb:2f3132,q_auto,f_auto,dpr_auto/d_transparent.gif/content/dam/gaming/en/homepage/product-swatch-carousel/home-product-swatch-4.png?v=1
 			//   https://resource.logitechg.com/content/dam/gaming/en/homepage/product-swatch-carousel/home-product-swatch-4.png?v=1
 			domain === "resource.logitechg.com") {
 			newsrc = src
 				.replace(/%2C/g, ",")
+				.replace(/\/if_(?:else|[^/_,]+_(?:eq|[gl]te?)_[^/_,]+),[^/]+\//, "/")
 				.replace(/\/[a-z]+_[^/_,]+(?:,[^/]*)?\//, "/")
 				.replace(/\/fl_any_format\.[^/]*\//, "/")
 				.replace(/\/fl_keep_iptc[^/]*\//, "/")
@@ -30826,6 +31160,13 @@ var $$IMU_EXPORT$$;
 			};
 		}
 
+		if (domain === "diveng.rosselcdn.net") {
+			// thanks to anonymous for reporting:
+			// https://diveng.rosselcdn.net/sites/default/files/dpistyles_v2/diverto_16_9_749w/2024/04/30/node_14928/26551/public/2024/04/30/hd_anne_morin_ok_11-03-2024-0693-.jpg?itok=MOVKV6-O1714513374
+			//   https://diveng.rosselcdn.net/sites/default/files/2024/04/30/hd_anne_morin_ok_11-03-2024-0693-.jpg?itok=MOVKV6-O1714513374
+			return src.replace(/(\/sites\/+default\/+files\/).*?\/+public\//, "$1");
+		}
+
 		if (domain === "cdn.okmag.de" ||
 			// https://cdn.9razia.de/s/fotostrecke__slider/public/media/gallery/2016-05-26/rihanna_red.jpg
 			//   https://cdn.9razia.de/media/gallery/2016-05-26/rihanna_red.jpg
@@ -31071,6 +31412,14 @@ var $$IMU_EXPORT$$;
 				if (urls.length)
 					return urls;
 			}
+
+			// thanks to Froktime on github: https://github.com/qsniyg/maxurl/issues/1371
+			// https://books.google.com/books/publisher/content/images/frontcover/vRLAEAAAQBAJ -- 128x179
+			//   https://books.google.com/books/publisher/content/images/frontcover/vRLAEAAAQBAJ?fife=w480-h690
+			//   https://books.google.com/books/publisher/content/images/frontcover/vRLAEAAAQBAJ?fife=w99999999
+			newsrc = src.replace(/(\/books\/+(?:publisher\/+)?content\/+images\/+[^/]+\/+[^/?#]+)(?:[?#].*)?$/, "$1?fife=w99999999");
+			if (newsrc !== src)
+				return newsrc;
 		}
 
 		if (host_domain === "docs.google.com" && options.element) {
@@ -31245,9 +31594,12 @@ var $$IMU_EXPORT$$;
 			// thanks to llacb47 on github: https://github.com/qsniyg/maxurl/issues/482 (moving this rule above the /rf/ one due to [?#].*)
 			// https://img.washingtonpost.com/wp-apps/imrs.php?src=https://www.washingtonpost.com/rf/image_982w/2010-2019/WashingtonPost/2020/03/14/Health-Environment-Science/Graphics/promo2-coronavirus-simulator-0313.jpg&w=60&h=60
 			//   https://www.washingtonpost.com/rw/2010-2019/WashingtonPost/2020/03/14/Health-Environment-Science/Graphics/promo2-coronavirus-simulator-0313.jpg
+			// thanks to liamengland1 on github: https://github.com/qsniyg/maxurl/pull/1380
+			// https://www.washingtonpost.com/wp-apps/imrs.php?src=https%3A%2F%2Farc-anglerfish-washpost-prod-washpost%252Es3%252Eamazonaws%252Ecom%2Fpublic%2FBJVONBA3VBXPZDXZILSARTNYY4%252Ejpg&w=992&h=662
+			//   https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/BJVONBA3VBXPZDXZILSARTNYY4.jpg
 			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+wp-apps\/+imrs\.php\?(?:.*&)?src=([^&]+).*/, "$1");
 			if (newsrc !== src)
-				return decodeuri_ifneeded(newsrc);
+				return decodeURIComponent(decodeuri_ifneeded(newsrc));
 
 			// thumbor (todo: have a sort of get_dest_from_thumbor in common_functions)
 			// thanks to llacb47 on github: https://github.com/qsniyg/maxurl/issues/482
@@ -32562,7 +32914,11 @@ var $$IMU_EXPORT$$;
 				return decodeURIComponent(newsrc);
 		}
 
-		if (domain_nowww === "gala.fr") {
+		if (domain_nowww === "gala.fr"
+			// thanks to anonymous for reporting:
+			// https://www.capital.fr/imgre//fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcap.2F2017.2F05.2F09.2F1c21c36a-b809-4662-bf09-1068218410b9.2Ejpeg/896x504/focus-point/50%2C50/background-color/ffffff/quality/70/picture.jpg
+			//domain_nowww === "capital.fr"
+			) {
 			// thanks to anonymous for reporting:
 			// http://www.gala.fr/imgre/fit/https.3A.2F.2Fwww.2Egala.2Efr.2Fimgre.2Ffit.2Fhttps.2E3A.2E2F.2E2Fi.2E2Epmdstatic.2E2Enet.2E2Fgal.2E2F2023.2E2F02.2E2F24.2E2F1236eecd-78f3-48e5-9160-1908c9718578.2E2Ejpeg.2F1120x747.2Fquality.2F80.2Fthumbnail.2Ejpg/480x320/quality/80/picture.jpg
 			//   https://i.pmdstatic.net/gal/2023/02/24/1236eecd-78f3-48e5-9160-1908c9718578.jpeg
@@ -32790,6 +33146,18 @@ var $$IMU_EXPORT$$;
 					bad: "mask"
 				};
 			}
+		}
+
+		if (domain_nowww === "rd.com") {
+			// thanks to anonymous for reporting:
+			// https://www.rd.com/wp-content/uploads/2020/03/GettyImages-623545506-scaled.jpg?fit=700,700
+			// removing -scaled returns 503
+			newsrc = src.replace(/(\/wp-content\/+uploads\/.*?)\?.*/, "$1");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					can_head: false
+				};
 		}
 
 		// /wp/uploads:
@@ -33102,6 +33470,9 @@ var $$IMU_EXPORT$$;
 			(domain === "store.playstation.com" && string_indexof(src, "/image?") >= 0) ||
 			// https://blog.us.playstation.com/tachyon/2020/04/49811271288_81f0c02714_k.jpg?resize=1088,612&crop_strategy=smart&zoom=1.5
 			(domain_nosub === "playstation.com" && /^blog\./.test(domain)) ||
+			// thanks to siloricity on discord:
+			// https://image.api.playstation.com/vulcan/img/rnd/202010/2319/CByG3NffVx7xnvzUbqu57slz.jpg?w=780&thumb=false
+			domain === "image.api.playstation.com" ||
 			// https://www.snopes.com/tachyon/2021/01/mcdonalds-curved-glass.jpg?resize=1200,630&quality=65
 			(domain_nowww === "snopes.com" && string_indexof(src, "/tachyon/") >= 0) ||
 			// https://images.interactives.dk/cdn-connect/98f5b7864bfb4efba3e65b9d0c983122.jpg?auto=compress&ch=Width%2CDPR&ixjsv=2.2.4&w=750
@@ -33634,6 +34005,10 @@ var $$IMU_EXPORT$$;
 			// thanks to fedesk on discord
 			// https://www.devold.com/globalassets/catalog-images/tc-650-550-a-284c2.jpg?width=320&height=320&mode=max
 			(domain_nowww === "devold.com" && /\/globalassets\/+catalog-images\//.test(src)) ||
+			// thanks to BlindWanda on github: https://github.com/qsniyg/maxurl/issues/1392
+			// https://www.cashconverters.co.uk/globalassets/catalogs/5973d690-c951-45bd-93e5-b25601128012.jpg?width=800&height=600&rsampler=bicubic&compand=true&bgcolor=255,255,255,55&rmode=pad
+			//   https://www.cashconverters.co.uk/globalassets/catalogs/5973d690-c951-45bd-93e5-b25601128012.jpg
+			(domain_nowww === "cashconverters.co.uk" && /\/globalassets\/+catalogs\//.test(src)) ||
 			// thanks to nijaz-lab on github: https://github.com/qsniyg/maxurl/issues/572
 			// https://contents.mediadecathlon.com/p1838690/k$4753af5cd214ab403bb9c745ae932702/sq/Free+Standing+Punching+Bag+100+Inflatable.webp?f=250x250
 			domain === "contents.mediadecathlon.com" ||
@@ -33955,6 +34330,10 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://images.delfi.ee/media-api-image-cropper/v1/aa38a240-b907-11eb-922a-c7bedcd3f781.jpg?w=1600&h=914&noup=1
 			(domain === "images.delfi.ee" && /\/media-api-image-cropper\//.test(src)) ||
+			// thanks to anonymous for reporting:
+			// https://images.delfi.lv/media-api-image-cropper/v1/17fe062f-e747-46fe-9293-17807fe26299.jpg?w=588&h=331&r=16:9
+			//   https://images.delfi.lv/media-api-image-cropper/v1/17fe062f-e747-46fe-9293-17807fe26299.jpg
+			(domain === "images.delfi.lv" && /\/media-api-image-cropper\//.test(src)) ||
 			// thanks to nimbuz on discord: https://github.com/qsniyg/maxurl/issues/948
 			// https://img.br.de/5d72b187-bd87-4b00-b972-6e2b2b92922d.jpeg?q=80&rect=0%2C125%2C2880%2C1619&w=2000
 			// https://img.br.de/64705972-8ec2-4b41-96c6-7a36cecbe0f5.jpeg?q=80&rect=0%2C385%2C2644%2C1488&w=2000
@@ -34052,6 +34431,9 @@ var $$IMU_EXPORT$$;
 			// thanks to Liz on discord:
 			// https://www.azcentral.com/gcdn/presto/2023/06/05/PPHX/d14cdd74-f08e-4aeb-8698-d8a1d856cba4-20230604161124_-_FFusion.jpg?width=1320&height=880&fit=crop&format=pjpg&auto=webp
 			(domain_nowww === "azcentral.com" && /\/gcdn\//.test(src)) ||
+			// thanks to Liz on discord:
+			// https://www.tennessean.com/gcdn/authoring/authoring-images/2024/09/21/USAT/75316038007-charli-xcx-troye-sivan-2024-tour.jpg?width=1200&disable=upscale&format=pjpg&auto=webp
+			(domain_nowww === "tennessean.com" && /\/gcdn\//.test(src)) ||
 			// thanks to James Joint on discord:
 			// https://images.kerrangcdn.com/images/2023/05/NessaBarrett-JamieLeeTaete-2023-9.jpg?auto=compress&fit=max&w=640
 			domain === "images.kerrangcdn.com" ||
@@ -34065,6 +34447,15 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://img.trampt.com/products/000/033/448/Love_Thy_Neighbor-Brian_Hurst-Gicle_Digital_Print-trampt-33448o.jpg?tr=w-750,h-750,cm-pad_resize
 			domain === "img.trampt.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.lavieenrose.com/globalassets/lver/pictures-24f3/campaign/40600197_30032_camp.jpg?width=768&format=webp
+			domain_nowww === "lavieenrose.com" ||
+			// thanks to anonymous for reporting:
+			// https://d.fashiontimes.com/en/full/44711/savage-x-fenty-2025-valentines-day-loveline-collection.jpg?w=900&f=77c552965a45bf4fd05a8d1d97c95531
+			domain === "d.fashiontimes.com" ||
+			// thanks to anonymous for reporting:
+			// https://images.ottplay.com/images/big/reem-shaikh-on-social-media-pressure-and-more-1736674690.jpeg?impolicy=ottplay-202410&width=426&height=240
+			domain === "images.ottplay.com" ||
 			// http://us.jimmychoo.com/dw/image/v2/AAWE_PRD/on/demandware.static/-/Sites-jch-master-product-catalog/default/dw70b1ebd2/images/rollover/LIZ100MPY_120004_MODEL.jpg?sw=245&sh=245&sm=fit
 			// https://www.aritzia.com/on/demandware.static/-/Library-Sites-Aritzia_Shared/default/dw3a7fef87/seasonal/ss18/ss18-springsummercampaign/ss18-springsummercampaign-homepage/hptiles/tile-wilfred-lrg.jpg
 			src.match(/\/demandware\.static\//) ||
@@ -34113,8 +34504,6 @@ var $$IMU_EXPORT$$;
 			//(domain_nosub === "mafengwo.net" && domain.match(/^p[0-9]*(?:-[a-z]+)\./)) ||
 			// http://mplive-1253454074.image.myqcloud.com/mplive_dev/imgZmFkNWY0Y2ItNDFkOS00ZTNlLWE3ZmEtZmE4YTA2MGI1NjM0.jpg?imageView2/1/w/400/h/225
 			(domain_nosub === "myqcloud.com" && domain.match(/image\.myqcloud\.com/)) ||
-			// https://ci.xiaohongshu.com/751cccf1-a34a-57fd-ac5e-438265582359?imageMogr2/thumbnail/640x640/format/jpg/quality/92/auto-orient/strip
-			domain === "ci.xiaohongshu.com" ||
 			// http://pic.qianye88.com/0c4b3bc07a69b2ed260d3b17e15ff4f2.jpeg?imageMogr2/thumbnail/x300/quality/90!
 			domain === "pic.qianye88.com" ||
 			// http://imgboys1.yohobuy.com/spidercms/2018/01/27/01/0127fc0ca0f50496e5235ebc742ff0e056.jpeg?imageView2/2/w/240/q/75|imageslim
@@ -34183,6 +34572,9 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://media-assets.grailed.com/prd/listing/temp/566bb1a355784bfba56883862d980d4a?w=123&h=164&fit=crop&auto=format
 			domain === "media-assets.grailed.com" ||
+			// thanks to anonymous for reporting:
+			// https://hexbear.net/pictrs/image/c501cc95-0e88-4b1e-a72b-de8a19a87adf.png?format=webp&thumbnail=256
+			(domain_nowww === "hexbear.net" && /\/pictrs\/+image\//.test(src)) ||
 			// thanks to MinuteAd8502 on github: https://github.com/qsniyg/maxurl/issues/874
 			// https://img01.ztat.net/article/spp-media-p1/369ffb094cae4443bee45519929dddb8/4269d8d79cfe418888fdc155bf1a8e2e.jpg?imwidth=762
 			//   https://img01.ztat.net/article/spp-media-p1/369ffb094cae4443bee45519929dddb8/4269d8d79cfe418888fdc155bf1a8e2e.jpg -- 1801x2600
@@ -34207,6 +34599,23 @@ var $$IMU_EXPORT$$;
 			return {
 				url: src.replace(/\?.*$/, ""),
 				head_wrong_contenttype: true
+			};
+		}
+
+		if (domain === "ci.xiaohongshu.com" ||
+			// thanks to Froktime on github for reporting: https://github.com/qsniyg/maxurl/issues/1363
+			// https://sns-img-al.xhscdn.com/55aecc9b-df03-0ef1-a602-1d126e78035b?imageView2/2/w/1080/format/jpg
+			//   https://sns-img-al.xhscdn.com/55aecc9b-df03-0ef1-a602-1d126e78035b
+			domain === "sns-img-al.xhscdn.com") {
+			// https://ci.xiaohongshu.com/751cccf1-a34a-57fd-ac5e-438265582359?imageMogr2/thumbnail/640x640/format/jpg/quality/92/auto-orient/strip
+			return {
+				url: src.replace(/\?.*$/, ""),
+				headers: {
+					Referer: ""
+				},
+				referer_ok: {
+					same_domain: true
+				}
 			};
 		}
 
@@ -35077,6 +35486,12 @@ var $$IMU_EXPORT$$;
 			//   https://wp-assets.futurism.com/2024/01/Screenshot-2024-01-12-at-10.19.15%E2%80%AFAM.png
 			domain === "wp-assets.futurism.com" ||
 			// thanks to anonymous for reporting:
+			// https://mei.kuudere.pw/j0lL63uqpto-218x400.jpg
+			domain === "mei.kuudere.pw" ||
+			// thanks to anonymous for reporting:
+			// https://gizmodo.com/app/uploads/2020/01/omu3x1ljkuxngkz1ledn-1024x576.jpg
+			(domain_nowww === "gizmodo.com" && /\/app\/+uploads\//.test(src)) ||
+			// thanks to anonymous for reporting:
 			// https://cdn.entameclip.com/2024/10/pic20241023kimitoband1-300x225.jpg
 			//   https://cdn.entameclip.com/2024/10/pic20241023kimitoband1.jpg
 			domain === "cdn.entameclip.com"
@@ -35228,6 +35643,10 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://image.b2bmilestone.com/9b548baace8311b86ed42435b22d801599ffbb5f/00047740382_01_350x350.jpg
 			domain === "image.b2bmilestone.com" ||
+			// thanks to DoomTay on github: https://github.com/qsniyg/maxurl/issues/1376
+			// https://www.booksie.com/files/postings/8/93163-22445_MEDIA_IMAGE__230x230.jpg
+			//   https://www.booksie.com/files/postings/8/93163-22445_MEDIA_IMAGE_.jpg
+			(domain_nowww === "booksie.com" && /\/files\/+postings\//.test(src)) ||
 			// https://music-bandlink.s3.yandex.net/img/bandlinks/sGCmi_igXrmdjp_370x370.jpg
 			//   https://music-bandlink.s3.yandex.net/img/bandlinks/sGCmi_igXrmdjp.jpg
 			domain === "music-bandlink.s3.yandex.net") {
@@ -36105,7 +36524,7 @@ var $$IMU_EXPORT$$;
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+pin\/+([0-9]+)\/*(?:[?#].*)?$/,
 				query_for_id: "https://www.pinterest.com/pin/${id}/",
-				process: function(done, resp, cache_key, website_match) {
+				process_old: function(done, resp, cache_key, website_match) {
 					var match = resp.responseText.match(/<script id="initial-state" type="application\/json">({.*?})<\/script>/);
 					if (!match) {
 						console_error(cache_key, "Unable to find initial state for", resp);
@@ -36218,13 +36637,164 @@ var $$IMU_EXPORT$$;
 					}
 
 					return done(obj, 6*60*60);
+				},
+				process: function(done, resp, cache_key, website_match) {
+					let matches = match_all(resp.responseText, /<script data-relay-response="true" type="application\/json">({.*?"data":\s*{\s*"v3GetPinQuery".*?})<\/script>/);
+					if (!matches) {
+						console_error(cache_key, "Unable to find pin queries for", resp);
+						return done(null, false);
+					}
+
+					let id = website_match[1];
+					let response = null;
+
+					for (let match of matches) {
+						let json = JSON_parse(match[1]);
+						let data = json.response.data.v3GetPinQuery.data;
+						if (data.entityId !== id)
+							continue;
+
+						if (!response) {
+							response = data;
+						} else {
+							for (let key in data) {
+								if (!(key in response)) {
+									response[key] = data[key];
+								}
+
+								if (key === "videos" && data[key]) {
+									if (data.videos.videoUrls)
+										response.videos.videoUrls = data.videos.videoUrls;
+								}
+							}
+						}
+					}
+
+					if (!response) {
+						console_error(cache_key, "Unable to find pin from", resp, matches);
+						return done(null, false);
+					}
+
+					//console_log(response);
+
+					var urls = [];
+
+					var baseobj:BigImageInfoSObject = {
+						extra: {
+							page: resp.finalUrl
+						}
+					};
+
+					if (response.title) {
+						baseobj.extra.caption = response.title;
+					}
+
+					let pinner = response.originPinner || response.pinner;
+					if (pinner) {
+						baseobj.extra.author_username = pinner.username;
+					}
+
+					if (response.videos) {
+						let get_url_properties = function(url) {
+							let props = {
+								hevc: 0,
+								videofile: 1,
+								dash: 0,
+								multi: 0,
+								type: null
+							};
+
+							if (/\/(?:hevc|h265)/.test(url)) {
+								props.hevc = 1;
+							}
+
+							if (/\.(?:m3u8|mpd)$/.test(url))
+								props.videofile = 0;
+
+							if (/\.mpd$/.test(url))
+								props.dash = 1;
+
+							if (/-multi-.*\.(?:m3u8|mpd)$/.test(url))
+								props.multi = 1;
+
+							let match = url.match(/_t([0-9]+)\./);
+							if (match) {
+								props.type = parseInt(match[1]);
+							}
+
+							return props;
+						};
+
+						let raw_videourls = response.videos.videoUrls;
+
+						let new_videourls = [];
+						for (let url of raw_videourls) {
+							if (array_indexof(new_videourls, url) >= 0)
+								continue;
+
+							let props = get_url_properties(url);
+							let delivery:VideoDelivery = null;
+							if (!props.videofile) {
+								delivery = props.dash ? "dash" : "hls"
+							};
+
+							new_videourls.push({
+								url: url,
+								media_info: {
+									type: "video",
+									delivery: delivery,
+									codec: props.hevc ? "hevc" : null
+								}
+							});
+						}
+
+						new_videourls.sort(function(a, b) {
+							let ap = get_url_properties(a.url);
+							let bp = get_url_properties(b.url);
+
+							if (ap.hevc !== bp.hevc)
+								return bp.hevc - ap.hevc;
+
+							// prioritize streams over raw video files
+							if (ap.videofile !== bp.videofile)
+								return ap.videofile - bp.videofile;
+
+							if (ap.multi !== bp.multi)
+								return bp.multi - ap.multi;
+
+							// dash requires less network calls
+							if (!ap.videofile && !bp.videofile && ap.dash !== bp.dash)
+								return bp.dash - ap.dash;
+
+							if (ap.type !== null && bp.type !== null)
+								return bp.type - ap.type;
+
+							return 0;
+						});
+
+						array_extend(urls, new_videourls);
+					}
+
+					if (response.imageSpec_orig) {
+						urls.push(response.imageSpec_orig.url);
+					}
+
+					var obj = fillobj_urls(urls, baseobj);
+
+					if (response.link) {
+						obj.unshift({
+							url: response.link,
+							is_pagelink: true
+						});
+					}
+
+					return done(obj, 6*60*60);
 				}
 			});
 			if (newsrc) return newsrc;
 		}
 
-		// disabling for now because it's broken
-		if (false && common_functions["is_pinterest_domain"](host_domain) && options.element) {
+		if (common_functions["is_pinterest_domain"](host_domain) && options.element) {
 			var current = options.element;
 			do {
 				if (current.tagName === "A" && /^[a-z]+:\/\/[^/]+\/+pin\/+[0-9]{5,}/.test(current.href)) {
@@ -42887,6 +43457,13 @@ var $$IMU_EXPORT$$;
 			return src.replace(/(\/news)\/+assets_[^/]*\/+[0-9]{4}\/+[0-9]{2}\/+([^-/]*)-.*(\.[^/.]*)$/, "$1/$2$3");
 		}
 
+		if (domain_nowww === "townnews.co.jp") {
+			// thanks to anonymous for reporting:
+			// https://www.townnews.co.jp/0105/assets_c/2024/12/a001349050_01-thumb-80xauto-966613..jpg
+			//   https://www.townnews.co.jp/0105/images/a001349050_01.jpg
+			return src.replace(/(\/[0-9]+)\/+assets_[^/]*\/+[0-9]{4}\/+[0-9]{2}\/+([^-/]*)-.*(\.[^/.]*)$/, "$1/images/$2$3");
+		}
+
 		if (domain_nowww === "agencyteo.com") {
 			// http://www.agencyteo.com/news/download/28302/w/600/KakaoTalk_20161121_144905918.jpg
 			//   http://www.agencyteo.com/news/download/28302/KakaoTalk_20161121_144905918.jpg
@@ -43271,9 +43848,6 @@ var $$IMU_EXPORT$$;
 			// https://estaticos.globoradio.globo.com/fotos/2019/05/6311f398-e2fb-4267-8cbb-2adba1dae8eb.jpg.640x360_q75_box-0%2C0%2C1024%2C576_crop_detail.jpg
 			//   https://estaticos.globoradio.globo.com/fotos/2019/05/6311f398-e2fb-4267-8cbb-2adba1dae8eb.jpg
 			(domain_nosub === "globo.com" && string_indexof(src, "/fotos/") >= 0) ||
-			// https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/zinnia/2017/08/22/0824-felicity-jones_cred_shutterstock-featureflash-photo-agency.jpg.644x420_q100.jpg
-			//   https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/zinnia/2017/08/22/0824-felicity-jones_cred_shutterstock-featureflash-photo-agency.jpg
-			domain === "d26oc3sg82pgk3.cloudfront.net" ||
 			// https://memberme.net/media/creator/creators/d60239d1-4877-445c-913a-4cc837875214.jpg.300x300_q85_crop-50%2C%2050_detail_upscale.jpg
 			(domain_nowww === "memberme.net" && string_indexof(src, "/media/") >= 0) ||
 			// https://funasia.net/site_media/coverphoto/7aef660a-9d55-4f48-a75f-4b500f821312.jpg.260x0_q85.jpg
@@ -43338,7 +43912,12 @@ var $$IMU_EXPORT$$;
 		if (domain === "www.allkpop.com") {
 			// https://www.allkpop.com/upload/2018/02/af/12101614/clc.jpg
 			//   https://www.allkpop.com/upload/2018/02/af_org/12101614/clc.jpg
-			return src.replace(/\/af\/([0-9]*\/[^/]*)$/, "/af_org/$1");
+			// thanks to azadandro on github for reporting: https://github.com/qsniyg/maxurl/issues/1388
+			// https://www.allkpop.com/upload/2024/12/content/141416/thumb/1734203817-aespawinter.jpg
+			//   https://www.allkpop.com/upload/2024/12/content/141416/1734203817-aespawinter.jpg
+			return src
+				.replace(/\/af\/([0-9]*\/[^/]*)$/, "/af_org/$1")
+				.replace(/(\/content\/+[0-9]+\/+)thumb\/+/, "$1");
 		}
 
 		if (domain === "cwcontent.asiae.co.kr") {
@@ -45608,7 +46187,8 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
-		if (domain_nowww === "tnaflix.com") {
+		if (domain_nowww === "tnaflix.com" ||
+			domain_nowww === "empflix.com") {
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+[^/]+\/+[^/]+\/+video([0-9]+)(?:[?#].*)?$/,
 				query_for_id(id) {
@@ -45622,7 +46202,7 @@ var $$IMU_EXPORT$$;
 						json: true
 					}
 				},
-				process(done, resp, cache_key) {
+				process(done, resp, cache_key, match) {
 					if (!resp.html) {
 						console_error(cache_key, "Unable to find html from", resp);
 						return done(null, false);
@@ -45630,7 +46210,7 @@ var $$IMU_EXPORT$$;
 
 					let fakeresp = {
 						responseText: resp.html,
-						finalUrl: "https://www.tnaflix.com/"
+						finalUrl: "https://" + domain_nosub + "/a/a/video" + match[1]
 					};
 
 					var obj = common_functions["get_videotag_obj"](fakeresp);
@@ -45669,8 +46249,16 @@ var $$IMU_EXPORT$$;
 			}
 			if (!match) {
 				is_pagelink = false;
+				match = src.match(/^[a-z]+:\/\/img[0-9]*\.[^/]+\/+[^/]+\/+.*\/([0-9]+)\/+thumbs\/+[0-9]+\./);
+			}
+			if (!match) {
+				is_pagelink = false;
 				// https://mosaic.tnaflix.com/1883746/a16:8q10w300/22.jpg
 				match = src.match(/^[a-z]+:\/\/mosaic\.[^/]+\/+([0-9]+)\/+a[0-9]+(?::[^/]+)?\/+/);
+			}
+			if (!match) {
+				is_pagelink = false;
+				match = src.match(/^[a-z]+:\/\/[^/]+\/+(?:[0-9]+\/+)+([0-9]+)\/+trailer\.mp4(?:[?#].*)?$/);
 			}
 			if (!match) {
 				is_pagelink = false;
@@ -45779,6 +46367,13 @@ var $$IMU_EXPORT$$;
 						url: "https://www." + base_domain + "/view_video.php?viewkey=" + vkey
 					}, cb, process_tnaflix_site);
 				};
+
+				if (!is_vkey) {
+					return {
+						url: "https://www." + base_domain + "/a/a/video" + id,
+						is_pagelink: true
+					};
+				}
 
 				if (options.do_request && options.cb) {
 					var final = function(data) {
@@ -46056,7 +46651,7 @@ var $$IMU_EXPORT$$;
 			return src.replace("/imgS/", "/imgL/").replace("/imgM/", "/imgL/");
 		}
 
-		if (domain === "walter.trakt.tv") {
+		if (domain_nosub === "trakt.tv" && /^walter[-.]/.test(domain)) {
 			// https://walter.trakt.tv/images/movies/000/224/301/posters/thumb/687ddf47d8.jpg.webp
 			//   https://walter.trakt.tv/images/movies/000/224/301/posters/thumb/687ddf47d8.jpg
 			//   https://walter.trakt.tv/images/movies/000/224/301/posters/medium/687ddf47d8.jpg.webp
@@ -46077,6 +46672,9 @@ var $$IMU_EXPORT$$;
 			//   https://walter.trakt.tv/images/users/001/257/078/avatars/original/bfb7994232.jpg
 			// https://walter.trakt.tv/images/users/001/006/285/avatars/medium/ff4a3b514d.png -- 300x300, upscaled
 			//   https://walter.trakt.tv/images/users/001/006/285/avatars/original/ff4a3b514d.png -- 200x199
+			// thanks to anonymous for reporting:
+			// https://walter-r2.trakt.tv/images/shows/000/067/584/fanarts/thumb/e49f97f20d.jpg.webp
+			//   https://walter-r2.trakt.tv/images/shows/000/067/584/fanarts/original/e49f97f20d.jpg
 			return src
 				.replace(/\/(posters|fanarts|avatars)\/(?:thumb|medium|large|full)\/([^/]*?)(\.webp)?$/, "/$1/original/$2");
 		}
@@ -47737,134 +48335,45 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
-		if (domain_nosub === "rdtcdn.com" ||
-			domain_nowww === "redtube.com" ||
-			domain_nowww === "redtube.com.br" ||
-			domain === "embed.redtube.com") {
-			page_nullobj = null;
-			var get_redtube_id_from_url = function(url) {
-				var match = url.match(/:\/\/[^/]+\/+(?:m=[^/]+\/+)?media\/+videos\/+[0-9]{6}\/+[0-9]{2}\/+([0-9]+)\/+/);
-				if (match) {
-					return match[1];
-				}
-
-				match = url.match(/:\/\/embed\.[^/]+\/+\?(?:.*&)?id=([0-9]+)/);
-				if (!match) {
-					match = url.match(/:\/\/(?:www\.)redtube\.com\/+([0-9]+)(?:[?#].*)?$/);
-				}
-				if (match) {
-					page_nullobj = {
-						url: url,
-						is_pagelink: true
-					};
-
-					return match[1];
-				}
-
-				return null;
-			};
-
+		if (domain_nowww === "redtube.com" ||
+			domain_nowww === "redtube.com.br") {
 			var query_redtube = function(id, cb) {
 				var cache_key = "redtube:" + id;
-				api_cache.fetch(cache_key, cb, function(done) {
-					options.do_request({
-						url: "https://www.redtube.com/" + id,
-						method: "GET",
-						onload: function(resp) {
-							if (resp.status !== 200) {
-								console_error(cache_key, resp);
-								return done(null, false);
-							}
+				api_query(cache_key, {
+					url: "https://www.redtube.com/" + id,
+				}, cb, function(done, resp, cache_key) {
+					let match = resp.responseText.match(/page_params\.video_player_setup[\s\S]+playervars:\s*({.*}),/);
+					if (!match) {
+						console_error(cache_key, "Unable to find match for", resp);
+						return done(null, false);
+					}
 
-							var match = resp.responseText.match(/page_params\.video_player_setup[\s\S]+playervars:\s*({.*}),/);
-							if (!match) {
-								console_error(cache_key, "Unable to find match for", resp);
-								return done(null, false);
-							}
-
-							try {
-								var json = JSON_parse(match[1])
-								return done(json, 60*60);
-							} catch (e) {
-								console_error(cache_key, e);
-							}
-
-							return done(null, false);
-						}
-					});
+					let json = JSON_parse(match[1]);
+					return done(json, 60*60);
 				});
 			};
 
-			var get_obj_from_redtube_info = function(data) {
-				var baseobj = {
-					extra: {
-						page: data.link_url,
-						caption: data.video_title
-					}
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9]+)\/*(?:[?#].*)?$/,
+				run: function(cb, match) {
+					query_redtube(match[1], function(data) {
+						if (!data)
+							cb(null);
+
+						common_functions["parse_mediadefinition"](api_cache, options, origsrc, data, cache_key, cb);
+					})
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain_nowww === "embed.redtube.com") {
+			match = src.match(/:\/\/[^/]+\/+\?(?:.*&)?id=([0-9]+)/);
+			if (match) {
+				return {
+					url: "https://www.redtube.com/" + match[1],
+					is_pagelink: true
 				};
-
-				var max = 0;
-				var maxobj = null;
-				for (var i = 0; i < data.mediaDefinitions.length; i++) {
-					var media = data.mediaDefinitions[i];
-
-					var our_quality = parseInt(media.quality);
-					if (!isNaN(our_quality) && our_quality > max && media.videoUrl) {
-						max = our_quality;
-						maxobj = media;
-					}
-				}
-
-				var urls = [];
-
-				if (maxobj) {
-					urls.push({
-						url: maxobj.videoUrl,
-						video: true,
-						headers: {
-							Referer: baseobj.extra.page,
-							Origin: "https://redtube.com"
-						}
-					});
-				}
-
-				urls.push(data.image_url);
-
-				return fillobj_urls(urls, baseobj);
-			};
-
-			id = get_redtube_id_from_url(src);
-			if (id) {
-				obj = {
-					url: src,
-					extra: {
-						page: "https://www.redtube.com/" + id
-					}
-				};
-
-				if (page_nullobj)
-					obj.is_pagelink = true;
-
-				if (options.do_request && options.cb) {
-					query_redtube(id, function(data) {
-						if (!data) {
-							return options.cb(obj);
-						}
-
-						var newobj = get_obj_from_redtube_info(data);
-						if (!is_array(newobj))
-							newobj = [newobj as BigImageInfoSObject];
-
-						newobj.push(obj);
-						return options.cb(newobj);
-					});
-
-					return {
-						waiting: true
-					};
-				}
-
-				return obj;
 			}
 		}
 
@@ -47900,7 +48409,7 @@ var $$IMU_EXPORT$$;
 							origsrc = options._internal_info.mediadefinition_src;
 						}
 
-						cb(common_functions["parse_mediadefinition"](origsrc, data, cache_key));
+						common_functions["parse_mediadefinition"](api_cache, options, origsrc, data, cache_key, cb);
 					});
 				}
 			});
@@ -47943,7 +48452,7 @@ var $$IMU_EXPORT$$;
 							origsrc = options._internal_info.mediadefinition_src;
 						}
 
-						cb(common_functions["parse_mediadefinition"](origsrc, data, cache_key));
+						common_functions["parse_mediadefinition"](api_cache, options, origsrc, data, cache_key, cb);
 					});
 				}
 			});
@@ -47987,7 +48496,7 @@ var $$IMU_EXPORT$$;
 							origsrc = options._internal_info.mediadefinition_src;
 						}
 
-						cb(common_functions["parse_mediadefinition"](origsrc, data, cache_key));
+						common_functions["parse_mediadefinition"](api_cache, options, origsrc, data, cache_key, cb);
 					});
 				}
 			});
@@ -48393,7 +48902,12 @@ var $$IMU_EXPORT$$;
 			if (string_indexof(src, "/profile/") >= 0) {
 				// https://static.maxmodels.pl/profile/6/c/9/6c9fd60f434f2a06212844dc6c073bf0_428915_428915_tinythumb.jpg
 				//   https://static.maxmodels.pl/profile/6/c/9/6c9fd60f434f2a06212844dc6c073bf0_428915_428915_profile.jpg
-				return src.replace(/_[a-z]+(\.[^/.]*)$/, "_profile$1");
+				// thanks to anonymous for reporting:
+				// https://static.maxmodels.pl/profile/1/a/9/1a96cd827a7b2f300b61d53992e348fc_232282_232282_profile.jpeg
+				//   https://static.maxmodels.pl/photos/1/a/96/1a96cd827a7b2f300b61d53992e348fc_232282.jpeg
+				return src
+					.replace(/\/profile\/+(.\/+.\/+.)\/+([0-9a-f]{3})([0-9a-f])([0-9a-f]+_[0-9]+)_[0-9]+_[a-z]+(\.[a-z]+)(?:[?#].*)?$/, "/photos/$1$3/$2$3$4$5")
+					.replace(/_[a-z]+(\.[^/.]*)$/, "_profile$1");
 			}
 		}
 
@@ -50009,7 +50523,11 @@ var $$IMU_EXPORT$$;
 			// http://flyhighstore.pl/2210-home_default/fh-cool-red-winter-jacket.jpg
 			//   http://flyhighstore.pl/2210/fh-cool-red-winter-jacket.jpg
 			domain_nowww === "flyhighstore.pl" ||
-			/^[a-z]+:\/\/[^/]+\/+[0-9]+-(?:home|large|thickbox)_default\/+[^/.]+\.jpg(?:[?#].*)?$/.test(src)) {
+			// thanks to anonymous for reporting:
+			// https://www.sublimet.com/12604-large_default/serviettes-microfibre-cotton-sublimation.webp
+			//   https://www.sublimet.com/12604/serviettes-microfibre-cotton-sublimation.webp
+			domain_nowww === "sublimet.com" ||
+			/^[a-z]+:\/\/[^/]+\/+[0-9]+-(?:home|large|thickbox)_default\/+[^/.]+\.(?:jpg|webp)(?:[?#].*)?$/.test(src)) {
 			// https://www.tiarashop.eu/3412-home_default/o.jpg
 			//   https://www.tiarashop.eu/3412/o.jpg
 			newsrc = src.replace(/(\/img\/+p\/+(?:[0-9]\/+){1,}[0-9]+)[-_][^/.]*(\.[^/.]*)$/, "$1$2");
@@ -50205,6 +50723,21 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain === "cdn.store-assets.com") {
+			// thanks to anonymous for reporting:
+			// https://cdn.store-assets.com/s/304945/i/81123616.png?width=1024&format=webp
+			//   https://cdn.store-assets.com/s/304945/i/81123616.png
+			newsrc = src.replace(/(\/s\/+[0-9]+\/+[a-z]\/+[0-9]+[^/?#]+)(?:[?#].*)?$/, "$1");
+			if (newsrc !== src)
+				return newsrc;
+
+			// other: https://cdn.store-assets.com/s/304945/f/14511290.jpg -- 3024x4032
+			// https://cdn.store-assets.com/s/304945/i/81123579.jpeg -- 1800x2400
+			//   https://cdn.store-assets.com/s/304945/f/14511290.jpg -- 3024x4032
+			// https://cdn.store-assets.com/s/304945/i/81123577.jpeg -- 1800x2400
+			//   https://cdn.store-assets.com/s/304945/f/14511291.jpg -- 3024x4032
+			// https://cdn.store-assets.com/s/304945/i/81123582.jpeg
+			//   https://cdn.store-assets.com/s/304945/f/14511292.jpg
+
 			// https://cdn.store-assets.com/s/5319/i/1058445_480x.jpeg
 			//   https://cdn.store-assets.com/s/5319/i/1058445.jpeg
 			return src.replace(/_[0-9]+x(?:[0-9]+)?(\.[^/.]*)$/, "$1");
@@ -50904,6 +51437,10 @@ var $$IMU_EXPORT$$;
 			// https://cdn.elitebabes.com/content/200905/0002-01_1200.jpg
 			//   https://cdn.elitebabes.com/content/200905/0002-01.jpg
 			domain === "cdn.elitebabes.com" ||
+			// thanks to anonymous for reporting:
+			// https://cdn.metarthunter.com/content/231257/0010-01_w400.jpg
+			//   https://cdn.metarthunter.com/content/231257/0010-01_1200.jpg
+			domain === "cdn.metarthunter.com" ||
 			// https://c9w8v3m5.ssl.hwcdn.net/content/130305/bree-glamorous-01_w400.jpg
 			//   https://c9w8v3m5.ssl.hwcdn.net/content/130305/bree-glamorous-01.jpg
 			domain === "c9w8v3m5.ssl.hwcdn.net") {
@@ -50911,8 +51448,14 @@ var $$IMU_EXPORT$$;
 			//   https://k5x5n5g8.ssl.hwcdn.net/content/181035/0013-03.jpg
 			newsrc = src.replace(/(\/content\/+[0-9]+\/+[^/]+-[0-9]+)_(?:[wh][0-9]+|1200)(\.[^/.]*)(?:[?#].*)?$/,
 							   "$1$2");
-			if (newsrc !== src)
-				return newsrc;
+			if (newsrc !== src) {
+				return {
+					url: newsrc,
+					headers: {
+						Referer: "https://" + domain_nosub + "/"
+					}
+				};
+			}
 		}
 
 		if (domain_nowww === "xjapanese.com") {
@@ -50949,7 +51492,11 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/[0-9]+x[^/.]*(\.[^/.]*)$/, "/x$1");
 		}
 
-		if (domain === "cdn.tobi.com") {
+		if (domain === "cdn.tobi.com" ||
+			// thanks to anonymous for reporting:
+			// https://img.tobi.com/product_images/xs/1/red-no-time-dolphin-hem-skirt.jpg
+			//   https://img.tobi.com/product_images/lg/1/red-no-time-dolphin-hem-skirt@2x.jpg
+			domain === "img.tobi.com") {
 			// https://cdn.tobi.com/product_images/sm/1/natural-infinite-glow-layered-bracelet-set.jpg
 			//   https://cdn.tobi.com/product_images/lg/1/natural-infinite-glow-layered-bracelet-set@2x.jpg
 			// https://cdn.tobi.com/product_images/md/1/rose-eyes-on-you-knotted-maxi-dress.jpg
@@ -51686,8 +52233,12 @@ var $$IMU_EXPORT$$;
 		}
 
 		if ((domain_nosub === "vigbo.com" ||
+			 // thanks to anonymous for reporting:
+			 // https://static-cdn4-2.vigbo.tech/u109775/105500/blog/5883263/5390328/70992433/1000-20f13d28b0ee688196c88af1b711253f.jpg
+			 //   https://static-cdn4-2.vigbo.tech/u109775/105500/blog/5883263/5390328/70992433/2000-20f13d28b0ee688196c88af1b711253f.jpg
+			 domain_nosub === "vigbo.tech" ||
 			 domain_nosub === "gophotoweb.com") &&
-			domain.match(/^static[0-9]*\./)) {
+			domain.match(/^static[0-9]*(?:-cdn[^./]+)?\./)) {
 			// http://static1.vigbo.com/u19820/22951/photos/3065711/1500-gophotoweb-5e9e0caa00352abf3c64dd6656552c8c.JPG
 			//   http://static1.vigbo.com/u19820/22951/photos/3065711/2000-gophotoweb-5e9e0caa00352abf3c64dd6656552c8c.JPG
 			// http://static1.gophotoweb.com/u4419/3425/photos/680943/500-alexey_trofimov-170b44c09e9fdabd1446bf2f125c2836.jpg
@@ -51846,12 +52397,18 @@ var $$IMU_EXPORT$$;
 				.replace(/\/images\/+previews_comm\/+/, "/images/big_size_comm/");
 		}
 
-		if (domain_nosub === "podium.life") {
+		if (domain_nosub === "podium.life" ||
+			// thanks to anonymous for reporting:
+			// https://c.podium.im/r/h4/44b/bfd/39b9c6878a2a3826886c54c207.jpg
+			//   https://c.podium.im/44b/bfd/39b9c6878a2a3826886c54c207.jpg
+			// https://c.podium.im/r/w12/c9b/91c/7f64ce310b1e45b4bd9a14a602.jpg
+			//   https://c.podium.im/c9b/91c/7f64ce310b1e45b4bd9a14a602.jpg
+			domain === "c.podium.im") {
 			// https://c.podium.life/content/r/80/photo/2409/2409496/533aaf0ded61d.jpg
 			//   https://c.podium.life/content/photo/2409/2409496/533aaf0ded61d.jpg
 			// https://c.podium.life/content/r/2/p/28765/8112/5a81580060110.jpg
 			//   https://c.podium.life/content/p/28765/8112/5a81580060110.jpg
-			return src.replace(/\/content\/r\/[wh]?[0-9]*(?:x[0-9]+)?\//, "/content/");
+			return src.replace(/(:\/\/[^/]+\/+(?:content\/+)?)r\/+[wh]?[0-9]*(?:x[0-9]+)?\/+/, "$1");
 		}
 
 		if (domain_nowww === "lelulove.com") {
@@ -51867,16 +52424,38 @@ var $$IMU_EXPORT$$;
 			// http://ist3-2.filesor.com/pimpandhost.com/1/_/_/_/1/3/4/Q/V/34QVp/1_0.jpg
 			//   http://ist3-2.filesor.com/pimpandhost.com/1/_/_/_/1/3/4/Q/V/34QVp/1.jpg
 			// http://ist3-6.filesor.com/pimpandhost.com/1/1/2/0/112024/4/i/C/t/4iCt9/The.Good.Wife.S07_0.jpg
-			return {
-				url: src.replace(/_(?:[a-z]|[0-9])(\.[^/.]*)/, "$1"),
-				bad_if: [{
-					// This is too broad, but I can't find another consistent way without requiring CRCs
-					headers: {
-						"content-length": "9408",
-						"content-type": "image/gif"
+			newsrc = src.replace(/_(?:[a-z]|[0-9])(\.[^/.]*)/, "$1");
+			let urls = [newsrc];
+			if (newsrc !== src)
+				urls = add_extensions_jpeg(newsrc);
+
+			return fillobj_urls(urls, {
+				bad_if: [
+					{
+						// This is too broad, but I can't find another consistent way without requiring CRCs
+						headers: {
+							"content-length": "9408",
+							"content-type": "image/gif"
+						}
+					},
+					{
+						// last-modified: Thu, 09 May 2024 08:30:00 GMT
+						headers: {
+							"content-length": "12106",
+							"content-type": "image/gif"
+						}
 					}
-				}]
-			};
+				]
+			});
+		}
+
+		if (domain_nowww === "pimpandhost.com") {
+			// thanks to Earthworm-Banana on github: https://github.com/qsniyg/maxurl/issues/1389
+			// https://pimpandhost.com/media/profile_image/2/5/9/9/1/5/D/l/15Dl/2599871b5eae05c7060ec24e20c8435578acf0_thumb1140_250.jpg
+			//   https://pimpandhost.com/media/profile_image/2/5/9/9/1/5/D/l/15Dl/2599871b5eae05c7060ec24e20c8435578acf0.jpg
+			// https://pimpandhost.com/media/profile_image/3/0/6/4/1/h/J/u/1hJu/306496cafa493353f382d28168f2dfaccde5ee_thumb1140_250.jpg
+			//   https://pimpandhost.com/media/profile_image/3/0/6/4/1/h/J/u/1hJu/306496cafa493353f382d28168f2dfaccde5ee.jpg
+			return src.replace(/_thumb[0-9]+_[0-9]+(\.[a-zA-Z]+)(?:[?#].*)?$/, "$1");
 		}
 
 		if (domain_nowww === "namooactors.com") {
@@ -53827,6 +54406,13 @@ var $$IMU_EXPORT$$;
 			return src.replace(/^[a-z]+:\/\/[^/]*\/(?:obs\/)?([-_0-9A-Za-z]*)(?:\/[a-z0-9]*)?$/, "https://obs.line-scdn.net/$1");
 		}
 
+		if (domain === "resource-jp-linemusic.line-scdn.net") {
+			// thanks to anonymous for reporting:
+			// https://resource-jp-linemusic.line-scdn.net/r/musicjp/c/c86c819e44064t0fc8923f/m470x470
+			//   https://obs.line-scdn.net/r/musicjp/c/c86c819e44064t0fc8923f
+			return src.replace(/:\/\/[^/]+\/+/, "://obs.line-scdn.net/");
+		}
+
 		if (domain === "cdn-obs.line-apps.com") {
 			// http://cdn-obs.line-apps.com/line/r/lineq/c/39502AA7-70E6-4CA0-BC5A-BAA75CFE9AAD.be1e14t04a16236/200x200.rf
 			//   http://cdn-obs.line-apps.com/line/r/lineq/c/39502AA7-70E6-4CA0-BC5A-BAA75CFE9AAD.be1e14t04a16236
@@ -55475,6 +56061,10 @@ var $$IMU_EXPORT$$;
 			// https://foruda.gitee.com/avatar/1676894742397292147/2072_yinian1992_1598196937.png!avatar200
 			//   https://foruda.gitee.com/avatar/1676894742397292147/2072_yinian1992_1598196937.png
 			(domain_nosub === "gitee.com" && /\/avatar\//.test(src)) ||
+			// thanks to RAT on discord:
+			// https://image-assets.mihuashi.com/permanent/2717943%7C-2024/11/04/12/FlLSXAohn4VaiZPu-MwvTxlb2ZEW_4910.jpg!artwork.large
+			//   https://image-assets.mihuashi.com/permanent/2717943%7C-2024/11/04/12/FlLSXAohn4VaiZPu-MwvTxlb2ZEW_4910.jpg
+			domain === "image-assets.mihuashi.com" ||
 			// https://img.mgpyh.com/post_image/52fdf552ea637c47518ad8b5d0db379e.jpg!small
 			//   https://img.mgpyh.com/post_image/52fdf552ea637c47518ad8b5d0db379e.jpg
 			domain === "img.mgpyh.com") {
@@ -56774,6 +57364,23 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
+		if (domain_nowww === "modelmayhem.com") {
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+portfolio\/+pic\/+([0-9]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/portfolio/pic/${id}",
+				process: function(done, resp, cache_key) {
+					var match = resp.responseText.match(/<meta\s+property="og:image"\s+content="([^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find og:image match from", resp);
+						return done(null, false);
+					}
+
+					return done(decode_entities(match[1]), 24*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
 		if (host_domain_nosub === "modelmayhem.com" && options.element) {
 			if (!src) {
 				var current = options.element;
@@ -56789,61 +57396,23 @@ var $$IMU_EXPORT$$;
 				}
 			}
 
-			var query_picid = function(picid, cb) {
-				var cache_key = "modelmayhem:" + picid;
+			var parent = options.element.parentElement;
+			if (parent && parent.tagName === "A" && /\/portfolio\/+pic\/+[0-9]+/.test(parent.href)) {
+				let urls = [
+					{
+						url: parent.href,
+						is_pagelink: true
+					}
+				];
 
-				api_cache.fetch(cache_key, cb, function(done) {
-					options.do_request({
-						url: "https://www.modelmayhem.com/portfolio/pic/" + picid,
-						method: "GET",
-						onload: function(resp) {
-							if (resp.readyState !== 4)
-								return;
-
-							if (resp.status !== 200) {
-								console_error(cache_key, resp);
-								return done(null, false);
-							}
-
-							var match = resp.responseText.match(/<meta\s+property="og:image"\s+content="([^"]+)"/);
-							if (!match) {
-								console_error(cache_key, "Unable to find match", resp);
-								return done(null, false);
-							}
-
-							return done(decode_entities(match[1]), 24*60*60);
-						}
+				if (/\/images\/+nopic_worksafe-on\./.test(src)) {
+					urls.push({
+						url: src,
+						can_cache: false
 					});
-				});
-			};
-
-			var get_picid_from_url = function(url) {
-				return url.replace(/.*\/portfolio\/+pic\/+([0-9]+)(?:[?#].)?$/, "$1");
-			};
-
-			if (options.do_request && options.cb) {
-				var parent = options.element.parentElement;
-				if (parent && parent.tagName === "A" && /\/portfolio\/+pic\/+[0-9]+/.test(parent.href)) {
-					query_picid(get_picid_from_url(parent.href), function(newsrc) {
-						if (newsrc) {
-							var obj:BigImageInfoSObject = {
-								url: newsrc
-							};
-
-							if (/\/images\/+nopic_worksafe-on\./.test(src)) {
-								obj.can_cache = false;
-							}
-
-							options.cb(obj);
-						} else {
-							options.cb(null);
-						}
-					});
-
-					return {
-						waiting: true
-					};
 				}
+
+				return urls;
 			}
 		}
 
@@ -57733,6 +58302,10 @@ var $$IMU_EXPORT$$;
 				if ("resolve.quality" in newkvs)
 					newkvs["resolve.quality"].value = 100;
 
+				// thanks to Froktime: https://github.com/qsniyg/maxurl/issues/1384
+				if ("resolve.format" in newkvs)
+					newkvs["resolve.format"].value = "png";
+
 				if ("quality" in newkvs) {
 					// quality[L]
 					if (/^[0-9]{1,2}$/.test(newkvs["quality"].value))
@@ -57795,10 +58368,15 @@ var $$IMU_EXPORT$$;
 			}
 		}
 
-		if (domain_nowww === "natedsanders.com" && string_indexof(src, "/ItemImages/") >= 0) {
+		if ((domain_nowww === "natedsanders.com" ||
+			 // thanks to anonymous for reporting:
+			 // https://auctions.morphyauctions.com/ItemImages/000481/20035161_4_sm.jpeg -- 1698x1000
+			 //   https://auctions.morphyauctions.com/ItemImages/000481/20035161_4_med.jpeg -- 1019x600
+			 //   https://auctions.morphyauctions.com/ItemImages/000481/20035161_4_lg.jpeg -- 3600x2119
+			 domain === "auctions.morphyauctions.com") && string_indexof(src, "/ItemImages/") >= 0) {
 			// https://natedsanders.com/ItemImages/000008/8339a_med.jpeg -- 600x163
 			//   https://natedsanders.com/ItemImages/000008/8339a_lg.jpeg -- 4500x1224
-			return src.replace(/(\/[0-9a-z]+)_[a-z]+(\.[^/.]*)$/, "$1_lg$2");
+			return src.replace(/(\/[0-9a-z]+(?:_[0-9]+)?)_(?:sm|med)(\.[^/.]*)$/, "$1_lg$2");
 		}
 
 		if (domain === "d1x0dndjbjw02n.cloudfront.net" ||
@@ -57837,7 +58415,8 @@ var $$IMU_EXPORT$$;
 		if (domain === "image.tmdb.org" ||
 			// https://www.themoviedb.org/t/p/w220_and_h330_face/6SJppowm7cdQgLkvoTlnTUSbjr9.jpg
 			//   https://www.themoviedb.org/t/p/original/6SJppowm7cdQgLkvoTlnTUSbjr9.jpg
-			domain_nowww === "themoviedb.org") {
+			domain_nowww === "themoviedb.org" ||
+			domain === "media.themoviedb.org") {
 			// https://image.tmdb.org/t/p/w500/76gfJrmdBADyJJXqI0GRgj01yUo.jpg -- 500x750
 			//   https://image.tmdb.org/t/p/original/76gfJrmdBADyJJXqI0GRgj01yUo.jpg -- 2000x3000
 			// https://image.tmdb.org/t/p/w220_and_h330_bestv2/9AMeuhQn99W6deTt6cVemCy6nKe.jpg -- 220x330
@@ -58246,8 +58825,16 @@ var $$IMU_EXPORT$$;
 			// thanks to remlap for reporting:
 			// https://a.ltrbxd.com/resized/avatar/upload/7/3/3/3/5/7/5/shard/avtr-0-1000-0-1000-crop.jpg?v=d4e92a9521
 			//   https://a.ltrbxd.com/avatar/upload/7/3/3/3/5/7/5/shard/avtr?v=d4e92a9521 -- 1689x1689
+			// thanks to anonymous for reporting:
+			// https://a.ltrbxd.com/resized/film-poster/7/9/8/9/3/79893-the-bling-ring-0-2000-0-3000-crop.jpg
+			//   https://a.ltrbxd.com/film-poster/7/9/8/9/3/79893-the-bling-ring -- 1000x1500
+			// https://a.ltrbxd.com/resized/sm/upload/pq/hn/s2/a8/the-bling-ring-1200-1200-675-675-crop-000000.jpg
+			//   https://a.ltrbxd.com/sm/upload/pq/hn/s2/a8/the-bling-ring.jpg
+			// https://a.ltrbxd.com/resized/alternative-poster/3/3/5/3/8/4/p/qscHikdEWVpHl7hz9KpIfwjP9oU-0-140-0-210-crop.jpg
+			//   https://a.ltrbxd.com/alternative-poster/3/3/5/3/8/4/p/qscHikdEWVpHl7hz9KpIfwjP9oU.jpg
 			return src
 				.replace(/(\/avatar\/+upload\/.*\/avtr)\.[a-z]+([?#].*)?$/, "$1$2")
+				.replace(/\/resized\/(film-poster\/+.*)-(?:[0-9]+-){4}crop(?:-[0-9]+)?\.[^/.]*$/, "/$1")
 				.replace(/\/resized\/(.*)-(?:[0-9]+-){4}crop(?:-[0-9]+)?(\.[^/.]*)?$/, "/$1$2");
 		}
 
@@ -59573,17 +60160,6 @@ var $$IMU_EXPORT$$;
 			return src.replace(/:\/\/preview\.redd\.it\/(award_images\/+t[0-9]*_[0-9a-z]+\/+)?(?:[-0-9a-z]+-)?([^/.]*\.[^/.?]*)\?.*$/, "://i.redd.it/$1$2");
 		}
 
-		if (domain === "i.redd.it" && src.match(/^[a-z]+:\/\/[^/]*\/[0-9a-z]+\.[^-/._?#]*$/)) {
-			return {
-				url: src,
-				headers: {
-					Accept: '*/*',
-					Referer: null
-				},
-				is_original: true
-			};
-		}
-
 		if (domain === "i.reddituploads.com") {
 			// https://i.reddituploads.com/59933254fd6e44228dc5f0fef3d850af?fit=max&h=1536&w=1536&s=6db141a8ef89df0720e6666f3e7e26bf
 			//   https://i.reddituploads.com/59933254fd6e44228dc5f0fef3d850af
@@ -59676,8 +60252,12 @@ var $$IMU_EXPORT$$;
 
 					var urls = [];
 
-					var obj = {
-						extra: {}
+					var obj:BigImageInfoSObject = {
+						extra: {},
+						headers: {
+							Accept: "*/*",
+							Referer: "https://www.reddit.com/"
+						}
 					};
 
 					if (item.permalink) {
@@ -59731,13 +60311,24 @@ var $$IMU_EXPORT$$;
 					if (item.gallery_data && item.gallery_data.items) {
 						var first_url = null;
 						var album_links = [];
-						array_foreach(item.gallery_data.items, function(item) {
-							var url = "https://i.redd.it/" + item.media_id + ".jpg";
+						array_foreach(item.gallery_data.items, function(mediaitem) {
+							let ext = "jpg";
+
+
+							if (item.media_metadata && mediaitem.media_id in item.media_metadata) {
+								let meta = item.media_metadata[mediaitem.media_id];
+								if (meta.m && /^image\//.test(meta.m)) {
+									ext = meta.m.replace(/.*\//, "");
+								}
+							}
+
+							var url = "https://i.redd.it/" + mediaitem.media_id + "." + ext;
 							if (!first_url)
 								first_url = url;
 
 							album_links.push({
 								url: url,
+								x_id: mediaitem.media_id,
 								is_current: first_url === url
 							});
 						});
@@ -59764,6 +60355,27 @@ var $$IMU_EXPORT$$;
 
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+(?:(?:(?:r|u(?:ser)?)\/+[^/]+\/+comments|gallery)\/+)?([a-z0-9]+)(?:\/+.*)?(?:[?#].*)?$/,
+				override_cb: function(cb, data) {
+					if (!is_array(data))
+						data = [data];
+
+					let id = null;
+					let imu_id = src.match(/#imu-id=(.*)/);
+					if (imu_id)
+						id = imu_id[1];
+
+					if (id) {
+						id = id.replace(/^.*\/([0-9a-z]+)\.[a-z0-9]+(?:[?#].*)?$/, "$1");
+					}
+
+					for (let sobj of data) {
+						common_functions["update_album_info_links"](sobj, function(x) {
+							return x === id;
+						});
+					}
+
+					cb(data);
+				},
 				run: function(cb, match) {
 					var id = match[1];
 					// t3 = link
@@ -59783,8 +60395,12 @@ var $$IMU_EXPORT$$;
 			var get_reddit_link = function(id) {
 				id = id.replace(/^t[0-9]+_/, "");
 
+				let url = "https://redd.it/" + id;
+				if (src)
+					url += "#imu-id=" + src;
+
 				return {
-					url: "https://redd.it/" + id,
+					url,
 					is_pagelink: true
 				};
 			};
@@ -59810,6 +60426,17 @@ var $$IMU_EXPORT$$;
 					}
 				}
 			} while (current = current.parentElement);
+		}
+
+		if (domain === "i.redd.it" && src.match(/^[a-z]+:\/\/[^/]*\/[0-9a-z]+\.[^-/._?#]*$/)) {
+			return {
+				url: src,
+				headers: {
+					Accept: '*/*',
+					Referer: null
+				},
+				is_original: true
+			};
 		}
 
 		if ((domain_nosub === "gstatic.com" ||
@@ -61991,8 +62618,12 @@ var $$IMU_EXPORT$$;
 			domain_nowww === "xvideos.net" ||
 			domain_nowww === "xvideos.es" ||
 			domain_nowww === "xnxx.com" ||
+			// thanks to anonymous for reporting:
+			domain_nowww === "xv-ru.com" ||
 			domain_nowww === "xnxx.es") {
 			var our_host = domain_nosub.replace(/\..*/, "");
+			if (our_host === "xv-ru")
+				our_host = "xvideos";
 
 			var full_videourl = function(videourl) {
 				if (our_host === "xvideos") {
@@ -62069,7 +62700,7 @@ var $$IMU_EXPORT$$;
 				if (our_host === "xvideos") {
 					return "https://www.xvideos.com/video." + videoid + "/a";
 				} else if (our_host === "xnxx") {
-					return "https://www.xnxx.com/video-" + videoid + "/";
+					return "https://www.xnxx.com/video-" + videoid + "/a";
 				}
 			};
 
@@ -62150,16 +62781,19 @@ var $$IMU_EXPORT$$;
 			 host_domain_nowww === "xvideos.xxx" ||
 			 host_domain_nowww === "xvideos.net" ||
 			 host_domain_nowww === "xvideos.es" ||
+			 host_domain_nowww === "xv-ru.com" ||
 			 host_domain_nowww === "xnxx.com" ||
 			 host_domain_nowww === "xnxx.es") &&
 			options.element && options.do_request && options.cb) {
 			var our_host = host_domain_nosub.replace(/\..*/, "");;
+			if (our_host === "xv-ru")
+				our_host = "xvideos";
 
 			var videoid_to_videourl = function(videoid) {
 				if (our_host === "xvideos") {
-					return "https://www.xvideos.com/video" + videoid + "/";
+					return "https://www.xvideos.com/video" + videoid + "/a";
 				} else if (our_host === "xnxx") {
-					return "https://www.xnxx.com/video-" + videoid + "/";
+					return "https://www.xnxx.com/video-" + videoid + "/a";
 				}
 			};
 
@@ -62281,9 +62915,21 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://t1.pictoa.com/media/galleries/169/999/16999959423e419b4e7/302506959423e419e19d.jpg
 			//   https://s1.pictoa.com/media/galleries/169/999/16999959423e419b4e7/302506959423e419e19d.jpg
+			// https://t1.pictoa.com/media/galleries/264/539/264539600822866053a/38567126008228a06e67.jpg
+			//   https://s2.pictoa.com/media/galleries/264/539/264539600822866053a/38567126008228a06e67.jpg
 			newsrc = src.replace(/^([a-z]+:\/\/)t([0-9]*\.)/, "$1s$2");
-			if (newsrc !== src)
-				return newsrc;
+			if (newsrc !== src) {
+				if (/:\/\/s[0-9]\./.test(newsrc)) {
+					let urls = [newsrc];
+
+					array_upush(urls, src.replace(/^([a-z]+:\/\/)t[0-9]*\./, "$1s1."));
+					array_upush(urls, src.replace(/^([a-z]+:\/\/)t[0-9]*\./, "$1s2."));
+
+					return urls;
+				} else {
+					return newsrc;
+				}
+			}
 			//return src.replace(/\/thumbs\/([0-9a-f]+\.[^/.]*)$/, "/$1");
 		}
 
@@ -63235,6 +63881,9 @@ var $$IMU_EXPORT$$;
 		if (domain === "gdb.rferl.org" ||
 			// https://gdb.voanews.com/FFF71CAB-7CA6-4876-831A-B7E44ED40BF4_w1200_r1_s.jpg
 			//   https://gdb.voanews.com/FFF71CAB-7CA6-4876-831A-B7E44ED40BF4.jpg
+			// thanks to anonymous for reporting:
+			// https://gdb.voanews.com/92c115a5-dea6-4082-9a22-2e62a325192f_cx0_cy2_cw0_w1597_n_r1_st.jpg
+			//   https://gdb.voanews.com/92c115a5-dea6-4082-9a22-2e62a325192f.jpg
 			domain === "gdb.voanews.com" ||
 			// https://gdb.alhurra.eu/A4CE07B4-32FF-45DE-9D01-26FE034ABC75_cx0_cy5_cw0_w144_r1.jpg
 			//   https://gdb.alhurra.eu/A4CE07B4-32FF-45DE-9D01-26FE034ABC75.jpg
@@ -63248,7 +63897,7 @@ var $$IMU_EXPORT$$;
 			domain === "gdb.radiosawa.us") {
 			// https://gdb.rferl.org/A8AAF0A8-851A-4A70-8803-05E5409C6A19_w1200_r1_s.jpg
 			//   https://gdb.rferl.org/A8AAF0A8-851A-4A70-8803-05E5409C6A19.jpg
-			return src.replace(/(:\/\/[^/]*\/+[-0-9A-Fa-f]+)(?:_c?[a-z][0-9]*){1,}(\.[^/.]*)$/, "$1$2");
+			return src.replace(/(:\/\/[^/]*\/+[-0-9A-Fa-f]+)(?:_(?:c?[a-z]|st)[0-9]*){1,}(\.[^/.]*)$/, "$1$2");
 			// return src.replace(/_[^/.]*(\.[^/.]*)$/, "$1");
 		}
 
@@ -63840,13 +64489,25 @@ var $$IMU_EXPORT$$;
 			domain_nosub === "4wank.com" ||
 			domain_nosub === "fapnado.com" ||
 			domain_nosub === "crazyporn.xxx" ||
-			domain_nowww === "thisvid.com" ||
+			domain_nosub === "thisvid.com" ||
 			domain_nowww === "amateur8.com" ||
 			domain_nowww === "fpo.xxx" ||
 			domain_nowww === "masturbationgirl.com" ||
 			domain_nowww === "xhomealone.com" ||
 			domain_nosub === "porntrex.com" ||
 			domain_nosub === "cdntrex.com" ||
+			domain_nowww === "alphavids.cc" ||
+			domain_nowww === "pornmega.com" ||
+			domain_nowww === "viralxxxporn.com" ||
+			domain_nowww === "porntrex.tv" ||
+			domain_nowww === "bitchesgirls.tv" ||
+			domain_nowww === "xxbrits.com" ||
+			domain_nowww === "jizzoncam.com" ||
+			domain_nowww === "jizzonme.org" ||
+			domain_nowww === "xgirls.agency" ||
+			domain_nowww === "xgirls.webcam" ||
+			domain_nowww === "xshemales.webcam" ||
+			domain_nowww === "pornoembed.info" ||
 			// different system
 			// https://static2.tubepornclassic.com/contents/videos_screenshots/1051000/1051741/240x180/1.jpg
 			//domain_nosub === "tubepornclassic.com" ||
@@ -63867,7 +64528,11 @@ var $$IMU_EXPORT$$;
 			// https://www.tube-bunny.com/kt_player/skin/img/play_white.png
 			// https://cartoon-sex.tv/images/title_icon.png
 			if (/\/(?:kt_)?player\/+skin\/+img\//.test(src) ||
-				/\/images\/+(?:title_icon|blank)\.[A-Za-z]+(?:[?#].*)?$/.test(src))
+				// https://www.jizzoncam.com/images/pattern.gif
+				// https://www.jizzoncam.com/images/bg-grey.gif
+				/\/images\/+(?:title_icon|blank|pattern|bg-grey)\.[A-Za-z]+(?:[?#].*)?$/.test(src) ||
+				// https://anysex.com/static/bg.png
+				/\/static\/+bg\.png(?:[?#].*)?$/.test(src))
 				return {
 					url: src,
 					bad: "mask"
@@ -63909,6 +64574,7 @@ var $$IMU_EXPORT$$;
 						match = src.match(/^[a-z]+:\/\/[^/]+\/+video\/+([^/.]+)\.html(?:[?#].*)?$/);
 					} else if (domain_nosub === "alotporn.com" ||
 							   domain_nosub === "xcafe.com" ||
+							   domain_nowww === "anysex.com" ||
 							   domain_nosub === "cambro.io") {
 						match = src.match(/^[a-z]+:\/\/[^/]+\/+([0-9]+)\/+(?:[^/]+\/*)?(?:[?#].*)?$/);
 					}
@@ -63940,6 +64606,10 @@ var $$IMU_EXPORT$$;
 				videos_component = "embed";
 				addslash = "";
 				a_component = "";
+
+				if (domain === "wh.cdntrex.com") {
+					basedomain = "https://www.whoreshub.com/";
+				}
 			} else if (domain_nosub === "porntb.com" ||
 					   domain_nosub === "pornstarsadvice.com" ||
 					   domain_nosub === "fetishburg.com" ||
@@ -63984,6 +64654,7 @@ var $$IMU_EXPORT$$;
 					   domain_nosub === "pornfappy.com" ||
 					   domain_nosub === "theyarehuge.com" ||
 					   domain_nosub === "pervclips.com" ||
+					   domain_nosub === "pornoembed.info" ||
 					   domain_nosub === "thisvid.com") {
 				videos_component = "embed";
 				addslash = "";
@@ -64451,7 +65122,14 @@ var $$IMU_EXPORT$$;
 
 				var find_flashvars_from_page = function(resp) {
 					let resptext = resp.responseText;
+
 					resptext = resptext.replace(/low_quality_for_uc == true\)\s*{\s*var flashvars[\s\S]+?}\s*else\s*{/, ""); // zbporn.com
+
+					if (!/var\s+flashvars\s*=/.test(resptext)) {
+						// jizzoncam.com
+						resptext = resptext.replace(/var\s+t[0-9a-f]{10}(\s*=\s*{\s*video_id:)/, "var flashvars$1");
+					}
+
 					var match = resptext.match(/var\s+flashvars\s*=\s*({[\s\S]+?})\s*;/);
 					if (!match) {
 						console_warn(cache_key, "Unable to find flashvars match", resp);
@@ -64463,8 +65141,8 @@ var $$IMU_EXPORT$$;
 					// https://tubedupe.com/contents/videos_screenshots/143000/143641/preview_embed_360p.mp4.jpg
 					// : encodeURIComponent('1')
 					var jsoned = match[1]
-						.replace(/adv_pre_vast(?:_alt)?:\s*'[^\\']+?'(?:\s*\+\s*[a-z_]+),/g, "") // theyarehuge.com, zbporn.com
-						.replace(/adv_pre_vast(?:_alt)?:\s*'[^\\']+?'\s*,/g, "") // thisvid.com
+						.replace(/adv_(?:pre|postpause)_vast(?:_alt)?:\s*'[^\\']+?'(?:\s*\+\s*[a-z_]+),/g, "") // theyarehuge.com, zbporn.com
+						.replace(/adv_(?:pre|postpause)_vast(?:_alt)?:\s*'[^\\']+?'\s*,/g, "") // thisvid.com
 						.replace(/([{,]\s*)([^"'\s:]+)\s*:/g, "$1\"$2\":")
 						.replace(/:\s*encodeURIComponent\(('[^']+')\)/g, ":$1")
 						.replace(/([^\\])\\'/g, "$1\\u0027")
@@ -67091,6 +67769,13 @@ var $$IMU_EXPORT$$;
 			// http://static.guide.supereva.it/guide/guida_hollywood/halle-berry-la-donna-nera-piu-sexy/thn_halleberrysx7.jpg
 			//   http://static.guide.supereva.it/guide/guida_hollywood/halle-berry-la-donna-nera-piu-sexy/halleberrysx7.jpg
 			return src.replace(/\/thn_([^/]*)$/, "/$1");
+		}
+
+		if (domain_nowww === "xzone.to") {
+			// thanks to anonymous for reporting:
+			// https://www.xzone.to/patero/k06201/images/thn_001.jpg
+			//   https://www.xzone.to/patero/k06201/images/001.jpg
+			return src.replace(/(\/images\/+)thn_([0-9]+\.)/, "$1$2");
 		}
 
 		if (domain_nowww === "apachan.net" ||
@@ -71040,7 +71725,7 @@ var $$IMU_EXPORT$$;
 			// https://endchan.net/.media/t_2fdd7a2250a106cec0e513dec3b30a83-imagepng
 			//   https://endchan.net/.media/2fdd7a2250a106cec0e513dec3b30a83-imagepng.png
 			domain_nowww === "endchan.net" ||
-			/:\/\/[^/]+\/+\.(?:media\/+t_[0-9a-f]{32,64}(?:-image[a-z]+)?|static\/+images\/+404-[0-9]+\.png)(?:[?#].*)?$/) {
+			/:\/\/[^/]+\/+\.(?:media\/+t_[0-9a-f]{32,64}(?:-image[a-z]+)?|static\/+images\/+404-[0-9]+\.png)(?:[?#].*)?$/.test(src)) {
 			// https://kohlchan.net/.static/images/404-200.png
 			if (/\/\.static\/+images\/+404-/.test(src))
 				return {
@@ -71056,9 +71741,11 @@ var $$IMU_EXPORT$$;
 			if (newsrc !== src)
 				return newsrc;
 
-			newsrc = src.replace(/\/\.media\/+t_([0-9a-f]{20,})(?:[?#].*)?$/, "/.media/$1.jpg");
+			newsrc = src.replace(/\/\.media\/+t_([0-9a-f]{20,})(?:[?#].*)?$/, "/.media/$1");
 			if (newsrc !== src) {
-				return add_full_extensions2(newsrc, {extensions: ["jpg", "png", "mp4", "gif"]});
+				let urls = add_full_extensions2(newsrc + ".jpg", {extensions: ["jpg", "png", "mp4", "webm", "gif"]});
+				urls.unshift(newsrc);
+				return urls;
 			}
 		}
 
@@ -73282,6 +73969,13 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/(?:crop|resize)\/+[0-9]+x[0-9]+\/+/, "/images/");
 		}
 
+		if (domain === "cam4-images.xcdnpro.com") {
+			// thanks to anonymous for reporting:
+			// https://cam4-images.xcdnpro.com/resize/400x300/8dfdd4ee-2699-4883-ba8d-716c88f49bcb.jpg
+			//   https://cam4-images.xcdnpro.com/8dfdd4ee-2699-4883-ba8d-716c88f49bcb.jpg
+			return src.replace(/\/resize\/+[0-9]+x[0-9]+\/+/, "/");
+		}
+
 		if (domain === "icdn.ensonhaber.com") {
 			// thanks to anonymous for reporting:
 			// https://icdn.ensonhaber.com/crop/114x65-90/resimler/diger/kok/2023/09/04/pasinyanin-rusya-pismanligi-stratejik-bir-hataydi_50dfb854.jpg
@@ -74203,6 +74897,118 @@ var $$IMU_EXPORT$$;
 			return src.replace(/(\/[^/]*-[0-9a-f]+)_[a-z_]+(\.[^/.]*)(?:[?#].*)?$/, "$1$2");
 		}
 
+		if (domain_nowww === "spankbang.com") {
+			let get_streamdata = function(streamkey, cb) {
+				api_query("spankbang_streamdata:" + streamkey, {
+					method: "POST",
+					url: "https://spankbang.com/api/videos/stream",
+					data: "id=" + streamkey + "&data=0",
+					headers: {
+						"Origin": "https://spankbang.com",
+						"Referer": "https://spankbang.com/", // add /.../video?
+						"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+						"X-Requested-With": "XMLHttpRequest"
+					},
+					json: true
+				}, cb, function(done, resp, cache_key) {
+					return done(resp, 6*60*60);
+				});
+			};
+
+			let find_largest_from_streamdata = function(streamdata) {
+				var sizes = [
+					"4k",
+					"1080p",
+					"720p",
+					"480p",
+					"360p",
+					"320p",
+					"240p",
+					"144p"
+				];
+
+				var largestsize = 100;
+
+				for (var key in streamdata) {
+					if (!streamdata[key] || streamdata[key].length === 0)
+						continue;
+
+					var ourindex = array_indexof(sizes, key);
+					if (ourindex >= 0 && ourindex < largestsize)
+						largestsize = ourindex;
+				}
+
+				if (largestsize < sizes.length) {
+					return streamdata[sizes[largestsize]][0];
+				}
+
+				return null;
+			};
+
+			let get_norm_sb_url = function(url) {
+				return url.replace(/.*\/([0-9]+-[0-9]+[a-z]+\.[^/.?]+)(?:[?#].*)?$/, "$1");
+			};
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9a-z]+)\/+video(?:\/+[^/]*)(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/${id}/video/",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/data-videoid=["'][0-9]+["']\s+data-streamkey=["']([^"']+)["']/);
+					if (!match) {
+						console_warn(cache_key, "Unable to find streamkey match from", resp);
+						return done(null, false);
+					}
+
+					let streamkey = match[1];
+
+					let caption = null;
+					match = resp.responseText.match(/"@type":\s*"VideoObject",\s*"name":\s*("[^"]+"),/);
+					if (match) {
+						caption = JSON_parse(match[1]);
+					}
+
+					let created_date = null;
+					match = resp.responseText.match(/"uploadDate":\s*("[^"]+"),/);
+					if (match) {
+						created_date = new Date(JSON_parse(match[1])).getTime();
+					}
+
+					get_streamdata(streamkey, function(streamdata) {
+						if (!streamdata)
+							return done(null, false);
+
+						let largest = find_largest_from_streamdata(streamdata);
+						if (!largest) {
+							console_warn(cache_key, "Unable to find video URL from", {resp, streamkey, streamdata});
+							return done(null, false);
+						}
+
+						let urls = [];
+
+						let imuhash = common_functions["parse_imu_hash"](src);
+						if (imuhash && imuhash.orig) {
+							if (get_norm_sb_url(imuhash.orig) === get_norm_sb_url(largest))
+								largest = imuhash.orig;
+						}
+
+						urls.push({
+							url: largest,
+							is_private: true,
+							extra: {
+								page: resp.finalUrl,
+								caption,
+								created_date
+							},
+							video: true
+						});
+
+						return done(urls, 60*60);
+					});
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
 		if (domain_nosub === "spankbang.com" &&
 			domain.match(/^cdnthumb[0-9]*\./)) {
 			// https://cdnthumb4.spankbang.com/200/4/4/4471728-t1.jpg
@@ -74227,141 +75033,30 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
-		if ((domain_nosub === "sb-cd.com" && /^tbv?[0-9]*\./.test(domain)) ||
+		if (domain === "tbi.sb-cd.com") {
+			// https://tbi.sb-cd.com/t/3906881/3/9/w:500/t2-enh/body.jpg
+			//   https://tbi.sb-cd.com/t/3906881/3/9/t2-enh/body.jpg
+			// -enh = enhanced, but is needed to remove /w:500/ and returns the original unenhanced image
+			newsrc = src.replace(/\/w:[0-9]+\/+(t[0-9]+)(?:-[a-z]+)?\/+/, "/$1-enh/");
+			if (newsrc !== src)
+				return newsrc;
+		}
+
+		if ((domain_nosub === "sb-cd.com" && /^(?:tb[iv]?[0-9]*|vdownload(?:-[0-9]+)?)\./.test(domain)) ||
 			(domain_nosub === "spankbang.com" && /^vcdn-[^-]+(?:-[0-9]+)?\./.test(domain))) {
 			match = src.match(/:\/\/[^/]+\/+(?:w:[0-9]+\/+)?[0-9]\/+[0-9]\/+([0-9]+)-/);
+			if (!match)
+				match = src.match(/:\/\/[^/]+\/+t\/+([0-9]{2,})\/+[0-9]\/+[0-9]\/+/);
+
 			var vidid_numeric, vidid;
 			if (match) {
 				vidid_numeric = parseInt(match[1]);
 				vidid = vidid_numeric.toString(36);
 
-				obj = {
-					url: src,
-					extra: {page: "https://spankbang.com/" + vidid + "/video/"}
-				};
-			}
-
-			if (options.cb && options.do_request && match) {
-				var get_streamkey_for_vidid = function(vidid, cb) {
-					var cache_key = "spankbang_streamkey:" + vidid;
-					api_cache.fetch(cache_key, cb, function(done) {
-						options.do_request({
-							method: "GET",
-							url: "https://spankbang.com/" + vidid + "/video/",
-							onload: function(resp) {
-								if (resp.readyState !== 4)
-									return;
-
-								if (resp.status !== 200) {
-									console_error(resp);
-									return done(null, false);
-								}
-
-								match = resp.responseText.match(/data-videoid=["'][0-9]+["']\s+data-streamkey=["']([^"']+)["']/);
-								if (match) {
-									return done(match[1], 24*60*60);
-								} else {
-									console_warn("Unable to find match", resp);
-									return done(null, false);
-								}
-							}
-						});
-					});
-				};
-
-				var get_streamdata = function(streamkey, cb) {
-					var cache_key = "spankbang_streamdata:" + streamkey;
-					api_cache.fetch(cache_key, cb, function(done) {
-						options.do_request({
-							method: "POST",
-							url: "https://spankbang.com/api/videos/stream",
-							data: "id=" + streamkey + "&data=0",
-							headers: {
-								"Origin": "https://spankbang.com",
-								"Referer": "https://spankbang.com/", // add /.../video?
-								"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-								"X-Requested-With": "XMLHttpRequest"
-							},
-							onload: function(resp) {
-								if (resp.readyState !== 4)
-									return;
-
-								if (resp.status !== 200) {
-									console_error(resp);
-									return done(null, false);
-								}
-
-								try {
-									var response = JSON_parse(resp.responseText);
-									return done(response, 6*60*60);
-								} catch (e) {
-									console_error(e, resp);
-									return done(null, false);
-								}
-							}
-						});
-					});
-				};
-
-				var find_largest_from_streamdata = function(streamdata) {
-					var sizes = [
-						"4k",
-						"1080p",
-						"720p",
-						"480p",
-						"360p",
-						"320p",
-						"240p",
-						"144p"
-					];
-
-					var largestsize = 100;
-
-					for (var key in streamdata) {
-						if (!streamdata[key] || streamdata[key].length === 0)
-							continue;
-
-						var ourindex = array_indexof(sizes, key);
-						if (ourindex >= 0 && ourindex < largestsize)
-							largestsize = ourindex;
-					}
-
-					if (largestsize < sizes.length) {
-						return streamdata[sizes[largestsize]][0];
-					}
-
-					return null;
-				};
-
-				var get_norm_sb_url = function(url) {
-					return url.replace(/.*\/([0-9]+-[0-9]+[a-z]+\.[^/.?]+)(?:[?#].*)?$/, "$1");
-				};
-
-				get_streamkey_for_vidid(vidid, function(streamkey) {
-					// function too large for analysis
-					// @ts-expect-error
-					if (!streamkey)
-						return options.cb(obj);
-
-					get_streamdata(streamkey, function(streamdata) {
-						if (!streamdata)
-							return options.cb(obj);
-
-						var largest = find_largest_from_streamdata(streamdata);
-
-						if (get_norm_sb_url(largest) !== get_norm_sb_url(src)) {
-							obj.url = largest;
-						}
-
-						options.cb(obj);
-					});
-				});
-
 				return {
-					waiting: true
+					url: "https://spankbang.com/" + vidid + "/video/#imu-orig=" + src,
+					is_pagelink: true
 				};
-			} else if (match) {
-				return options.cb(obj);
 			}
 		}
 
@@ -74906,7 +75601,11 @@ var $$IMU_EXPORT$$;
 							   "://cdn2$1original$2");
 		}
 
-		if (domain_nowww === "themepack.me") {
+		if (domain_nowww === "themepack.me" ||
+			// thanks to anonymous for reporting:
+			// https://motionbgs.com/i/c/364x205/media/5096/kakashi-hatake-naruto.jpg
+			//   https://motionbgs.com/media/5096/kakashi-hatake-naruto.jpg
+			domain_nowww === "motionbgs.com") {
 			// https://themepack.me/i/c/749x468/media/g/379/elisha-cuthbert-theme-4.jpg
 			//   https://themepack.me/media/g/379/elisha-cuthbert-theme-4.jpg
 			return src.replace(/\/i\/+c\/+[0-9]+x[0-9]+\/+media\/+/, "/media/");
@@ -76989,10 +77688,13 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/fanfics\/+thumbs\/+/, "/fanfics/historias/");
 		}
 
-		if (domain === "pic.homepornbay.com") {
+		if (domain_nosub === "homepornbay.com") {
 			// https://pic.homepornbay.com/c/a/1/24/45974/2046024s.jpg
 			//   https://pic.homepornbay.com/c/a/1/24/45974/2046024.jpg
-			return src.replace(/(\/[0-9]+)s(\.[^/.]*)(?:[?#].*)?$/, "$1$2");
+			// thanks to vscum on github: https://github.com/qsniyg/maxurl/issues/1373
+			// https://homepornbay.com/c/a/1/24/59161/3086207s.jpg
+			//   https://homepornbay.com/c/a/1/24/59161/3086207.jpg
+			return src.replace(/(\/[0-9]+\/+[0-9]+\/+[0-9]+\/+[0-9]+)s(\.[^/.]*)(?:[?#].*)?$/, "$1$2");
 		}
 
 		if (domain === "cdn.funpic.us") {
@@ -80318,7 +81020,9 @@ var $$IMU_EXPORT$$;
 		if (domain_nowww === "meduza.io") {
 			// https://meduza.io/image/attachments/images/003/958/556/small/x-iRkiJpTH_GrOTCnuH5BA.jpg
 			//   https://meduza.io/image/attachments/images/003/958/556/original/x-iRkiJpTH_GrOTCnuH5BA.jpg
-			return src.replace(/(\/images\/+(?:[0-9]{3}\/+){3})[a-z]+\/+/, "$1original/");
+			newsrc = src.replace(/(\/images\/+(?:[0-9]{3}\/+){3})[a-z]+\/+/, "$1original/");
+			if (newsrc !== src)
+				return newsrc;
 		}
 
 		if (domain_nowww === "popgun.ru") {
@@ -81725,7 +82429,41 @@ var $$IMU_EXPORT$$;
 			// https://d26oc3sg82pgk3.cloudfront.net/files/media/edit/image/30891/article_full@3x.jpg -- 2370x1350, upscaled
 			//   https://d26oc3sg82pgk3.cloudfront.net/files/media/edit/image/30891/original.jpg -- 1200x800
 			// http://d26oc3sg82pgk3.cloudfront.net/files/media/edit/image/30399/original.jpg -- 4210x4281
-			return src.replace(/(\/image\/+[0-9]+\/+)[^/.]*(\.[^/.]*)(?:[?#].*)?$/, "$1original$2")
+			newsrc = src.replace(/(\/image\/+[0-9]+\/+)[^/.]*(\.[^/.]*)(?:[?#].*)?$/, "$1original$2")
+			if (newsrc !== src)
+				return newsrc;
+
+			// https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/zinnia/2017/08/22/0824-felicity-jones_cred_shutterstock-featureflash-photo-agency.jpg.644x420_q100.jpg
+			//   https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/zinnia/2017/08/22/0824-felicity-jones_cred_shutterstock-featureflash-photo-agency.jpg
+			newsrc = src.replace(/(\/files\/+media\/+uploads\/+[^/]+.*\.([a-z]+))\.[^/.]+\.\2(?:[?#].*)?$/, "$1");
+			if (newsrc !== src)
+				return newsrc;
+
+			// https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/03cfbe59-88cb-41de-abc6-92056eb2b454-c3F1YXJlX3RodW1iLW4tbi0wLTAtMC0wLTA.JPG
+			//   https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/03cfbe59-88cb-41de-abc6-92056eb2b454.JPG
+			// https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/8b0e3875-eb3a-43ba-9d5d-ebfe53abacf4-bWFpbi1uLW4tMC0wLTAtMC0w.JPG
+			//   https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/8b0e3875-eb3a-43ba-9d5d-ebfe53abacf4.JPG
+			// https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/163ddcc7-a73c-4be8-9440-3b616583a737-c3F1YXJlX3RodW1iLW4tbi0wLTAtMC0wLTA.jpg
+			//   https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/163ddcc7-a73c-4be8-9440-3b616583a737.jpg -- 4000x6000, forces download
+			newsrc = src.replace(/(\/uploads\/+casting_call\/+[-0-9a-f]+-[0-9a-f]{12})-[0-9a-zA-Z]{20,}\./, "$1.");
+			if (newsrc !== src)
+				return newsrc;
+
+			// https://d26oc3sg82pgk3.cloudfront.net/transcoded/cdcd0933-0234-4a54-b71c-fae8ec0eaa4a/hls-playlist.m3u8
+			if (/\.m3u8(?:[?#].*)?$/.test(src))
+				return {
+					url: src,
+					video: "hls"
+				};
+
+			// https://d26oc3sg82pgk3.cloudfront.net/transcoded/cdcd0933-0234-4a54-b71c-fae8ec0eaa4a/thumbs/thumb.0000001.jpg
+			//   https://d26oc3sg82pgk3.cloudfront.net/transcoded/cdcd0933-0234-4a54-b71c-fae8ec0eaa4a/hls-playlist.m3u8
+			newsrc = src.replace(/(\/transcoded\/+[-0-9a-f]{20,}\/+)thumbs\/.*/, "$1hls-playlist.m3u8");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					video: "hls"
+				};
 		}
 
 		if (domain_nowww === "glow.pl") {
@@ -82097,6 +82835,15 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain_nosub === "ppstatic.pl") {
+			// thanks to Velocidensity on github for reporting: https://github.com/qsniyg/maxurl/issues/1396
+			// https://d-pa.ppstatic.pl/frames/pa-def/ae/f8/il20250117_889278375_large.jpg
+			//   https://d-pa.ppstatic.pl/frames/pa-def/ae/f8/il20250117_889278375_original.jpg
+			// https://d-pa.ppstatic.pl/frames/pa-def/2b/e1/il20250118_889525635_xlarge.jpg
+			//   https://d-pa.ppstatic.pl/frames/pa-def/2b/e1/il20250118_889525635_original.jpg
+			newsrc = src.replace(/(\/il[0-9]+_[0-9]+)_[a-z]+\./, "$1_original.");
+			if (newsrc !== src)
+				return newsrc;
+
 			// https://d-pt.ppstatic.pl/kadry/k/r/1/ec/34/5cfe1c641cc1a_o,size,445x270,q,71,h,b9f944.jpg
 			//   https://d-pt.ppstatic.pl/kadry/k/r/1/ec/34/5cfe1c641cc1a_o.jpg -- 1920x1080
 			return src.replace(/(\/[^/.,]*)(?:,(?:size|[whq]),[^/,.]*){1,}(\.[^/.]*)(?:[?#].*)?$/, "$1$2");
@@ -82665,6 +83412,10 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain_nosub === "kgimg.com" ||
+			// thanks to anonymous for reporting:
+			// https://imge.kugou.com/stdmusic/480/20201111/20201111182807516238.jpg
+			//   https://imge.kugou.com/stdmusic/20201111/20201111182807516238.jpg
+			domain === "imge.kugou.com" ||
 			// thanks to tathastu871 on discord:
 			// https://imgessl.kugou.com/custom/150/20230923/20230923205634287593.jpg
 			//   https://imgessl.kugou.com/custom/20230923/20230923205634287593.jpg
@@ -82728,8 +83479,11 @@ var $$IMU_EXPORT$$;
 			//   https://media1.jpc.de/image/w999999/0/0602577649608.jpg
 			// https://media1.jpc.de/image/h90/front/0/0825396079627.jpg
 			//   https://media1.jpc.de/image/w999999/0/0825396079627.jpg -- 1500x1500
+			// thanks to James Joint on discord
+			// https://media1.jpc.de/image/w2400/rear/0/0075679919243.jpg
+			//   https://media1.jpc.de/image/w999999/rear/0/0075679919243.jpg
 			return {
-				url: src.replace(/\/image\/+[wh][0-9]+\/+(?:[a-z]+\/+)?/, "/image/w999999/"),
+				url: src.replace(/\/image\/+[wh][0-9]+\/+(?:front\/+)?/, "/image/w999999/"),
 				can_head: false // 0
 			};
 		}
@@ -85320,8 +86074,15 @@ var $$IMU_EXPORT$$;
 		if (domain_nosub === "gaanacdn.com" && /^a[0-9]*\./.test(domain)) {
 			// https://a10.gaanacdn.com/gn_img/artists/9MAWe97WyJ/MAWerpqJby/size_s_1558423579.jpg
 			//   https://a10.gaanacdn.com/gn_img/artists/9MAWe97WyJ/MAWerpqJby/size_l_1558423579.jpg -- 400x400
+			//   https://a10.gaanacdn.com/gn_img/artists/9MAWe97WyJ/MAWerpqJby/size_xl_1558423579.jpg -- 800x800
 			// https://a10.gaanacdn.com/images/artists/58/831358/crop_480x480_831358.jpg
-			return src.replace(/(\/artists\/+[^/]*\/+[^/]*\/+size_)[sm]_/, "$1l_");
+			// thanks to anonymous for reporting:
+			// https://a10.gaanacdn.com/gn_img/albums/jBr3gybR1m/r3geldGZbR/size_l_1717509899.jpg
+			//   https://a10.gaanacdn.com/gn_img/albums/jBr3gybR1m/r3geldGZbR/size_xxl_1717509899.jpg -- 1200x1200
+			return src
+				.replace(/(\/(?:artists|albums)\/+[^/]*\/+[^/]*\/+size_)xl_/, "$1xxl_")
+				.replace(/(\/(?:artists|albums)\/+[^/]*\/+[^/]*\/+size_)l_/, "$1xl_")
+				.replace(/(\/(?:artists|albums)\/+[^/]*\/+[^/]*\/+size_)[sm]_/, "$1l_");
 		}
 
 		if (domain_nosub === "baidu-img.cn" && /^cdn[0-9]*\./.test(domain)) {
@@ -89105,6 +89866,24 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/thumbs\/+(?:[0-9]+x[0-9]+|f[0-9]+)\/+/, "/thumbs/");
 		}
 
+		if (domain === "images1.vinted.net" && host_domain_nowww === "vinted.co.uk") {
+			// thanks to anonymous for reporting:
+			match = src.match(/\/t\/+([0-9]+_[0-9a-f]+_[^_/?#]+)\//);
+			if (match) {
+				try {
+					let next = document.querySelector("script#__NEXT_DATA__");
+					let fullsize_matches = match_all(next.innerHTML, /"(https?:\/\/images1\.vinted\.net\/+tc\/+[^"]+)"/);
+					for (let fsmatch of fullsize_matches) {
+						if (string_indexof(fsmatch[1], "/" + match[1] + "/") >= 0) {
+							return JSON_parse('"' + fsmatch[1] + '"');
+						}
+					}
+				} catch (e) {
+					console_error(e);
+				}
+			}
+		}
+
 		if (domain_nowww === "celebnakedness.com") {
 			// http://www.celebnakedness.com/gallery4/tourgallery/thumbnails/Anne_Hathaway__-_Valentines_Day287.jpg
 			//   http://www.celebnakedness.com/gallery4/tourgallery/Anne_Hathaway__-_Valentines_Day287.jpg
@@ -90934,7 +91713,18 @@ var $$IMU_EXPORT$$;
 			//   https://www.beicon.ru/uploads/215268a418f8f2077936de06329b307f30ab.jpg
 			// https://www.beicon.ru/uploads/1570709393_1_1_352_exact.jpg
 			//   https://www.beicon.ru/uploads/1570709393.jpg
-			return src.replace(/(\/uploads\/+(?:[0-9a-f]{20,}|[0-9]{10,}))_(?:16_9_[0-9]+|[0-9]+_[0-9]+_[0-9]+_exact)(\.[^/.]*)(?:[?#].*)?$/, "$1$2");
+			// thanks to anonymous for reporting:
+			// https://www.beicon.ru/uploads/1735161670_16_9_1040_resized.jpg
+			//   https://www.beicon.ru/uploads/1735161670.jpg
+			// https://www.beicon.ru/uploads/galleries/11429/77e51983c4c68640a0271321786cb5a7_9_16_352_exact.jpg
+			//   https://www.beicon.ru/uploads/galleries/11429/77e51983c4c68640a0271321786cb5a7.jpg
+			// https://www.beicon.ru/uploads/1734956965_mini_resized.jpeg
+			//   https://www.beicon.ru/uploads/1734956965.jpeg
+			// https://www.beicon.ru/uploads/1732797452_16_9_1040_resized.jpg
+			//   https://www.beicon.ru/uploads/1732797452.jpg
+			// other:
+			// https://www.beicon.ru/uploads/galleries/729/72935885919f9c8ae526021628ba0295e9e.jpg -- 140x140
+			return src.replace(/(\/uploads\/+(?:galleries\/+[0-9]+\/+)?(?:[0-9a-f]{20,}|[0-9]{10,}))(?:_16_9_[0-9]+|_[0-9]+_[0-9]+_[0-9]+)?(?:_(?:exact|(?:mini_)?resized))?(\.[^/.]*)(?:[?#].*)?$/, "$1$2");
 		}
 
 		if (domain_nowww === "bigmenu.com.br") {
@@ -91509,6 +92299,16 @@ var $$IMU_EXPORT$$;
 				.replace(/(\/shirt_pic\/+(?:[0-9]+\/+){4})[0-9]+x[0-9]+\/+([^/]+\.[^/.]+)(?:[?#].*)?$/, "$1999999x999999/$2");
 		}
 
+		if (domain_nowww === "getpodpage.com") {
+			// thanks to anonymous for reporting:
+			// https://getpodpage.com/image_transform_gate_v3/CP56dWRlK6hZPxUgCJpYW-anJOJieXPnnQWvKNafWhg=/?image_url=https%3A%2F%2Fmegaphone.imgix.net%2Fpodcasts%2F89238dc0-c87c-11eb-bd95-67e3317faee6%2Fimage%2FEP_46_cover_art_without_title.jpg%3Fixlib%3Drails-2.1.2%26max-w%3D3000%26max-h%3D3000%26fit%3Dcrop%26auto%3Dformat%2Ccompress&w=1200&h=630&fill=blur
+			//   https://megaphone.imgix.net/podcasts/89238dc0-c87c-11eb-bd95-67e3317faee6/image/EP_46_cover_art_without_title.jpg
+			match = src.match(/\/image_transform_gate_v3\/+[^/]+\/+\?(?:.*&)?image_url=([^&]+)/, "$1");
+			if (match) {
+				return decodeuri_ifneeded(match[1]);
+			}
+		}
+
 		if (domain_nosub === "lvme.me" && /^[a-z]\./.test(domain)) {
 			// http://e.lvme.me/j4p3om9_2.jpg
 			//   http://e.lvme.me/j4p3om9.jpg
@@ -91852,8 +92652,12 @@ var $$IMU_EXPORT$$;
 				});
 			};
 
+			let get_gfycat_access_token_cache_key = function(site) {
+				return site + ":access_token_v2";
+			};
+
 			let get_gfycat_temp_token_v2 = function(site, cb) {
-				var cache_key = site + ":access_token_v2";
+				var cache_key = get_gfycat_access_token_cache_key(site);
 
 				get_redgifs_token_localstorage(function(token) {
 					if (token&&false)
@@ -91894,6 +92698,7 @@ var $$IMU_EXPORT$$;
 						url: "https://api." + site + ".com/v2/gifs/" + id_lower + "?views=yes&users=yes&niches=yes",
 						method: "GET",
 						imu_mode: "xhr",
+						non200_ok: true,
 						headers: {
 							Origin: "https://www." + site + ".com",
 							//Priority: "u=1, i",
@@ -91909,6 +92714,14 @@ var $$IMU_EXPORT$$;
 						},
 						json: true
 					}, cb, function(done, json, cache_key) {
+						try {
+							if (json.error.code === "Unauthorized") {
+								api_cache.remove(get_gfycat_access_token_cache_key(site));
+								console_error(cache_key, "Unauthorized, try again", json);
+								return done(null, false);
+							}
+						} catch (e) {}
+
 						if (!json || !json.gif) {
 							console_error(cache_key, "Unable to find json from", json);
 							return done(null, false);
@@ -92024,11 +92837,13 @@ var $$IMU_EXPORT$$;
 
 		if (host_domain_nowww === "redgifs.com" && options.element && !src) {
 			if (options.element.tagName === "VIDEO") {
-				let parent = common_functions["get_parent_el_matching"](options.element, x => (x.classList.contains("Video") || x.classList.contains("GifPreview")));
+				let parent = common_functions["get_parent_el_matching"](options.element, x => (x.classList.contains("Video") || x.classList.contains("GifPreview") || x.classList.contains("PlayerV2")));
 				if (parent) {
 					let poster = parent.querySelector("img.Video-Poster");
 					if (!poster)
 						poster = parent.querySelector("img.Player-Poster");
+					if (!poster)
+						poster = parent.querySelector("img.PlayerV2-Poster");
 					if (poster) {
 						return poster.src;
 					}
@@ -92043,7 +92858,7 @@ var $$IMU_EXPORT$$;
 			};
 		}
 
-		if ((domain_nosub === "gfycat.com" || domain_nosub === "redgifs.com") && (/^(?:th(?:umbs|cf)[0-9]*|zippy|giant|files)\./.test(domain))) {
+		if ((domain_nosub === "gfycat.com" || domain_nosub === "redgifs.com") && (/^(?:th(?:umbs|cf)[0-9]*|zippy|giant|files|media)\./.test(domain))) {
 			match = src.match(/^[a-z]+:\/\/[^/]+\/+([^-./]+)[-.]/);
 			if (match) {
 				var watch = "/";
@@ -92077,6 +92892,16 @@ var $$IMU_EXPORT$$;
 			}
 
 			return obj;
+		}
+
+		if (domain_nosub === "redgifs.com" && /^v[0-9]*\./.test(domain)) {
+			// thanks to anonymous for reporting:
+			match = src.match(/:\/\/[^/]+\/+watch\/+([^/?#]+)(?:[?#].*)?$/);
+			if (match)
+				return {
+					url: "https://www.redgifs.com/watch/" + match[1],
+					is_pagelink: true
+				};
 		}
 
 		if (amazon_container === "blurbprod1000") {
@@ -92723,6 +93548,14 @@ var $$IMU_EXPORT$$;
 			//   http://prodimage.images-bn.com/pimages/0786936850291_p0_v1_s1200x630.jpg -- 352x496
 			newsrc = src.replace(/_s[0-9]{3}x[0-9]{3}\./, "_s1200x630.");
 			if (newsrc !== src) return newsrc;
+
+			// thanks to Froktime on github: https://github.com/qsniyg/maxurl/issues/1384
+			// https://prodimage.images-bn.com/pimages/0786936850291_p0_v1_s118x184.jpg
+			//   https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D%2Cvalue%5B1%5D&set=key%5Bresolve.width%5D%2Cvalue%5B99999%5D&set=key%5Bresolve.height%5D%2Cvalue%5B99999%5D&set=key%5Bresolve.imageFit%5D%2Cvalue%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D%2Cvalue%5B0%5D&set=key%5Bresolve.format%5D%2Cvalue%5Bpng%5D&product=path%5B%2Fpimages%2F0786936850291_p0_v1%5D&call=url%5Bfile%3Acommon%2FdecodeProduct.chain%5D
+			match = src.match(/:\/\/[^/]+\/+(pimages\/+[0-9]+_p[0-9]+_v[0-9]+)(?:_s[0-9]+x[0-9]+)?(?:\.[a-z]+)?(?:[?#].*)?$/);
+			if (match) {
+				return "https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D%2Cvalue%5B1%5D&set=key%5Bresolve.width%5D%2Cvalue%5B99999%5D&set=key%5Bresolve.height%5D%2Cvalue%5B99999%5D&set=key%5Bresolve.imageFit%5D%2Cvalue%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D%2Cvalue%5B0%5D&set=key%5Bresolve.format%5D%2Cvalue%5Bpng%5D&product=path%5B%2F" + encodeURIComponent(match[1]) + "%5D&call=url%5Bfile%3Acommon%2FdecodeProduct.chain%5D";
+			}
 
 			// http://prodimage.images-bn.com/pimages/9780739052204.jpg
 			return {
@@ -94872,6 +95705,32 @@ var $$IMU_EXPORT$$;
 			}
 		}
 
+		if (domain === "images.sanoma-sndp.fi") {
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/270#issuecomment-2585390012
+			// https://images.sanoma-sndp.fi/b9fb6b475bd64f9a8d91569d3cc139ce.jpg/normal/978.webp
+			//   https://images.sanoma-sndp.fi/b9fb6b475bd64f9a8d91569d3cc139ce.jpg/normal/1920.jpg
+			// https://images.sanoma-sndp.fi/8e26de84b78a2fd4e10ee93c402f1aea.jpg/square/WIDTH.EXT
+			//   https://images.sanoma-sndp.fi/8e26de84b78a2fd4e10ee93c402f1aea.jpg/normal/WIDTH.EXT
+			//   https://images.sanoma-sndp.fi/8e26de84b78a2fd4e10ee93c402f1aea.jpg/normal/1920.jpg
+			// https://images.sanoma-sndp.fi/bb42e40ab206f6313599df99baa2f554/some/hs-default.jpg
+			//   https://images.sanoma-sndp.fi/bb42e40ab206f6313599df99baa2f554/normal/1920.jpg
+			// https://images.sanoma-sndp.fi/c7959358e78a7948641dc63ea6067307.gif/normal/978.gif -- 960x4730
+			//   https://images.sanoma-sndp.fi/c7959358e78a7948641dc63ea6067307.gif/normal/1920.gif -- 960x4730
+			// other:
+			// https://images.sanoma-sndp.fi/1809a4bf431b057f599428a9bf8291b7.svg.svg
+
+			newsrc = src
+				.replace(/\.jpg\.webp(?:[?#].*)?$/, ".jpg")
+				.replace(/\.webp(?:[?#].*)?$/, ".jpg");
+			if (newsrc !== src)
+				return newsrc;
+
+			return src
+				.replace(/\/normal\/+(?:[0-9]{3}|1[0-8][0-9]{2})(\.[a-z]+)(?:[?#].*)?$/, "/normal/1920$1")
+				.replace(/\/WIDTH\.EXT(?:[?#].*)?$/, "/1920.jpg")
+				.replace(/\/(?:square|some)\/+[^/.]+(\.[a-z]+)(?:[?#].*)?$/, "/normal/1920$1");
+		}
+
 		if (domain === "cdn.cdkeys.com" ||
 			// thanks to MinuteAd8502 on github: https://github.com/qsniyg/maxurl/issues/846
 			// https://media.sssports.com/630x630/media/catalog/product/1/9/192564613144_1.jpg
@@ -95818,7 +96677,8 @@ var $$IMU_EXPORT$$;
 			}
 		}
 
-		if (domain_nowww === "pixxxels.cc") {
+		if (domain_nowww === "pixxxels.cc" ||
+			domain_nowww === "postimg.cc") {
 			// https://pixxxels.cc/8jkzg5wM
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9a-zA-Z]+)(?:[?#].*)?$/,
@@ -96402,6 +97262,7 @@ var $$IMU_EXPORT$$;
 				.replace(/\/sizedimages\/+([^/]+\/+)[0-9]+\/+/, "/images/$1");
 		}
 
+		// https://github.com/lovell/sharp ?
 		if (domain === "d1iiivw74516uk.cloudfront.net" ||
 			// https://d27csu38upkiqd.cloudfront.net/eyJidWNrZXQiOiJmZGMtc2l0ZXB1YmxpYy1tZWRpYS1wcm9kIiwia2V5IjoidXBsb2Fkc1wvMjAyM1wvMDNcLzgwNDk0LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6Mjk2LCJmaXQiOiJjb3ZlciJ9LCJ0b0Zvcm1hdCI6IndlYnAifX0=
 			//   https://d27csu38upkiqd.cloudfront.net/eyJidWNrZXQiOiJmZGMtc2l0ZXB1YmxpYy1tZWRpYS1wcm9kIiwia2V5IjoidXBsb2Fkcy8yMDIzLzAzLzgwNDk0LmpwZyJ9
@@ -96422,6 +97283,24 @@ var $$IMU_EXPORT$$;
 			// atob:
 			//   = {"bucket":"gamerch-img-contents","key":"wiki\/3823\/entry\/1647314096.jpg","edits":{"webp":{"quality":85},"toFormat":"webp","resize":{"width":200,"fit":"cover"}}}
 			domain === "cdn.gamerch.com" ||
+			// thanks to Froktime on github: https://github.com/qsniyg/maxurl/issues/1382
+			// https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5Ijoic3RvcnkvNGRjNWQzMjItZDRhMy00NGY3LWIwZmItNDhjZTFiNGVkMDk2LzMyMmIzMzlkLTc3YmEtNGJhZS1iYWI1LWFhMjcwNjE5MWJhZi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyNDAsIndpdGhvdXRFbmxhcmdlbWVudCI6dHJ1ZX19fQ==
+			//   https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5Ijoic3RvcnkvNGRjNWQzMjItZDRhMy00NGY3LWIwZmItNDhjZTFiNGVkMDk2LzMyMmIzMzlkLTc3YmEtNGJhZS1iYWI1LWFhMjcwNjE5MWJhZi5qcGcifQ==
+			//   https://img.tumblbug.com/story/4dc5d322-d4a3-44f7-b0fb-48ce1b4ed096/322b339d-77ba-4bae-bab5-aa2706191baf.jpg
+			// atob:
+			//   = {"bucket":"tumblbug-img-assets","key":"story/4dc5d322-d4a3-44f7-b0fb-48ce1b4ed096/322b339d-77ba-4bae-bab5-aa2706191baf.jpg","edits":{"resize":{"width":1240,"withoutEnlargement":true}}}
+			domain === "img.tumblbug.com" ||
+			// thanks to anonymous for reporting:
+			// https://d193frjqb908ar.cloudfront.net/eyJidWNrZXQiOiJtaWxlc3BsaXQiLCJrZXkiOiJwaG90b3NcLzYyODg5XC9ub3JtYWxcLzQwOTQ5ODE1IiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjozMDAsImZpdCI6ImNvdmVyIiwicG9zaXRpb24iOiJjZW50ZXIiLCJoZWlnaHQiOjE2OX19fQ==?Expires=...
+			//   https://milesplit.s3.amazonaws.com/photos/62889/normal/40949815
+			// atob:
+			//   = {"bucket":"milesplit","key":"photos\/62889\/normal\/40949815","edits":{"resize":{"width":300,"fit":"cover","position":"center","height":169}}}
+			// other:
+			// https://d193frjqb908ar.cloudfront.net/eyJidWNrZXQiOiJmaWxlcy5taWxlc3BsaXQudXMiLCJrZXkiOiJhcnRpY2xlc1wvMzUwMDIzXC9pbWFnZXNcL2NvdmVyLTE3MjM4Mzg2MzMucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyMDAsImZpdCI6ImNvdmVyIiwicG9zaXRpb24iOiJjZW50ZXIiLCJoZWlnaHQiOjExM319fQ==?Expires=...
+			//   https://milesplit.s3.amazonaws.com/articles/350023/images/cover-1723838633.png -- 403
+			// atob:
+			//   = {"bucket":"files.milesplit.us","key":"articles\\/350023\\/images\\/cover-1723838633.png","edits":{"resize":{"width":200,"fit":"cover","position":"center","height":113}}}
+			domain === "d193frjqb908ar.cloudfront.net" ||
 			// thanks to anonymous for reporting:
 			// https://images.ams-prd.blv.cloud/eyJidWNrZXQiOiJpbWFnZXMtcHJkLTFvNHV6OXpieHd6cDF1Ym0iLCJrZXkiOiJkYTkwNjE5Yy0yOGVkLTRjMDYtOTkzNi03Y2EzNGE1NjI1MzQiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjM2MCwiaGVpZ2h0IjozNjB9fX0=
 			//   https://images.ams-prd.blv.cloud/eyJidWNrZXQiOiJpbWFnZXMtcHJkLTFvNHV6OXpieHd6cDF1Ym0iLCJrZXkiOiJkYTkwNjE5Yy0yOGVkLTRjMDYtOTkzNi03Y2EzNGE1NjI1MzQifQ==
@@ -96435,7 +97314,10 @@ var $$IMU_EXPORT$$;
 			match = src.match(/^([a-z]+:\/\/[^/]+\/+(?:resize\/+)?)([^-_/.]{20,})(?:[?#].*)?$/);
 			if (match) {
 				let orig_map = {
-					"cdn.gamerch.com": "https://cdn.gamerch.com/contents/"
+					"cdn.gamerch.com/gamerch-img-contents": "https://cdn.gamerch.com/contents/",
+					"img.tumblbug.com/tumblbug-img-assets": "https://img.tumblbug.com/",
+					"d193frjqb908ar.cloudfront.net/milesplit": "https://milesplit.s3.amazonaws.com/"
+					//"d193frjqb908ar.cloudfront.net/files.milesplit.us": ""
 				};
 
 				try {
@@ -96447,17 +97329,27 @@ var $$IMU_EXPORT$$;
 
 					let urls = [];
 
-					if (domain in orig_map) {
-						urls.push(orig_map[domain] + json.key);
+					let domainbucket = domain + "/" + (json.bucket||"");
+					if (domainbucket in orig_map) {
+						urls.push(orig_map[domainbucket] + json.key);
 					}
 
-					urls.push(host + base64_encode(JSON_stringify(json)));
+					if (!/[?&]Signature=/i.test(src))
+						urls.push(host + base64_encode(JSON_stringify(json)));
 
-					return urls;
+					if (urls.length > 0)
+						return urls;
 				} catch (e) {
 					console_error(e);
 				}
 			}
+		}
+
+		if (amazon_container === "milesplit") {
+			// thanks to anonymous for reporting:
+			// https://milesplit.s3.amazonaws.com/photos/62889/normal/40949815
+			//   https://milesplit.s3.amazonaws.com/photos/62889/original/40949815
+			return src.replace(/(\/photos\/+[0-9]+\/+)normal\/+/, "$1original/");
 		}
 
 		if (domain === "imagery.zoogletools.com" ||
@@ -99872,7 +100764,10 @@ var $$IMU_EXPORT$$;
 		if (domain_nowww === "dood.to" ||
 			domain_nowww === "doods.pro" ||
 			domain_nowww === "ds2play.com" ||
-			domain_nowww === "do0od.com") {
+			domain_nowww === "do0od.com" ||
+			domain_nowww === "dood.la" ||
+			domain_nowww === "dood.work" ||
+			domain_nowww === "doodstream.com") {
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+[de]\/+([0-9a-z]{10,})\/*(?:[?#].*)?$/,
 				query_for_id: function(id) {
@@ -99903,27 +100798,38 @@ var $$IMU_EXPORT$$;
 						token = token[1];
 					}
 
-					var baseobj = {
+					var baseobj:BigImageInfoSObject = {
 						extra: {}
 					};
 
 					var title = get_meta(resp.responseText, "og:title");
 					if (title) {
 						baseobj.extra.caption = title;
+					} else {
+						let titlematch = resp.responseText.match(/<title>([^<]*?)\s*- DoodStream<\/title>/);
+						if (titlematch) {
+							baseobj.extra.caption = decode_entities(titlematch[1]);
+						}
 					}
 
 					baseobj.extra.page = resp.finalUrl;
+
+					let imgurl = get_meta(resp.responseText, "og:image");
 
 					var md5_url = urljoin(resp.finalUrl, match[1], true);
 					var get_videourl_from_md5url = function(md5url, cb) {
 						api_query("dood.to_md5url:" + md5url, {
 							url: md5url,
 							headers: {
+								"Accept": "*/*",
 								Referer: resp.finalUrl,
-								"x-requested-with": "XMLHttpRequest"
+								"X-Requested-With": "XMLHttpRequest",
+								"Sec-Fetch-Dest": "empty",
+								"Sec-Fetch-Mode": "cors",
+								"Sec-Fetch-Site": "same-origin"
 							}
 						}, cb, function(done, resp, cache_key) {
-							if (!resp.responseText.match(/^(https?:\/\/.*~)$/)) {
+							if (!resp.responseText.match(/^(https?:\/\/.*)$/)) {
 								console_error(cache_key, "Invalid URL for", resp);
 								return done(null, false);
 							}
@@ -99944,11 +100850,11 @@ var $$IMU_EXPORT$$;
 
 						vidurl += "?token=" + token + "&expiry=" + Date.now();
 
-						return done({
+						let vidobj:BigImageInfoSObject = {
 							url: vidurl,
 							extra: baseobj.extra,
 							headers: {
-								Referer: vidurl.replace(/(:\/\/[^/]+\/+).*/, "$1"),
+								Referer: resp.finalUrl,
 								"Accept": "*/*",
 								"Accept-Encoding": "identity;q=1, *;q=0",
 								"Sec-Fetch-Site": "cross-site",
@@ -99957,7 +100863,21 @@ var $$IMU_EXPORT$$;
 							},
 							can_head: false,
 							video: true
-						}, 60*60);
+						};
+
+						let result:BigImageInfoMulti = [];
+
+						if (vidurl)
+							result.push(vidobj);
+
+						if (imgurl) {
+							result.push({
+								url: imgurl,
+								extra: baseobj.extra
+							});
+						}
+
+						return done(result, 60*60);
 					});
 				}
 			});
@@ -99992,7 +100912,7 @@ var $$IMU_EXPORT$$;
 						return done(null, false);
 					}
 
-					var data_match = unpacked1.match(/^var data='({.*?})';[[]'sojson\.v4'/);
+					var data_match = unpacked1.match(/var data='({.*?})';\s*[[]'sojson\.v4'/);
 					if (!data_match) {
 						console_error(cache_key, "Unable to find data json for", resp, {unpacked1:unpacked1});
 						return done(null, false);
@@ -100349,6 +101269,28 @@ var $$IMU_EXPORT$$;
 				query_for_id: "https://" + domain + "/video/${id}/",
 				process: function(done, resp, cache_key) {
 					let match = resp.responseText.match(/<div class=.video-embedded.>\s*<iframe[^>]*src="(https?:\/\/[^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find iframe match for", resp);
+						return done(null, false);
+					}
+
+					return done({
+						url: decode_entities(match[1]),
+						is_pagelink: true
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain_nowww === "hdpornflix.com" ||
+			domain_nowww === "pornstreams.co") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([^/]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/${id}/",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<div class=.responsive-player.>\s*<iframe[^>]*src="(https?:\/\/[^"]+)"/);
 					if (!match) {
 						console_error(cache_key, "Unable to find iframe match for", resp);
 						return done(null, false);
@@ -102364,10 +103306,12 @@ var $$IMU_EXPORT$$;
 				};
 		}
 
-		if (domain_nowww === "mixdrop.co") {
+		if (domain_nowww === "mixdrop.co" ||
+			domain_nowww === "mixdrop.ag" ||
+			domain_nowww === "mixdrop.ps") {
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+e\/+([0-9a-z]{5,})(?:[?#].*)?$/,
-				query_for_id: "https://mixdrop.co/e/${id}",
+				query_for_id: "https://" + domain + "/e/${id}",
 				process: function(done, resp, cache_key) {
 					var match = resp.responseText.match(/<script>\s*MDCore\.[\s\S]+?eval\(function\(p,.*\s*<\/script>\s*(?:<div class="title|<video)/);
 					if (!match) {
@@ -102389,8 +103333,8 @@ var $$IMU_EXPORT$$;
 							url: urljoin(resp.finalUrl, JSON_parse(match[1]), true),
 							video: true,
 							headers: {
-								Origin: "https://mixdrop.co",
-								Referer: "https://mixdrop.co/"
+								Origin: "https://" + domain,
+								Referer: "https://" + domain + "/"
 							}
 						});
 					}
@@ -103008,26 +103952,115 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain_nowww === "twitch.tv") {
-			var fetch_twitch_access_token = function(vid, cb) {
-				api_query("twitch_access:" + vid, {
-					url: "https://api.twitch.tv/api/vods/" + vid + "/access_token?oauth_token=undefined&need_https=true&platform=_&player_type=site&player_backend=mediaplayer",
-					imu_mode: "xhr",
+			let twitch_graphql = function(payload, cb) {
+				api_query("twitch_gql:" + JSON_stringify(payload), {
+					url: "https://gql.twitch.tv/gql",
+					method: "POST",
+					data: JSON_stringify(payload),
 					headers: {
-						"accept": "application/vnd.twitchtv.v5+json; charset=UTF-8",
+						accept: "*/*",
 						"client-id": base64_decode("IGtpbW5lNzhreDNuY3g2YnJnbzRtdjZ3a2k1aDFrbw==").substr(1),
-						"content-type": "application/json; charset=UTF-8",
+						"content-type": "text/plain;charset=UTF-8",
 						origin: "https://www.twitch.tv",
 						referer: "https://www.twitch.tv/",
-						"x-requested-with": "XMLHttpRequest"
 					},
+					imu_mode: "xhr",
 					json: true
 				}, cb, function(done, resp, cache_key) {
-					if (!resp.sig && !resp.token) {
-						console_error(cache_key, "Unexpected result", resp);
-						return done(null, false);
+					done(resp, 60*60);
+				});
+			};
+
+			let fetch_twitch_videoaccesstoken = function(vid, cb) {
+				twitch_graphql([
+					{
+						"operationName":"VideoAccessToken_Clip",
+						"variables": {
+							"platform": "web",
+							"slug": vid
+						},
+						"extensions": {
+							"persistedQuery": {
+								"version": 1,
+								"sha256Hash": base64_decode("IDZmZDNhZjJiMjI5ODk1MDYyNjliOWFjMDJkZDg3ZWI0YTY2ODgzOTJkNjdkOTRlNDFhNjg4NmYxZTlmNWMwMGY").substr(1)
+							}
+						}
+					}
+				], function(data) {
+					let urls = null;
+
+					try {
+						let vat_clip = data[0].data.clip;
+
+						vat_clip.videoQualities.sort((a, b) => {
+							return parseInt(b.quality) - parseInt(a.quality);
+						});
+
+						let append = '?sig=' + vat_clip.playbackAccessToken.signature + "&token=" + encodeURIComponent(vat_clip.playbackAccessToken.value);
+
+						urls = [];
+
+						for (let quality of vat_clip.videoQualities) {
+							urls.push({
+								url: quality.sourceURL + append,
+								video: true,
+								headers: {
+									Referer: "https://twitch.tv/"
+								}
+							});
+						}
+					} catch (e) {
+						console_error(e);
+						return cb(null);
 					}
 
-					done(resp, 60*60);
+					return cb(urls);
+				});
+			};
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+[^/]+\/+clip\/+([^/?#]+)(?:[?#].*)?$/,
+				run: function(cb, match) {
+					let id = match[1];
+
+					fetch_twitch_videoaccesstoken(id, cb);
+				}
+			});
+			if (newsrc) return newsrc;
+
+			var fetch_twitch_access_token = function(vid, cb) {
+				twitch_graphql({
+					"operationName": "PlaybackAccessToken_Template",
+					"query": "query PlaybackAccessToken_Template($login: String!, $isLive: Boolean!, $vodID: ID!, $isVod: Boolean!, $playerType: String!, $platform: String!) {  streamPlaybackAccessToken(channelName: $login, params: {platform: $platform, playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isLive) {    value    signature   authorization { isForbidden forbiddenReasonCode }   __typename  }  videoPlaybackAccessToken(id: $vodID, params: {platform: $platform, playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isVod) {    value    signature   __typename  }}",
+					"variables": {
+						"isLive": false,
+						"login": "",
+						"isVod": true,
+						"vodID": vid+"",
+						"playerType": "site",
+						"platform": "web"
+					}
+				}, function(resp) {
+					let sig = null;
+					let token = null;
+
+					try {
+						let vpat = resp.data.videoPlaybackAccessToken;
+						sig = vpat.signature;
+						token = vpat.value;
+					} catch (e) {
+						console_error(e);
+					}
+
+					if (!sig || !token) {
+						console_error("Unable to find twitch access token for", vid, "from", resp);
+						return cb(null);
+					} else {
+						return cb({
+							sig,
+							token
+						});
+					}
 				});
 			};
 
@@ -103038,6 +104071,7 @@ var $$IMU_EXPORT$$;
 					playlist_include_framerate: "true",
 					reassignments_supported: "true",
 					sig: token.sig,
+					//supported_codecs: "av1,h264",
 					token: encodeURIComponent(token.token)
 				});
 			};
@@ -103056,12 +104090,14 @@ var $$IMU_EXPORT$$;
 						return cb({
 							url: get_vod_url(id, token),
 							headers: {
-								Referer: page
+								Referer: "",
+								Accept: "application/x-mpegURL, application/vnd.apple.mpegurl, application/json, text/plain"
 							},
 							extra: {
 								page: page
 							},
-							video: "hls"
+							video: "hls",
+							can_head: false // 404
 						});
 					});
 				}
@@ -104447,9 +105483,18 @@ var $$IMU_EXPORT$$;
 			if (newsrc) return newsrc;
 		}
 
-		if (host_domain_nowww === "ok.ru") {
+		if (host_domain_nowww === "ok.ru" ||
+			host_domain === "m.ok.ru") {
+			if (options.element) {
+				if (options.element.tagName === "A" && options.element.hasAttribute("data-photo")) {
+					let photojson = options.element.getAttribute("data-photo");
+					let json = JSON_parse(photojson);
+					return json.url;
+				}
+			}
+
 			newsrc = common_functions["get_pagelink_host_el_matching"](options, {
-				url_match: /^https?:\/\/(?:www\.)?ok\.ru\/+video\/+([0-9]+)(?:[?#].*)?$/,
+				url_match: /^https?:\/\/(?:(?:www|m)\.)?ok\.ru\/+video\/+([0-9]+)(?:[?#].*)?$/,
 				el_match: function(x) {
 					return x.classList.contains("vp_video");
 				}
@@ -105263,14 +106308,69 @@ var $$IMU_EXPORT$$;
 			return src.replace(/(\/_matrix\/+media\/+(?:r[0-9]+|v3)\/+)thumbnail\/+([^/]+\/+[-_a-zA-Z0-9]+)\?.*$/, "$1download/$2");
 		}
 
-		if (domain_nowww === "pornssd.com") {
-			match = src.match(/\/wp-content\/+plugins\/+clean-tube-player\/+public\/+player-x.php\?q=([^&]{50,})/);
-			if (match) {
-				var decoded = base64_decode(match[1]);
-				var queries = get_queries("?" + decoded);
-				// <iframe src="..."
-				return parse_tag_def(decodeURIComponent(queries.tag)).args.src;
-			}
+		if (domain_nowww === "liztube.com" ||
+			// thanks to anonymous for reporting:
+			domain_nowww === "xpaja.net" ||
+			domain_nowww === "lechetube.com" ||
+			domain_nowww === "darkero.com" ||
+			domain_nowww === "xleche.com") {
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([-0-9a-zA-Z]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/${id}/",
+				process: function(done, resp, cache_key) {
+					var obj = common_functions["get_videotag_obj"](resp);
+					done(obj, obj ? 60*60 : false);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain_nowww === "pornssd.com" ||
+			// thanks to anonymous for reporting:
+			domain_nowww === "baddielatina.com" ||
+			domain_nowww === "baddieass.com" ||
+			domain_nowww === "baddieslut.com" ||
+			domain_nowww === "baddietube.com") {
+			newsrc = website_query({
+				website_regex: /\/wp-content\/+plugins\/+clean-tube-player\/+public\/+player-x\.php\?q=([^&]{50,})/,
+				run: function(cb, match) {
+					var decoded = base64_decode(match[1]);
+					var queries = get_queries("?" + decoded);
+
+					let decoded_html = decodeURIComponent(queries.tag);
+
+					if (/<iframe/.test(decoded_html)) {
+						// <iframe src="..."
+						return cb(parse_tag_def(decoded_html).args.src);
+					} else {
+						let obj = common_functions["get_videotag_obj"]({
+							responseText: decoded_html,
+							finalUrl: src
+						});
+						return cb(obj);
+					}
+				}
+			});
+			if (newsrc) return newsrc;
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([^/]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/${id}/",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<iframe[^>]*src=[^>]*\/clean-tube-player\/+[^>]+>/);
+					if (!match) {
+						console_error(cache_key, "Unable to find iframe match for", resp);
+						return done(null, false);
+					}
+
+					let iframe = parse_tag_def(match[0]);
+					return done({
+						url: iframe.args.src,
+						is_pagelink: true
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
 		}
 
 		if (domain_nowww === "pornedup.com") {
@@ -106517,8 +107617,8 @@ var $$IMU_EXPORT$$;
 		if (domain_nowww === "playvids.com") {
 			newsrc = website_query({
 				website_regex: [
-					/^[a-z]+:\/\/[^/]+\/+([0-9a-zA-Z]{10,12})\/+/,
-					/^[a-z]+:\/\/[^/]+\/+embed\/+([0-9a-zA-Z]{10,12})(?:[?#].*)?$/
+					/^[a-z]+:\/\/[^/]+\/+([0-9a-zA-Z_]{10,12})\/+/,
+					/^[a-z]+:\/\/[^/]+\/+embed\/+([0-9a-zA-Z_]{10,12})(?:[?#].*)?$/
 				],
 				query_for_id: "https://www.playvids.com/embed/${id}",
 				process: function(done, resp, cache_key) {
@@ -108326,7 +109426,11 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://imgs.search.brave.com/[...]/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA1Lzk4Lzc5LzM2/LzM2MF9GXzU5ODc5/MzY4Nl9jWXZ4Tk15/VWJCRUFuTnZSTURP/Um8yQ2x4Y3d6eXJC/QS5qcGc
 			//   https://t3.ftcdn.net/jpg/05/98/79/36/360_F_598793686_cYvxNMyUbBEAnNvRMDORo2ClxcwzyrBA.jpg
-			domain === "imgs.search.brave.com") {
+			domain === "imgs.search.brave.com" ||
+			// thanks to anonymous for reporting:
+			// https://meduza.io/impro/VoxfM8o2icttGT1B5ftz_P56JbJaXXN7KDTChuHBjy4/resizing_type:fit/width:980/height:0/enlarge:1/quality:80/aHR0cHM6Ly9tZWR1/emEuaW8vaW1hZ2Uv/YXR0YWNobWVudHMv/aW1hZ2VzLzAxMC82/OTUvOTMxL29yaWdp/bmFsLzVHbUVsVjI2/Ukt3MWI3R1dPRjRi/ekE.webp
+			//   https://meduza.io/image/attachments/images/010/695/931/original/5GmElV26RKw1b7GWOF4bzA
+			domain_nowww === "meduza.io") {
 			// thanks to fedesk on discord for reporting
 			// https://imgr.search.brave.com/LpJ29gWgcyCH8jAI_v_LValU3vgy77DMTtANenHMMGw/fit/740/1010/no/1/aHR0cHM6Ly9pdjEu/bGlzaW1nLmNvbS9p/bWFnZS8xNzEzMDg4/NS83NDBmdWxsLXNp/Z3JpZC1zb2xiYWtr/LXJhYWJlLmpwZw
 			//   https://iv1.lisimg.com/image/17130885/740full-sigrid-solbakk-raabe.jpg
@@ -110965,6 +112069,59 @@ var $$IMU_EXPORT$$;
 			// https://gray-kvly-prod.gtv-cdn.com/resizer/v2/https%3A%2F%2Fcloudfront-us-east-1.images.arcpublishing.com%2Fgray%2FALWQDT5MIREGTGOVBMOKZYHJBY.jpg?auth=696f1c074052f5d043f46b46b3072587d5b47b7e8ee5356c6c91968a79843a53&width=980&smart=false
 			//   https://cloudfront-us-east-1.images.arcpublishing.com/gray/ALWQDT5MIREGTGOVBMOKZYHJBY.jpg
 			domain_nosub === "gtv-cdn.com" ||
+			// thanks to liamengland1 on github: https://github.com/qsniyg/maxurl/issues/1375
+			// https://www.ajc.com/resizer/v2/SK2DBT6OQZRKZMFLNQXDW3ONJM.jpg?auth=852f70ce395b0017a080c454b8600d84c15f9d8625ab106a1ed17a1762b5dd07&width=1600&height=900&smart=true
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/ajc/SK2DBT6OQZRKZMFLNQXDW3ONJM.jpg
+			// https://www.ajc.com/resizer/v2/2NQ42HBDE5KMVK7YD3IDJKTDTI.jpg?auth=806c87c71561e3ee70b1bfb39a869c585603a23c1f55db0a17cc084d6a465baf&width=1600&height=900&smart=true
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/ajc/2NQ42HBDE5KMVK7YD3IDJKTDTI.jpg
+			domain_nowww === "ajc.com" ||
+			// https://www.dawgnation.com/resizer/v2/E45ES2YKKR7DUEE2XIFUI2LBHQ.jpg?auth=8c7e97d43df8e6604fa388c83a6c1e39250ce7fa1ec745d8b6c96cf22fcda236&width=150&height=150&focal=1724,675
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/ajc/E45ES2YKKR7DUEE2XIFUI2LBHQ.jpg
+			domain_nowww === "dawgnation.com" ||
+			// thanks to liamengland1 on github: https://github.com/qsniyg/maxurl/issues/1375
+			// https://www.nj.com/resizer/v2/NKR3FPARHRDGNNBHG6X3TXV2J4.jpg?auth=c9d4d180304d4d024ac5498d54e550c1a244b4783ab3432446502f296536c664&width=600&height=450&smart=true
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/NKR3FPARHRDGNNBHG6X3TXV2J4.jpg
+			domain_nowww === "nj.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.kn-online.de/resizer/v2/YZRQ522MIFBHHEXIXWIVDXMXSU.jpg?auth=9d78f3115256d353fc0c0bc16ad676dbb71436e299176f76d43f41009a93c845&quality=70&width=596&height=396&smart=true
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/madsack/YZRQ522MIFBHHEXIXWIVDXMXSU.jpg
+			domain_nowww === "kn-online.de" ||
+			// thanks to anonymous for reporting:
+			// https://www.thedailybeast.com/resizer/v2/NFAHP52BEBG7VL6IYQ76BDMEYY.jpg?smart=true&auth=3018549faff46342fa5420fa6a0902487f7d5ee0ad2ca1ef28483608180b29b7&width=1600&height=899
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/thedailybeast/NFAHP52BEBG7VL6IYQ76BDMEYY.jpg
+			domain_nowww === "thedailybeast.com" ||
+			// thanks to anonymous for reporting:
+			// https://resizer.glanacion.com/resizer/v2/paro-de-intergargo-y-aeronauticos-en-aeroparque-FB64XC5PU5BN3KY4CFCTDPSUHU.JPG?auth=1459d2883fad3b16fd9b543ece73a6543b65a72af93608350e9f9efb3bac4be1&width=302&height=201&quality=70&smart=true
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/lanacionar/paro-de-intergargo-y-aeronauticos-en-aeroparque-FB64XC5PU5BN3KY4CFCTDPSUHU.JPG
+			domain === "resizer.glanacion.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.lanacion.com.ar/resizer/v2/donald-trump-y-javier-UJQQYMO6VRE3JFUC7GYRSMLRGU.jpeg?auth=6fa75a9d093929ba457fd50da953b7be7b43d0b889d74b36a387944b9f382274&width=488&height=325&quality=70&smart=true
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/lanacionar/donald-trump-y-javier-UJQQYMO6VRE3JFUC7GYRSMLRGU.jpeg
+			domain_nowww === "lanacion.com.ar" ||
+			// thanks to anonymous for reporting:
+			// https://www.oregonlive.com/resizer/v2/ET6KPTM4OJBNHH4CMZVOD6QSXY.jpg?auth=bfd2d714d208d3b6d065127f2ae5d7caeae30d47591b7989b456f2124f696c0d&width=500&quality=90
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/ET6KPTM4OJBNHH4CMZVOD6QSXY.jpg
+			domain_nowww === "oregonlive.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.ln-online.de/resizer/v2/V65QYIXUVHMFR6OTPLZT3V76LU.jpg?auth=9c2b99ff49ffdbae9d7d604a799e3d0e32358548a82a9390714552d7c0442b7f&quality=70&width=1441&height=1441&smart=true
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/madsack/V65QYIXUVHMFR6OTPLZT3V76LU.jpg
+			domain_nowww === "ln-online.de" ||
+			// thanks to anonymous for reporting:
+			// https://www.estadao.com.br/resizer/v2/CGTWQPIB2RGGXKG6ABE74R2VFY.jpg?quality=80&auth=9024e28b84d92ec28de196e743cb353157a40e99ce5891e900469b519854444b&width=360&height=202&smart=true
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/estadao/CGTWQPIB2RGGXKG6ABE74R2VFY.jpg
+			domain_nowww === "estadao.com.br" ||
+			// thanks to anonymous for reporting:
+			// https://www.irishnews.com/resizer/v2/VLCFZ6K2KNLSFASOFLP5ELPX24.jpg?auth=1c8c4abb9b9fe1046ea4071c63b4085fe28e599cc37414dedc5aa515d3dd224c&width=1440&height=959
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/irishnews/VLCFZ6K2KNLSFASOFLP5ELPX24.jpg
+			domain_nowww === "irishnews.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.chosun.com/resizer/v2/LBWQMMKOPU3FOOU7AHHKXOUR7A.jpg?auth=4c1e3e585ef4b85292596e1096ee52c493d1eb8cc5fb1aec90ca107c7eebd61d&width=530&height=742&smart=true
+			//   https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/LBWQMMKOPU3FOOU7AHHKXOUR7A.jpg
+			domain_nowww === "chosun.com" ||
+			// thanks to arlenestrigger on discord for reporting:
+			// https://www.hawaiinewsnow.com/resizer/EaNm4i_Y7Y9UHcofx9u57R2VF1c=/300x0/arc-photo-gray/arc3-prod/public/ISNN7NFXLFFG3DF4QYVJF7ZUI4.jpg
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/gray/ISNN7NFXLFFG3DF4QYVJF7ZUI4.jpg
+			domain_nowww === "hawaiinewsnow.com" ||
 			// thanks to roi:
 			// https://www.theglobeandmail.com/resizer/v2/MIMBGW3UORBLZMMTL2GASZ75JE.JPG?auth=c570680e25c89027c795085ce398d06291485e026f2830e996db3e2d9a71d3d8&width=900&quality=80
 			//   https://cloudfront-us-east-1.images.arcpublishing.com/tgam/MIMBGW3UORBLZMMTL2GASZ75JE.JPG
@@ -110978,7 +112135,9 @@ var $$IMU_EXPORT$$;
 				info = {folder: "nzme", loc: "ap-southeast-2"};
 			else if (domain_nowww === "reuters.com")
 				info = {folder: "reuters", loc: "us-east-2"};
-			else if (domain_nowww === "masslive.com")
+			else if (domain_nowww === "masslive.com" ||
+					 domain_nowww === "nj.com" ||
+					 domain_nowww === "oregonlive.com")
 				info = {folder: "advancelocal", loc: "us-east-1"};
 			else if (domain_nowww === "theglobeandmail.com")
 				info = {folder: "tgam", loc: "us-east-1"};
@@ -110986,8 +112145,26 @@ var $$IMU_EXPORT$$;
 				info = {folder: "prisa", loc: "eu-central-1"};
 			else if (domain_nowww === "shropshirestar.com")
 				info = {folder: "mna", loc: "us-east-1"};
-			else if (domain_nosub === "gtv-cdn.com")
+			else if (domain_nosub === "gtv-cdn.com" ||
+					 domain_nowww === "hawaiinewsnow.com")
 				info = {folder: "gray", loc: "us-east-1"};
+			else if (domain_nowww === "ajc.com" ||
+				     domain_nowww === "dawgnation.com")
+				info = {folder: "ajc", loc: "us-east-1"};
+			else if (domain_nowww === "kn-online.de" ||
+					 domain_nowww === "ln-online.de")
+				info = {folder: "madsack", loc: "eu-central-1"};
+			else if (domain_nowww === "thedailybeast.com")
+				info = {folder: "thedailybeast", loc: "us-east-1"};
+			else if (domain_nosub === "glanacion.com" ||
+					 domain_nowww === "lanacion.com.ar")
+				info = {folder: "lanacionar", loc: "us-east-1"};
+			else if (domain_nowww === "estadao.com.br")
+				info = {folder: "estadao", loc: "us-east-1"};
+			else if (domain_nowww === "irishnews.com")
+				info = {folder: "irishnews", loc: "eu-central-1"};
+			else if (domain_nowww === "chosun.com")
+				info = {folder: "chosun", loc: "ap-northeast-1"};
 
 			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+resizer\/+v2\/+([^?#/]+)(?:[?#].*)?$/, "https://cloudfront-" + info.loc + ".images.arcpublishing.com/" + info.folder + "/$1");
 			if (newsrc !== src)
@@ -111301,6 +112478,26 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://search.pabloferreiro.es/image_proxy.php?url=https%3A%2F%2Fs2.qwant.com%2Fthumbr%2F474x316%2Fe%2F1%2F23ff2131ca13dee06d3c6b20d175bf14025d339e374726b99db5184d77f547%2Fth.jpg%3Fu%3Dhttps%253A%252F%252Ftse.mm.bing.net%252Fth%253Fid%253DOIP.sldsThi-4O7viMDMp527cgHaE8%2526pid%253DApi%26q%3D0%26b%3D1%26p%3D0%26a%3D0
 			//   https://tse.mm.bing.net/th?id=OIP.sldsThi-4O7viMDMp527cgHaE8
+			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+image_proxy\.php\?(?:.*&)?url=([^&]+).*?$/, "$1");
+			if (newsrc !== src)
+				return decodeuri_ifneeded(newsrc);
+		}
+
+		// Binternet
+		if (domain === "bn.bloat.cat" ||
+			// https://bn.opnxng.com/image_proxy.php?url=https://i.pinimg.com/originals/93/8d/51/938d51c8291f006b0146aa7e8dda7b5f.jpg
+			//   https://i.pinimg.com/originals/93/8d/51/938d51c8291f006b0146aa7e8dda7b5f.jpg
+			domain === "bn.opnxng.com" ||
+			domain === "binternet.4o1x5.dev" ||
+			domain === "binternet.privacyredirect.com" ||
+			domain === "pin.blitzw.in" ||
+			domain === "binternet.canine.tools" ||
+			domain === "binternet.ducks.party") {
+			// https://github.com/Ahwxorg/binternet/
+			// uses https://github.com/Ahwxorg/LibreY for the image proxy
+			// thanks to anonymous for reporting:
+			// https://bn.bloat.cat/image_proxy.php?url=https://i.pinimg.com/originals/6a/a7/8a/6aa78aef47fc59f110a64576d7edf4d1.jpg
+			//   https://i.pinimg.com/originals/6a/a7/8a/6aa78aef47fc59f110a64576d7edf4d1.jpg
 			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+image_proxy\.php\?(?:.*&)?url=([^&]+).*?$/, "$1");
 			if (newsrc !== src)
 				return decodeuri_ifneeded(newsrc);
@@ -111661,13 +112858,13 @@ var $$IMU_EXPORT$$;
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+f\/+([0-9a-zA-Z]+)(?:[?#].*)?$/,
 				query_for_id(id) {
-					let url = "https://" + domain + "/f/" + id;
 					return {
-						url: "https://" + domain + "/api/f/" + id,
+						url: "https://api.cyberdrop.me/api/file/auth/" + id,
 						imu_mode: "xhr",
 						headers: {
 							Accept: "application/json, text/plain, */*",
-							Referer: url
+							Origin: "https://cyberdrop.me",
+							Referer: "https://cyberdrop.me/"
 						},
 						json: true
 					};
@@ -111691,7 +112888,7 @@ var $$IMU_EXPORT$$;
 			if (newsrc) return newsrc;
 		}
 
-		if (domain_nosub === "cyberdrop.cloud" && host_domain_nowww === "cyberdrop.me" && options.element) {
+		if ((domain_nosub === "cyberdrop.cloud" || domain_nosub === "cyberdrop.me") && host_domain_nowww === "cyberdrop.me" && options.element) {
 			var link_el = common_functions["get_link_el_matching"](options.element.parentElement, el => el.href && /\/f\/+[a-zA-Z0-9]+$/.test(el.href));
 
 			if (link_el) {
@@ -111809,6 +113006,10 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain_nowww === "ososedki.com" ||
+			// thanks to anonymous for reporting:
+			// https://cosplayrule34.com/images/a/604/-10000001/10008657/1.webp
+			//   https://cosplayrule34.com/images/a/1280/-10000001/10008657/1.webp
+			domain_nowww === "cosplayrule34.com" ||
 			// thanks to anonymous for reporting:
 			// https://cosplaythots.com/images/a/604/-166908530/259321137/456373847.jpg
 			//   https://cosplaythots.com/images/a/1280/-166908530/259321137/456373847.jpg
@@ -112273,7 +113474,10 @@ var $$IMU_EXPORT$$;
 			// https://static-cdn.strpst.com/photos/f/e/8/fe81e63a426acaf293851102f2ef0c96-preview -- 1200x1600
 			//   https://static-cdn.strpst.com/photos/f/e/8/fe81e63a426acaf293851102f2ef0c96-full -- 1920x2560
 			//   https://static-cdn.strpst.com/photos/f/e/8/fe81e63a426acaf293851102f2ef0c96 -- 2316x3088
-			return src.replace(/(\/(?:avatars|photos|intro)\/+(?:[0-9a-f]\/+){3}[0-9a-f]{10,})-[a-z]+(?:[?#].*)?$/, "$1");
+			// thanks to anonymous for reporting:
+			// https://static-cdn.strpst.com/previews/0/8/2/082a048ad87a6e24660a6c64e572f950-thumb-big -- 400x663
+			//   https://static-cdn.strpst.com/previews/0/8/2/082a048ad87a6e24660a6c64e572f950
+			return src.replace(/(\/(?:avatars|photos|intro|previews)\/+(?:[0-9a-f]\/+){3}[0-9a-f]{10,})-[a-z]+(?:-[a-z]+)?(?:[?#].*)?$/, "$1");
 		}
 
 		if (domain === "media.e-talenta.eu") {
@@ -112354,7 +113558,11 @@ var $$IMU_EXPORT$$;
 				.replace(/:\/\/[^/]+\/+[0-9a-f]+\/+([0-9a-f]{2})([0-9a-f]+\.)/, "://cdn2.mmwst.ru/files/$1/$1$2");
 		}
 
-		if (domain === "img.atlasobscura.com") {
+		if (domain === "img.atlasobscura.com" ||
+			// thanks to anonymous for reporting:
+			// https://img.dfrag.gg/VcMvSsJ5nDyUPcEaFgbTml_b0rs-CzaTQZEgAaj1Bio/rt:fill/width:1100/height:240/aHR0cHM6Ly9ieWpnd2Nv/bm13enp1ZnBldGp3cS5z/dXBhYmFzZS5jby9zdG9y/YWdlL3YxL29iamVjdC9w/dWJsaWMvZGZyYWcvZXZl/bnQvMjY0N2NlMmUtNjk0/MS00ODFiLWFkYzAtMTMx/NTYzNzI5ZjIwLnBuZw==.webp
+			//   https://byjgwconmwzzufpetjwq.supabase.co/storage/v1/object/public/dfrag/event/2647ce2e-6941-481b-adc0-131563729f20.png
+			domain === "img.dfrag.gg") {
 			// thanks to anonymous for reporting:
 			// https://img.atlasobscura.com/Bc4PDJicX5faaBSYeZkjqmRELD3pDifsRD4BDjsn2CU/rt:fit/w:1280/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy81Mzg2Mjg2NjU1/YWU0ZjAxOWRfVHJh/aXRvcnMgYW5kIFR5/cmFudHMgTWFwLmpw/ZWc.jpg
 			//   https://atlas-dev.s3.amazonaws.com/uploads/assets/5386286655ae4f019d_Traitors%20and%20Tyrants%20Map.jpeg
@@ -112710,6 +113918,23 @@ var $$IMU_EXPORT$$;
 				});
 			};
 
+			let get_vxxx_meta = function(id, cb) {
+				api_query("vxxx_meta:" + id, {
+					url: "https://vxxx.com/api/json/video/86400/0/" + ((id/1000)|0) + "/" + id + ".json",
+					imu_mode: "xhr",
+					json: true
+				}, cb, function(done, resp, cache_key) {
+					let extra = {
+						caption: resp.video.title,
+						author_username: resp.video.user.username,
+						created_date: new Date(resp.video.post_date).getTime(),
+						page: "https://vxxx.com/video-" + id + "/"
+					};
+
+					return done(extra, 6*60*60);
+				});
+			};
+
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+video-([0-9]+)\/*(?:[?#].*)?$/,
 				run: function(cb, match) {
@@ -112717,7 +113942,22 @@ var $$IMU_EXPORT$$;
 						if (!resp)
 							return cb(null);
 
-						return cb(resp);
+						let baseobj = {
+							extra: {
+								page: "https://vxxx.com/video-" + match[1] + "/"
+							}
+						};
+
+						if (options.force_page) {
+							get_vxxx_meta(match[1], function(extra) {
+								if (extra)
+									baseobj.extra = extra;
+
+								return cb(fillobj_urls(resp, baseobj));
+							})
+						} else {
+							return cb(fillobj_urls(resp, baseobj));
+						}
 					});
 				}
 			});
@@ -113734,7 +114974,9 @@ var $$IMU_EXPORT$$;
 			if (newsrc) return newsrc;
 		}
 
-		if (domain === "thumb.zzup.com") {
+		if (domain === "thumb.zzup.com" ||
+			// thanks to anonymous for reporting:
+			domain === "thumb.zzup.cc") {
 			// thanks to anonymous for reporting
 			match = src.match(/:\/\/[^/]+\/+[^/]+\/+image0*([0-9]+)-[0-9]+-([0-9]+)-[0-9]+\/+([^/]+)\/+/);
 			if (match) {
@@ -113861,11 +115103,15 @@ var $$IMU_EXPORT$$;
 			//   https://imagedelivery.net/CNHQDfI-aOkA7ffs8mbdmA/item-images/nec481.jpg/w=9999999 -- 4328x4328
 			// https://imagedelivery.net/nx-BariuFDW3u41l69hhKg/534e5b59-d91f-47ad-159d-bbe88b514100/header
 			//   https://imagedelivery.net/nx-BariuFDW3u41l69hhKg/534e5b59-d91f-47ad-159d-bbe88b514100/w=9999999 -- 1556x723
+			// thanks to byjrg on github: https://github.com/qsniyg/maxurl/issues/1383
+			// https://imagedelivery.net/qQuMkbHJ-0s6rwu8vup_5w/7268a63b-9a30-4adf-566f-25e75f2cc800/2x
+			//   https://imagedelivery.net/qQuMkbHJ-0s6rwu8vup_5w/7268a63b-9a30-4adf-566f-25e75f2cc800/original -- 1083x1673
 			// other:
 			// https://imagedelivery.net/tBWwepYnH_U9dHRAxdyD6g/438f8275-00a2-4af5-6d77-7bfd77c9b700/origin
 			//   https://imagedelivery.net/tBWwepYnH_U9dHRAxdyD6g/438f8275-00a2-4af5-6d77-7bfd77c9b700/w=9999999 -- ERROR 9429: Flexible variants are not enabled for the account
 			let cf_original_map = {
-				"QondspN4HIUvB_R16-ddAQ": "original"
+				"QondspN4HIUvB_R16-ddAQ": "original",
+				"qQuMkbHJ-0s6rwu8vup_5w": "original"
 			};
 
 			match = src.match(/^[a-z]+:\/\/[^/]+\/+([^/]+)\/+/);
@@ -114468,7 +115714,8 @@ var $$IMU_EXPORT$$;
 				api_query(cache_key, {
 					url: "https://gofile.io/dist/js/alljs.js"
 				}, cb, function(done, resp, cache_key) {
-					let match = resp.responseText.match(/websiteToken\s*=\s*"([0-9a-z]{5,})"/);
+					//let match = resp.responseText.match(/websiteToken\s*=\s*"([0-9a-z]{5,})"/);
+					let match = resp.responseText.match(/wt:\s*"([0-9a-z]{5,})"/);
 					if (!match) {
 						console_error(cache_key, "Unable to find websiteToken match for", resp);
 						return done(null, false);
@@ -114511,10 +115758,13 @@ var $$IMU_EXPORT$$;
 
 						let cache_key = "gofile_content:" + id;
 						api_query(id, {
-							url: "https://api.gofile.io/getContent?contentId=" + id + "&token=" + token + "&websiteToken=" + websitetoken,
+							url: "https://api.gofile.io/contents/" + id + "?wt=" + websitetoken,
 							imu_mode: "xhr",
 							headers: {
-								Origin: "https://gofile.io"
+								Accept: "*/*",
+								Authorization: "Bearer " + token,
+								Origin: "https://gofile.io",
+								Referer: "https://gofile.io/"
 							},
 							json: true
 						}, cb, function(done, resp, cache_key) {
@@ -114547,8 +115797,8 @@ var $$IMU_EXPORT$$;
 
 						let items = [];
 						let chosenitem = null;
-						for (let itemid in content.contents) {
-							let item = content.contents[itemid];
+						for (let itemid in content.children) {
+							let item = content.children[itemid];
 							let obj:BigImageInfoSObject = {
 								url: item.link,
 								headers: {
@@ -114625,7 +115875,9 @@ var $$IMU_EXPORT$$;
 
 		if (host_domain_nowww === "gofile.io" && options.element) {
 			// thanks to anonymous for reporting:
-			if (options.element.tagName === "A" && options.element.classList.contains("contentLink")) {
+			if ((options.element.tagName === "A" && options.element.classList.contains("contentLink")) ||
+				(options.element.tagName === "IMG" || options.element.tagName === "VIDEO") ||
+				(options.element.tagName === "DIV" && options.element.classList.contains("plyr__poster"))) {
 				let contentid_container = common_functions["get_parent_el_matching"](options.element, x => x.hasAttribute("data-contentid"));
 				if (contentid_container) {
 					return {
@@ -115424,7 +116676,9 @@ var $$IMU_EXPORT$$;
 				.replace(/\/img\/+(.*[0-9]+\.[a-z]+)(?:[?#].*)?$/, "/images/u/$1");
 		}
 
-		if (domain_nosub === "pimeyes.com" && /^jsc[0-9]*\./.test(domain)) {
+		if ((domain_nosub === "pimeyes.com" && /^jsc[0-9]*\./.test(domain)) ||
+			domain === "94.130.187.81" ||
+			domain === "94.130.99.222") {
 			// thanks to anonymous for reporting:
 			// https://jsc7.pimeyes.com/proxy/7b2275...
 			match = src.match(/\/proxy\/+(7b2275[0-9a-f]+)(?:[?#].*)?$/i);
@@ -115967,7 +117221,10 @@ var $$IMU_EXPORT$$;
 		if (domain === "i.daily.jp") {
 			// https://i.daily.jp/horse/2016/12/14/Images/09750568.jpg -- 447x450
 			//   https://i.daily.jp/horse/2016/12/14/Images/f_09750568.jpg
-			return src.replace(/(\/Images\/+)([0-9]+\.[a-z]+)(?:[?#].*)?$/, "$1f_$2");
+			// thanks to nimbuz on discord:
+			// https://i.daily.jp/gossip/2024/11/09/Images/b_18323608.jpg
+			//   https://i.daily.jp/gossip/2024/11/09/Images/f_18323608.jpg -- 427x960
+			return src.replace(/(\/Images\/+)(?:b_)?([0-9]+\.[a-z]+)(?:[?#].*)?$/, "$1f_$2");
 		}
 
 		if (domain_nowww === "dr-johanna-budwig.de") {
@@ -116412,8 +117669,17 @@ var $$IMU_EXPORT$$;
 			//   https://images.scrolller.com/yocto/doug-at-sunset-9cy1fpzekr.jpg
 			if (/-[0-9a-z]{5,}-[0-9]+x[0-9]+\./.test(src)) {
 				newsrc = src.replace(/-[0-9]+x[0-9]+(\.[a-z]+)(?:[?#].*)?$/, "$1");
-				if (newsrc !== src)
-					return newsrc;
+				if (newsrc !== src) {
+					let urls = [newsrc];
+
+					// thanks to anonymous for reporting:
+					// https://images.scrolller.com/nano/jewelz-blu-4m7nxvrvgf-427x640.jpg
+					//   https://images.scrolller.com/pico/jewelz-blu-4m7nxvrvgf.jpg
+					if (/\/nano\//.test(newsrc))
+						urls.unshift(newsrc.replace(/\/nano\/+/, "/pico/"));
+
+					return urls;
+				}
 			}
 
 			newsrc = src.replace(/\.webp(?:[?#].*)?$/, ".jpg");
@@ -116998,6 +118264,813 @@ var $$IMU_EXPORT$$;
 				return src.replace(/(:\/\/[^/]+\/+[^/]+\/+)(?:(?:cover(?::[^/]+)?\/+[0-9]+x[0-9]+|[-a-z]+:[^/]+|(?:width|height)\/+[0-9]+)\/+)+/, "$1cdn/");
 		}
 
+		if (domain === "apicms.thestar.com.my") {
+			// thanks to anonymous for reporting:
+			// https://apicms.thestar.com.my/uploads/images/2024/10/29/thumbs/700/2991943.webp
+			//   https://apicms.thestar.com.my/uploads/images/2024/10/29/2991943.webp
+			return src.replace(/(\/uploads\/+images\/+.*\/+)thumbs\/+[0-9]+\/+/, "$1");
+		}
+
+		if (domain_nowww === "theimagefile.com") {
+			// thanks to anonymous for reporting:
+			// https://www.theimagefile.com/v/nr/i/t.png
+			if (/\/v\/+nr\/+i\/+t\.png(?:[?#].*)?$/.test(src)) {
+				return {
+					url: src,
+					bad: "mask"
+				};
+			}
+		}
+
+		if (domain === "cdn.thingiverse.com") {
+			// thanks to anonymous for reporting:
+			// https://cdn.thingiverse.com/renders/fe/06/a2/99/e1/0424a65ac06ce95bbb33f469a589c14c_preview_small.jpg
+			//   https://cdn.thingiverse.com/renders/fe/06/a2/99/e1/0424a65ac06ce95bbb33f469a589c14c_preview_large.jpg
+			//   https://cdn.thingiverse.com/renders/fe/06/a2/99/e1/0424a65ac06ce95bbb33f469a589c14c_display_large.jpg
+			// https://cdn.thingiverse.com/renders/4b/2a/87/2a/80/c7fba093e122e5827c5c08ca4cdd6ebb_preview_card.jpg
+			//   https://cdn.thingiverse.com/renders/4b/2a/87/2a/80/c7fba093e122e5827c5c08ca4cdd6ebb_display_large.jpg
+			// other:
+			// https://cdn.thingiverse.com/assets/41/0a/be/8c/aa/medium_preview_IMG_0823.JPEG
+			//   https://cdn.thingiverse.com/assets/a6/4c/1c/91/1d/large_display_IMG_0823.JPEG
+			return {
+				url: src
+					.replace(/(\/renders\/+(?:[0-9a-f]{2}\/+)+[0-9a-f]{10,}_)preview_large\./, "$1display_large.")
+					.replace(/(\/renders\/+(?:[0-9a-f]{2}\/+)+[0-9a-f]{10,}_(?:display|preview)_)(?:small|medium|card)\./, "$1large."),
+				can_head: false // 403
+			};
+		}
+
+		if (domain_nowww === "thepeninsulaqatar.com") {
+			// thanks to anonymous for reporting:
+			// https://thepeninsulaqatar.com/get/image/20241109_1731135227-619-thumb_big_590.jpg
+			//   https://thepeninsulaqatar.com/get/maximage/20241109_1731135227-619.jpg
+			return src.replace(/(\/get\/+)image\/+([^/?#]+)-thumb_[^/.?#]+\./, "$1maximage/$2.");
+		}
+
+		if (domain === "cdn.aznudefeet.com") {
+			// thanks to anonymous for reporting:
+			// https://cdn.aznudefeet.com/celeb_pictures/37952/a14bbcd1-1553-4933-9774-64d386442e44_thumb.jpg
+			//   https://cdn.aznudefeet.com/celeb_pictures/37952/a14bbcd1-1553-4933-9774-64d386442e44_logo.jpg
+			//   https://cdn.aznudefeet.com/celeb_pictures/37952/a14bbcd1-1553-4933-9774-64d386442e44.jpg
+			return src.replace(/(\/[0-9]+\/+[-0-9a-f]{10,})_(?:thumb|logo)\./, "$1.");
+		}
+
+		if (domain === "cdn-official-web.peropero.net") {
+			// thanks to siloricity on discord:
+			// https://cdn-official-web.peropero.net/covers_tmp/525eac574598b408-1649918303117.jpg
+			//   https://cdn-official-web.peropero.net/covers/525eac574598b408-1649918303117.png
+			newsrc = src.replace(/\/covers_tmp\/+([0-9a-f]{10,}-[0-9]+\.)/, "/covers/$1");
+			if (newsrc !== src)
+				return add_extensions(newsrc);
+		}
+
+		if (false && domain_nowww === "delo.si") {
+			// wip
+			// thanks to anonymous for reporting:
+			// https://www.delo.si/media/images/20241110/1876333.max-1280x1280.jpg?rev=1
+			// https://www.delo.si/media/images/20241112/1878248.max-1280x1280.jpg?rev=1
+			// https://cms.dpc.delo.si/media/dcgjab5t/_vi_0764.jpg -- 6000x4000
+			// https://www.delo.si/media/original_images/se/kviz/135/anketa.jpg?v=1731110400626 -- 4919x2395
+			// https://www.delo.si/media/original_images/se/kviz/127/anketa2.jpg?v=1730851200440
+			// https://www.delo.si/media/images/20230926/1530759.2e16d0ba.fill-1280x720.format-webp.webp
+			// https://deloindom.delo.si/uploads/old/781941/strojno_oljenje2.jpg
+			// https://deloindom.delo.si/uploads/11688/superform3-foto-miran-kambic.jpg
+			// https://deloindom.delo.si/uploads/29224/shutterstock-102755909.jpg
+		}
+
+		if (domain === "images.igdb.com") {
+			// thanks to DoomTay on github: https://github.com/qsniyg/maxurl/issues/1377
+			// https://api-docs.igdb.com/#images
+			// https://images.igdb.com/igdb/image/upload/t_cover_big/co1re9.webp
+			//   https://images.igdb.com/igdb/image/upload/t_original/co1re9.webp
+			return src.replace(/(\/image\/+upload\/+)t_[^/]+\/+/, "$1t_original/");
+		}
+
+		if (domain_nowww === "arnbook.com") {
+			// thanks to Froktime on github: https://github.com/qsniyg/maxurl/issues/1369
+			// https://arnbook.com/images/thumbs/0016682_360.png
+			//   https://arnbook.com/images/thumbs/0016682.png
+			return src.replace(/(\/images\/+thumbs\/+[0-9]+)_[0-9]+\./, "$1.")
+		}
+
+		if (domain === "torontolife.mblycdn.com") {
+			// thanks to anonymous for reporting:
+			// https://torontolife.mblycdn.com/tl/resized/2024/11/w2560/image1.jpeg
+			//   https://torontolife.mblycdn.com/uploads/tl/2024/11/image1.jpeg
+			return src.replace(/(:\/\/[^/]+\/+)([^/]+\/+)resized\/+([0-9]{4}\/+[0-9]{1,2}\/+)w[0-9]+\/+/, "$1uploads/$2$3");
+		}
+
+		if (domain === "img.elele.com.tr") {
+			// thanks to anonymous:
+			// https://img.elele.com.tr/rcman/Cw700h886q95gc/storage/files/images/2023/11/28/hazal-subasi4-q3rp.jpg
+			//   https://i.elele.com.tr/storage/files/images/2023/11/28/hazal-subasi4-q3rp.jpg
+			return src.replace(/^[a-z]+:\/\/[^/]+\/+.*(\/storage\/)/, "https://i.elele.com.tr$1");
+		}
+
+		if (domain === "media-cdn.erohive.com" ||
+			// https://cdn.erocdn.co/[hex],[timestamp]/[...]/image/[.]/[.]/[...]/thumb.webp
+			//   https://cdn.erocdn.co/[hex],[timestamp]/[...]/image/[.]/[.]/[...]/media.webp
+			domain === "cdn.erocdn.co") {
+			// thanks to anonymous for reporting:
+			// https://media-cdn.erohive.com/[...],[...]/s/image/[...]/thumb.webp
+			return src.replace(/(:\/\/[^/]+\/+[^/]+\/+[^/]+\/+image)\/+(.*?\/+)thumb\./, "$1/$2media.");
+		}
+
+		if (domain === "t.prcdn.co") {
+			// thanks to anonymous for reporting:
+			// https://t.prcdn.co/img?file=36532024112700000000001001&page=62&scale=99 -- 617x805
+			//   https://t.prcdn.co/img?file=36532024112700000000001001&page=62 -- 623x813
+			// https://t.prcdn.co/img?file=36532024112700000000001001&page=63&scale=39
+			//   https://t.prcdn.co/img?file=36532024112700000000001001&page=63 -- 623x813
+			if (/\/img\?(?:.*&)?file=[0-9]+/.test(src))
+				return remove_queries(src, ["scale"]);
+		}
+
+		if (domain === "prod-api.mediaexpert.pl") {
+			// thanks to anonymous for reporting:
+			// https://prod-api.mediaexpert.pl/api/images/gallery_290_300/thumbnails/images/60/6087978/LEGO-10321-ICONS-Corvette1-tyl.jpg
+			//   https://prod-api.mediaexpert.pl/api/images/gallery/thumbnails/images/60/6087978/LEGO-10321-ICONS-Corvette1-tyl.jpg
+			return src.replace(/(\/api\/+images\/+gallery)_[^/]+\/+/, "$1/");
+		}
+
+		if (domain_nowww === "mediaexpert.pl") {
+			// thanks to anonymous for reporting:
+			// https://www.mediaexpert.pl/media/cache/resolve/gallery_xml/images/37/3738626/Kuweta-PETKIT-PetKit-Pura-Max-front.jpg
+			//   https://prod-api.mediaexpert.pl/api/images/gallery/thumbnails/images/37/3738626/Kuweta-PETKIT-PetKit-Pura-Max-front.jpg
+			return src.replace(/.*\/gallery_xml\/+images\/+([0-9]{2}\/+[0-9]+\/+[^/]+)(?:[?#].*)?$/, "https://prod-api.mediaexpert.pl/api/images/gallery/thumbnails/images/$1");
+		}
+
+		if (domain === "imagescdn.junodownload.com") {
+			// thanks to anonymous for reporting:
+			// https://imagescdn.junodownload.com/300/CS6880155-02A-MED.jpg
+			//   https://imagescdn.junodownload.com/full/CS6880155-02A-BIG.jpg
+			// https://imagescdn.junodownload.com/75/CS2592868-02A-TN.jpg
+			//   https://imagescdn.junodownload.com/full/CS2592868-02A-BIG.jpg
+			// https://imagescdn.junodownload.com/150/CS6624355-02A.jpg
+			//   https://imagescdn.junodownload.com/full/CS6624355-02A-BIG.jpg
+			return src.replace(/(:\/\/[^/]+\/+)[0-9]+\/+([A-Z]+[0-9]+-[0-9A-Z]+)(?:-(?:MED|TN))?(\.[a-z]+)(?:[?#].*)?$/, "$1full/$2-BIG$3");
+		}
+
+		if (domain_nowww === "lindadress.com") {
+			// thanks to anonymous for reporting:
+			// https://www.lindadress.com/content/res/thumbs/s87/0008722_pink_long_sleeve_v_neck_a_line_lace_embellished_short_homecoming_dress_80.jpeg
+			//   https://www.lindadress.com/content/res/thumbs/s87/0008722_pink_long_sleeve_v_neck_a_line_lace_embellished_short_homecoming_dress_600.jpeg
+			//   https://www.lindadress.com/content/res/large/l87/0008722_pink_long_sleeve_v_neck_a_line_lace_embellished_short_homecoming_dress_wm.jpeg
+			return src
+				.replace(/(\/res\/+)thumbs\/+s([0-9]+\/+[^/]+)_600\./, "$1large/l$2_wm.")
+				.replace(/(\/res\/+thumbs\/+s[0-9]+\/+[^/]+)_80\./, "$1_600.");
+		}
+
+		if (domain === "media.davidrumsey.com") {
+			// thanks to anonymous for reporting:
+			// https://media.davidrumsey.com/MediaManager/srvr?mediafile=/Size0/D5005/4587108.jpg
+			//   https://media.davidrumsey.com/MediaManager/srvr?mediafile=/Size4/D5005/4587108.jpg -- 1392x1536
+			// other:
+			// https://media.davidrumsey.com/rumsey/Size4/D9003/5694201.jpg -- 3528x2254
+			return src
+				.replace(/([?&]mediafile=\/+Size)3\/+/, "$14/")
+				.replace(/([?&]mediafile=\/+Size)2\/+/, "$13/")
+				.replace(/([?&]mediafile=\/+Size)1\/+/, "$12/")
+				.replace(/([?&]mediafile=\/+Size)0\/+/, "$11/");
+		}
+
+		if (domain === "static.nonograms.ru" ||
+			// https://static.nonograms.org/files/nonograms/small/ribachok3_1_1.png
+			//   https://static.nonograms.org/files/nonograms/large/ribachok3_12_1_1p.png
+			domain === "static.nonograms.org") {
+			// thanks to anonymous for reporting:
+			// https://static.nonograms.ru/files/nonograms/small/ribachok3_1_1.png
+			//   https://static.nonograms.ru/files/nonograms/large/ribachok3_12_1_1p.png
+			// https://static.nonograms.ru/files/nonograms/small/kozlyonok2_1_1.png
+			//   https://static.nonograms.ru/files/nonograms/large/kozlyonok2_12_1_1p.png
+			// https://static.nonograms.ru/files/nonograms/small/ponchiki_1_1.png
+			//   https://static.nonograms.ru/files/nonograms/large/ponchiki_12_1_1p.png
+			return src.replace(/(\/files\/+nonograms\/+)small\/+([^/]+)_(1_1)(\.)/, "$1large/$2_12_$3p$4");
+		}
+
+		if (domain === "profiles.skyprivate.com") {
+			// thanks to anonymous for reporting:
+			// https://profiles.skyprivate.com/videos/view/aHR0c.../
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+videos\/+view\/+(aHR0c[^/]+)/,
+				run: function(cb, match) {
+					let splitted = match[1].split("-");
+					// splitted[0] = .m3u8
+					// splitted[1] = thumbnail.jpg
+					let url = base64_decode(splitted[0]);
+					if (!/\.(?:m3u8|mp4)(?:[?#].*)?$/.test(url)) {
+						console_error("Unknown URL", url);
+						return cb(null);
+					}
+
+					return cb({
+						url: url,
+						headers: {
+							Referer: "https://profiles.skyprivate.com/"
+						},
+						video: /\.m3u8(?:[?#].*)?$/.test(url) ? "hls" : true
+					});
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "images.skyprivate.com") {
+			// thanks to anonymous for reporting:
+			// https://images.skyprivate.com/images/public/307x307/11735858-sarahleksy.jpeg
+			//   https://images.skyprivate.com/images/public/1600x1200xoptimal/11735858-sarahleksy.jpeg
+			//   https://images.skyprivate.com/images/public/orig/11735858-sarahleksy.jpeg
+			return src.replace(/(\/images\/+(?:public\/+)?)(?:[0-9autooptimal]+x)+[0-9autooptimal]+\/+/, "$1orig/");
+		}
+
+		if (domain === "customer-391zfg3puc82o4vr.cloudflarestream.com") {
+			// thanks to anonymous for reporting:
+			// https://customer-391zfg3puc82o4vr.cloudflarestream.com/[hex]/thumbnails/thumbnail.jpg
+			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+([0-9a-f]{10,})\/+thumbnails\/+[^/]+(?:[?#].*)?$/, "https://cloudflare.videos.skyprivate.com/$1/manifest/video.m3u8");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					headers: {
+						Referer: "https://profiles.skyprivate.com/"
+					},
+					video: "hls"
+				};
+		}
+
+		if (domain === "s3aws.payperminute.live") {
+			// thanks to anonymous for reporting:
+			// https://s3aws.payperminute.live/avatars/converted/thumbs/[0-9a-z]+.jpg
+			newsrc = src.replace(/(\/avatars\/+converted\/+)thumbs\/+([0-9a-z]{10,})\.jpg(?:[?#].*)?$/, "$1$2.mp4");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					headers: {
+						Referer: "https://profiles.skyprivate.com/"
+					},
+					video: true
+				};
+		}
+
+		if (domain_nosub === "porndig.com") {
+			// thanks to anonymous for reporting:
+			// https://celebrities-small.porndig.com/content/d/e/delilahraige/1000/delilahraige_00763_300.jpg?ver=1
+			//   https://celebrities-small.porndig.com/content/d/e/delilahraige/1000/delilahraige_00763.jpg?ver=1
+			return src.replace(/(\/content\/+.\/+.\/+[^/]+\/+[0-9]+\/+[^/]+_[0-9]+)_300\./, "$1.");
+		}
+
+		if (domain_nowww === "chaturflix.cam") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+play\/+([0-9a-f]{10,})(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/play/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/"__NEXT_DATA__"[^>]*>({.*?})<\/script/);
+					if (!match) {
+						console_error(cache_key, "Unable to find next data from", resp);
+						return done(null, false);
+					}
+
+					let json = JSON_parse(match[1]);
+
+					if (!json.props.pageProps.video.embedUrl) {
+						console_error(cache_key, "Unable to find embedUrl in", {json, resp});
+						return done(null, false);
+					}
+
+					done({
+						url: json.props.pageProps.video.embedUrl,
+						is_pagelink: true
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain_nowww === "archivebate.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+watch\/+([0-9]+)(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/watch/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<div[^>]*\sclass="player"[^>]*>\s*<iframe[^>]*\ssrc="([^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find iframe match from", resp);
+						return done(null, false);
+					}
+
+					let url = decode_entities(match[1]);
+
+					done({
+						url,
+						is_pagelink: true
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "cdn.archivebate.com") {
+			// thanks to anonymous for reporting:
+			// https://cdn.archivebate.com/thumbnails/2021/05/03/[...]_4x4.jpg
+			match = src.match(/\/thumbnails\/+[0-9]{4}\/+[0-9]{2}\/+[0-9]{2}\/+([0-9]+)_/);
+			if (match) {
+				return {
+					url: "https://archivebate.com/watch/" + match[1],
+					is_pagelink: true
+				};
+			}
+		}
+
+		if (domain_nowww === "pornrecs.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+video\/+([0-9]+)-[^/]+\/*(?:[?#].*)?$/,
+				query_for_id: "https://pornrecs.com/video/${id}--/",
+				process: function(done, resp, cache_key) {
+					var obj = common_functions["get_videotag_obj"](resp, {
+						videotag: true,
+						ogvideo: true
+					});
+					done(obj, obj ? 60*60 : false);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (false && domain_nowww === "emturbovid.com") {
+			// wip
+			// currently fails because the hls parts link to 1x1 PNGs
+			// intercepting the request and nulling out until IEND fixes it
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+t\/+([0-9a-f]{10,})(?:[?#].*)?$/,
+				query_for_id: "https://emturbovid.com/t/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<div[^>]*\sid="video_player"[^>]*\sdata-hash="([^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find video_player match from", resp);
+						return done(null, false);
+					}
+
+					let vidlink = decode_entities(match[1]);
+					let imglink = null;
+
+					match = resp.responseText.match(/var\s+poster\s*=.*?["'](https?:\/\/[^'"]+\/poster\/[^'"]+)["']/);
+					if (match) {
+						imglink = match[1];
+					}
+
+					let title = null;
+
+					match = resp.responseText.match(/var\s+title\s*=.*?\?\s*("[^"]+")/);
+					if (match) {
+						title = JSON_parse(match[1]);
+					}
+
+					let baseobj = {
+						extra: {
+							page: resp.finalUrl,
+							caption: title
+						}
+					};
+
+					let urls = [{
+						url: vidlink,
+						video: "hls",
+						headers: {
+							Origin: "https://" + domain,
+							Referer: vidlink.replace(/(:\/\/[^/]+\/+).*/, "$1"),
+							"Sec-Fetch-Dest": "empty",
+							"Sec-Fetch-Mode": "cors",
+							"Sec-Fetch-Site": "cross-site"
+						}
+					}];
+					if (imglink)
+						urls.push(imglink);
+
+					return done(fillobj_urls(urls, baseobj), 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "ver1.sptvp.com") {
+			// thanks to anonymous for reporting:
+			match = src.match(/\/poster\/+.\/+..\/+([0-9a-f]{10,})\./);
+			if (match) {
+				return {
+					url: "https://emturbovid.com/t/" + match[1],
+					is_pagelink: true
+				};
+			}
+		}
+
+		if (domain === "images.chesscomfiles.com") {
+			// thanks to arlenestrigger on discord for reporting:
+			// https://images.chesscomfiles.com/uploads/user/38782340.3e81e892.160x160o.aa814a9d31d4.jpeg
+			//   https://images.chesscomfiles.com/uploads/user/38782340.3e81e892.160x160o.aa814a9d31d4@2x.jpeg
+			newsrc = src.replace(/(\/uploads\/+user\/+[0-9]+\.[0-9a-f]{5,}\.[^/?#@]+\.[0-9a-f]{5,})(\.[a-z]+)(?:[?#].*)?$/, "$1@2x$2");
+			if (newsrc !== src)
+				return newsrc;
+
+			// thanks to arlenestrigger on discord for reporting:
+			// https://images.chesscomfiles.com/uploads/user/38782340.3e81e892.160x160o.aa814a9d31d4@2x.jpeg
+			//   https://images.chesscomfiles.com/uploads/user/38782340.3e81e892.jpeg
+			return src.replace(/(\/uploads\/+user\/+[0-9]+\.[0-9a-f]{5,})\.[^/?#]+(\.[a-z]+)(?:[?#].*)?$/, "$1$2");
+		}
+
+		if (domain_nowww === "ecdn.pro") {
+			// thanks to anonymous for reporting:
+			// o, x, p, f, l, t, b, c
+			// https://ecdn.pro/p/t/4/133/7418497.jpg
+			//   https://ecdn.pro/p/f/4/133/7418497.jpg -- 1400x806
+			//   https://ecdn.pro/p/x/4/133/7418497.jpg -- 1800x1036
+			//   https://ecdn.pro/p/o/4/133/7418497.jpg -- 4716x2714
+			return src.replace(/(:\/\/[^/]+\/+p\/+)[a-z]\/+/, "$1o/");
+		}
+
+		if (domain_nowww === "xahlee.org") {
+			// thanks to anonymous for reporting:
+			// http://xahlee.org/sl/sl/tn/i/sl_math/double_spiral.jpg
+			//   http://xahlee.org/sl/sl/i/sl_math/double_spiral.jpg
+			return src.replace(/\/tn\/+i\/+/, "/i/");
+		}
+
+		if (domain_nowww === "gawby.com") {
+			// thanks to anonymous for reporting:
+			// https://www.gawby.com/en/photos/258847/3837382
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+[^/]+\/+((?:photos|person)?\/+[0-9]+\/+(?:photos\/+)?[0-9]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://www.gawby.com/en/${id}",
+				process: function(done, resp, cache_key) {
+					let orig_match = resp.responseText.match(/"(https?:\/\/i\.gawby\.com\/[^"]+\/o\/[^/"]+)"/);
+					if (!orig_match) {
+						console_error(cache_key, "Unable to find orig match from", resp);
+						return done(null, false);
+					}
+
+					let extra:InfoExtraObject = {
+						page: resp.finalUrl
+					};
+
+					let desc = get_meta(resp.responseText, "description");
+					if (desc)
+						extra.caption = desc;
+
+					let url = decode_entities(orig_match[1]);
+					return done({
+						url,
+						extra
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "i.gawby.com" && host_domain_nowww === "gawby.com" && options.element) {
+			newsrc = common_functions["get_pagelink_el_matching"](options.element, function(el) {
+				if (el.href && /\/(?:photos|person)\/+[0-9]+\/+(?:photos\/+)?[0-9]+\/*(?:[?#].*)?$/.test(el.href))
+					return true;
+			});
+			if (newsrc) return newsrc;
+
+			// thanks to chr1sx on github for reporting: https://github.com/qsniyg/maxurl/issues/1393
+			newsrc = common_functions["get_pagelink_host_el_matching"](options, {
+				url_match: /\/(?:photos|person)\/+[0-9]+\/+(?:photos\/+)?[0-9]+\/*(?:[?#].*)?$/,
+				el_match: function(x) {
+					return x.tagName === "IMG" && !x.hasAttribute("data-src") && x.hasAttribute("alt");
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain_nowww === "pornmedium.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+video\/+(?:[^/?#]*-)?([0-9]+)(?:[?#].*)?$/,
+				query_for_id: "https://www.pornmedium.com/video/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/player\.source\s*=\s*({[\s\S]+?});/);
+					if (!match) {
+						console_error(cache_key, "Unable to find player.source match from", resp);
+						return done(null, false);
+					}
+
+					let json_txt = fixup_js_obj_proper(match[1]);
+
+					let json = null;
+					try {
+						json = JSON_parse(json_txt);
+					} catch (e) {
+						console_error(cache_key, "Unable to parse JSON from", {json_txt, resp}, e);
+						return done(null, false);
+					}
+
+					json.sources.sort((a, b) => {
+						return b.size - a.size;
+					});
+
+					let extra:InfoExtraObject = {
+						page: resp.finalUrl
+					};
+
+					if (json.title)
+						extra.caption = json.title;
+
+					let urls = [];
+
+					for (let source of json.sources) {
+						urls.push({
+							url: source.src,
+							headers: {
+								Referer: resp.finalUrl
+							},
+							video: true
+						});
+					}
+
+					if (json.poster)
+						urls.push(json.poster);
+
+					return done(fillobj_urls(urls, {extra}), 60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "img.pornmedium.com") {
+			// thanks to anonymous for reporting:
+			// https://img.pornmedium.com/images/8896700/8896679_1.webp
+			match = src.match(/\/images\/+[0-9]+\/+([0-9]+)_[0-9]+\.[a-z]+(?:[?#].*)?$/);
+			if (match) {
+				return {
+					url: "https://www.pornmedium.com/video/" + match[1],
+					is_pagelink: true
+				};
+			}
+		}
+
+		if (domain === "img.fotocommunity.com") {
+			// thanks to anonymous for reporting:
+			// https://img.fotocommunity.com/the-living-forest-846-red-fox-52649387-837a-48d1-b4fe-e881c199b04d.jpg?height=600
+			//   https://img.fotocommunity.com/the-living-forest-846-red-fox-52649387-837a-48d1-b4fe-e881c199b04d.jpg?width=1920
+			// https://img.fotocommunity.com/protected-8450ae63-6d49-45ae-9005-b46090a4ed9a.jpg?width=1920 -- 1920x1223
+			return src.replace(/\?.*/, "?width=1920");
+		}
+
+		if (domain === "cdn.syngency.com") {
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1391
+			// https://www.naturalmodelsla.com/portfolios/jasmine-blandford
+			// https://cdn.syngency.com/591/models/474307/galleries/1095783/small/19813702.jpg?1726618739
+			//   https://cdn.syngency.com/591/models/474307/galleries/1095783/medium/19813702.jpg?1726618739
+			//   https://cdn.syngency.com/591/models/474307/galleries/1095783/large/19813702.jpg?1726618739
+			//   https://cdn.syngency.com/591/models/474307/galleries/1095783/19813702.jpg?1726618739 -- 5501x7335
+			return src.replace(/(\/galleries\/+[0-9]+\/+)(?:small|medium|large)\/+/, "$1");
+		}
+
+		if (domain_nowww === "mvideoroom.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+(?:watch|embed)\/+([0-9]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/embed/${id}/",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<iframe[^>]+src="([^'']+?)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find iframe match from", resp);
+						return done(null, false);
+					}
+
+					let url = decode_entities(match[1]);
+
+					return done({
+						url,
+						is_pagelink: true
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+shorts\/+([0-9]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/shorts/${id}/",
+				process: function(done, resp, cache_key, urlmatch) {
+					let videomatches = match_all(resp.responseText, /<video id="shorts_([0-9]+)"[^>]*src="([^"]+)"/);
+					if (!videomatches) {
+						console_error(cache_key, "Unable to find video matches from", resp);
+						return done(null, false);
+					}
+
+					let url = null;
+					for (let match of videomatches) {
+						if (match[1] !== urlmatch[1])
+							continue;
+
+						url = decode_entities(match[2]);
+					}
+
+					if (!url) {
+						console_error(cache_key, "Unable to find video URL from", {resp, videomatches, urlmatch});
+						return done(null, false);
+					}
+
+					let urls = [];
+
+					let qualities = ["720", "480", "360"];
+					for (let quality of qualities) {
+						urls.push({
+							url: url.replace(/(\/[0-9]+_)[0-9]+(\.[a-z0-9]+(?:[?#].*)?)$/, "$1" + quality + "$2"),
+							video: true
+						});
+					}
+
+					done(urls, 60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "img.mvideoroom.com") {
+			// thanks to anonymous for reporting:
+			// https://img.mvideoroom.com/picture/picture_preview/.../78510.jpg
+			match = src.match(/\/picture\/+picture_preview\/+[0-9a-f]{10,}\/+([0-9]+)\./);
+			if (match)
+				return {
+					url: "https://mvideoroom.com/embed/" + match[1] + "/",
+					is_pagelink: true
+				};
+
+			// https://img.mvideoroom.com/picture/picture_preview/.../[id].jpg
+			match = src.match(/\/picture\/+picture_preview_shorts\/+[0-9a-f]{10,}\/+([0-9]+)\./);
+			if (match)
+				return {
+					url: "https://mvideoroom.com/shorts/" + match[1] + "/",
+					is_pagelink: true
+				};
+		}
+
+		if (domain === "teaser.mvideoroom.com") {
+			// https://teaser.mvideoroom.com/teaser/.../[id].mp4?rn=[timestamp]
+			match = src.match(/\/teaser\/+[0-9a-f]{10,}\/+([0-9]+)\./);
+			if (match)
+				return {
+					url: "https://mvideoroom.com/embed/" + match[1] + "/",
+					is_pagelink: true
+				};
+		}
+
+		if (domain === "cdn.my.club") {
+			// thanks to anonymous for reporting:
+			// https://cdn.my.club/cdn/photos/f/9/2/f9249cd8f51b99c6f87364039c173bb5-preview -- 741x1200, wm
+			//   https://cdn.my.club/cdn/photos/f/9/2/f9249cd8f51b99c6f87364039c173bb5-full -- 1417x2296, wm
+			//   https://cdn.my.club/cdn/photos/f/9/2/f9249cd8f51b99c6f87364039c173bb5 -- 1417x2296, no wm
+			// https://cdn.my.club/cdn/avatars/0/d/a/0daf83129110659e4d8d5183de0827bb-full -- 200x200
+			//   https://cdn.my.club/cdn/avatars/0/d/a/0daf83129110659e4d8d5183de0827bb -- 800x800
+			// https://cdn.my.club/cdn/photos/5/7/4/5742a24796b774b9a6f08af5745741b3-preview -- 900x1200, wm
+			//   https://cdn.my.club/cdn/photos/5/7/4/5742a24796b774b9a6f08af5745741b3-full -- 1440x1920, wm
+			//   https://cdn.my.club/cdn/photos/5/7/4/5742a24796b774b9a6f08af5745741b3 -- 404
+			// https://cdn.my.club/cdn/photos/7/4/0/740ff0c7555fd9b37e22e19090a08f9a-thumb
+			//   https://cdn.my.club/cdn/photos/7/4/0/740ff0c7555fd9b37e22e19090a08f9a-full
+			//   https://cdn.my.club/cdn/photos/e/4/6/e46ce449e3f8daba5e2c8187153456ca-blur -- different hex
+			// https://cdn.my.club/cdn/intro/a/0/5/a058a41d99d9b60e4c9212eccf1a05ab-thumb
+			//   https://cdn.my.club/cdn/intro/a/0/5/a058a41d99d9b60e4c9212eccf1a05ab -- 1955x2276
+			// https://cdn.my.club/cdn/photos/f/6/7/f670be4a4f7859d5cc0a4854f37da662-preview-original
+			//   https://cdn.my.club/cdn/photos/f/6/7/f670be4a4f7859d5cc0a4854f37da662
+			return src
+				.replace(/(\/cdn\/+(?:photos|avatars|intro)\/+.\/+.\/+.\/+[0-9a-f]{10,})-full(?:[?#].*)?$/, "$1")
+				.replace(/(\/cdn\/+(?:photos|avatars|intro)\/+.\/+.\/+.\/+[0-9a-f]{10,})-preview(?:-original)?(?:[?#].*)?$/, "$1-full")
+				.replace(/(\/cdn\/+(?:photos|avatars|intro)\/+.\/+.\/+.\/+[0-9a-f]{10,})-(?:thumb|blur)(?:[?#].*)?$/, "$1-preview");
+		}
+
+		if (domain_nowww === "protohub.online") {
+			// thanks to anonymous for reporting:
+			// https://protohub.online/iconimage/?id=3537
+			//   https://protohub.online/image/?id=3537
+			return src.replace(/\/iconimage\//, "/image/");
+		}
+
+		if (domain === "img.artlogic.net") {
+			// thanks to anonymous for reporting:
+			// https://img.artlogic.net/w_3000,h_3000,c_limit/exhibit-e/5a9863286aa72c2f236dc9c5/1ed927a7a16d0d6d1326f5ad3bce0e1d.jpeg
+			//   https://img.artlogic.net/exhibit-e/5a9863286aa72c2f236dc9c5/1ed927a7a16d0d6d1326f5ad3bce0e1d.jpeg
+			return src.replace(/(:\/\/[^/]+\/+)[^/]+\/+(exhibit)/, "$1$2");
+		}
+
+		if (host_domain_nowww === "facecheck.id" && !src && origsrc && options.element) {
+			// thanks to Egor Popov on discord:
+			if (options.element.tagName === "DIV" && options.element.classList.contains("facediv")) {
+				try {
+					let decoded = base64_decode(origsrc.replace(/^.*?,\s*/, ""));
+					match = decoded.match(/"url":\s*("https?:\/\/[^"]+")/);
+					if (match) {
+						let page = JSON_parse(match[1]);
+						let baseobj = {
+							url: origsrc,
+							extra: {
+								page
+							}
+						};
+
+						if (looks_like_valid_link(page, true)) {
+							return [page, baseobj];
+						} else {
+							return baseobj;
+						}
+					}
+				} catch (e) {
+					console_error(e);
+				}
+			}
+		}
+
+		if (domain_nowww === "comicshoplocator.com" ||
+			// https://www.previewsworld.com/SiteImage/CatalogThumbnail/STL321428
+			//   https://www.previewsworld.com/SiteImage/MainImage/STL321428
+			domain_nowww === "previewsworld.com") {
+			// thanks to Froktime: https://github.com/qsniyg/maxurl/issues/1385
+			// https://www.comicshoplocator.com/SiteImage/CatalogThumbnail/STL321428
+			//   https://www.comicshoplocator.com/SiteImage/MainImage/STL321428
+			//   https://www.comicshoplocator.com/SiteImage/MainImage/STL321428.jpg
+			return src.replace(/(\/SiteImage\/+)CatalogThumbnail\/+/, "$1MainImage/");
+		}
+
+		if (domain === "img.xchina.store") {
+			// thanks to anonymous for reporting:
+			// https://img.xchina.store/photos2/6666063f48d5c/0003_600x0.webp
+			//   https://img.xchina.store/photos2/6666063f48d5c/0003.jpg -- 1800x2700
+			return src.replace(/(\/photos2\/+[0-9a-f]+\/+[0-9]+)_[0-9]+x[0-9]+\.webp(?:[?#].*)?$/, "$1.jpg");
+		}
+
+		if (domain_nowww === "exeypanteleev.com") {
+			// thanks to anonymous for reporting:
+			return src.replace(/(:\/\/[^/]+\/+)pp\/+/, "$1p/");
+		}
+
+		if (domain_nosub === "exportersindia.com" && /^img[0-9]*\./.test(domain)) {
+			// thanks to anonymous for reporting:
+			// https://img3.exportersindia.com/product_images/bc-thumb/dir_11/304667/mica-heating-elements-01-93207.jpg
+			//   https://img3.exportersindia.com/product_images/bc-small/dir_11/304667/mica-heating-elements-01-93207.jpg
+			//   https://img3.exportersindia.com/product_images/bc-full/dir_11/304667/mica-heating-elements-01-93207.jpg -- 450x256
+			// https://img1.exportersindia.com/product_images/bc-full/2023/9/433773/ladies-cotton-top-1686981275-6940736.jpeg -- 488x798, upscaled?
+			return src
+				.replace(/(\/product_images\/+)bc-small\/+/, "$1bc-full/")
+				.replace(/(\/product_images\/+)bc-thumb\/+/, "$1bc-small/");
+		}
+
+		if (domain_nowww === "players.de") {
+			// thanks to anonymous for reporting:
+			// https://players.de/app/uploads/dynamic/2018/12/Hannah-c-Chloe-Leenheer18-2560x0-c-default.jpg
+			//   https://players.de/app/uploads/2018/12/Hannah-c-Chloe-Leenheer18.jpg
+			return src.replace(/(\/app\/+uploads\/+)dynamic\/+(.*?)-[0-9]+x[0-9]+-c-[a-z]+\./, "$1$2.");
+		}
+
+		if (domain_nosub === "dgicloud.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: [
+					// https://glbt.i8.dgicloud.com/ladylibertyheaddress/
+					/^[a-z]+:\/\/[^/]+\/+([a-z0-9]+)\/*(?:[?#].*)?$/,
+					// https://unr.dgicloud.com/node/32393 -- has original
+					/^[a-z]+:\/\/[^/]+\/+(node\/+[0-9]+)\/*(?:[?#].*)?$/
+				],
+				query_for_id: "https://" + domain + "/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<script type="application\/json" data-drupal-selector="drupal-settings-json">({.*?})<\/script>/);
+					if (!match) {
+						console_error(cache_key, "Unable to find drupal-settings-json match from", resp);
+						return done(null, false);
+					}
+
+					let tsmatch = match[1].match(/"tileSources":\s*("[^"]+"),/);
+					if (!tsmatch) {
+						console_error(cache_key, "Unable to find tileSources match from", {resp, match});
+						return done(null, false);
+					}
+
+					let tilesources = JSON_parse(tsmatch[1]);
+
+					// TODO: try original file first
+					return done(tilesources + "/full/full/0/default.jpg", 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (host_domain_nosub === "dgicloud.com" && options.element) {
+			if (options.element.tagName === "CANVAS" && options.element.parentElement && options.element.parentElement.classList.contains("openseadragon-canvas")) {
+				return {
+					url: options.host_url,
+					is_pagelink: true
+				};
+			}
+		}
+
+		if (domain === "arc.stimg.co") {
+			// thanks to friedkeenan on github for reporting: https://github.com/qsniyg/maxurl/issues/1401
+			// https://arc.stimg.co/startribunemedia/DIYZUZCWVFU2CBOECJNRBYCX2Y.jpg?&w=712 -- 1424x949
+			//   https://arc.stimg.co/startribunemedia/DIYZUZCWVFU2CBOECJNRBYCX2Y.jpg?w -- 4474x2982
+			return src.replace(/(:\/\/[^/]+\/+[^/]+\/+[A-Z0-9]+\.[a-z]+)(?:[?#].*)?$/, "$1?w");
+		}
+
 
 
 
@@ -117186,6 +119259,10 @@ var $$IMU_EXPORT$$;
 
 		// coppermine
 		if (domain === "i.pinger.pl" ||
+			// thanks to anonymous for reporting:
+			// https://hamaraphotos.com/albums300/userpics/Actresses/easwari_rao/big/thumb_15.jpg
+			//   https://hamaraphotos.com/albums300/userpics/Actresses/easwari_rao/big/15.jpg
+			domain_nowww === "hamaraphotos.com" ||
 			src.search(/(?::\/\/[^/]*\/(gallery|photos|photogallery)|:\/\/gallery\.[^/]*)?\/albums\/+[^/]*(?:\/+.*)?\/+(normal|thumb|userpics)_[^/.]*\.[^/.]*$/) >= 0) {
 			// http://emma-w.net/photos/albums/Events/2017/MARCH13/001/thumb_001.jpg
 			//   http://emma-w.net/photos/albums/Events/2017/MARCH13/001/001.jpg
@@ -119777,6 +121854,20 @@ var $$IMU_EXPORT$$;
 			};
 		}
 
+		if (host_domain_nosub === "ok.ru") {
+			return {
+				element_ok: function(el) {
+					if (el.tagName === "DIV" && el.classList.contains("np_photoBox")) {
+						let img = el.querySelector(".np_img_cnt > img.np_img");
+						if (img)
+							return img;
+					}
+
+					return "default";
+				}
+			};
+		}
+
 		// no longer necessary due to blob being supported
 		if (false && (common_functions["is_pinterest_domain"](host_domain) ||
 			common_functions["multidomain__nitter"](host_domain, host_domain_nowww) ||
@@ -120996,9 +123087,20 @@ var $$IMU_EXPORT$$;
 		let oldobj = state.oldobj;
 
 		let already_tried_url = false;
+		let already_tried_nonbad_url = false;
 		for (let tried_url of state.tried_imus) {
 			if (tried_url === url) {
 				already_tried_url = true;
+
+				for (let t_url of state.tried_urls) {
+					if (t_url.url !== tried_url)
+						continue
+
+					if (!t_url.redirects_to_bad) {
+						already_tried_nonbad_url = true;
+						break;
+					}
+				}
 			}
 		}
 		state.tried_imus.push(url);
@@ -121028,6 +123130,9 @@ var $$IMU_EXPORT$$;
 									let orig_url = tried_urls[j].newobj.url;
 									let index = array_indexof(image_urls, orig_url);
 									tried_urls[j].redirects_to_bad = true;
+
+									if (already_tried_nonbad_url && bad_url === url)
+										already_tried_nonbad_url = false;
 
 									if (index >= 0) {
 										obj.splice(index, 1);
@@ -121135,9 +123240,9 @@ var $$IMU_EXPORT$$;
 
 						//if (array_indexof(image_urls, newurl) < 0 && newurl !== url || true) {
 						var newurl_index = array_indexof(image_urls, newurl);
-						if (newurl_index < 0 && already_tried_url) {
+						if (newurl_index < 0 && already_tried_nonbad_url) {
 							if (_nir_debug_) {
-								console_log("bigimage_recursive_loop (query): already tried url", deepcopy(state));
+								console_log("bigimage_recursive_loop (query): already tried url", newurl, image_urls, deepcopy(state));
 							}
 							return options.cb(null, data);
 						}
@@ -124450,6 +126555,21 @@ var $$IMU_EXPORT$$;
 			version = 11;
 		}
 
+		if (version === 11) {
+			if ("mouseover_video_autoplay" in new_settings) {
+				if (new_settings.mouseover_video_autoplay === true) {
+					update_setting("mouseover_video_autoplay", "always");
+				} else if (new_settings.mouseover_video_autoplay === false) {
+					update_setting("mouseover_video_autoplay", "never");
+				}
+			}
+
+			update_setting("settings_version", 12);
+			changed = true;
+
+			version = 12;
+		}
+
 		cb(changed);
 	}
 
@@ -125004,12 +127124,24 @@ var $$IMU_EXPORT$$;
 		return newsubs;
 	};
 
+	let is_tab_active = function() {
+		if (!("hidden" in document))
+			return true;
+
+		return !document.hidden;
+	};
+
+	let autoplay_enabled = function() {
+		return settings.mouseover_video_autoplay === "always" ||
+			(settings.mouseover_video_autoplay === "active" && is_tab_active());
+	};
+
 	var create_streaming_el = function(obj, type, processing, good_cb, err_cb) {
 		var video = document_createElement(type);
 
 		set_common_el_properties(video, obj);
 
-		if (settings.mouseover_video_autoplay)
+		if (autoplay_enabled())
 			video.setAttribute("autoplay", "autoplay");
 
 		if (settings.mouseover_video_controls || type === "audio")
@@ -125916,6 +128048,36 @@ var $$IMU_EXPORT$$;
 						}
 					} else if (enc.objurl) {
 						// based on https://stackoverflow.com/a/23856573/13255485
+
+						/*let reject = function() {
+							revoke_objecturl(enc.objurl);
+
+							console_error("Unable to load blob for", enc);
+							response.data.response = null;
+							request_final();
+						};
+
+						fetch(enc.objurl, {
+							method: "GET",
+							// thanks to anonymous for reporting:
+							// kitty-kats.net sets <meta name="referrer" content="always" />, which breaks these requests
+							referrerPolicy: "no-referrer"
+						}).then(resp => {
+							if (wanted_responseType === "blob") {
+								return resp.blob();
+							} else if (wanted_responseType === "arraybuffer") {
+								return resp.arrayBuffer();
+							} else {
+								throw new Error("Unhandled response type: " + wanted_responseType);
+							}
+						}, reject).then(data => {
+							revoke_objecturl(enc.objurl);
+
+							response.data.response = data;
+							request_final();
+						}, reject);
+						return;*/
+
 						var xhr = new XMLHttpRequest();
 						xhr.open("GET", enc.objurl);
 						xhr.responseType = wanted_responseType as XMLHttpRequestResponseType;
@@ -126148,7 +128310,7 @@ var $$IMU_EXPORT$$;
 			waitingel.style.top = (y - (waitingsize / 2)) + "px";
 		}
 
-		var start_waiting = function(el, cursor?:string) {
+		var start_waiting = function(el?, cursor?:string) {
 			if (!cursor)
 				cursor = "wait";
 
@@ -127772,22 +129934,15 @@ var $$IMU_EXPORT$$;
 
 			var current = "";
 			var in_bracket = false;
-			var escape = false;
 			for (var i = 0; i < formatstr.length; i++) {
 				var c = formatstr[i];
+				let nextc = null;
+				if (i+1 < formatstr.length)
+					nextc = formatstr[i + 1];
 
-				if (c === '\\') {
-					if (escape) {
-						current += '\\';
-					} else {
-						escape = true;
-					}
-
-					continue;
-				}
-
-				if (escape) {
-					current += c;
+				if (c === '\\' && (nextc === '{' || nextc === '}')) {
+					current += nextc;
+					i++;
 					continue;
 				}
 
@@ -127834,7 +129989,79 @@ var $$IMU_EXPORT$$;
 					var op = null;
 					var compare_flags = [];
 
-					var match = varname.match(/^([^?]+)[?](.*)$/);
+					let process_varvalue = [];
+
+					// thanks to musicianjam888 on github for the idea: https://github.com/qsniyg/maxurl/issues/1398
+					let match = varname.match(/^([^!/:=]+?)\/(.*?\/.*?\/c?)(:[0-9]+\.?)?$/);
+					if (match) {
+						varname = match[1];
+						if (match[3]) // :[0-9]+\.?
+							varname += match[3];
+
+						let regexval = match[2]; // don't pass match to closure because it gets overridden
+						process_varvalue.push(function(value) {
+							let regexmatch = "", regexreplace = "", regexflags = "";
+							let stage = 0;
+
+							let commit = function(c) {
+								if (stage === 0) {
+									regexmatch += c;
+								} else if (stage === 1) {
+									regexreplace += c;
+								} else if (stage === 2) {
+									regexflags += c;
+								} else {
+									console.error("Invalid regex stage:", {stage, c, regexval});
+								}
+							};
+
+							for (let i = 0; i < regexval.length; i++) {
+								let c = regexval[i];
+								let nextc = null;
+								if (i+1 < regexval.length)
+									nextc = regexval[i + 1];
+
+								if (stage === 2) {
+									commit(c);
+									continue;
+								}
+
+								if (c === "\\" && nextc === "/") {
+									commit("/");
+									i++;
+									continue;
+								}
+
+								if (c === "/") {
+									stage++;
+									continue;
+								}
+
+								commit(c);
+							}
+
+							if (!regexmatch || !regexreplace) {
+								console_warn("Unable to parse regex:", {regexval, regexmatch, regexreplace, stage});
+								return value;
+							}
+
+							let flags = "i";
+							if (regexflags === "c")
+								flags = "";
+
+							let regex = null;
+							try {
+								regex = new RegExp(regexmatch, flags);
+							} catch (e) {
+								console_error(e);
+								return value;
+							}
+
+							return value.replace(regex, regexreplace);
+						});
+					}
+
+					match = varname.match(/^([^?]+)[?](.*)$/);
 					if (match) {
 						varname = match[1];
 						default_value = match[2];
@@ -127868,21 +130095,32 @@ var $$IMU_EXPORT$$;
 						op = "set";
 					}
 
-					var varvalue = vars[varname];
-
-					var match = varname.match(/^(.*?):([0-9]+)(\.)?$/);
+					match = varname.match(/^(.*?):([0-9]+)(\.)?$/);
 					if (match) {
-						varvalue = vars[match[1]];
-						if (varvalue) {
-							var newvalue = varvalue.substr(0, parseInt(match[2]));
-							if (match[3]) {
+						varname = match[1];
+
+						let trimamt = parse_int(match[2]);
+						let add_ellipsis = match[3];
+
+						process_varvalue.push(function(varvalue) {
+							var newvalue = varvalue.substr(0, trimamt);
+							if (add_ellipsis) {
 								if (newvalue !== varvalue) {
 									// …
 									newvalue += "\u2026";
 								}
 							}
-							varvalue = newvalue;
-						}
+
+							return newvalue;
+						});
+					}
+
+					var varvalue = vars[varname];
+					for (let proc of process_varvalue) {
+						if (!varvalue)
+							break;
+
+						varvalue = proc(varvalue);
 					}
 
 					var usevar = !!varvalue;
@@ -128042,7 +130280,7 @@ var $$IMU_EXPORT$$;
 			return null;
 		};
 
-		var fill_obj_filename = function(newobj, url, respdata) {
+		var fill_obj_filename = function(newobj, url, respdata, popup_el) {
 			if (typeof newobj.filename !== "string")
 				newobj.filename = "";
 
@@ -128153,7 +130391,7 @@ var $$IMU_EXPORT$$;
 			// to avoid formatting the filename multiple times
 			if (!("_orig_filename" in newobj)) newobj._orig_filename = orig_filename;
 
-			var format_vars = {
+			var format_vars:any = {
 				filename: newobj._orig_filename
 			};
 
@@ -128263,6 +130501,11 @@ var $$IMU_EXPORT$$;
 					format_vars.ext = "." + wanted_ext;
 			}
 
+			// thanks to Dietz on discord for reporting:
+			if (!format_vars.caption && popup_el) {
+				format_vars.caption = get_caption(newobj, popup_el);
+			}
+
 			newobj.format_vars = shallowcopy(format_vars);
 
 			var new_filename = get_filename_from_format(settings.filename_format, format_vars);
@@ -128335,7 +130578,7 @@ var $$IMU_EXPORT$$;
 				if (resp.finalUrl)
 					theobj.url = resp.finalUrl;
 
-				fill_obj_filename(theobj, theobj.url, resp);
+				fill_obj_filename(theobj, theobj.url, resp, popup_el);
 				popup_obj = theobj;
 
 				if (openb === "newtab" || openb === "newtab_bg") {
@@ -130016,7 +132259,7 @@ var $$IMU_EXPORT$$;
 
 				popup_createui_func = create_ui;
 
-				fill_obj_filename(newobj, url, data.data.respdata);
+				fill_obj_filename(newobj, url, data.data.respdata, popup_el);
 
 				create_ui();
 
@@ -130686,7 +132929,7 @@ var $$IMU_EXPORT$$;
 
 				// even if autoplay is enabled, if the element is cached, it won't play automatically
 				if (is_stream) {
-					if (settings.mouseover_video_autoplay) {
+					if (autoplay_enabled()) {
 						play_video(img);
 					} else {
 						img.pause();
@@ -134259,15 +136502,22 @@ var $$IMU_EXPORT$$;
 			get_library("jszip", settings, do_request, function(lib) {
 				if (!lib) return cb(null);
 
-				var zip = new lib();
+				let zip = null;
 
-				var root = zip;
-				if (foldername) {
-					root = zip.folder(foldername);
-				}
+				try {
+					zip = new lib();
 
-				for (var filename in files) {
-					root.file(filename, files[filename]);
+					var root = zip;
+					if (foldername) {
+						root = zip.folder(foldername);
+					}
+
+					for (var filename in files) {
+						root.file(filename, files[filename]);
+					}
+				} catch (e) {
+					console_error("jszip:", e);
+					return cb(null);
 				}
 
 				zip.generateAsync({type: "blob"}, function(prog_info) {
@@ -134597,7 +136847,7 @@ var $$IMU_EXPORT$$;
 				}
 
 				var fill_filename = function(use_download) {
-					fill_obj_filename(obj, origurl, data.data.respdata);
+					fill_obj_filename(obj, origurl, data.data.respdata, our_source.el);
 					filename = obj.filename;
 
 					// this should hopefully not happen
@@ -134740,6 +136990,7 @@ var $$IMU_EXPORT$$;
 								onprogress(1);
 
 								if (!data) {
+									console_error("download_album: No data (failed to zip?)", files);
 									cursor_not_allowed();
 									return;
 								} else {
@@ -136977,11 +139228,20 @@ var $$IMU_EXPORT$$;
 
 		let url = parsed._positional[0];
 
-		bigimage_recursive(url, {
+		let window = {
+			location: {
+				href: url
+			}
+		};
+
+		bigimage_recursive_loop(url, {
 			fill_object: true,
+			window: window,
 			cb: function(obj) {
 				console.log(JSON_stringify(obj, null, '\t'));
 			}
+		}, function(obj, finalcb) {
+			console.log("BRL", obj);
 		});
 	};
 
