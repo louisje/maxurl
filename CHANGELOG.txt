@@ -1,3 +1,32 @@
+2025.5.0
+
+New features:
+
+ * Option to autoplay only when tab is active (#1399)
+ * Re-enable downloading HLS/DASH streams for non-AMO builds (#753)
+ * Option to enable chunked downloads for userscript
+ * Option to enable gallery download button in popup (disabled by default, thanks to Dietz for the idea)
+ * Gallery download popup action
+ * Support dragging to select images for custom gallery
+ * Shift+click in custom gallery will now (un)select all detected gallery images
+ * Gallery download key can now be triggered directly in custom gallery
+ * Support for ~160 new websites (using ~85 new rules)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Reddit, Soundcloud, Steam, VK)
+ * Gallery detection now treats picture and img elements as the same
+ * Custom gallery outlines remain correct on window resize
+
+Bugfixes:
+
+ * Fix "Clicking link downloads" downloading when dragging the popup (#1378)
+ * Fix SVG downloads returning a ".svg.svg+xml" extension (thanks to Dietz for reporting)
+
+Special thanks to byjrg, TanatOSz, skbeh, F640, Gavin, vscum, sn3akyb3ar, elevate, karpuzikov, Froktime, LemonMeringueTie895, fireattack, chalklog, ljcool2006, fyhtma, karpuzikov, Floorbound, ANaPhOrAX, Earthworm-Banana, Dietz, Oddbrother, Velocidensity, Freso, ROpdebee for their contributions and reports for this release
+
+---
+
 2025.2.0
 
 New features:

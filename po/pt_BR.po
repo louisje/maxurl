@@ -12,9 +12,9 @@ msgstr ""
 msgid "$language_native$"
 msgstr "Português (Brasil)"
 
-#. English: Finds larger or original versions of images and videos for 9700+ websites, including a powerful media popup and download feature
+#. English: Finds larger or original versions of images and videos for 9800+ websites, including a powerful media popup and download feature
 msgid "$description$"
-msgstr "Encontra versões maiores ou originais de imagens e vídeos para mais de 9700 sites"
+msgstr "Encontra versões maiores ou originais de imagens e vídeos para mais de 9800 sites"
 
 #. English: Options
 msgid "options_header"
@@ -396,6 +396,14 @@ msgstr "Se um arquivo for maior que este tamanho, use um download simples basead
 #. gm_download_max.number_unit
 msgid "MB"
 msgstr "MB"
+
+#. enable_chunked_download.name
+msgid "Enable chunked download"
+msgstr ""
+
+#. enable_chunked_download.description
+msgid "Prefers chunked downloads over simple browser-based downloads. Allows downloading files requiring custom headers. Note that it will download the entire file into memory before displaying the save dialog, and can be slower than regular downloads."
+msgstr ""
 
 #. enable_webextension_download.name
 msgid "Force save dialog when downloading"
@@ -779,6 +787,18 @@ msgstr "Reprodução automática"
 msgid "Play automatically once the popup is opened"
 msgstr "Reproduzir automaticamente quando o pop-up for aberto"
 
+#. mouseover_video_autoplay.options.active.name
+msgid "If active tab"
+msgstr ""
+
+#. mouseover_video_autoplay.options.onactive.name
+msgid "When active tab"
+msgstr ""
+
+#. mouseover_video_autoplay.options.disabled.name
+msgid "Disabled"
+msgstr ""
+
 #. mouseover_video_controls.name
 msgid "Show video controls"
 msgstr "Exibir controles de vídeo"
@@ -1142,6 +1162,16 @@ msgid ""
 msgstr ""
 "Habilita um botão para baixar a imagem.\n"
 "ID CSS: `#downloadbtn`"
+
+#. mouseover_ui_download_gallery_btn.name
+msgid "Gallery Download Button"
+msgstr ""
+
+#. mouseover_ui_download_gallery_btn.description
+msgid ""
+"Enables a button to download the gallery.\n"
+"CSS ID: `#gallerydlbtn`"
+msgstr ""
 
 #. mouseover_ui_rotationbtns.name
 msgid "Rotation Buttons"
@@ -1752,12 +1782,8 @@ msgid "Enable downloading HLS/DASH streams"
 msgstr "Habilitar download de transmissões HLS/DASH"
 
 #. enable_stream_download.description
-msgid ""
-"Downloads and muxes the contents of the streams rather than the stream information file.\n"
-"This currently does not work under modern browsers due to `SharedArrayBuffer` restrictions."
+msgid "Downloads and muxes the contents of the streams rather than the stream information file."
 msgstr ""
-"Baixa e multiplexa o conteúdo dos streams em vez do arquivo de informações do stream.\n"
-"Atualmente, isso não funciona em navegadores modernos devido a restrições do `SharedArrayBuffer`."
 
 #. stream_mux_mp4_over_mkv.name
 msgid "Prefer MP4 over MKV"
@@ -3191,7 +3217,7 @@ msgstr "Destacar imagens automaticamente"
 msgid "Automatically highlights images as you view pages"
 msgstr "Destaca automaticamente as imagens enquanto você visualiza as páginas"
 
-#. highlightimgs_auto.options.always.name, mouseover_enable_mask_styles2.options.always.name, mouseover_zoom_use_last.options.always.name, scroll_zoomout_pagemiddle.options.always.name, gallery_jd_referer.options.always.name
+#. highlightimgs_auto.options.always.name, mouseover_enable_mask_styles2.options.always.name, mouseover_zoom_use_last.options.always.name, scroll_zoomout_pagemiddle.options.always.name, gallery_jd_referer.options.always.name, mouseover_video_autoplay.options.always.name
 msgid "Always"
 msgstr "Sempre"
 
@@ -3295,6 +3321,10 @@ msgstr "Nova aba em segundo plano"
 #. mouseover_open_behavior.options.download.name, t2_mouseover_open_behavior.options.download.name, t3_mouseover_open_behavior.options.download.name
 msgid "Download"
 msgstr "Baixar"
+
+#. mouseover_open_behavior.options.download_album.name, t2_mouseover_open_behavior.options.download_album.name, t3_mouseover_open_behavior.options.download_album.name
+msgid "Gallery download"
+msgstr ""
 
 #. mouseover_open_behavior.options.copylink.name, t2_mouseover_open_behavior.options.copylink.name, t3_mouseover_open_behavior.options.copylink.name
 msgid "Copy link"

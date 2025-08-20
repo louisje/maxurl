@@ -13,3 +13,4 @@ maxurl.zip
 build/tsout.js
 package-lock.json
 yarn.lock
+standalone_config.json
