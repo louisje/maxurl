@@ -860,12 +860,15 @@ var onHeadersReceived = function(details) {
 		if (overrides.length && (overrides[0].anonymous || overrides[0].content_type)) {
 			var override_hdrs = [];
 
-			if (overrides[0].anonymous) {
-				override_hdrs.push({
-					name: "Access-Control-Allow-Origin",
-					value: "*"
-				});
-			}
+			/*AMO_REMOVE*/// FIXME: find a better alternative
+			/*AMO_REMOVE*/// for now, this is removed in the AMO (Firefox addons) build, as we cannot relax security headers
+			/*AMO_REMOVE*/// AMO_REMOVE is automatically removed by the packaging script
+			/*AMO_REMOVE*/if (overrides[0].anonymous) {
+			/*AMO_REMOVE*/	override_hdrs.push({
+			/*AMO_REMOVE*/		name: "Access-Control-Allow-Origin",
+			/*AMO_REMOVE*/		value: "*"
+			/*AMO_REMOVE*/	});
+			/*AMO_REMOVE*/}
 
 			if (overrides[0].content_type) {
 				override_hdrs.push({
@@ -1549,14 +1552,18 @@ function destroy_contextmenu() {
 
 function get_option(name, cb, _default) {
 	storage.get([name], function(response) {
-			var value = _default;
+		var value = _default;
 
-			if (Object.keys(response).length > 0 && response[name] !== undefined) {
-					value = JSON.parse(response[name]);
-			}
+		if (Object.keys(response).length > 0 && response[name] !== undefined) {
+			value = JSON.parse(response[name]);
+		}
 
-			cb(value);
+		cb(value);
 	});
+}
+
+function set_option(name, value) {
+	storage.set({[name]: JSON.stringify(value)});
 }
 
 on_ready(function() {
@@ -1801,4 +1808,24 @@ chrome.runtime.onInstalled.addListener(function() {
 	get_option("extension_hotreload", function(value) {
 		if (value) hotload();
 	}, true);
+
+	var welcome_message_needed = true;
+	/*AMO_REMOVE*/welcome_message_needed = false;
+	if (welcome_message_needed) {
+		get_option("extension_shown_welcome_message", function(value) {
+			if (value)
+				return;
+
+			set_option("extension_shown_welcome_message", true);
+
+			var tab_options = {
+				url: chrome.runtime.getURL("/extension/welcome.html"),
+				active: true
+			};
+
+			chrome.tabs.create(tab_options, function (tab) {
+				debug("opened welcome message");
+			});
+		}, false);
+	}
 });
