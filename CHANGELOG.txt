@@ -1,3 +1,36 @@
+2025.12.0
+
+New features:
+
+ * Support for ~85 new websites (using ~45 new rules)
+ * Comment support for black/whitelists with presets (#1498, thanks to Julian on discord for the idea)
+ * Option to prevent websites from converting images to webp/avif (#1502, disabled by default, thanks to sn3akyb3ar for the idea)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Amazon, Ebay, Google Images, Pinterest, Shopify, Snapchat, Squarespace)
+ * Improve support for touchscreen devices (#1518, thanks to F640)
+
+Bugfixes:
+
+ * Fix redirect infobox crashing on some websites
+ * Fix invalid data URL on some websites
+ * Fix crash on chunked download when response data exceeds Content-Length
+ * Fix detected filename when / is in a query string
+ * Fix duplicated highlights in custom gallery caused by selecting child or parent element
+ * Fix custom gallery drag selection silently cancelling changes
+ * Fix gallery downloads not working for plain links
+ * Fix gallery counter input text color (#1514, thanks to Korb for reporting)
+ * Fix translation for profiled settings not respecting user preference (#1515, thanks to Korb for reporting)
+ * Fix infinite loop when redirecting caused by protocol change (#1517, thanks to Froktime for reporting)
+ * Fix userscript failing to load on websites with setTimeout blocked due to adblockers
+ * Fix dragging when cursor is outside of window
+ * Apply special character fixes to zip filenames as well
+
+Special thanks to Julian, fyhtma, biziclop, in-the-halfway, sn3akyb3ar, karpuzikov, iotaOmicron, Saine Grey, bruceschaff, JayCubby-enwiki, Korb, Froktime, fireattack, F640, cbadoud for their contributions and reports for this release
+
+---
+
 2025.11.2
 
 New features:

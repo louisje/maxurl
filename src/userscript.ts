@@ -67,7 +67,7 @@
 // @description:zh-TW 為10,000多個網站查找更大或原始圖像
 // @description:zh-HK 為10,000多個網站查找更大或原始圖像
 // @namespace         http://tampermonkey.net/
-// @version           2025.11.2
+// @version           2025.12.0
 // @author            qsniyg
 // @homepageURL       https://qsniyg.github.io/maxurl/options.html
 // @supportURL        https://github.com/qsniyg/maxurl/issues
@@ -528,6 +528,7 @@ var $$IMU_EXPORT$$;
 		our_EventTarget, our_addEventListener, our_removeEventListener,
 		string_fromcharcode, string_charat,
 		array_reduce, array_reduce_prototype,
+		set_timeout, clear_timeout,
 		document_createElement;
 
 	if (is_node) {
@@ -1047,6 +1048,34 @@ var $$IMU_EXPORT$$;
 			}
 		};
 		get_compat_blob();
+
+		var get_compat_settimeout = function() {
+			// ublock on txxx.com blocks settimeout
+			// TODO: support setInterval blocked and requestAnimationFrame fallback
+			let good = {
+				timeout: false
+			};
+
+			try {
+				setTimeout(function() {}, 1);
+				good.timeout = true
+			} catch (e) {
+			}
+
+			if (good.timeout) {
+				set_timeout = setTimeout;
+				clear_timeout = clearTimeout;
+			} else {
+				set_timeout = function(func, timeout) {
+					let interval = setInterval(() => {
+						clearInterval(interval);
+						func();
+					}, timeout);
+				};
+				clear_timeout = clearInterval;
+			}
+		};
+		get_compat_settimeout();
 
 		// this is rather slow (~25ms according to fireattack's profile)
 		var native_functions = {};
@@ -2400,7 +2429,10 @@ var $$IMU_EXPORT$$;
 
 					headers_to_set["origin"] = data.url.replace(/^([a-z]+:\/\/[^/]+)(?:\/+.*)?$/, "$1");
 				} else if (data.imu_mode === "image") {
-					headers_to_set["accept"] = "image/webp,image/apng,image/*,*/*;q=0.8";
+					if (!settings.disable_webp_autoconvert)
+						headers_to_set["accept"] = "image/webp,image/apng,image/*,*/*;q=0.8";
+					else
+						headers_to_set["accept"] = "*/*";
 					headers_to_set["Sec-Fetch-Dest"] = "image";
 					headers_to_set["Sec-Fetch-Mode"] = "no-cors";
 					headers_to_set["Sec-Fetch-Site"] = "same-site";
@@ -2479,7 +2511,7 @@ var $$IMU_EXPORT$$;
 							console_warn("Received status 503, retrying request", resp, orig_data);
 							orig_data.retry_503 = data.retry_503 - 1;
 
-							setTimeout(function() {
+							set_timeout(function() {
 								do_request(orig_data);
 							}, parse_int(settings.retry_503_ms) || 1);
 						} else {
@@ -2664,6 +2696,28 @@ var $$IMU_EXPORT$$;
 		return norm(url1) === norm(url2);
 	};
 
+	let finalize_imu_headers = function(headers:Record<string, any>):Record<string, any> {
+		headers = deepcopy(headers);
+
+		if (settings.disable_webp_autoconvert && headerobj_get(headers, "Accept") === void 0) {
+			// squarespace requires */*;q=0.8 instead of */*
+			// https://images.squarespace-cdn.com/content/v1/63beb1552f2a41471a264ee4/324d8a8c-510e-43e1-9646-d09969f9519b/Copy+of+92130_STA_Polyster_009_23.jpeg?format=original
+			headerobj_set(headers, "Accept", "*/*;q=0.8");
+		}
+
+		if (headerobj_get(headers, "Accept")) {
+			if (headerobj_get(headers, "Cache-Control") === void 0) {
+				headerobj_set(headers, "Cache-Control", "no-cache");
+			}
+
+			if (headerobj_get(headers, "Pragma") === void 0) {
+				headerobj_set(headers, "Pragma", "no-cache");
+			}
+		}
+
+		return headers;
+	};
+
 	var create_progress_el = null;
 	var update_progress_el = null;
 
@@ -2698,7 +2752,7 @@ var $$IMU_EXPORT$$;
 		document.body.appendChild(a);
 		a.click();
 
-		setTimeout(function() {
+		set_timeout(function() {
 			document.body.removeChild(a);
 		}, 500);
 
@@ -2728,6 +2782,10 @@ var $$IMU_EXPORT$$;
 		if (is_data) {
 			return do_browser_download(imu, filename, cb);
 		}
+
+		imu = deepcopy(imu);
+		if (imu.headers)
+			imu.headers = finalize_imu_headers(imu.headers);
 
 		if (is_extension) {
 			extension_send_message({
@@ -2798,7 +2856,7 @@ var $$IMU_EXPORT$$;
 						url: objurl,
 					}, filename, cb);
 
-					setTimeout(function() {
+					set_timeout(function() {
 						revoke_objecturl(objurl);
 					}, 500);
 				},
@@ -2822,13 +2880,18 @@ var $$IMU_EXPORT$$;
 			url: objurl,
 		}, filename);
 
-		setTimeout(function() {
+		set_timeout(function() {
 			revoke_objecturl(objurl);
 			if (cb) cb();
 		}, 500);
 	};
 
-	var multiqueue = function(options, cb) {
+	type MultiQueueOptions<T> = {
+		concurrency: number;
+		queue: Array<T>;
+		runner: (T, cb:()=>void)=>void;
+	};
+	var multiqueue = function<T>(options:MultiQueueOptions<T>, cb) {
 		var running = false;
 
 		var currently_running = 0;
@@ -3060,7 +3123,7 @@ var $$IMU_EXPORT$$;
 			};
 		}
 
-		var data = null;
+		var data:Uint8Array|null = null;
 		var mime = null;
 
 		var final_cb = function(resp) {
@@ -3095,7 +3158,7 @@ var $$IMU_EXPORT$$;
 				return options.onload(null, resp);
 			}
 
-			data = new Uint8Array(content_length);
+			data = new Uint8Array(Math_max(content_length, resp.response.byteLength));
 			data.set(new Uint8Array(resp.response), 0);
 
 			if (resp.response.byteLength >= content_length) {
@@ -3135,7 +3198,25 @@ var $$IMU_EXPORT$$;
 					download_chunk(item[0], item[1], function(resp) {
 						// todo: check errors
 						//console_log(item[0], item[1], resp.response.byteLength, content_length);
-						data.set(new Uint8Array(resp.response), item[0]);
+
+						if (resp.response) {
+							// extend the data if we get response > content-length
+							let end = item[0] + resp.response.byteLength;
+							if (end > data.byteLength) {
+								let newdata = new Uint8Array(end);
+								newdata.set(data);
+								data = newdata;
+							}
+
+							data.set(new Uint8Array(resp.response), item[0]);
+						} else {
+							console_warn("download_chunk returned null response:", {
+								resp,
+								start: item[0],
+								end: item[1]
+							});
+						}
+
 						cb();
 					}, chunk_progress);
 				}
@@ -3175,7 +3256,7 @@ var $$IMU_EXPORT$$;
 			input.focus();
 			input.select();
 
-			setTimeout(function() {
+			set_timeout(function() {
 				document.body.removeChild(input);
 			}, 100);
 
@@ -3459,7 +3540,7 @@ var $$IMU_EXPORT$$;
 		};
 
 		host_html_filter = function(url) {
-			console.log(host_html_blacklist_regexes);
+			//console.log(host_html_blacklist_regexes);
 			return blackwhitelist_filter(url, host_html_blacklist_regexes, settings.host_html_blacklist_mode);
 		};
 	}
@@ -4364,6 +4445,13 @@ var $$IMU_EXPORT$$;
 			"pt-BR": "Bot\u00F5es",
 			"ru": "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E",
 			"zh-CN": "\u5176\u4ED6"
+		},
+		"Gallery Download": {
+			"_info": {
+				"comments": {
+					"en": "Gallery Download button on popup"
+				}
+			}
 		},
 		"subcategory_replaceimages": {
 			"en": "Replace Images",
@@ -11816,6 +11904,26 @@ var $$IMU_EXPORT$$;
 			"ru": "480p",
 			"zh-CN": "480p"
 		},
+		"Disable WebP/AVIF conversion": {
+			"_info": {
+				"instances": [
+					{
+						"setting": "disable_webp_autoconvert",
+						"field": "name"
+					}
+				]
+			}
+		},
+		"Tries to fetch original JPG images instead of auto-converted WebP or AVIF images served by websites": {
+			"_info": {
+				"instances": [
+					{
+						"setting": "disable_webp_autoconvert",
+						"field": "description"
+					}
+				]
+			}
+		},
 		"Larger watermarked images": {
 			"_info": {
 				"instances": [
@@ -14944,7 +15052,15 @@ var $$IMU_EXPORT$$;
 		redirect_to_no_infobox: false,
 		// thanks to nijaz-lab on github for the idea: https://github.com/qsniyg/maxurl/issues/557
 		redirect_host_html: false,
-		host_html_blacklist: "",
+		host_html_blacklist: [
+			"# Examples (remove # to enable)",
+
+			"# Redirect media pages to raw media (requires whitelist):",
+			"# Glob (default):",
+			"#**/*.{jpg,jpeg,jpe,jif,jfif,jxl,png,apng,bmp,gif,webp,webm,avif,heic,svg,ico,cur,tif,tiff,xbm,mp3,mp4,m4a,m4v,mkv,ogg,oga,ogv}",
+			"# Regex:",
+			"#^.*\\.(?:jpe?g|jpe|jif|jfif|jxl|a?png|bmp|gif|web[pm]|avif|heic|svg|ico|cur|tiff?|xbm|mp[34]|m4[av]|mkv|og[gav])(?:[?&#].*)?$"
+		].join("\n"),
 		host_html_blacklist_mode: "blacklist",
 		mouseover: true,
 		// thanks to blue-lightning on github for the idea: https://github.com/qsniyg/maxurl/issues/16
@@ -15196,6 +15312,8 @@ var $$IMU_EXPORT$$;
 		website_image: true,
 		extension_contextmenu: true,
 		extension_hotreload: true,
+		// thanks to sn3akyb3ar on github for the idea: https://github.com/qsniyg/maxurl/issues/1503
+		disable_webp_autoconvert: false,
 		allow_watermark: false,
 		allow_smaller: false,
 		allow_possibly_different: false,
@@ -18246,6 +18364,11 @@ var $$IMU_EXPORT$$;
 			category: "popup",
 			subcategory: "video"
 		},
+		disable_webp_autoconvert: {
+			name: "Disable WebP/AVIF conversion",
+			description: "Tries to fetch original JPG images instead of auto-converted WebP or AVIF images served by websites",
+			category: "rules"
+		},
 		allow_watermark: {
 			name: "Larger watermarked images",
 			description: "Enables rules that return larger images that include watermarks",
@@ -19161,7 +19284,7 @@ var $$IMU_EXPORT$$;
 				settings_meta[profiled_setting_name] = profiled_meta;
 
 				if (is_interactive) {
-					profiled_meta.name = _(profiled_meta.name) + " (#" + trigger_id + ")";
+					profiled_meta.name = profiled_meta.name + " (#" + trigger_id + ")";
 					profiled_meta.description = null;
 					profiled_meta.example_websites = null;
 				}
@@ -19661,7 +19784,7 @@ var $$IMU_EXPORT$$;
 			var added_time = Date.now();
 			if (typeof time === "number" && time > 0) {
 				var cache = this;
-				var timer = setTimeout(function() {
+				var timer = set_timeout(function() {
 					cache.remove(key);
 				}, time * 1000);
 
@@ -19739,7 +19862,7 @@ var $$IMU_EXPORT$$;
 				var timeobj = map_get(this.times, key);
 
 				if ("timer" in timeobj)
-					clearTimeout(timeobj.timer);
+					clear_timeout(timeobj.timer);
 			}
 
 			if (this.options.destructor && map_has(this.data, key)) {
@@ -19755,7 +19878,7 @@ var $$IMU_EXPORT$$;
 
 			map_foreach(this.times, function(key, value) {
 				if ("timer" in value) {
-					clearTimeout(value.timer);
+					clear_timeout(value.timer);
 				}
 			});
 
@@ -21017,7 +21140,7 @@ var $$IMU_EXPORT$$;
 	}
 
 	function run_soon(func) {
-		setTimeout(func, 1);
+		set_timeout(func, 1);
 	}
 
 	// bug in chrome, see
@@ -21116,7 +21239,9 @@ var $$IMU_EXPORT$$;
 		let lines = (blacklist || "").split("\n");
 
 		for (let i = 0; i < lines.length; i++) {
-			let current = lines[i].replace(/^\s+|\s+$/, "");
+			let current = lines[i]
+				.replace(/^\s+|\s+$/, "")
+				.replace(/^#.*/, "");
 			//console_log(current);
 			if (current.length === 0)
 				continue;
@@ -21970,7 +22095,7 @@ var $$IMU_EXPORT$$;
 		var finalcb = function(e) {
 			image.onload = null;
 			image.onerror = null;
-			clearTimeout(timeout);
+			clear_timeout(timeout);
 
 			var x, y;
 			if (!image.naturalHeight || !image.naturalWidth) {
@@ -22060,8 +22185,8 @@ var $$IMU_EXPORT$$;
 		args: Record<string, string>
 		args_array: Array<{name: string, value: string}>
 	};
-	var parse_tag_def = function(tag:string):ParsedTagDef {
-		var match = tag.match(/^<([-a-zA-Z0-9]+)((?:\s+[-a-z0-9A-Z]+(?:=(?:"[^"]*"|'[^']*'|[-_a-zA-Z0-9:/.]+))?)*)\s*(\/?)>/);
+	var parse_tag_def = function(tag:string):ParsedTagDef|null {
+		var match = tag.match(/^<([-_a-zA-Z0-9]+)((?:\s+[-_a-z0-9A-Z]+(?:=(?:"[^"]*"|'[^']*'|[-_a-zA-Z0-9:/.]+))?)*)\s*(\/?)>/);
 
 		if (!match) {
 			return null;
@@ -26291,7 +26416,7 @@ var $$IMU_EXPORT$$;
 							//   the video url still doesn't work though, so let's not check for that?
 							if (resp.status === 503) {
 								if (times < 5) {
-									return setTimeout(function() {
+									return set_timeout(function() {
 										request_video(times + 1);
 									}, 500);
 								}
@@ -26307,7 +26432,7 @@ var $$IMU_EXPORT$$;
 							// probably the application/json, content-length: 0 bug
 							if (finalurl === request_url) {
 								if (times < 5) {
-									return setTimeout(function() {
+									return set_timeout(function() {
 										request_video(times + 1);
 									}, 500);
 								}
@@ -27063,8 +27188,23 @@ var $$IMU_EXPORT$$;
 
 			if (source.args && found.args) {
 				for (let key in source.args) {
-					if (!(key in found.args))
+					if (!(key in found.args)) {
 						found.args[key] = source.args[key];
+					} else {
+						let orig_val = found.args[key];
+						let new_val = source.args[key];
+
+						let better = false;
+
+						if (new_val && !orig_val)
+							better = true;
+						if (/^[0-9]+p?(?:\s.*)?$/.test(new_val)) // "720p" vs "Default"
+							better = true;
+
+						if (better) {
+							found.args[key] = source.args[key];
+						}
+					}
 				}
 			}
 		}
@@ -27420,6 +27560,15 @@ var $$IMU_EXPORT$$;
 			return 0;
 		}
 
+		let get_quality_from_url = function(url) {
+			let match = url.match(/_([0-9]+p)\.[a-z0-9]+\/*(?:[?#].*)?$/);
+			if (match) {
+				return match[1];
+			}
+
+			return null;
+		};
+
 		// todo: should this be in get_videotag_sources instead?
 		sources.video.sort(function(a, b) {
 			// hanime1.me
@@ -27433,6 +27582,13 @@ var $$IMU_EXPORT$$;
 
 			if (a.args.title && b.args.title) {
 				return compare_qualities(a.args.title, b.args.title);
+			}
+
+			let a_url_q = get_quality_from_url(a.url);
+			let b_url_q = get_quality_from_url(b.url);
+
+			if (a_url_q && b_url_q) {
+				return compare_qualities(a_url_q, b_url_q);
 			}
 
 			return 0;
@@ -27523,7 +27679,7 @@ var $$IMU_EXPORT$$;
 		}
 
 		//var match = jwplayerstr.match(/\.setup\({[\s\S]*?file:\s*"([^"]+)"[,}]/);
-		var match = jwplayerstr.match(/\.setup\s*\(({[\s\S]*?file:\s*"[\s\S]*?})\);/);
+		var match = jwplayerstr.match(/\.setup\s*\(({[\s\S]*?\"?file\"?:\s*"[\s\S]*?})\);/);
 		if (!match) {
 			console_error("Unable to find jwplayer match for", {resp, jwplayerstr});
 			return null;
@@ -27578,9 +27734,23 @@ var $$IMU_EXPORT$$;
 		return urls;
 	};
 
-	common_functions["update_album_info_links"] = function(obj, cmp) {
+	common_functions["update_album_info_links"] = function(obj:BigImageInfoObject, cmp) {
+		let origobj = obj;
+
+		if (is_array(origobj)) {
+			origobj = origobj as BigImageInfoMObject;
+			for (let sobj of origobj) {
+				if (typeof sobj === "object" && sobj.album_info) {
+					obj = sobj;
+					break;
+				}
+			}
+		}
+
+		obj = obj as BigImageInfoSObject;
+
 		if (!obj.album_info)
-			return obj;
+			return origobj;
 
 		var links = obj.album_info.links;
 
@@ -27599,7 +27769,7 @@ var $$IMU_EXPORT$$;
 			links[0].is_current = true;
 		}
 
-		return obj;
+		return origobj;
 	};
 
 	common_functions["run_msml_op"] = function(state, process_data, cb) {
@@ -28945,11 +29115,18 @@ var $$IMU_EXPORT$$;
 		});
 	};
 
-	common_functions["xor_str"] = function(str:string, key:string):string {
+	common_functions["xor_str"] = function(str:string, key:Array<number>|string):string {
 		let result:string = "";
 
+		let charcode_at = function(source:Array<number>|string, at:number) {
+			if (typeof source === "string")
+				return source.charCodeAt(at);
+
+			return source[at];
+		}
+
 		for (let i = 0; i < str.length; i++) {
-			result += string_fromcharcode(str.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+			result += string_fromcharcode(charcode_at(str, i) ^ charcode_at(key, i % key.length));
 		}
 
 		return result;
@@ -31439,10 +31616,6 @@ var $$IMU_EXPORT$$;
 			//   https://c.static-nike.com/a/images/rdjukugxuljyne9f551j/kyrie-5-pineapple-house-release-date.png
 			domain === "c.static-nike.com" ||
 			// thanks to anonymous for reporting:
-			// https://resources.mynewsdesk.com/image/upload/ar_16:9,c_fill,dpr_auto,f_auto,g_auto,q_auto:good,w_746/lr6uyrf6pnefauywylkq
-			//   https://resources.mynewsdesk.com/image/upload/ar_16:9,c_fill,dpr_auto,f_auto,g_auto,q_auto:good,w_746/lr6uyrf6pnefauywylkq
-			domain === "resources.mynewsdesk.com" ||
-			// thanks to anonymous for reporting:
 			// https://brand.assets.adidas.com/image/upload/f_auto,fl_lossy,q_1/enUS/Images/xcat-fw20-rfc-DerrickRose-statement-02-d_tcm221-581175.jpg
 			//   https://brand.assets.adidas.com/image/upload/enUS/Images/xcat-fw20-rfc-DerrickRose-statement-02-d_tcm221-581175.jpg
 			domain === "brand.assets.adidas.com" ||
@@ -31458,6 +31631,10 @@ var $$IMU_EXPORT$$;
 			// https://rvb-img.reverb.com/image/upload/s--9aSZevpV--/a_exif,c_limit,e_unsharp_mask:80,f_auto,fl_progressive,g_south,h_620,q_90,w_620/v1489766866/oditmsrdg3qrtlduhxnc.jpg
 			//   https://rvb-img.reverb.com/image/upload/s--9aSZevpV--/oditmsrdg3qrtlduhxnc.jpg
 			domain === "rvb-img.reverb.com" ||
+			// thanks to anonymous for reporting:
+			// https://dam.mediacorp.sg/image/upload/s--JBfjNtkC--/c_fill,g_auto/f_auto,q_auto/v1/8world/images/2025/12/02/20251202_ent_blackpink_04.jpg?itok=jNuMsyXB
+			//   https://dam.mediacorp.sg/image/upload/s--JBfjNtkC--/8world/images/2025/12/02/20251202_ent_blackpink_04.jpg?itok=jNuMsyXB
+			(domain === "dam.mediacorp.sg" && /\/image\/+upload\//.test(src)) ||
 			// thanks to anonymous for reporting:
 			// https://asset.swarovski.com/images/c_crop,g_xy_center,w_2826,h_2826,x_1413,y_1635/dpr_1.0,f_auto,q_auto,c_lfill,w_960,h_960/swa-cms/2025_T1_BRAND_ANNOUNCEMENT_KV1_ARIANA-GRANDE_200dpi/.jpg
 			//   https://asset.swarovski.com/images/swa-cms/2025_T1_BRAND_ANNOUNCEMENT_KV1_ARIANA-GRANDE_200dpi/.jpg
@@ -31558,12 +31735,6 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
-		if (domain === "resources.mynewsdesk.com") {
-			// https://resources.mynewsdesk.com/image/upload/t_next_gen_span3_fit_and_crop/b3d5cr3yxtxylt7sp9wu.jpg
-			//   https://resources.mynewsdesk.com/image/upload/b3d5cr3yxtxylt7sp9wu.jpg
-			return src.replace(/(\/image\/+upload\/+)t_[^/]+\/+/, "$1");
-		}
-
 		if (domain_nosub === "bridestory.com") {
 			// thanks to resentizised on discord:
 			// https://london.bridestory.com/images/c_fill,dpr_1.0,f_auto,fl_progressive,pg_1,q_80,w_680/v1/assets/the-barracks-hotel_wedding_mixed-tables_day_lo-res-By6IX3isU/the-barracks-hotel-sentosa_barracks-lawn_1.webp
@@ -31573,6 +31744,16 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain_nowww === "chanel.com" ||
+			// tahnks to anonymous for reporting:
+			// https://resources.mynewsdesk.com/image/upload/t_next_gen_span3_fit_and_crop/b3d5cr3yxtxylt7sp9wu.jpg
+			//   https://resources.mynewsdesk.com/image/upload/b3d5cr3yxtxylt7sp9wu.jpg
+			//   https://mnd-assets.mynewsdesk.com/image/upload/c_limit/b3d5cr3yxtxylt7sp9wu.jpg
+			// thanks to anonymous for reporting:
+			// https://resources.mynewsdesk.com/image/upload/ar_16:9,c_fill,dpr_auto,f_auto,g_auto,q_auto:good,w_746/lr6uyrf6pnefauywylkq
+			//   https://mnd-assets.mynewsdesk.com/image/upload/c_limit/lr6uyrf6pnefauywylkq -- 8021x5350
+			// https://mnd-assets.mynewsdesk.com/image/upload/c_limit,dpr_2.625,f_auto,h_700,q_auto,w_360/qjqmfk4l0e4mpm4fvpkj.jpg
+			//   https://mnd-assets.mynewsdesk.com/image/upload/c_limit/qjqmfk4l0e4mpm4fvpkj.jpg
+			domain_nosub === "mynewsdesk.com" ||
 			// thanks to roi:
 			// https://img.olympics.com/images/image/private/t_original_760/f_auto/primary/d3mlgzrzc3vdbt936jxk
 			//   https://img.olympics.com/images/image/private/c_limit/primary/d3mlgzrzc3vdbt936jxk - 8000x4500
@@ -31580,7 +31761,7 @@ var $$IMU_EXPORT$$;
 			// thanks to rEnr3n on github: https://github.com/qsniyg/maxurl/issues/917
 			// https://www.chanel.com/images/q_auto,f_auto,fl_lossy,dpr_auto/w_1920/FSH-1632391810548-coconeige2021slideshowcampagnedesktop1.jpg
 			//   https://www.chanel.com/images/c_limit/FSH-1632391810548-coconeige2021slideshowcampagnedesktop1.jpg
-			return src.replace(/(\/images\/+(?:image\/+private\/+)?)(?:(?:q|fl?|dpr|w|h|t)_[^/]+\/+)+/, "$1c_limit/");
+			return src.replace(/(\/(?:images\/+(?:image\/+private\/+)?|image\/+upload\/+))(?:(?:q|fl?|dpr|w|h|t|c|ar|g)_[^/]+\/+)+/, "$1c_limit/");
 		}
 
 		if (domain === "cloudinary-cdn.ffm.to") {
@@ -31901,6 +32082,15 @@ var $$IMU_EXPORT$$;
 			// thanks to nimbuz on discord:
 			// https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX466_.png
 			//   https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.png
+			// https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX466_FMwebp_.png
+			//   https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.png
+			// https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000._QL10_.png
+			//   https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.png
+			// https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.0_AC_SX466.666666_FMwebp_.png
+			//   https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C91ZCXdqRg0L.png%7C0%2C0%2C2140%2C2000%2B0.0%2C0.0%2C2140.0%2C2000.png
+			// other:
+			// https://m.media-amazon.com/images/S/pv-target-images/cd0168ff7cf1ed026fd6c3648fca4663a15d7764e8d506bcdfb7dabf020b7708._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/appletvca/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1595,885,246,117_kv4da665aac5cce1fe4ae9a5ce733bb56f_SX720_FMwebp_.jpg -- 720x405 + appletv logo
+			//   https://m.media-amazon.com/images/S/pv-target-images/cd0168ff7cf1ed026fd6c3648fca4663a15d7764e8d506bcdfb7dabf020b7708.jpg -- 1920x1080
 			domain_nosub === "media-amazon.com" ||
 			// https://ia.media-imdb.com/images/M/MV5BNjA1NDYwMDQ3MF5BMl5BanBnXkFtZTcwOTYyNDQ0MQ@@._V1_UY268_CR1,0,182,268_AL_.jpg
 			//   https://ia.media-imdb.com/images/M/MV5BNjA1NDYwMDQ3MF5BMl5BanBnXkFtZTcwOTYyNDQ0MQ@@.jpg
@@ -31927,17 +32117,36 @@ var $$IMU_EXPORT$$;
 					bad: "mask"
 				};
 
-			let parse_directives = function(url) {
-				let match = url.match(/((?:\.+_*(?:0_)?(?:[A-Z][A-Z0-9]|V_)[^/.]*)+)\.+[^/.]+(?:[?#].*)?$/);
+			let split_amazon_url = function(url:string):[string, string, string]|null {
+				let match = url.match(/^(.*)(\.(?:_*(?:0_)?(?:[A-Z][A-Z0-9]|[A-Z]{2}[0-9]+\.[0-9]+|V_)[^/.]*[_.]+)+)(?<=\.)([^/.]+)(?:[?#].*)?$/);
 				if (!match)
 					return null;
 
-				let raw_directives = match[1].replace(/\./g, "_").replace(/_+/g, "_").split("_");
+				return [match[1], match[2], match[3]];
+			}
+
+			let parse_directives = function(url) {
+				let splitted = split_amazon_url(url);
+				if (!splitted)
+					return null;
+
+				let raw_directives = splitted[1].replace(/\./g, "_").replace(/_+/g, "_").split("_");
 				let directives = [];
 
-				for (let directive of raw_directives) {
+				for (let i = 0; i < raw_directives.length; i++) {
+					let directive = raw_directives[i];
 					if (!directive || !directive.length)
 						continue;
+
+					// _SX123.456_
+					if (/^[A-Z]{2}[0-9]+$/.test(directive)) {
+						if (i+1 < raw_directives.length) {
+							if (/^[0-9]+$/.test(raw_directives[i+1])) {
+								directive += "." + raw_directives[i+1];
+								i++;
+							}
+						}
+					}
 
 					let dmatch = directive.match(/^([A-Z][A-Z0-9]|V|0)(.*)?$/);
 					if (!dmatch) {
@@ -31965,13 +32174,21 @@ var $$IMU_EXPORT$$;
 				if (!stringified_arr.length)
 					stringified = "";
 
-				let urlmatch = url.match(/^(.*\/[^/]+?)(?:\.+_*(?:0_)?(?:[A-Z][A-Z0-9]|V_)[^/.]*)*\.*(\.[^/.]+(?:[?#].*)?)$/);
-				if (!urlmatch) {
-					console_warn("Unable to find URL match for", url);
+				let splitted = split_amazon_url(url);
+				if (!splitted) {
+					console_warn("Unable to parse Amazon URL", url);
 					return url;
 				}
 
-				return urlmatch[1] + stringified + urlmatch[2];
+				return splitted[0] + stringified + "." + splitted[2];
+
+				//let urlmatch = url.match(/^(.*\/[^/]+?)(?:\.+_*(?:0_)?(?:[A-Z][A-Z0-9]|[A-Z]+[0-9]+\.[0-9]+|V_)[^/.]*)*\.*(\.[^/.]+(?:[?#].*)?)$/);
+				//if (!urlmatch) {
+				//	console_warn("Unable to find URL match for", url);
+				//	return url;
+				//}
+
+				//return urlmatch[1] + stringified + urlmatch[2];
 			}
 
 			let parsed_directives = parse_directives(src);
@@ -31991,6 +32208,8 @@ var $$IMU_EXPORT$$;
 						directive.key === "SR" ||
 						directive.key === "SX" ||
 						directive.key === "SY" ||
+						directive.key === "FM" || // format
+						directive.key === "QL" ||
 						directive.key === "V" ||
 						directive.key === "BG" || // background color
 						directive.key === "0" ||
@@ -32113,6 +32332,13 @@ var $$IMU_EXPORT$$;
 		if (false && string_indexof(domain, "static.independent.co.uk") >= 0) {
 		  return src.replace(/(\/styles\/)story_[^/]*(\/public)/, "$1story_large$2");
 		}*/
+
+		if (domain === "media.modernluxury.com") {
+			// thanks to sn3akyb3ar on github: https://github.com/qsniyg/maxurl/issues/1513
+			// https://media.modernluxury.com/ntgpghfuax/styles/crop-none-12-lg/2025/11/17/LOOK-1_ModernLuxury_128.jpg.webp?t=29fa9146.webp
+			//   https://media.modernluxury.com/ntgpghfuax/uploads/2025/11/17/LOOK-1_ModernLuxury_128.jpg
+			return src.replace(/\/styles\/+[^/]+\/+(.*?\.[a-z]+)(?:\.webp)?(?:[?#].*)?$/, "/uploads/$1");
+		}
 
 		if (domain_nowww === "cinema.de") {
 			// https://www.cinema.de/sites/default/files/styles/cin_portrait_180/public/sync/cms3.cinema.de/imgdb/import/dreams2/5ffd/5ce/0/5ffd5ce081896512339484d5.jpeg.jpg?itok=nifUBvQj
@@ -32442,6 +32668,9 @@ var $$IMU_EXPORT$$;
 			  //   https://lh7-us.googleusercontent.com/u/0/sheets/ACTFsxTil-YVOtdlIVAIK2xh_cxcZ2tDwFCvabS7in3gaiH-OMjxZ9EHU3mv9AZ_0oXRj3NzXtZBRvzBbuLW-LWu2jSFKQdwWkX3J_3lvCzB0OEwmkM0VZv5vF7QXJb_u8ySiMMFmJ0xYU-Tz1BZjfzqwF8JdtmUpYS316sB5TXNxskakfzMFCXpM_1a3ekMS2X51MS2ytIQO7s1NAj3dsDFDCTWxBtUHLK3tMINr_SrewtFw3eiaBDqsh4aI3KHxfmFT3xsx3yS_9dvZ0cGfinRCSnTwOIQep4aZTuVQ7hfp8aYoXx2tLU4sV-Sv2CKayEgfmublclXitGpV84p7i4dW4Kpi5-BMzK-iT8L0MzInR1KswrwvqHHXClXReu458QJ1Ju5EJvcuAjWHZqKnp1K1Spt4zRlqhleYnO4f4taUjSEbMHDe5ZdnLl9APKDET9Zgy6dya_eLACOh6So1H2SX3Ix4Q5lke97HAxd1Wx3VddzBh2Lw3Im0Pte-Pl4H4yJvGh_u_f8DY6i262mfNkz5HyDLn_QGv7DbpTo6QkPgrovpMSQM2Ef9CPx5vDGb0lMz1Siw8WzXl7bGfMYHMcmXgP-w5hZpTOo7ctIsF1Nri3Kx-Qgg-5Ks2tmq75KrSddgTiHmHV0_Fmt_UT8CXhmwHWq_BCTEXcuwOB00GOlAZv-T8gVMMaieniVAP6G1zhIK3dVDLn-OP41aEj0BrTcuNuSIK2Ae-3L4L_n22sjr6LvpBMAq_I7o8NrHFvvh_GJweZbBbjZhyjGH2AahFUqaxiN7uwab---y-l3Fb52PVpjFFpC2LRyNIpDb_YE03TJjV9EqSw8m4oG6aBLZcV2Z5tExRefpRJ0q-47NpqTTHdQv_9E73JBwmcIgcjXRjKvPIkrwphqPThaek9s1LaDamLTQJtN-liZ_FG0Xa_BligOSrMV94qaMa6Q_nNHdClnFIKNvsntnpzhCdNhrsAXWT3sB6CyT4yyRTC4pKhgCHdj5v6E1Eg50TUpNtdOQmb8MnD9c-lLq3jTgjwrT-LJtLbOTkuIefempXm22CRBdZ_ut1Yh8FaQxoW9ncn96tYJH1_R_CdfI4Vug2-0ePjL4Ti1n_rZtn2p-x2bMgypz9vMaYGQVVfcQTysF9k3X82s55cNSuz7hl4sGsWRDL0d9Q=s0?imgmax=0
 			  // thanks to Froktime on github: https://github.com/qsniyg/maxurl/issues/1470
 			  // https://lh7-rt.googleusercontent.com/formsz/AN7BsVCicp7TgOtv4WSxtN8D7ojTzDTbLBN5JoLf96DQfMf5G_VYsvmFJg6VUQxCdZPf4SorZDxktNcSgM2k6wphcZgdMmNfIU73eZWhcXnLM88UivMF-ga6D_eluDeiE0xYevQKPRt4F2y07TS0BwQpqDNaA=w796?key=x6BmC1ZclxauGfvi2YFKnA
+			  // thanks to anonymous for reporting:
+			  // https://lh3.googleusercontent.com/sPRaDIS7CbonlHsRfAWNUWvcw7UKIyyHa_1PT9_xbobOrjtDbVA1khP2Pc_M_ujK-TdWqoJs4CMc%3Ds144
+			  //   https://lh3.googleusercontent.com/sPRaDIS7CbonlHsRfAWNUWvcw7UKIyyHa_1PT9_xbobOrjtDbVA1khP2Pc_M_ujK-TdWqoJs4CMc=s0?imgmax=0
 			  (/^(?:yt|ci|lh|gp)[0-9](?:-[a-z]{2})?\./.test(domain) ||
 			  // thanks to Elliot Alderson on discord for reporting
 			  // https://play-lh.googleusercontent.com/DfAVURLgv0F8OZxFds3vLqd6o7dW9hbe9AUPgvVi4kzY5qb7Y-VRitHYA8_9W8edidI=w1440-h620-rw
@@ -32502,10 +32731,10 @@ var $$IMU_EXPORT$$;
 			domain_nosub === "ggpht.com") {
 			newsrc = src;
 
-			if (!(/^[a-z]+:\/\/[^/]+\/+[^/?#=]{30,}=x[0-9]+-y[0-9]+-z[0-9]+-t[^-/?#]{23,}(?:[?#].*)?$/.test(src))) {
+			if (!(/^[a-z]+:\/\/[^/]+\/+[^/?#=%]{30,}(?:=|%3D)x[0-9]+-y[0-9]+-z[0-9]+-t[^-/?#]{23,}(?:[?#].*)?$/.test(src))) {
 				newsrc = keep_queries(src.replace(/#.*$/, ""), ["key"])
 					.replace(/\/[swh][0-9]*(-[^/]*]*)?\/([^/]*)$/, "/s0/$2")
-					.replace(/(?:=[^/?]*)?(\?.*)?$/, "=s0$1");
+					.replace(/(?:(?:=|%3D)[^/?]*)?(\?.*)?$/, "=s0$1");
 				newsrc = add_queries(newsrc, {"imgmax": "0"});
 			}
 
@@ -34228,7 +34457,10 @@ var $$IMU_EXPORT$$;
 			if (newsrc !== src)
 				return {
 					url: newsrc,
-					head_wrong_contentlength: true
+					head_wrong_contentlength: true,
+					headers: {
+						Accept: '*/*;q=0.8' // to prevent jpg->webp
+					}
 				};
 		}
 
@@ -34250,9 +34482,12 @@ var $$IMU_EXPORT$$;
 			// proxy? or just image name?
 			// https://images.squarespace-cdn.com/content/589e834eff7c50486de031c3/1587075064704-H0L0WI13DJ5V81WAIVQ5/https%25253A%25252F%25252Fstatic.onecms.io%25252Fwp-content%25252Fuploads%25252Fsites%25252F28%25252F2020%25252F02%25252Fqatar-qsuites-seat-FREEQATAR0519.jpg?content-type=image%2Fjpeg
 			//   triple URI encoded, decodes to: https://static.onecms.io/wp-content/uploads/sites/28/2020/02/qatar-qsuites-seat-FREEQATAR0519.jpg
+			//
+			// thanks to sn3akyb3ar on github for reporting: https://github.com/qsniyg/maxurl/issues/1503
+			// https://images.squarespace-cdn.com/content/v1/63beb1552f2a41471a264ee4/324d8a8c-510e-43e1-9646-d09969f9519b/Copy+of+92130_STA_Polyster_009_23.jpeg?format=original -- webp without Accept: */* header
 
 			var contenttype = get_queries(src)["content-type"];
-			let queries = {};
+			let queries:Record<string, any> = {};
 			if (contenttype) queries["content-type"] = contenttype;
 
 			newsrc = src
@@ -34270,7 +34505,43 @@ var $$IMU_EXPORT$$;
 			delete queries.format;
 			urls.push(add_queries(newsrc, queries));
 
-			return urls;
+			return fillobj_urls(urls, {
+				headers: {
+					Accept: '*/*;q=0.8' // to prevent jpg->webp
+				}
+			});
+		}
+
+		if (domain === "video.squarespace-cdn.com" && options.element) {
+			let parent = common_functions["get_parent_el_matching"](options.element, x => {
+				return x.tagName === "DIV" && x.hasAttribute("data-config-video");
+			});
+
+			if (parent) {
+				let videoconfig = parent.getAttribute("data-config-video");
+				let videojson = JSON_parse(decode_entities(videoconfig));
+
+				let baseobj:BigImageInfoSObject = {
+					extra: {
+						created_date: videojson.addedOn
+					}
+				};
+
+				if (videojson.updatedOn)
+					baseobj.extra.updated_date = videojson.updatedOn;
+
+				let urls:BigImageInfoMulti = [
+					{
+						url: videojson.alexandriaUrl.replace(/{variant}/, "playlist.m3u8"),
+						video: "hls"
+					},
+					{
+						url: videojson.alexandriaUrl.replace(/{variant}/, "thumbnail")
+					}
+				];
+
+				return fillobj_urls(urls, baseobj);
+			}
 		}
 
 		if (domain_nosub === "sqspcdn.com") {
@@ -34344,9 +34615,6 @@ var $$IMU_EXPORT$$;
 			  // thanks to fedesk on discord
 			  // https://img.urbania.ca/media/2019/08/Image-d%E2%80%99iOS.jpg?fm=webp&quality=75&fit=max&width=1400&height=1400
 			  (domain === "img.urbania.ca" && string_indexof(src, "/media/") >= 0) ||
-			  // thanks to remlap
-			  // https://images.thefacecdn.com/images/The-Face_ZAMAR_OliviaRodrigo_1-4x5.jpg?fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.5&w=2800 -- upscaled
-			  (domain === "images.thefacecdn.com" && string_indexof(src, "/images/") >= 0) ||
 			  // thanks to Liz on discord
 			  // https://image6.thenewslens.com/2019/2/kjg955id8363y8hjz50ck5vwrz4os5.jpg?auto=compress&fit=crop&h=648&q=85&updated_at=2019-02-28-18-08-19&w=1080
 			  (domain_nosub === "thenewslens.com" && /^image[0-9]*\./.test(domain)) ||
@@ -34369,6 +34637,9 @@ var $$IMU_EXPORT$$;
 			amazon_container === "hmg-prod" ||
 			// https://blogs-images.forbes.com/niallmccarthy/files/2017/11/20171114_Cigarettes.jpg?width=960
 			domain === "blogs-images.forbes.com" ||
+			// thanks to anonymous for reporting:
+			// https://imageio.forbes.com/blogs-images/simonrockman1/files/2019/01/nokia-6310.jpg?height=711&width=711&fit=bounds
+			(domain === "imageio.forbes.com" && /\/blogs-images\//.test(src)) ||
 			// https://images-production.global.ssl.fastly.net/uploads/images/file/47918/jonah-hill-2015-vs-2017.jpg?auto=compress&fit=crop&h=727&q=55&w=750
 			domain === "images-production.global.ssl.fastly.net" ||
 			// https://images-production.freetls.fastly.net/uploads/photos/file/116888/selena-gomez-no-bra-2015.jpg?auto=compress&crop=top&fit=max&q=55&w=750
@@ -35708,6 +35979,24 @@ var $$IMU_EXPORT$$;
 			// https://www.supla.fi/
 			// https://data.richie.app/editions-eu-images/issue/6/7/5/issue_6752fc6a-1947-46f8-aaf1-54e9ab3069d4_issue/master_preview_master_cover.png?mode=stretch&width=276&height=405&format=jpeg
 			domain === "data.richie.app" ||
+			// thanks to anonymous for reporting:
+			// https://cdn-live.be-stabilo.com/media/df/5b/3a/1653530996/St_225462_87_410_pen_diagonal_cs.jpg?ts=1762235903&width=320&quality=70
+			(domain === "cdn-live.be-stabilo.com" && string_indexof(src, "/media/") >= 0) ||
+			// thanks to anonymous for reporting:
+			// https://framerusercontent.com/images/zLxJuTxUJ1gfbNRGuqUv4zHQDI.png?scale-down-to=1024&width=1296&height=729
+			(domain_nowww === "framerusercontent.com" && string_indexof(src, "/images/") >= 0) ||
+			// thanks to anonymous for reporting:
+			// https://c02.purpledshub.com/uploads/sites/52/2023/11/Alex_Kingston_1200x800.jpg?w=1200&webp=1
+			(domain_nosub === "purpledshub.com" && /\/uploads\/+sites\//.test(src)) ||
+			// thanks to anonymous for reporting:
+			// https://static.sky.it/editorialimages/ea11ae89f5bcc84b31cf95080cede91570d9bbde/skytg24/it/mondo/video/2025/11/08/1050137_1762623994801_thumb_494.0000001_1762625195427.jpg?im=Resize,width=565
+			domain === "static.sky.it" ||
+			// thanks to anonymous for reporting:
+			// https://dot.ca.gov/-/media/dot-media/programs/local-assistance/images/rc-h2b/d1-walk-rch2b.jpg?h=345&w=258&hash=F54B1BE408631F537F4B3D202C87E8FA
+			(domain === "dot.ca.gov" && /\/media\/+dot-media\//.test(src)) ||
+			// thanks to anonymous for reporting:
+			// https://img-eshop.cdn.nintendo.net/i/036cc26472551a44556e29d29d711eeb5db5e894f4f59fef7ec82547643fa3b6.jpg?w=1000
+			domain === "img-eshop.cdn.nintendo.net" ||
 			// http://us.jimmychoo.com/dw/image/v2/AAWE_PRD/on/demandware.static/-/Sites-jch-master-product-catalog/default/dw70b1ebd2/images/rollover/LIZ100MPY_120004_MODEL.jpg?sw=245&sh=245&sm=fit
 			// https://www.aritzia.com/on/demandware.static/-/Library-Sites-Aritzia_Shared/default/dw3a7fef87/seasonal/ss18/ss18-springsummercampaign/ss18-springsummercampaign-homepage/hptiles/tile-wilfred-lrg.jpg
 			src.match(/\/demandware\.static\//) ||
@@ -35854,6 +36143,9 @@ var $$IMU_EXPORT$$;
 			// https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/78961122/2/?bust=1761462631&width=1080 -- 415
 			//   https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/78961122/2/
 			(domain === "dl5zpyw5k3jeb.cloudfront.net" && string_indexof(src, "/photos/") >= 0) ||
+			// thanks to anonymous for reporting:
+			// https://images-api.printify.com/mockup/68a7dafe57accd1d120d83ec/25449/100648/beautiful-chaos-coffee-co-sweatshirt.jpg?camera_label=folded&revision=1756841321571&s=400
+			domain === "images-api.printify.com" ||
 			// thanks to MinuteAd8502 on github: https://github.com/qsniyg/maxurl/issues/874
 			// https://img01.ztat.net/article/spp-media-p1/369ffb094cae4443bee45519929dddb8/4269d8d79cfe418888fdc155bf1a8e2e.jpg?imwidth=762
 			//   https://img01.ztat.net/article/spp-media-p1/369ffb094cae4443bee45519929dddb8/4269d8d79cfe418888fdc155bf1a8e2e.jpg -- 1801x2600
@@ -35986,6 +36278,23 @@ var $$IMU_EXPORT$$;
 			// https://collectivegen.com/wp-content/uploads/2016/12/Wardrobe-Rehab_Colour-Guide_InfographicV2-778x1146@2x.jpg
 			//   https://collectivegen.com/wp-content/uploads/2016/12/Wardrobe-Rehab_Colour-Guide_InfographicV2.jpg
 			return src.replace(/-[0-9]+x[0-9]+(?:@[0-9]+x)?(\.[^/.]+(?:[?#].*)?)$/, "$1");
+		}
+
+		if (domain_nowww === "sabeltsimracing.com") {
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1502
+			// https://sabeltsimracing.com/wp-content/webp-express/webp-images/uploads/2023/04/focus_supp_tastiera2-510x330.jpg.webp
+			//   https://sabeltsimracing.com/wp-content/uploads/2023/04/focus_supp_tastiera2.jpg
+			return src.replace(/(\/wp-content\/+)webp-express\/+webp-images\/(uploads\/.*)-[0-9]+x[0-9]+(\.[a-z]+)\.webp(?:[?#].*)?$/, "$1$2$3");
+		}
+
+		if (domain_nowww === "telugumopo.com") {
+			// thanks to anonymous for reporting:
+			// https://telugumopo.com/wp-content/smush-webp/2025/10/1-2-79-769x1024.jpg.webp
+			//   https://telugumopo.com/wp-content/uploads/2025/10/1-2-79-769x1024.jpg
+			//   https://telugumopo.com/wp-content/uploads/2025/10/1-2-79.jpg
+			newsrc = src.replace(/(\/wp-content\/+)smush-webp(\/.*\.[a-z]+)\.webp(?:[?#].*)?$/, "$1uploads$2");
+			if (newsrc !== src)
+				return newsrc;
 		}
 
 		// check to make sure this doesn't break anything
@@ -37003,6 +37312,10 @@ var $$IMU_EXPORT$$;
 			// https://www.booksie.com/files/postings/8/93163-22445_MEDIA_IMAGE__230x230.jpg
 			//   https://www.booksie.com/files/postings/8/93163-22445_MEDIA_IMAGE_.jpg
 			(domain_nowww === "booksie.com" && /\/files\/+postings\//.test(src)) ||
+			// thanks to anonymous for reporting:
+			// https://edit.gerda-henkel-stiftung.de/das-junge-rheinland/gegruendet-gescheitert-vergessen/media/uploads/2019/11/Makarova-Gessner-Fig.-4_1268x1024.jpg
+			//   https://edit.gerda-henkel-stiftung.de/das-junge-rheinland/gegruendet-gescheitert-vergessen/media/uploads/2019/11/Makarova-Gessner-Fig.-4.jpg
+			(domain === "edit.gerda-henkel-stiftung.de" && /\/media\/+uploads\//.test(src)) ||
 			// https://music-bandlink.s3.yandex.net/img/bandlinks/sGCmi_igXrmdjp_370x370.jpg
 			//   https://music-bandlink.s3.yandex.net/img/bandlinks/sGCmi_igXrmdjp.jpg
 			domain === "music-bandlink.s3.yandex.net") {
@@ -37827,6 +38140,21 @@ var $$IMU_EXPORT$$;
 					bad: true
 				};
 			}
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+show\/+([0-9]+\/+[^/?#]+)(?:[?#].*)?$/,
+				query_for_id: "https://pixhost.to/show/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<img id="image"[^>]*\ssrc="([^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find image match for", resp);
+						return done(null, false);
+					}
+
+					return done(decode_entities(match[1]), 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
 		}
 
 		if ((domain_nosub === "pixhost.org" ||
@@ -37873,7 +38201,11 @@ var $$IMU_EXPORT$$;
 			//   https://cloudimages.broadwayworld.com/upload13/2005458/burnthiswm076769780059330.jpg -- 2586x3600
 			// https://cloudimages.broadwayworld.com/upload7/319544/tn-500_tn-500_anger4863.jpg
 			//   https://cloudimages.broadwayworld.com/upload7/319544/tn-500_anger4863.jpg -- 600x402
-			domain === "cloudimages.broadwayworld.com" ||
+			//domain === "cloudimages.broadwayworld.com" ||
+			// thanks to anonymous for reporting:
+			// https://cloudimages2.broadwayworld.com/upload13/2395212/tn-500_3.jpg?format=auto&width=1400
+			//   https://cloudimages2.broadwayworld.com/upload13/2395212/3.jpg -- 7154x4772
+			(domain_nosub === "broadwayworld.com" && /^cloudimages[0-9]*\./.test(domain)) ||
 			// https://newimages.bwwstatic.com/upload11/1600837/tn-500_17stg11.jpg
 			//   https://newimages.bwwstatic.com/upload11/1600837/17stg11.jpg
 			domain === "newimages.bwwstatic.com") {
@@ -37884,6 +38216,7 @@ var $$IMU_EXPORT$$;
 			// https://images.bwwstatic.com/columnpic10/155x64x170ACAF3A86-10F8-4C49-A5A20BCB3E5870DD.jpg.pagespeed.ic.XjIWMZEHy2.jpg
 			//   https://images.bwwstatic.com/columnpic10/ACAF3A86-10F8-4C49-A5A20BCB3E5870DD.jpg
 			return src
+				.replace(/\?.*$/, "")
 				.replace(/\/tn-[0-9]+_([^/]*)$/, "/$1")
 				.replace(/\/(?:[0-9]+)?x(?:[0-9]*)(?:x[0-9]+)?([^/]*)\.pagespeed\.[^/]*(?:[?#].*)?$/, "/$1");
 		}
@@ -37907,7 +38240,7 @@ var $$IMU_EXPORT$$;
 
 		if (common_functions["is_pinterest_domain"](domain)) {
 			newsrc = website_query({
-				website_regex: /^[a-z]+:\/\/[^/]+\/+pin\/+([0-9]+)\/*(?:[?#].*)?$/,
+				website_regex: /^[a-z]+:\/\/[^/]+\/+pin\/+([0-9]+)(?:\/.*)?(?:[?#].*)?$/,
 				query_for_id: "https://www.pinterest.com/pin/${id}/",
 				process_old: function(done, resp, cache_key, website_match) {
 					var match = resp.responseText.match(/<script id="initial-state" type="application\/json">({.*?})<\/script>/);
@@ -38025,6 +38358,8 @@ var $$IMU_EXPORT$$;
 				},
 				process: function(done, resp, cache_key, website_match) {
 					let matches = match_all(resp.responseText, /<script data-relay-response="true" type="application\/json">({.*?"data":\s*{\s*"v3GetPinQuery".*?})<\/script>/);
+					if (!matches)
+						matches = match_all(resp.responseText, /<script data-relay-completed-request="true"[^>]*>[^<]*?,\s*({"data":\s*{\s*"v3GetPinQuery".*?})\);*<\/script>/);
 					if (!matches) {
 						console_error(cache_key, "Unable to find pin queries for", resp);
 						return done(null, false);
@@ -38035,7 +38370,18 @@ var $$IMU_EXPORT$$;
 
 					for (let match of matches) {
 						let json = JSON_parse(match[1]);
-						let data = json.response.data.v3GetPinQuery.data;
+						let response_data = null;
+						if (json.response)
+							response_data = json.response.data;
+						else if (json.data)
+							response_data = json.data;
+
+						if (!response_data) {
+							console_warn(cache_key, "Unable to find data from", {resp, json});
+							continue;
+						}
+
+						let data = response_data.v3GetPinQuery.data;
 						if (data.entityId !== id)
 							continue;
 
@@ -38239,6 +38585,27 @@ var $$IMU_EXPORT$$;
 					is_original: true
 				});
 			}
+		}
+
+		if (domain_nowww === "pin.it") {
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9a-zA-Z]+)\/*(?:[?#].*)?/,
+				run: function(cb, match) {
+					common_functions["get_redirect_url"](api_cache, options, {
+						url: src,
+						imu_mode: "document"
+					}, function(url) {
+						if (!url)
+							return cb(null);
+
+						return cb({
+							url,
+							is_pagelink: true
+						});
+					});
+				}
+			});
+			if (newsrc) return newsrc;
 		}
 
 		if (domain_nosub === "condecdn.net" && string_indexof(domain, "images.condecdn.net") >= 0) {
@@ -41275,7 +41642,7 @@ var $$IMU_EXPORT$$;
 						return cb(data.img);
 
 					if (data.inputs) {
-						return setTimeout(function() {
+						return set_timeout(function() {
 							query_imgflare(url, cb, data.inputs, times + 1);
 						}, 3*1000);
 					}
@@ -41880,8 +42247,11 @@ var $$IMU_EXPORT$$;
 			//   https://cdn.shopify.com/s/files/1/0702/0489/products/TINOCO.gif?v=1641501965&width=900
 			// https://cdn.shopify.com/s/files/1/0702/0489/products/TINOCO.gif?v=1641501965&height=900
 			//   https://cdn.shopify.com/s/files/1/0702/0489/products/TINOCO.gif?v=1641501965
+			// thanks to iotaOmicron on github: https://github.com/qsniyg/maxurl/issues/1505
+			// https://cdn.shopify.com/s/files/1/0275/3649/0561/files/keykobo-sacred-timeline-keycaps-8693287.webp?quality=75
+			//   https://cdn.shopify.com/s/files/1/0275/3649/0561/files/keykobo-sacred-timeline-keycaps-8693287.webp
 			newsrc = src.replace(/_(?:large|medium|small|grande|compact|[0-9]+x(?:[0-9]+)?|x[0-9]+)(?:@[0-9]+x)?(?:_crop_[a-z]+)?(?:\.progressive)?(\.[^/.]*)(?:[?#].*)?$/, "$1");
-			return remove_queries(newsrc, ["width", "height"]);
+			return remove_queries(newsrc, ["width", "height", "quality"]);
 		}
 
 		if (domain === "cdn.itv.com") {
@@ -42778,6 +43148,12 @@ var $$IMU_EXPORT$$;
 			newsrc = src
 				.replace(/\/thumbs\/images\//, "/images/")
 				.replace(/-l[0-9]+(\.[^/.]*)$/, "-l9999$1");
+			if (newsrc !== src) {
+				return fillobj_urls([newsrc, src], obj);
+			}
+
+			// thanks to karpuzikov for reporting: https://github.com/qsniyg/maxurl/issues/1504
+			newsrc = src.replace(/\.webp([?#].*)?$/, ".jpg$1");
 			if (newsrc !== src) {
 				return fillobj_urls([newsrc, src], obj);
 			}
@@ -44277,6 +44653,11 @@ var $$IMU_EXPORT$$;
 			// https://archive-media-0.nyafuu.org/w/thumb/1490/20/1490207933485s.jpg
 			//   https://archive-media-0.nyafuu.org/w/image/1490/20/1490207933485.png
 			(domain_nosub === "nyafuu.org" && /^archive-media/.test(domain)) ||
+			// thanks to anonymous for reporting:
+			// https://arch.b4k.dev/media/g/thumb/1764/01/1764011550153s.jpg
+			//   https://arch.b4k.dev/g/image/1764011550153.png
+			//   https://desu-usergeneratedcontent.xyz/g/image/1764/01/1764011550153.png
+			(domain === "arch.b4k.dev" && string_indexof(src, "/media/") >= 0) ||
 			// https://archiveofsins.com/data/s/thumb/1477/81/1477816195263s.jpg
 			//   https://archiveofsins.com/data/s/image/1477/81/1477816195263.jpg
 			domain_nowww === "archiveofsins.com") {
@@ -44293,6 +44674,12 @@ var $$IMU_EXPORT$$;
 			}
 
 			newsrc = src.replace(/\/thumb(\/+[0-9]{4}\/+[0-9]{2}\/+[0-9]+)s(\.[^/.]*)(?:[?#].*)?$/, "/image$1$2");
+
+			// https://arch.b4k.dev/media/g/thumb/1764/01/1764011550153s.jpg
+			//   https://arch.b4k.dev/g/image/1764011550153.png
+			if (newsrc !== src && domain_nosub === "b4k.dev")
+				newsrc = newsrc.replace(/\/media\/+([^/]+\/+image\/+)[0-9]{4}\/+[0-9]{2}\/+/, "/$1");
+
 			if (newsrc !== src)
 				return fillobj_urls(add_full_extensions(newsrc), baseobj);
 
@@ -44368,6 +44755,10 @@ var $$IMU_EXPORT$$;
 			// https://www.hispasexy.org/cl/thumb/174872956570s.jpg
 			//   https://www.hispasexy.org/cl/src/174872956570.jpg
 			domain_nowww === "hispasexy.org" ||
+			// thanks to anonymous for reporting:
+			// https://www.slutchan.com/camwhores/cracky/thumb/1751383672607s.jpg
+			//   https://www.slutchan.com/camwhores/cracky/src/1751383672607.jpg
+			domain_nowww === "slutchan.com" ||
 			// http://aqua.komica.org/60/thumb/1509040275477s.jpg
 			//   http://aqua.komica.org/60/src/1509040275477.jpg
 			domain === "aqua.komica.org") {
@@ -45481,8 +45872,19 @@ var $$IMU_EXPORT$$;
 			// http://d.ifengimg.com/q100/p0.ifengimg.com/pmop/2017/0726/F4057A55111AE62724AF9C914EFEE425FEBD79C7_size41_w750_h422.jpeg
 			// https://d.ifengimg.com/mw640_q100/y3.ifengimg.com/yidian/2015_46/4321111b2929329_w366_h550.jpg
 			//   http://y3.ifengimg.com/yidian/2015_46/4321111b2929329_w366_h550.jpg
+			// https://d.ifengimg.com/w480_h270_q90_webp/x0.ifengimg.com/res/2025/84E41D05096806438556FBFC95E418441F72B3A2_size8_w372_h248.jpg
+			//   https://x0.ifengimg.com/res/2025/84E41D05096806438556FBFC95E418441F72B3A2_size8_w372_h248.jpg
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3556344531
+			// https://d.ifengimg.com/w800_h1102_ablur_q90_webp/img1.ugc.ifeng.com/newugc/20171204/23/wemedia/0af9792f20fe92dcf0375e3ba8f8488265d320a3_size193_w800_h1102.jpg
 
-			return src.replace(/.*?\/[a-z]+[0-9]*(?:_[whq][0-9]*)?\//, "http://");
+			newsrc = src.replace(/^([a-z]+:\/\/[^/]+\/+)[a-z]+[0-9]*(?:_[a-z]+[0-9]*)*(\/+[^/]+\.[^/]+\/+)/, "$1q100$2");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					can_head: false
+				}
+
+			return src.replace(/^[a-z]+:\/\/[^/]+\/+q100\/+([^/]+\.[^/]+\/+)/, "http://$1");
 			//return src.replace(/(:\/\/[^/]*\/)[wh][0-9]+(?:_[wh][0-9]*)?\//, "$1w0/");
 		}
 
@@ -45545,6 +45947,12 @@ var $$IMU_EXPORT$$;
 			(domain_nowww === "funasia.net" && string_indexof(src, "/site_media/") >= 0) ||
 			// https://image.photocnc.com/photocnc/2019-06/21/201906210455231280.jpg.h200.jpg
 			domain === "image.photocnc.com" ||
+			// thanks to anonymous for reporting:
+			// https://dorogi-onf.ru/media/feedback/2018/05/25/8a78a90bd89d94d3edc099332af61c7b0fdca9f3_960.JPG.0x800_q85_crop.jpg
+			//   https://dorogi-onf.ru/media/feedback/2018/05/25/8a78a90bd89d94d3edc099332af61c7b0fdca9f3_960.JPG
+			// https://dorogi-onf.ru/media/feedback/2017/04/17/P70417-193204.jpg.1920x1080_q85.jpg
+			//   https://dorogi-onf.ru/media/feedback/2017/04/17/P70417-193204.jpg
+			(domain_nowww === "dorogi-onf.ru" && string_indexof(src, "/media/") >= 0) ||
 			// https://d53l9d6fqlxs2.cloudfront.net/photos/41/41127-tokyos-tak.jpg.660x0_q80_crop-scale_upscale.jpg
 			//   https://d53l9d6fqlxs2.cloudfront.net/photos/41/41127-tokyos-tak.jpg
 			domain === "d53l9d6fqlxs2.cloudfront.net") {
@@ -45778,11 +46186,23 @@ var $$IMU_EXPORT$$;
 			domain_nowww === "filmweb.no" ||
 			// https://www.kansascity.com/entertainment/movies-news-reviews/14x5cd/picture115119338/alternates/FREE_1140/edge%20of%20seventeen(2)
 			//   https://www.kansascity.com/entertainment/movies-news-reviews/14x5cd/picture115119338/BINARY/edge%20of%20seventeen(2)
+			// thanks to biziclop on github: https://github.com/qsniyg/maxurl/issues/1500
+			// https://www.kansascity.com/public/sports/spt-columns-blogs/for-petes-sake/6bjim6/picture312751174/alternates/LANDSCAPE_1140/GettyImages-2244682197.jpg
+			//   https://www.kansascity.com/public/sports/spt-columns-blogs/for-petes-sake/6bjim6/picture312751174/alternates/ORIGINAL/GettyImages-2244682197.jpg
+			// https://www.kansascity.com/public/sports/spt-columns-blogs/for-petes-sake/6bjim6/picture312751174/alternates/PORTRAIT_1140/GettyImages-2244682197.jpg
+			//   https://www.kansascity.com/public/sports/spt-columns-blogs/for-petes-sake/6bjim6/picture312751174/alternates/ORIGINAL/GettyImages-2244682197.jpg
+			// https://www.kansascity.com/public/sports/spt-columns-blogs/for-petes-sake/6bjim6/picture312751174/alternates/FREE_1140/GettyImages-2244682197.jpg
+			//   https://www.kansascity.com/public/sports/spt-columns-blogs/for-petes-sake/6bjim6/picture312751174/alternates/ORIGINAL/GettyImages-2244682197.jpg
 			domain_nowww === "kansascity.com" ||
 			// https://www.sanluisobispo.com/entertainment/movies-news-reviews/i9fla8/picture189785229/alternates/LANDSCAPE_160/COVER%201%20Zac%20Efron
 			//   https://www.sanluisobispo.com/entertainment/movies-news-reviews/i9fla8/picture189785229/BINARY/COVER%201%20Zac%20Efron
 			domain_nowww === "sanluisobispo.com" ||
 			// https://www.star-telegram.com/living/home-garden/neil-sperry/bfdn9z/picture162479848/alternates/FREE_1140/Photo%202%20Arch%20adds%20more%20curves%20to%20Sperry%20landscape.%20Walk%20stones%20made%20at%20home
+			// thanks to biziclop on github: https://github.com/qsniyg/maxurl/issues/1500
+			// https://www.star-telegram.com/public/latest-news/2b1elv/picture268096612/alternates/FREE_1140/10005172.jpg -- 2280x1424
+			//   https://www.star-telegram.com/public/latest-news/2b1elv/picture268096612/alternates/ORIGINAL/10005172.jpg -- 2280x1424
+			// https://www.star-telegram.com/public/latest-news/tlizdh/picture269041657/alternates/FREE_1140/10007462%20(1).jpg
+			//   https://www.star-telegram.com/public/latest-news/tlizdh/picture269041657/alternates/ORIGINAL/10007462%20(1).jpg
 			domain_nowww === "star-telegram.com" ||
 			// thanks to heptal on github (#83)
 			// https://sportske.jutarnji.hr/incoming/dalic_moskva_pletikosajpg/9013841/alternates/FREE_680/Dalic_Moskva_pletikosa.jpg
@@ -45858,13 +46278,24 @@ var $$IMU_EXPORT$$;
 			// https://www.fccnn.com/incoming/886099-A-row-of-wind-turbines-towers-over-the-landscape-near-Edgeley-N.D.-in-this-file-photo.-Darren-Gibbins-Forum-News-Service/alternates/BASE_LANDSCAPE/A%20row%20of%20wind%20turbines%20towers%20over%20the%20landscape%20near%20Edgeley%2C%20N.D.%20Darren%20Gibbins%20%20Forum%20News%20Service
 			//   https://www.fccnn.com/incoming/886099-A-row-of-wind-turbines-towers-over-the-landscape-near-Edgeley-N.D.-in-this-file-photo.-Darren-Gibbins-Forum-News-Service/BINARY/A%20row%20of%20wind%20turbines%20towers%20over%20the%20landscape%20near%20Edgeley%2C%20N.D.%20Darren%20Gibbins%20%20Forum%20News%20Service -- 404, similar layout to above?
 			//return src.replace(/(\/article[0-9]*\.ece\/.*?)(?:alternates|ALTERNATES|AUTOCROP|autocrop)\/[^/]*\//, "$1BINARY/");
-			newsrc = src.replace(/(?:alternates|autocrop|binary)\/+[^/]*\/+([^/]*)$/i, "BINARY/$1");
-			if (newsrc !== src)
-				return newsrc;
 
-			newsrc = src.replace(/\/representations\/+[^/]*\/+([^/]*)(?:[?#].*)?$/i, "/BINARY/$1");
-			if (newsrc !== src)
-				return newsrc;
+			let folders = [
+				"BINARY",
+				"alternates/ORIGINAL"
+			];
+
+			let urls = [];
+			for (let folder of folders) {
+				let regex = /(?:alternates|autocrop|binary)\/+[^/]*\/+([^/]*)$/i;
+				if (regex.test(src))
+					urls.push(src.replace(regex, folder + "/$1"));
+
+				regex = /\/representations\/+[^/]*\/+([^/]*)(?:[?#].*)?$/i;
+				if (regex.test(src))
+					urls.push(src.replace(regex, "/" + folder + "/$1"));
+			}
+			if (urls.length)
+				return fillobj_urls(urls, {can_head: false});
 		}
 
 		if (domain_nowww === "ekstrabladet.dk") {
@@ -47495,13 +47926,17 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://cms.nhl.bamgrid.com/images/photos/316907882/258x44/cut.jpg
 			//   https://cms.nhl.bamgrid.com/images/photos/316907882/raw.jpg
+			// https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/019a188f-d6aa-72da-a9f3-811905cbf4f4/compose?aspectRatio=1.78&format=webp&width=231
+			//   https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/019a188f-d6aa-72da-a9f3-811905cbf4f4/compose
 			// other:
 			// https://cms.nhl.bamgrid.com/images/assets/binary/301172494/binary-file/file.svg
 			// https://cms.nhl.bamgrid.com/images/headshots/current/168x168/8476166.jpg
 			domain_nosub === "bamgrid.com") {
 			// https://nhl.bamcontent.com/images/photos/291203200/2568x1444/cut.jpg
 			//   https://nhl.bamcontent.com/images/photos/291203200/raw.jpg
-			return src.replace(/(\/images\/photos\/[0-9]*\/)[0-9]+x[0-9]+\/[^/.]*(\.[^/.]*)$/, "$1raw$2");
+			return src
+				.replace(/(\/ripcut-delivery\/.*)\?.*$/, "$1")
+				.replace(/(\/images\/photos\/[0-9]*\/)[0-9]+x[0-9]+\/[^/.]*(\.[^/.]*)$/, "$1raw$2");
 		}
 
 		if (domain_nosub === "mail.ru" &&
@@ -50557,16 +50992,22 @@ var $$IMU_EXPORT$$;
 			// https://anh.moe/view/Image-1050392.MLR6IO
 			// https://anh.moe/view/Video-34803722.78OBwR
 			domain_nowww === "anh.moe" ||
+			// thanks to anonymous for reporting:
+			// https://pics-view.com/image/fc2-4793736.nAIyjl
+			domain_nowww === "pics-view.com" ||
+			// thanks to anonymous for reporting:
+			// https://hamster.is/image/qeny/
+			domain_nowww === "hamster.is" ||
 			// https://photoloading.com/image/messages-free-porn-video-photo-erome-37.ghXjsi
 			domain_nowww === "photoloading.com") {
 			newsrc = website_query({
 				website_regex: {
-					regex: /^[a-z]+:\/\/[^/]+\/+(image|img|i|view)\/+(?:[^/?#]+\.)?([0-9a-zA-Z]{3,7})(?:[?#].*)?$/,
+					regex: /^[a-z]+:\/\/[^/]+\/+(image|img|i|view)\/+(?:[^/?#]+\.)?([0-9a-zA-Z]{3,7})\/*(?:[?#].*)?$/,
 					groups: ["prefix", "id"]
 				},
 				query_for_id(id, match) {
-					// imgcredit.xyz doesn't support dot
-					let nodot = /\/[0-9a-zA-Z]+(?:[?#].*)?$/.test(src);
+					// imgcredit.xyz, hamster.is doesn't support dot
+					let nodot = /\/[0-9a-zA-Z]+\/*(?:[?#].*)?$/.test(src);
 					let dot = nodot ? "" : ".";
 
 					return {
@@ -50785,6 +51226,12 @@ var $$IMU_EXPORT$$;
 			domain === "f.anhmoecdn.icu" ||
 			// https://s4.anhmoecdn.online/78OBwR.md.jpeg
 			(domain_nosub === "anhmoecdn.online" && /^s[0-9]*\./.test(domain)) ||
+			// thanks to anonymous for reporting:
+			// https://pics-view.com/images/2025/11/09/FC2-4793736.md.jpg
+			domain_nowww === "pics-view.com" ||
+			// thanks to anonymous for reporting:
+			// https://hamster.is/images/2023/09/25/480668686_I-will-be-a-good-girl-because-Christmas-and-its-an-amazi.._01_b0519a8d-21aa-4c1e-8e6b-0794ca818679_s.th.jpg
+			domain_nowww === "hamster.is" ||
 			// http://image-bugs.com/images/2017/09/09/CelebsFlash.com_NP_Harpers_Bazaar_090817__3_.md.jpg
 			domain_nowww === "image-bugs.com") {
 			// http://imgmax.com/images/2017/03/20/0OQhE.th.jpg
@@ -52380,6 +52827,14 @@ var $$IMU_EXPORT$$;
 			// https://image.herognu.dk/4604537.webp?imageId=4604537&x=0.00&y=0.00&cropw=100.00&croph=100.00&width=1926&height=2890&format=webp -- upscaled?
 			//   https://image.herognu.dk/4604537.webp?width=-1&height=-1&format=jpg -- 1667x2500
 			domain === "image.herognu.dk" ||
+			// thanks to anonymous for reporting:
+			// https://image.allas.se/image-10170734?imageId=10170734&width=1320&height=1007&format=webp&compression=90&cropw=100&croph=100&x=0&y=0
+			//   https://image.allas.se/?imageId=10170734&height=-1 -- 2500x1908
+			domain === "image.allas.se" ||
+			// thanks to anonymous for reporting:
+			// https://image.jamtlandstidning.se/168500.webp?imageId=168500&width=960&height=718&format=jpg
+			//   https://image.jamtlandstidning.se/168500.webp?width=-1&height=-1&format=jpg
+			domain === "image.jamtlandstidning.se" ||
 			// https://www.dbstatic.no/68267011.jpg?imageId=68267011&x=0&y=0&cropw=100&croph=100&width=1024&height=1539
 			//   https://www.dbstatic.no/68267011.jpg -- 100x150
 			//   https://www.dbstatic.no/68267011.jpg?width=-1&height=-1 -- 1664x2500
@@ -52392,7 +52847,7 @@ var $$IMU_EXPORT$$;
 			//return src.replace(/(:\/\/[^/]*\/[0-9]+\.[^/.]*?)(?:\?.*)?$/, "$1?width=-1&height=-1");
 			newsrc = src
 				.replace(/(:\/\/[^/]+\/+(?:images\/+)?[0-9]+\.[^/.?#]*)(?:[?#].*)?$/, "$1?width=-1&height=-1")
-				.replace(/\/(?:images)?\?(?:.*&)?imageId=([0-9]+).*/, "/?imageId=$1&height=-1")
+				.replace(/\/(?:image(?:s|-[0-9]+)?)?\?(?:.*&)?imageId=([0-9]+).*/, "/?imageId=$1&height=-1")
 				.replace(/(\/[0-9]+\.webp\?width=-1&height=-1)$/, "$1&format=jpg");
 			if (newsrc !== src)
 				return newsrc;
@@ -52526,11 +52981,14 @@ var $$IMU_EXPORT$$;
 			// https://allbrandstoys.com/ABT2/127-thickbox_default/linkrewrite.jpg
 			//   https://allbrandstoys.com/ABT2/127/linkrewrite.jpg
 			domain_nowww === "allbrandstoys.com" ||
+			// thanks to karpuzikov on github: https://github.com/qsniyg/maxurl/issues/1521
+			// https://cdn.strangemusicinc.net/761-medium_default/tech-n9ne-here-comes-tecca-nina-cd-single.jpg
+			domain === "cdn.strangemusicinc.net" ||
 			// thanks to anonymous for reporting:
 			// https://www.sublimet.com/12604-large_default/serviettes-microfibre-cotton-sublimation.webp
 			//   https://www.sublimet.com/12604/serviettes-microfibre-cotton-sublimation.webp
 			domain_nowww === "sublimet.com" ||
-			/^[a-z]+:\/\/[^/]+\/+[0-9]+-(?:home|large|thickbox)_default\/+[^/.]+\.(?:jpg|webp)(?:[?#].*)?$/.test(src)) {
+			/^[a-z]+:\/\/[^/]+\/+[0-9]+-(?:home|large|thickbox|medium)_default\/+[^/.]+\.(?:jpg|webp)(?:[?#].*)?$/.test(src)) {
 			let baseobj = {
 				url: src
 			};
@@ -53742,6 +54200,10 @@ var $$IMU_EXPORT$$;
 			 // https://keysight-h.assetsadobe.com/is/image/content/dam/keysight/en/doc/gate/application-notes/5980-0288.pdf?$card-image$&wid=1008&hei=567
 			 //   https://keysight-h.assetsadobe.com/is/image/content/dam/keysight/en/doc/gate/application-notes/5980-0288.pdf?scl=1&fmt=png-alpha
 			 domain_nosub === "assetsadobe.com" ||
+			 // thanks to fyhtma on github for reporting: https://github.com/qsniyg/maxurl/issues/1507
+			 // https://kao-h.assetsadobe3.com/is/image/content/dam/sites/kao/pro-kao-com/jp/ja/products/kps05/25440809/GG01.jpg
+			 //   https://kao-h.assetsadobe3.com/is/image/content/dam/sites/kao/pro-kao-com/jp/ja/products/kps05/25440809/GG01.jpg?scl=1
+			 domain_nosub === "assetsadobe3.com" ||
 			 // thanks to MinuteAd8502: https://github.com/qsniyg/maxurl/issues/790
 			 // https://images.asics.com/is/image/asics/1012A898_400_SR_RT_GLB?$thumb$ -- 120x120
 			 //   https://images.asics.com/is/image/asics/1012A898_400_SB_BT_GLB?$sfcc-product$ -- 683x512
@@ -53795,6 +54257,12 @@ var $$IMU_EXPORT$$;
 			// https://www.sony.lu/image/a71e51053c03634f8ff5d4a78fb4b1fb?fmt=png-alpha&wid=900&hei=800
 			//   https://www.sony.lu/image/a71e51053c03634f8ff5d4a78fb4b1fb?scl=1&fmt=png-alpha
 			(domain_nowww === "sony.lu" && string_indexof(src, "/image/") >= 0) ||
+			// thanks to anonymous for reporting:
+			// https://slimages.macysassets.com/is/image/MCY/products/0/optimized/32797290_fpx.tif?qlt=80,0&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=webp&wid=342&hei=417
+			//   https://slimages.macysassets.com/is/image/MCY/products/0/optimized/32797290_fpx.tif?fmt=png-alpha&wid=3275 -- higher returns illegal image size
+			// https://slimages.macysassets.com/is/image/MCY/products/7/optimized/29772527_fpx.tif?wid=3275&scl=1 -- illegal image size
+			// https://slimages.macysassets.com/is/image/MacysInc/C2303479_102:1x1?scl=1&fmt=png-alpha -- 1600x1600
+			domain === "slimages.macysassets.com" ||
 			/^[a-z]+:\/\/[^/]+\/+is\/+image\/+[^/]+\/+[^/]+(?:[?#].*)?$/.test(src)) {
 			// https://dyson-h.assetsadobe2.com/is/image//content/dam/dyson/products/hair-care/dyson-supersonic/customisation/personal-care-dyson-supersonic-customisation-homepage.jpg?scl=1
 			// https://dyson-h.assetsadobe2.com/is/image//content/dam/dyson/icons/owner-footer/register-my-machine.png?scl=1&fmt=png-alpha
@@ -54387,6 +54855,9 @@ var $$IMU_EXPORT$$;
 			//   https://tokushima.ismcdn.jp/mwimgs/f/b/-/img_fb362946e995ce69ae5a7ad8eaf59c99100255.jpg
 			// https://bunshun.ismcdn.jp/mwimgs/2/7/1500wm/img_27d11dc1e57a8d508fb5c39ecb00ffe13151300.jpg
 			//   https://bunshun.ismcdn.jp/mwimgs/2/7/-/img_27d11dc1e57a8d508fb5c39ecb00ffe13151300.jpg
+			// thanks to anonymous for reporting:
+			// https://afpbb.ismcdn.jp/mwimgs/d/0/-/img_d0f784a3d711e6a0f2e83ec757c9d643242181.jpg -- 345x512, no watermark
+			// https://afpbb.ismcdn.jp/mwimgs/6/f/-/img_6f90a8b40808cd70eee0f3b32b389d42207217.jpg -- 690x1024, watermark
 			return src.replace(/(\/mwimgs\/+(?:[0-9a-f]\/+){2})[0-9]+(?:[xmhw][whm]?[0-9]*)?(\/+img_[0-9a-f]{20,}\.[^/.]*)(?:[?#].*)?$/, "$1-$2");
 			//return src.replace(/(\/mwimgs\/+(?:[0-9a-f]\/+){2})[0-9]+\/+(img_)/, "$1-/$2");
 			//return src.replace(/(\/mwimgs\/[0-9a-f]+\/[0-9a-f]+\/)[0-9]+\//, "$1-/");
@@ -56099,9 +56570,19 @@ var $$IMU_EXPORT$$;
 			//   https://static1.e621.net/data/5b/77/5b775b9fbcff339ce15fef7b85b1f9b9.png
 			// https://static1.e621.net/data/sample/de/b8/deb8350027c2edb949486319c1f78256.jpg
 			//   https://static1.e621.net/data/de/b8/deb8350027c2edb949486319c1f78256.png
+			// thanks to Saine Grey on discord:
+			// https://static1.e621.net/data/preview/e1/0e/e10e5eef3123504a0c9a7cf41dbba7d7.webp
+			//   https://static1.e621.net/data/e1/0e/e10e5eef3123504a0c9a7cf41dbba7d7.gif
+			// https://static1.e621.net/data/preview/86/86/868640d7ec27422d6576b492668ce623.webp
+			//   https://static1.e621.net/data/86/86/868640d7ec27422d6576b492668ce623.mp4
+			// https://static1.e621.net/data/preview/10/03/1003ae75fb9382800ca793e690b461cb.webp
+			//   https://static1.e621.net/data/10/03/1003ae75fb9382800ca793e690b461cb.webm
 			newsrc = src.replace(/(:\/\/[^/]+\/+data\/+)(?:preview|sample|crop)\/+([0-9a-f]{2}\/+)/, "$1$2");
 			if (newsrc !== src) {
-				return add_extensions(newsrc);
+				return add_full_extensions2(newsrc, {
+					extensions: ["mp4", "webm", "gif", "png", "jpg", "webp"],
+					prefer_order: true
+				});
 			}
 		}
 
@@ -58440,6 +58921,10 @@ var $$IMU_EXPORT$$;
 			// https://static.pptstore.net/picture/58/02/7792c001c1d89b75ffd0_s.jpg!/fh/300
 			//   https://static.pptstore.net/picture/58/02/7792c001c1d89b75ffd0_s.jpg
 			domain === "static.pptstore.net" ||
+			// thanks to anonymous for reporting:
+			// https://pic.616pic.com/photoone/00/00/15/618ce630e73691587.jpg!/fw/120
+			//   https://pic.616pic.com/photoone/00/00/15/618ce630e73691587.jpg
+			domain === "pic.616pic.com" ||
 			// https://img.lovepik.com/desgin_photo/40121/5643_detail.jpg!/fw/336/clip/0x456a0a0/quality/90
 			//   https://img.lovepik.com/desgin_photo/40121/5643_detail.jpg
 			domain === "img.lovepik.com") {
@@ -58479,10 +58964,14 @@ var $$IMU_EXPORT$$;
 			//   https://inews.gtimg.com/om_ls/OmR2IegKg2gpV2u7PeN6hmb-ocLWUXzuimEvbQIe-tjOUAA
 			// https://inews.gtimg.com/om_ls/O0PxU-XZC0aL8tPhC8qVKOXZ_X9IZY6p7n_ta9hoRGiv4AA_870492/0
 			//   https://inews.gtimg.com/om_ls/O0PxU-XZC0aL8tPhC8qVKOXZ_X9IZY6p7n_ta9hoRGiv4AA
+			// https://inews.gtimg.com/om_ls/OmR2IegKg2gpV2u7PeN6hmb-ocLWUXzuimEvbQIe-tjOUAA_870492/0
+			//   https://inews.gtimg.com/om_ls/OmR2IegKg2gpV2u7PeN6hmb-ocLWUXzuimEvbQIe-tjOUAA_870492
+			//   https://inews.gtimg.com/om_ls/OmR2IegKg2gpV2u7PeN6hmb-ocLWUXzuimEvbQIe-tjOUAA
 			// other:
 			// http://inews.gtimg.com/newsapp_match/0/1607193377/0 -- 2822x4242
 			return {
 				url: src
+					.replace(/(\/[a-z]+_[a-z]+\/+[-_0-9a-zA-Z]{20,})_[0-9]+(?:[?#].*)?$/, "$1")
 					.replace(/(\/[a-z]+_[a-z]+\/+[-_0-9a-zA-Z]{20,})(?:_[0-9]+)?\/+[0-9]+(?:[?#].*)?$/, "$1")
 					.replace(/\/newsapp_[a-z]+\/+([0-9]+\/+[0-9]+\/+)[0-9]+(?:\/+[0-9]+)?(?:[?#].*)?$/, "/newsapp_match/$10"),
 				headers: {
@@ -61369,7 +61858,7 @@ var $$IMU_EXPORT$$;
 					return url;
 
 				let algo = numbers[0];
-				if (algo < 1 || algo > 3)
+				if (algo < 1 || algo > 7)
 					return url;
 
 				let c_ify = function(n:number):number {
@@ -61406,6 +61895,48 @@ var $$IMU_EXPORT$$;
 					return temp;
 				};
 
+				let mulberry32_xxhash_thomaswang = function():number {
+					seed += 0x6d2b79f5;
+					seed = c_ify(seed);
+
+					let temp = seed << 7 | seed >>> 25;
+					temp += 0x9e3779b9;
+					temp = c_ify(temp);
+					temp ^= temp >>> 11;
+					temp = Math.imul(temp, 0x27d4eb2d) | 0;
+					return temp;
+				};
+
+				let xorshift_a5 = function():number {
+					seed = c_ify(seed);
+					seed ^= seed << 7;
+					seed ^= seed >>> 9;
+					seed ^= seed << 8;
+					seed += 0xa5a5a5a5;
+					seed = c_ify(seed);
+
+					return seed;
+				};
+
+				let pcg_basic = function():number {
+					seed = Math.imul(seed, 0x2c9277b5) + 0xac564b05;
+					seed = c_ify(seed);
+					let temp = seed ^ seed >>> 18;
+					temp >>>= (seed >>> 27 & 31);
+					return temp;
+				};
+
+				let xxhash_lowbias32 = function():number {
+					seed += 0x9e3779b9;
+					seed = c_ify(seed);
+
+					let temp = seed ^ seed << 5;
+					temp = Math.imul(temp, 0x7feb352d) | 0;
+					temp ^= temp >>> 15;
+					temp = Math.imul(temp, 0x846ca68b) | 0;
+					return temp;
+				}
+
 				let get_next_rng = function(algo:number):number {
 					let result = seed;
 					if (algo === 1) {
@@ -61414,6 +61945,14 @@ var $$IMU_EXPORT$$;
 						result = xorshift();
 					} else if (algo === 3) {
 						result = xxhash_avalanche();
+					} else if (algo === 4) {
+						result = mulberry32_xxhash_thomaswang();
+					} else if (algo === 5) {
+						result = xorshift_a5();
+					} else if (algo === 6) {
+						result = pcg_basic();
+					} else if (algo === 7) {
+						result = xxhash_lowbias32();
 					}
 
 					return result & 255;
@@ -61613,7 +62152,10 @@ var $$IMU_EXPORT$$;
 									continue;
 								}
 
+								let oldurl = item.url;
 								item.url = decode_xhamster_url(item.url);
+								if (false && item.url !== oldurl)
+									console_log(oldurl.substr(0, 2), oldurl, item.url);
 
 								if (!item.quality) {
 									if (/\.m3u8(?:[?#].*)?$/.test(item.url)) {
@@ -62470,7 +63012,9 @@ var $$IMU_EXPORT$$;
 			// thanks to LemonMeringueTie895 on github for reporting: https://github.com/qsniyg/maxurl/issues/279#issuecomment-2397165211
 			// https://fastly-s3.allmusic.com/release/mr0001196883/back/400/LWpalZjGqPRvFrwKszIL3t_M69_UI9rrJSVvWL2-yAg=.jpg
 			//   https://rovimusic.rovicorp.com/image.jpg?c=LWpalZjGqPRvFrwKszIL3t_M69_UI9rrJSVvWL2-yAg=&f=0
-			match = src.match(/\/release\/+.*?\/([-0-9a-zA-Z_=]{10,})\./);
+			// https://fastly-s3.allmusic.com/artist/mn0002398414/600/r7jqC4Ji6gpt-QhvBTyaJFWnbEN5fCjifro6xhIBuB4=.jpg
+			//   https://rovimusic.rovicorp.com/image.jpg?c=r7jqC4Ji6gpt-QhvBTyaJFWnbEN5fCjifro6xhIBuB4=&f=0
+			match = src.match(/\/(?:release|artist)\/+.*?\/([-0-9a-zA-Z_=]{10,})\./);
 			if (match) {
 				return "https://rovimusic.rovicorp.com/image.jpg?c=" + match[1] + "&f=0";
 			}
@@ -63038,6 +63582,14 @@ var $$IMU_EXPORT$$;
 							continue;
 
 						var our_tbnid = current.getAttribute("data-tbnid");
+						if (!our_tbnid) {
+							let jsdata = current.getAttribute("jsdata");
+							if (jsdata) {
+								let jsdatamatch = jsdata.match(/^[^;]+;([^;]+);/);
+								if (jsdatamatch)
+									our_tbnid = jsdatamatch[1];
+							}
+						}
 						if (!our_tbnid)
 							continue;
 
@@ -63048,6 +63600,7 @@ var $$IMU_EXPORT$$;
 						if (match) {
 							return JSON_parse(match[1]);
 						} else {
+							console_warn("Unable to find thumbnail data for tbnid:", tbnid);
 							break;
 						}
 					}
@@ -63068,7 +63621,7 @@ var $$IMU_EXPORT$$;
 						options.element.dispatchEvent(event);
 
 						// 500 seems to work fine. TODO: perhaps retry 2-3 times?
-						setTimeout(function() {
+						set_timeout(function() {
 							options.cb(get_imagesearch_url(options.element));
 						}, 500);
 
@@ -63915,6 +64468,8 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://www.gamespot.com/a/uploads/screen_tiny/1601/16018044/4569876-phyre-bloodlines-2.jpg
 			//   https://www.gamespot.com/a/uploads/original/1601/16018044/4569876-phyre-bloodlines-2.jpg
+			// https://www.gamespot.com/a/uploads/square_tiny/gamespot/images/2004/reviews/619894-582864_20041110_003.jpg
+			//   https://www.gamespot.com/a/uploads/original/gamespot/images/2004/reviews/619894-582864_20041110_003.jpg
 			domain_nowww === "gamespot.com" ||
 			// thanks to synthtech on github https://github.com/qsniyg/maxurl/issues/115
 			// https://comicvine1.cbsistatic.com/uploads/scale_small/13/136525/5341716-1.jpg
@@ -63926,7 +64481,7 @@ var $$IMU_EXPORT$$;
 			domain_nosub === "cbsistatic.com") {
 			// https://static.comicvine.com/uploads/square_small/6/67663/6449136-800.jpg
 			//   https://static.comicvine.com/uploads/original/6/67663/6449136-800.jpg
-			newsrc = src.replace(/(:\/\/[^/]+\/+(?:a\/+)?)uploads\/+[^/]+\/+((?:mig\/+(?:[0-9]\/+){4}|[0-9]+\/+[0-9]+\/+)[0-9]+(?:-[^/]+)?\.)/, "$1uploads/original/$2");
+			newsrc = src.replace(/(:\/\/[^/]+\/+(?:a\/+)?)uploads\/+[^/]+\/+((?:mig\/+(?:[0-9]\/+){4}|[0-9]+\/+[0-9]+\/+|gamespot\/+images\/+.*?\/)[0-9]+(?:-[^/]+)?\.)/, "$1uploads/original/$2");
 			if (newsrc !== src)
 				return add_extensions(newsrc);
 			//return src.replace(/\/uploads\/[^/]*\//, "/uploads/original/");
@@ -66919,6 +67474,18 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
+		if (domain === "media.heroero.com") {
+			// thanks to anonymous for reporting:
+			// https://media.heroero.com/contents/videos_screenshots/25000/25478/300x255/1.jpg
+			// https://media.heroero.com/contents/videos/2000/2343/2343.mp4
+			newsrc = src.replace(/\/contents\/+videos_screenshots\/+([0-9]+\/+([0-9]+)\/+).*/, "/contents/videos/$1$2.mp4");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					video: true
+				};
+		}
+
 		if (domain === "statics.cdntrex.com" ||
 			domain_nowww === "anon-v.com" ||
 			domain_nowww === "ifuckedmy.mom" ||
@@ -67228,6 +67795,10 @@ var $$IMU_EXPORT$$;
 			domain_nowww === "sexcelebrity.net" ||
 			domain_nowww === "camhub.tv" ||
 			domain_nowww === "gayhaus.com" ||
+			domain_nowww === "webpussi.com" ||
+			domain_nowww === "watcherotic.com" ||
+			domain_nowww === "nudebase.com" ||
+			domain_nosub === "perfektdamen.co" ||
 			// different system
 			// https://static2.tubepornclassic.com/contents/videos_screenshots/1051000/1051741/240x180/1.jpg
 			//domain_nosub === "tubepornclassic.com" ||
@@ -67306,6 +67877,8 @@ var $$IMU_EXPORT$$;
 						match = src.match(/^[a-z]+:\/\/[^/]+\/+([0-9]+)\/+(?:[?#].*)?$/);
 					} else if (domain_nowww === "sexcelebrity.net") {
 						match = src.match(/^[a-z]+:\/\/[^/]+\/+([^/]{5,})\/(?:[?#].*)?$/);
+					} else if (domain_nowww === "watcherotic.com") {
+						match = src.match(/^[a-z]+:\/\/[^/]+\/+video\/+([^/]{5,})\/*(?:[?#].*)?$/);
 					}
 				}
 				if (match) {
@@ -67387,6 +67960,7 @@ var $$IMU_EXPORT$$;
 					   domain_nosub === "pervclips.com" ||
 					   domain_nosub === "pornoembed.info" ||
 					   domain_nosub === "sexcelebrity.net" ||
+					   domain_nosub === "watcherotic.com" ||
 					   domain_nosub === "thisvid.com") {
 				videos_component = "embed";
 				addslash = "";
@@ -67481,6 +68055,7 @@ var $$IMU_EXPORT$$;
 			} else if (domain_nosub === "pornhat.com" ||
 					   domain_nosub === "mrdeepfakes.com" ||
 					   domain_nosub === "x-video.tube" ||
+					   domain_nosub === "nudebase.com" ||
 					   domain_nosub === "porno666.cam") {
 				videos_component = "video";
 			} else if (domain_nosub === "anysex.com") {
@@ -67535,6 +68110,9 @@ var $$IMU_EXPORT$$;
 			} else if (domain_nowww === "camwhores.lol" ||
 					   domain_nowww === "camwhores.video") {
 				replace_basedomain_in_finalurl = true; // canonical url is camwhores.tv
+			} else if (domain_nosub === "perfektdamen.co") {
+				videos_component = "video";
+				a_component = "";
 			}
 
 			var detected_url = null;
@@ -67787,6 +68365,11 @@ var $$IMU_EXPORT$$;
 							if (oursize === oururl) {
 								oursize = oururl.replace(/.*\/key=.*\/+mobile_[0-9]+\.mp4(?:[?#].*)?$/, "480");
 							}
+							// https://video.twimg.com/ext_tw_video/.../pr/vid/avc1/1728x720/....mp4?tag=...
+							// https://video.twimg.com/amplify_video/.../vid/avc1/768x576/....mp4?tag=...
+							if (oursize === oururl) {
+								oursize = oururl.replace(/.*\/video\.twimg\.com\/+[^/]+\/+[0-9]+\/+.*\/[0-9]+x([0-9]+)\/[^/]+(?:[?#].*)?$/, "$1");
+							}
 							if (oursize === oururl) {
 								oursize = null;
 
@@ -67814,7 +68397,7 @@ var $$IMU_EXPORT$$;
 								}
 
 								if (!oursize) {
-									if (oururl.match(/\/([0-9]+)\/+\1(?:_(?:trailer|s))?\.[^/.]+(?:\/*[^/]*)?(?:[?#].*)?$/)) {
+									if (oururl.match(/\/([0-9]+)\/+\1(?:_(?:trailer|s|hq))?\.[^/.]+(?:\/*[^/]*)?(?:[?#].*)?$/)) {
 										oursize = 480;
 									} else {
 										console_warn("Unable to detect size from URL: " + oururl, data);
@@ -67948,6 +68531,9 @@ var $$IMU_EXPORT$$;
 					var match = resp.responseText.match(/<div id="kt_player"[^>]*>\s*(<video id="(?:main_video|my-vid-[0-9]+)"[^>]*>\s*<source\s[^>]*[\s\S]*?<\/video>)/);
 					if (!match) { // alphaporno.com
 						match = resp.responseText.match(/(<video id="bravoplayer"[^>]+>(?:\s*<source[^>]*>){1,}[\s\S]*?<\/video>)/);
+					}
+					if (!match) { // perfektdamen.co
+						match = resp.responseText.match(/(<video id='my-video'[^>]+>(?:\s*<source[^>]*>){1,}[\s\S]*?<\/video>)/);
 					}
 					if (!match) {
 						console_warn(cache_key, "Unable to find plain kt video for", resp);
@@ -71228,6 +71814,12 @@ var $$IMU_EXPORT$$;
 			// https://im.mtvuutiset.fi/image/8488866/landscape16_9/496/279/aacdce57b35edd19bfc63d6061709b16/JR/sigrid.jpg
 			//   http://im.mtvuutiset.fi/blob/8488866/5ebfc88f9bcbef272f9348d6e5f8bdf8/sigrid-data.jpg -- 2048x1365
 			domain === "im.mtvuutiset.fi" ||
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1499
+			// https://api.mtvuutiset.fi/graphql/caas/v1/media/1181432/data/946ff1c6e93aadb801c88823cb67b193/landscape16_9/1024/1652605.jpg
+			//   https://api.mtvuutiset.fi/graphql/caas/v1/media/1181432/data/946ff1c6e93aadb801c88823cb67b193/1652605.jpg
+			// https://api.mtvuutiset.fi/graphql/caas/v1/media/1177594/data/60580c869d4543ea158a232fc1912688/portrait/460/1652610.jpg
+			//   https://api.mtvuutiset.fi/graphql/caas/v1/media/1177594/data/60580c869d4543ea158a232fc1912688/1652610.jpg
+			domain === "api.mtvuutiset.fi" ||
 			// https://www.swissinfo.ch/image/44463288/3x2/305/203/741d49c894cb22ca5949075eadcb2af7/jY/image_doc-19w5nz.jpg
 			//   https://www.swissinfo.ch/blob/44463288/a4e34c18602a9f8060fceff8fbeb3566/image_doc-19w5nz-data.jpg
 			domain_nowww === "swissinfo.ch") {
@@ -71241,8 +71833,9 @@ var $$IMU_EXPORT$$;
 			//   https://im.mtv.fi/blob/5670670/8fba0e97adbc51ef7f74a60f6ec8d04c/1004672-5869-data.jpg
 			// https://im.mtv.fi/image/4837600/landscape1_1/1024/1024/3140f045618e82e77a6247073d04bda7/iH/frendit-yleiskuva.jpg
 			//   https://im.mtv.fi/blob/4837600/3b711cb8aa2acf63fe0a60cffce964d0/frendit-yleiskuva-data.jpg
-			return src.replace(/\/image(\/[0-9]+\/)(?:(?:portrait|landscape[^/]*|3x2|max)\/[0-9]+\/[0-9]+\/)?([0-9a-f]+\/)[a-zA-Z0-9]{2}\/([^/.]+)(\.[^/.]*)$/,
-							   "/blob$1$2$3-data$4");
+			return src
+				.replace(/(\/media\/+[0-9]+\/+data\/+[0-9a-f]+\/+)(?:(?:portrait|landscape[^/]*|3x2|max)\/[0-9]+\/(?:[0-9]+\/)?)?([^/.]+\.[^/.]*)$/, "$1$2")
+				.replace(/\/image(\/[0-9]+\/)(?:(?:portrait|landscape[^/]*|3x2|max)\/[0-9]+\/[0-9]+\/)?([0-9a-f]+\/)[a-zA-Z0-9]{2}\/([^/.]+)(\.[^/.]*)$/, "/blob$1$2$3-data$4");
 		}
 
 		if (domain_nowww === "katsomo.fi") {
@@ -71331,7 +71924,17 @@ var $$IMU_EXPORT$$;
 			// thanks to thomased9412 on github: https://github.com/qsniyg/maxurl/issues/1473
 			// https://vcg00.cfp.cn/creative/vcg/800/new/VCG211367594730.jpg
 			//   https://vcg00.cfp.cn/creative/vcg/nowater800/new/VCG211367594730.jpg
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3506009334
+			// https://vcg02.cfp.cn/creative/vcg/800/version23/VCG41146264071.jpg
+			//   https://vcg02.cfp.cn/creative/vcg/nowater800/new/VCG41146264071.jpg
 			(domain_nosub === "cfp.cn" && /^vcg[0-9]*\./.test(domain))) {
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3547842495
+			// https://vcg02.cfp.cn/creative/vcg/nowater800/new/VCG211535193245.jpg?x-oss-process=image/format,webp
+			//   https://vcg02.cfp.cn/creative/vcg/nowater800/new/VCG211535193245.jpg
+			newsrc = src.replace(/\?x-oss-process.*/, "");
+			if (newsrc !== src)
+				return newsrc;
+
 			// https://goss.vcg.com/editorial/vcg/800/new/VCG111152795068.jpg
 			//   https://goss.vcg.com/editorial/vcg/nowarter800/new/VCG111152795068.jpg
 			// https://goss2.vcg.com/editorial/vcg/800/new/VCG111152804617.jpg
@@ -71342,7 +71945,7 @@ var $$IMU_EXPORT$$;
 			//   https://vcg00.cfp.cn/editorial/vcg/nowater800/version23/VCG31433662363.jpg -- doesn't work
 			return src
 				.replace(/(\/(?:editorial|creative)\/vcg\/)nowarter([0-9]+\/)/, "$1nowater$2")
-				.replace(/(\/(?:editorial|creative)\/vcg\/)[0-9]+\//, "$1nowarter800/");
+				.replace(/(\/(?:editorial|creative)\/vcg\/)[0-9]+\/(?:version[0-9]+|new)\/+/, "$1nowarter800/new/");
 		}
 
 		if (domain_nosub === "renault-dacia.com.ua") {
@@ -72225,7 +72828,39 @@ var $$IMU_EXPORT$$;
 			domain.match(/^i[0-9]*\./)) {
 			// http://i5.imageban.ru/thumbs/2018.01.31/e4aa3be93fac2bdf3be5247651ff560c.jpg -- 400x397
 			//   http://i5.imageban.ru/out/2018/01/31/e4aa3be93fac2bdf3be5247651ff560c.jpg -- 1000x992
-			return src.replace(/(:\/\/[^/]*\/)thumbs\/([0-9]+)\.([0-9]+)\.([0-9]+)\/([0-9a-f]+\.[^/.]*)$/, "$1out/$2/$3/$4/$5");
+			return {
+				url: src.replace(/(:\/\/[^/]*\/)thumbs\/([0-9]+)\.([0-9]+)\.([0-9]+)\/([0-9a-f]+\.[^/.]*)$/, "$1out/$2/$3/$4/$5"),
+				headers: {
+					Accept: "*/*",
+					Referer: "https://imageban.ru/",
+					"Sec-Fetch-Dest": "image"
+				}
+			};
+		}
+
+		if (domain_nowww === "imageban.ru") {
+			// https://i3.imageban.ru/out/2022/02/13/714c2d60466872e911613254c9b2c183.jpg
+			// https://imageban.ru/show/2022/02/13/714c2d60466872e911613254c9b2c183/jpg
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+show\/+([^?#]+\/[a-z]+)(?:[?#].*)?$/,
+				query_for_id: "https://" + domain_nosub + "/show/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/\sdata-original="([^"]+)"[^>]*\salt="([^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find data-original match for", resp);
+						return done(null, false);
+					}
+
+					return done({
+						url: decode_entities(match[1]),
+						extra: {
+							// fixme: should this be filename instead?
+							caption: decode_entities(match[2])
+						}
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
 		}
 
 		if (domain === "image.hackadoll.com") {
@@ -73853,7 +74488,12 @@ var $$IMU_EXPORT$$;
 		if (domain === "g.denik.cz") {
 			// https://g.denik.cz/56/15/eline-powell-twitter-nude1_sip-140up.jpg
 			//   https://g.denik.cz/56/15/eline-powell-twitter-nude1.jpg
-			return src.replace(/_sip-[0-9]+up(\.[^/.]*)$/, "$1");
+			// thanks to anonymous for reporting:
+			// https://g.denik.cz/1/39/petra-spalkova-snury-1_denik-630-16x9@2x.jpg
+			//   https://g.denik.cz/1/39/petra-spalkova-snury-1.jpg -- 1600x1067
+			// https://g.denik.cz/1/7f/4-3-a_denik-75-1x1.jpg
+			//   https://g.denik.cz/1/7f/4-3-a.jpg
+			return src.replace(/_(?:sip-[0-9]+up|denik-[0-9]+)(?:-[0-9]+x[0-9]+(?:@[0-9]+x)?)?(\.[^/.]*)$/, "$1");
 		}
 
 		if (domain_nowww === "imperiodefamosas.com") {
@@ -75460,6 +76100,61 @@ var $$IMU_EXPORT$$;
 			};
 		}
 
+		if (domain_nowww === "sex.com") {
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+[a-z]+\/+videos\/+([0-9]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://www.sex.com/en/videos/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/self\.__next_f\.push\(\[1,"[0-9a-f]+:(\[[^<]*,{\\"video\\":.*?\])(?:\\n)?"\]\)\;*(?:<|\\x3C)\/script>/);
+					if (!match) {
+						console_error(cache_key, "Unable to find __next_f match for", resp);
+						return done(null, false);
+					}
+
+					let unstringed = JSON_parse('"' + match[1] + '"');
+					let unjsoned = JSON_parse(unstringed);
+
+					if (unjsoned.length !== 4 || typeof unjsoned[3] !== "object") {
+						console_error(cache_key, "Unable to parse __next_f match", {
+							resp,
+							unjsoned
+						});
+						return done(null, false);
+					}
+
+					let video_obj = unjsoned[3].video;
+
+					let baseobj = {
+						extra: {
+							caption: video_obj.title,
+							page: resp.finalUrl
+						}
+					};
+
+					let urls = [];
+					for (let source of video_obj.sources) {
+						if (source.type !== "hls") {
+							console_warn(cache_key, "Unhandled source type", source);
+							continue;
+						}
+
+						urls.push({
+							url: urljoin("https://videos.sex.com/" + video_obj.id + "/", source.src, true),
+							video: "hls",
+							headers: {
+								Accept: "*/*",
+								Origin: "https://www.sex.com",
+								Referer: "https://www.sex.com/"
+							}
+						});
+					}
+
+					return done(fillobj_urls(common_functions["fill_ldjson"](urls, resp), baseobj), 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
 		if (domain === "fotografias.antena3.com" ||
 			// https://image.europafm.com/clipping/cmsimages01/2018/10/14/D4C3AFC5-9FF1-456D-9732-AC2F6234F48A/50.jpg -- 1024x400
 			//   https://image.europafm.com/clipping/cmsimages01/2018/10/14/D4C3AFC5-9FF1-456D-9732-AC2F6234F48A/18.jpg -- 1408x864, looks stretched
@@ -75726,12 +76421,6 @@ var $$IMU_EXPORT$$;
 			//   https://wallpapersmug.com/u/912787/barbara-palvin-cute-smiling.jpg
 			return src.replace(/\/(?:download\/+[0-9]+x[0-9]+|(?:thumb|large))\/+([-0-9a-z]+\/+[^/]*)(?:[?#].*)?$/, "/u/$1");
 			//return src.replace(/(:\/\/[^/]*\/)(?:thumb|large)\//, "$1u/");
-		}
-
-		if (domain === "cp12.nevsepic.com.ua") {
-			// http://cp12.nevsepic.com.ua/92/thumbs/1348495006-842567-alejandra_guilmant_24.jpg
-			//   http://cp12.nevsepic.com.ua/92/1348495006-842567-alejandra_guilmant_24.jpg
-			return src.replace(/(\/[0-9]+\/)thumbs\/([0-9]+-[0-9]+-[^/]*)$/, "$1$2");
 		}
 
 		if (domain === "itn.dmarge.com") {
@@ -77431,6 +78120,12 @@ var $$IMU_EXPORT$$;
 							   "$1_original$2");
 		}
 
+		if (domain === "cp12.nevsepic.com.ua") {
+			// http://cp12.nevsepic.com.ua/92/thumbs/1348495006-842567-alejandra_guilmant_24.jpg
+			//   http://cp12.nevsepic.com.ua/92/1348495006-842567-alejandra_guilmant_24.jpg
+			return src.replace(/(\/[0-9]+\/)thumbs\/([0-9]+-[0-9]+-[^/]*)$/, "$1$2");
+		}
+
 		if ((domain_nosub === "nevsepic.com.ua" ||
 			 // http://co15.nevseoboi.com.ua/212/21193/thumbs/1460653854-3037898-nevseoboi.com.ua.jpg
 			 //   http://co15.nevseoboi.com.ua/212/21193/1460653854-3037898-nevseoboi.com.ua.jpg
@@ -77438,7 +78133,10 @@ var $$IMU_EXPORT$$;
 			domain.match(/^c[po][0-9]*\./)) {
 			// http://cp16.nevsepic.com.ua/274/27435/thumbs/1475127502-fd0017.jpg
 			//   http://cp16.nevsepic.com.ua/274/27435/1475127502-fd0017.jpg
-			return src.replace(/(\/[0-9]{3}\/+[0-9]+\/+)thumbs\//, "$1");
+			// thanks to anonymous for reporting:
+			// https://cp22.nevsepic.com.ua/post/63/208_files/thumbs/001b2ec9f01d8b2c2f28983865ec0916.webp
+			//   https://cp22.nevsepic.com.ua/post/63/208_files/001b2ec9f01d8b2c2f28983865ec0916.webp
+			return src.replace(/(\/[0-9]+\/+[0-9]+(?:_files)?\/+)thumbs\//, "$1");
 		}
 
 		if (domain === "static.pulsk.com" ||
@@ -78986,6 +79684,15 @@ var $$IMU_EXPORT$$;
 					}
 				}
 			}
+		}
+
+		if (domain === "ctimages.servefilesonly.com") {
+			// thanks to anonymous for reporting:
+			// https://ctimages.servefilesonly.com/resize/?url=https%3A%2F%2Fpublic.onlyfans.com%2Ffiles%2Fe%2Few%2Fewj%2Fewjmt8be61uxfjylrqvxek9zatocsusa1747316655%2F499061106%2Favatar.jpg&w=480&q=80
+			//   https://public.onlyfans.com/files/e/ew/ewj/ewjmt8be61uxfjylrqvxek9zatocsusa1747316655/499061106/avatar.jpg
+			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+resize\/+\?(?:.*&)?url=([^&]+).*$/, "$1");
+			if (newsrc !== src)
+				return decodeuri_ifneeded(newsrc);
 		}
 
 		if (domain === "img.mfcimg.com") {
@@ -80785,14 +81492,26 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/files\/+attachments\/+[0-9]+\/+/, "/files/attachments/");
 		}
 
-		if (domain_nosub === "motorsport.com" &&
-			domain.match(/^cdn(?:-[0-9]*)?\./)) {
+		if (domain_nosub === "motorsport.com" && /^cdn(?:-[0-9]*)?\./.test(domain)) {
 			// https://cdn-1.motorsport.com/images/mgl/6zlWZOe2/s5/f1-hungarian-gp-2018-barbara-palvin-on-the-grid.jpg
 			//   https://cdn-1.motorsport.com/images/mgl/6zlWZOe2/s9/f1-hungarian-gp-2018-barbara-palvin-on-the-grid.jpg
 			//   https://cdn-1.motorsport.com/images/mgl/6zlWZOe2/s8/f1-hungarian-gp-2018-barbara-palvin-on-the-grid.jpg
 			//   https://cdn-1.motorsport.com/images/mgl/6zlWZOe2/s7/f1-hungarian-gp-2018-barbara-palvin-on-the-grid.jpg -- 960x1440, watermark
 			//   https://cdn-1.motorsport.com/images/mgl/6zlWZOe2/s10/f1-hungarian-gp-2018-barbara-palvin-on-the-grid.jpg -- 960x1440, no watermark
-			return src.replace(/(\/images\/+[^/]*\/+[^/]*\/+)s[5897]\/+/, "$1s10/");
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1501
+			// https://cdn-5.motorsport.com/images/mgl/63QmNk72/s300/nico-hulkenberg-sauber.jpg
+			//   https://cdn-7.motorsport.com/images/mgl/63QmNk72/s900/nico-hulkenberg-sauber.jpg
+			//   https://cdn-5.motorsport.com/images/mgl/63QmNk72/s1200/nico-hulkenberg-sauber.jpg
+			// https://cdn-7.motorsport.com/images/mgl/63QmNk72/s500/nico-hulkenberg-sauber.webp
+			//   https://cdn-7.motorsport.com/images/mgl/63QmNk72/s1200/nico-hulkenberg-sauber.webp
+			//   https://cdn-7.motorsport.com/images/mgl/63QmNk72/s1200/nico-hulkenberg-sauber.jpg
+			newsrc = src
+				.replace(/(\/images\/+[^/]*\/+[^/]*\/+)s[1-9]00\/+/, "$1s1200/")
+				.replace(/(\/images\/+[^/]*\/+[^/]*\/+)s[5897]\/+/, "$1s10/");
+			if (newsrc !== src)
+				return newsrc;
+
+			return src.replace(/\.webp(?:[?#].*)?$/, ".jpg");
 		}
 
 		if (domain_nowww === "epicwallpapers.com" ||
@@ -81411,8 +82130,15 @@ var $$IMU_EXPORT$$;
 			// thanks to Johnny on discord
 			// https://d32dm0rphc51dk.cloudfront.net/C5lzx8iv9A3BwiBsNXQG1A/larger.jpg -- 783x1024
 			//   https://d32dm0rphc51dk.cloudfront.net/C5lzx8iv9A3BwiBsNXQG1A/normalized.jpg -- 3000x3922
+			// thanks to anonymous for reporting:
+			// https://d32dm0rphc51dk.cloudfront.net/AiHpDaGrX5mlRbBEnjSQug/larger.jpg
+			//   https://d32dm0rphc51dk.cloudfront.net/AiHpDaGrX5mlRbBEnjSQug/main.jpg -- 5120x2909
+			//   https://d32dm0rphc51dk.cloudfront.net/AiHpDaGrX5mlRbBEnjSQug/normalized.jpg -- 5505x3128
+			// https://d32dm0rphc51dk.cloudfront.net/WQTTK8TOuQm032jfDQxBtQ/main.jpg -- 5120x3415
+			//   https://d32dm0rphc51dk.cloudfront.net/WQTTK8TOuQm032jfDQxBtQ/normalized.jpg -- 7952x5304
 			return src
-				.replace(/\/larger(\.[^/.]*)(?:[?#].*)?$/, "/normalized$1")
+				.replace(/\/main(\.[^/.]*)(?:[?#].*)?$/, "/normalized$1")
+				.replace(/\/larger(\.[^/.]*)(?:[?#].*)?$/, "/main$1")
 				.replace(/\/(?:small|medium|large)(\.[^/.]*)(?:[?#].*)?$/, "/larger$1");
 		}
 
@@ -82370,12 +83096,14 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/images\/+resized-image\/+[^/]*\/+([0-9]+)(?:[?#].*)?$/, "/images/image/$1");
 		}
 
-		if (domain_nosub === "autoevolution.com" &&
-			domain.match(/^s[0-9]*\.cdn\./)) {
+		if (domain_nosub === "autoevolution.com" && /^s[0-9]*\.cdn\./.test(domain)) {
 			// https://s1.cdn.autoevolution.com/images/news-gallery-130x/zoe-saldana-is-elegant-hot-in-a-mercedes-s-class-shooting-thumbnail_1.jpg
 			//   https://s1.cdn.autoevolution.com/images/news/gallery/zoe-saldana-is-elegant-hot-in-a-mercedes-s-class-shooting_1.jpg
-			return src.replace(/\/images\/+news-gallery-[0-9]+x\/+([^/]*)-thumbnail(_[0-9]+\.[^/.]*)(?:[?#].*)?$/,
-							   "/images/news/gallery/$1$2");
+			// https://s1.cdn.autoevolution.com/images-webp/news/the-brecon-campervan-proves-that-small-spaces-can-be-both-practical-and-genuinely-charming-261690-7.jpg.webp
+			//   https://s1.cdn.autoevolution.com/images/news/the-brecon-campervan-proves-that-small-spaces-can-be-both-practical-and-genuinely-charming-261690-7.jpg
+			return src
+				.replace(/\/images\/+news-gallery-[0-9]+x\/+([^/]*)-thumbnail(_[0-9]+\.[^/.]*)(?:[?#].*)?$/, "/images/news/gallery/$1$2")
+				.replace(/\/images-webp\/+(.*\.[a-z]+)\.webp(?:[?#].*)?$/, "/images/$1");
 		}
 
 		if (domain === "pics.haircutshairstyles.com") {
@@ -82984,8 +83712,7 @@ var $$IMU_EXPORT$$;
 							   "$1original.$2");
 		}
 
-		if (domain_nosub === "360buyimg.com" &&
-			domain.match(/^(?:img[0-9]*|m)\./)) {
+		if (domain_nosub === "360buyimg.com" && /^(?:img[0-9]*|m)\./.test(domain)) {
 			// https://img20.360buyimg.com/babel/s590x470_jfs/t1/36565/1/10948/90118/5ced0965E13f170b4/4be2c2283874a108.jpg!q90!cc_590x470.webp
 			//   https://img20.360buyimg.com/imgzone/jfs/t1/36565/1/10948/90118/5ced0965E13f170b4/4be2c2283874a108.jpg!q90!cc_590x470.webp
 			//   https://img20.360buyimg.com/imgzone/jfs/t1/36565/1/10948/90118/5ced0965E13f170b4/4be2c2283874a108.jpg
@@ -83000,9 +83727,14 @@ var $$IMU_EXPORT$$;
 			// thanks to XiaoSong-CPE: https://github.com/qsniyg/maxurl/issues/1463
 			// https://img14.360buyimg.com/n5/s114x114_jfs/t1/158229/8/39694/166392/6784863cF6a8276c5/09005f48b98e1088.jpg.avif
 			//   https://img14.360buyimg.com/imgzone/jfs/t1/158229/8/39694/166392/6784863cF6a8276c5/09005f48b98e1088.jpg
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3547842495
+			// https://img13.360buyimg.com//n0/jfs/t1/305399/38/704/166022/68201216Ff6510ba5/919edbaa90b03b77.jpg -- watermarked
+			//   https://img13.360buyimg.com/imgzone/jfs/t1/305399/38/704/166022/68201216Ff6510ba5/919edbaa90b03b77.jpg
+			// https://m.360buyimg.com/babel/jfs/t1/362042/39/4534/140945/6918bbc7Fca9bfef6/5ed14f65f40803cf.jpg
+			//   https://m.360buyimg.com/imgzone/jfs/t1/362042/39/4534/140945/6918bbc7Fca9bfef6/5ed14f65f40803cf.jpg
 			return src
 				.replace(/(\/imgzone\/+jfs\/+.*\.[a-z]+)\.avif(?:[?#].*)?$/, "$1")
-				.replace(/(:\/\/[^/]*\/)(?:[a-z0-9]+\/+s[0-9]+x[0-9]+_jfs|popWaterMark\/+jfs)\//, "$1imgzone/jfs/")
+				.replace(/(:\/\/[^/]*)\/+(?:[a-z0-9]+\/+s[0-9]+x[0-9]+_jfs|(?:popWaterMark|n[0-9]+|babel)\/+jfs)\//, "$1/imgzone/jfs/")
 				.replace(/![^/]*(?:[?#].*)?$/, "");
 		}
 
@@ -83869,6 +84601,13 @@ var $$IMU_EXPORT$$;
 			newsrc = urljoin("https://" + domain + "/", src.replace(/^[a-z]+:\/\/[^/]+\/+(?:cdn-cgi\/+)?image\/+[^/]*=[^/]*\/+/, ""), true);
 			if (newsrc !== src)
 				return newsrc;
+		}
+
+		if (domain === "images.vestiairecollective.com") {
+			// thanks to cbadoud on discord:
+			// https://images.vestiairecollective.com/images/resized/w=128,q=70,f=auto,/produit/pantalon-gucci-en-denim-bleu-46423047-1_6.jpg
+			//   https://images.vestiairecollective.com/produit/pantalon-gucci-en-denim-bleu-46423047-1_6.jpg
+			return src.replace(/\/images\/+resized\/+[^/]+\/+produit\/+/, "/produit/");
 		}
 
 		if (domain === "d3ls91xgksobn.cloudfront.net") {
@@ -86456,6 +87195,13 @@ var $$IMU_EXPORT$$;
 			if (newsrc !== src) return newsrc;
 		}
 
+		if (domain === "icdn.cda.pl") {
+			// thanks to anonymous for reporting:
+			// https://icdn.cda.pl/vid/premium/26834983/180x252/0fed3abeb2db8c587136c972dbe4c377.webp
+			//   https://icdn.cda.pl/vid/premium/26834983/0fed3abeb2db8c587136c972dbe4c377.jpg
+			return src.replace(/(\/vid\/+[a-z]+\/+[0-9]+\/+)[0-9]+x[0-9]+\/+([0-9a-f]{10,})\.webp(?:[?#].*)?$/, "$1$2.jpg");
+		}
+
 		if (domain_nowww === "cda.pl") {
 			var remove_cda_url_artifacts = function(str) {
 				return str.replace(/_(?:XDDD|CDA|ADC|CXD|QWE|Q5|IKSDE)/g, "");
@@ -87025,14 +87771,23 @@ var $$IMU_EXPORT$$;
 				return decodeURIComponent(newsrc);
 		}
 
-		if (domain_nosub === "c-ctrip.com" && domain.match(/^youimg[0-9]*\./)) {
+		if (domain_nosub === "c-ctrip.com" && domain.match(/^(?:(?:you|d)img|images)[0-9]*\./)) {
 			// https://youimg1.c-ctrip.com/target/100412000000t4vx25142_R_1024_10000_Q90.jpg?proc=autoorient
 			//   https://youimg1.c-ctrip.com/target/100412000000t4vx25142.jpg
 			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461
 			// https://youimg1.c-ctrip.com/target/fd/tg/g4/M09/D9/07/CggYHFbRSGaAb8pGAAQJHml5khM667_R_640_10000_Q90.jpg?proc=autoorient
 			//   https://youimg1.c-ctrip.com/target/fd/tg/g4/M09/D9/07/CggYHFbRSGaAb8pGAAQJHml5khM667.jpg -- 1200x1600
+			// thanks to anonymous for reporting:
+			// https://dimg04.c-ctrip.com/images/1mc3412000e2t4if64207_R_300_225_R5_Q70_D.jpg
+			//   https://dimg04.c-ctrip.com/images/1mc3412000e2t4if64207.jpg -- 1779x1323
+			// https://dimg04.c-ctrip.com/images/1mc2f12000e035f17DE05.webp
+			//   https://dimg04.c-ctrip.com/images/1mc2f12000e035f17DE05.jpg
+			// https://images4.c-ctrip.com/target/1mc0l12000id1ptc5CB34_C_1200_900_R5.jpg
+			//   https://images4.c-ctrip.com/target/1mc0l12000id1ptc5CB34.jpg -- 4000x2729, upscaled
 			return {
-				url: src.replace(/(\/target\/+.*?)(?:_(?:[A-Z][0-9]*|[0-9]+)){1,}(\.[^/.?#]*)(?:[?#].*)?$/, "$1$2"),
+				url: src
+					.replace(/\.webp(?:[?#].*)?$/, ".jpg")
+					.replace(/(\/(?:target|images)\/+.*?)(?:_(?:[A-Z][0-9]*|[0-9]+)){1,}(\.[^/.?#]*)(?:[?#].*)?$/, "$1$2"),
 				can_head: false
 			};
 		}
@@ -89499,7 +90254,11 @@ var $$IMU_EXPORT$$;
 			}
 		}
 
-		if (domain === "acgn-cdn.sunteorum.com") {
+		if (domain === "acgn-cdn.sunteorum.com" ||
+			// thanks to anonymous for reporting:
+			// https://art-img.voiux.com/gallery/9a30ac541e13a9cbf609dabdf3ecafa0.jpg_960w.jpg
+			//   https://art-img.voiux.com/gallery/9a30ac541e13a9cbf609dabdf3ecafa0.jpg
+			domain === "art-img.voiux.com") {
 			// http://acgn-cdn.sunteorum.com/pixiv-img/2018/57bacfda8dec2df21c42e6d34af2ca3b.jpg_800w.jpg -- upscaled?
 			//   http://acgn-cdn.sunteorum.com/pixiv-img/2018/57bacfda8dec2df21c42e6d34af2ca3b.jpg
 			return src.replace(/(\.[A-Za-z0-9]+)_[0-9]+[wh]\.[^/.]*(?:[?#].*)?$/, "$1");
@@ -90288,7 +91047,8 @@ var $$IMU_EXPORT$$;
 				.replace(/\/images([0-9]*)\/+thumbnails\/+([0-9]+)\/+[0-9]+\/+[0-9]+\/+([^/]+)(?:[?#].*)?$/, "/images$1/detailed/$2/$3");
 		}
 
-		if (domain_nosub === "userapi.com") {
+		if (domain_nosub === "userapi.com" ||
+			domain_nosub === "vkuserphoto.ru") {
 			// thanks to RAT on discord:
 			// https://sun9-3.userapi.com/s/v1/ig2/Eq4PF15hsNNNx_Vc3Pbxp15_i3xteHjeFTJlLDTlDSGo_vtD8J4ohoZjqUijawzj14wLyJ0usKWWSJmUQ-yDaPdD.jpg?quality=95&as=32x34,48x51,72x76,108x115,160x170,240x255,360x382,480x509,540x573,640x679,720x764,1080x1145,1280x1357,1440x1527,2414x2560&from=bu&cs=1280x0
 			//   https://sun9-3.userapi.com/s/v1/ig2/Eq4PF15hsNNNx_Vc3Pbxp15_i3xteHjeFTJlLDTlDSGo_vtD8J4ohoZjqUijawzj14wLyJ0usKWWSJmUQ-yDaPdD.jpg?quality=95&as=32x34,48x51,72x76,108x115,160x170,240x255,360x382,480x509,540x573,640x679,720x764,1080x1145,1280x1357,1440x1527,2414x2560&from=bu&cs=999999x999999
@@ -90304,7 +91064,8 @@ var $$IMU_EXPORT$$;
 				return newsrc;
 		}
 
-		if (domain_nowww === "vk.com") {
+		if (domain_nowww === "vk.com" ||
+			domain_nowww === "vk.ru") {
 			// https://vk.com/images/icons/video_play_small.png?1
 			// https://vk.com/images/album_top_shadow.png
 			if (/^[a-z]+:\/\/[^/]+\/+images\/+(?:icons\/+)?[a-z_]+\.png(?:[?#].*)?$/.test(src))
@@ -90315,6 +91076,7 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain_nowww === "vk.com" ||
+			domain_nowww === "vk.ru" ||
 			// thanks to anonymous for reporting:
 			domain_nowww === "vkvideo.ru") {
 			var vk_request_video = function(id, list, cb) {
@@ -90453,6 +91215,10 @@ var $$IMU_EXPORT$$;
 					var list = null;
 					if (queries) list = queries.playlist;
 
+					if (!list) {
+						list = get_queries(src).list || null;
+					}
+
 					vk_request_video(match[1], list, function(data) {
 						if (!data) return cb(null);
 
@@ -90461,32 +91227,138 @@ var $$IMU_EXPORT$$;
 				}
 			});
 			if (newsrc) return newsrc;
+
+			// https://vkvideo.ru/video_ext.php?oid=\d+&id=\d+
+			if (/^[a-z]+:\/\/[^/]+\/+video_ext\.php\?/.test(src)) {
+				let queries = get_queries(src);
+				if (queries.oid && queries.id) {
+					return {
+						url: "https://vkvideo.ru/video" + queries.oid + "_" + queries.id,
+						is_pagelink: true
+					};
+				}
+			}
 		}
 
-		if (domain_nowww === "vk.com") {
+		if (domain_nowww === "vk.com" ||
+			domain_nowww === "vk.ru") {
 			// thanks to anonymous for reporting:
 			// https://vk.com/clips/hashtag/[...]?z=clip[-id]&feedType=hashtag&hashtag=[...]
 			match = src.match(/:\/\/[^/]+\/+clips\/+(?:[^/]+\/+)?[^/]+\?(?:.*&)?z=clip(-?[0-9]+_[0-9]+)(?:[&/%#].*)?$/);
 			if (match) {
 				return {
-					url: "https://vk.com/video" + match[1],
+					url: "https://" + domain_nosub + "/video" + match[1],
 					is_pagelink: true
 				};
 			}
 		}
 
-		if (domain === "m.vk.com") {
+		if (domain_nowww === "vk.com" ||
+			domain_nowww === "vk.ru") {
+			let vk_request_photo = function(id, list, cb) {
+				var listkey = "";
+				if (list)
+					listkey = "&list=" + list;
+
+				api_query("vk_photo:" + id, {
+					method: "POST",
+					url: "https://" + domain_nosub + "/al_photos.php?act=show",
+					data: "act=show&al=1&photo=" + id + listkey,
+					imu_mode: "xhr",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"X-Requested-With": "XMLHttpRequest"
+					},
+					json: true
+				}, cb, function (done, json, cache_key) {
+					var jsonarray = json.payload[1][3];
+					var jsonobj = null;
+
+					//console_log(jsonarray);
+
+					for (var i = 0; i < jsonarray.length; i++) {
+						if (!jsonarray[i].id)
+							continue;
+
+						api_cache.set("vk_photo:" + jsonarray[i].id, jsonarray[i], 3*60*60);
+
+						if (jsonarray[i].id !== id)
+							continue;
+
+						jsonobj = jsonarray[i];
+					}
+
+					if (jsonobj !== null)
+						done(jsonobj, 3*60*60);
+					else
+						done(null, false);
+				});
+			}
+
+			let vk_process_photo = function(jsonobj) {
+				//console_log(jsonobj);
+
+				var maxsize = 0;
+				var maxurl = null;
+				for (var key in jsonobj) {
+					if (/^[a-z]_$/.test(key) && (key + "src") in jsonobj &&
+						is_array(jsonobj[key]) && jsonobj[key].length === 3) {
+						var size = jsonobj[key][1] * jsonobj[key][2];
+						if (size > maxsize) {
+							maxsize = size;
+							maxurl = jsonobj[key + "src"];
+
+							// fixme: for some reason this crashes, due to some conflict with the userapi rule above
+							if (false && typeof maxurl === "string")
+								maxurl = maxurl.replace(/(:\/\/[^/]+\/+)impg\/+(.*?)(?:[?#].*)?$/, "$1$2");
+						}
+					}
+				}
+
+				if (!maxurl) {
+					console_log("Unable to find photo for", deepcopy(jsonobj));
+				}
+
+				return maxurl;
+			}
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+photo(-?[0-9]+_[0-9]+)(?:[?#].*)?$/,
+				run: function(cb, match) {
+					let list = get_queries(src).list || null;
+
+					vk_request_photo(match[1], list, function(data) {
+						if (!data) return cb(null);
+
+						return cb(vk_process_photo(data));
+					});
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain === "m.vk.com" ||
+			domain === "m.vk.ru") {
 			// thanks to anonymous for reporting:
-			match = src.match(/:\/\/[^/]+\/+video(-?[0-9]+_[0-9]+)(?:[?#].*)?$/);
+			match = src.match(/:\/\/[^/]+\/+video(-?[0-9]+_[0-9]+(?:[?#].*)?)$/);
 			if (match) {
 				return {
-					url: "https://vk.com/video" + match[1],
+					url: "https://" + domain_nosub + "/video" + match[1],
+					is_pagelink: true
+				};
+			}
+
+			match = src.match(/:\/\/[^/]+\/+photo(-?[0-9]+_[0-9]+(?:[?#].*)?)$/);
+			if (match) {
+				return {
+					url: "https://" + domain_nosub + "/photo" + match[1],
 					is_pagelink: true
 				};
 			}
 		}
 
-		if (host_domain_nowww === "vk.com" && options.element) {
+		if ((host_domain_nowww === "vk.com" ||
+			 host_domain_nowww === "vk.ru") && options.element) {
 			newsrc = common_functions["get_pagelink_host_el_matching"](options, {
 				url_match: /^[a-z]+:\/\/[^/]+\/+(?:(?:.*\/)?video|clips\/+(?:[^/]+\/+)?[^/]+\?(?:.*&)?z=clip)(-?[0-9]+_[0-9]+)(?:[?&#].*)?$/,
 				el_match: x => x.id === "video_player"
@@ -90502,8 +91374,8 @@ var $$IMU_EXPORT$$;
 			if (newsrc) return newsrc;
 		}
 
-		if (domain_nosub === "userapi.com" &&
-			host_domain_nosub === "vk.com" && options.element &&
+		if ((domain_nosub === "userapi.com" || domain_nosub === "vkuserphoto.ru") &&
+			(host_domain_nosub === "vk.com" || host_domain_nosub === "vk.ru") && options.element &&
 			options.do_request && options.cb) {
 			// https://vk.com/photo153162173_457261604?all=1
 			// https://sun6-16.userapi.com/c855624/v855624788/9cf23/CQIxv7kEYOQ.jpg -- 1871x2160
@@ -90511,214 +91383,66 @@ var $$IMU_EXPORT$$;
 			//   o_: 130x150, p_: 200x231, q_: 320x370, r_: 510x589, w_: 1871x2160, x_: 523x604, y_: 699x807, z_: 935x1080
 			// TODO: profile photos on other pages (some are /id012345, some are /special.name.
 			//   requesting that will allow us to find <a id="profile_photo_link" href="/photo...">
-			newsrc = (function() {
-				var request_video = function(id, list, cb) {
-					// payload[1][4].player.params[0].url720|hls(raw)?
-					var cache_key = "vk_video:" + id;
-					api_cache.fetch(cache_key, cb, function(done) {
-						var listkey = "";
-						if (list) {
-							//listkey = "&list=" + list;
-							listkey = "&playlist_id=" + list;
-						} else {
-							listkey = "&playlist_id=" + id.replace(/_[0-9]+$/, "_-2");
-						}
 
-						options.do_request({
-							method: "POST",
-							url: "https://vk.com/al_video.php?act=show",
-							data: "act=show&al=1&al=1&module=direct&video=" + id + listkey,
-							headers: {
-								"Content-Type": "application/x-www-form-urlencoded",
-								"X-Requested-With": "XMLHttpRequest",
-								"Referer": "https://vk.com/",
-								"Origin": "https://vk.com"
-							},
-							onload: function(result) {
-								if (result.readyState !== 4)
-									return;
+			let vkdomain = host_domain_nosub;
 
-								try {
-									var json = JSON_parse(result.responseText);
+			let process_vk_el = function(current) {
+				if (current.tagName === "A") {
+					var is_photo = true;
 
-									var params = json.payload[1][4].player;
-									return done(params, 3*60*60);
-								} catch (e) {
-									console_error("vk_video", e);
-								}
-
-								return done(null, false);
-							}
-						});
-					});
-				};
-
-				function request_photo(id, list, cb) {
-					var listkey = "";
-					if (list)
-						listkey = "&list=" + list;
-
-					api_query("vk_photo:" + id, {
-						method: "POST",
-						url: "https://vk.com/al_photos.php?act=show",
-						data: "act=show&al=1&photo=" + id + listkey,
-						imu_mode: "xhr",
-						headers: {
-							"Content-Type": "application/x-www-form-urlencoded",
-							"X-Requested-With": "XMLHttpRequest"
-						},
-						json: true
-					}, cb, function (done, json, cache_key) {
-						var jsonarray = json.payload[1][3];
-						var jsonobj = null;
-
-						//console_log(jsonarray);
-
-						for (var i = 0; i < jsonarray.length; i++) {
-							if (!jsonarray[i].id)
-								continue;
-
-							api_cache.set("vk_photo:" + jsonarray[i].id, jsonarray[i], 3*60*60);
-
-							if (jsonarray[i].id !== id)
-								continue;
-
-							jsonobj = jsonarray[i];
-						}
-
-						if (jsonobj !== null)
-							done(jsonobj, 3*60*60);
-						else
-							done(null, false);
-					});
-				}
-
-				function process_photo(jsonobj) {
-					//console_log(jsonobj);
-
-					var maxsize = 0;
-					var maxurl = null;
-					for (var key in jsonobj) {
-						if (/^[a-z]_$/.test(key) && (key + "src") in jsonobj &&
-							is_array(jsonobj[key]) && jsonobj[key].length === 3) {
-							var size = jsonobj[key][1] * jsonobj[key][2];
-							if (size > maxsize) {
-								maxsize = size;
-								maxurl = jsonobj[key + "src"];
-
-								// fixme: for some reason this crashes, due to some conflict with the userapi rule above
-								if (false && typeof maxurl === "string")
-									maxurl = maxurl.replace(/(:\/\/[^/]+\/+)impg\/+(.*?)(?:[?#].*)?$/, "$1$2");
-							}
-						}
-					}
-
-					if (!maxurl) {
-						console_log("Unable to find photo for", deepcopy(jsonobj));
-					}
-
-					return maxurl;
-				}
-
-				function process_video(player) {
-					// https://vk.com/video-19043_456244315 -- youtube video
-					// https://vk.com/video-19043_456244349 -- non-youtube video
-					var params = player.params[0];
-
-					var maxsize = 0;
-					for (var key in params) {
-						var match = key.match(/^url([0-9]+)$/);
-						if (match) {
-							var size = parseInt(match[1]);
-							if (size > maxsize)
-								maxsize = size;
-						}
-					}
-
-					if (maxsize !== 0) {
-						return params["url" + maxsize];
-					}
-
-					if (player.type === "youtube") {
-						if (params.extra_data) {
-							return "https://i.ytimg.com/vi/" + params.extra_data + "/mqdefault.jpg";
-						}
-					}
-
-					console_log("Unable to find video for", deepcopy(params));
-
-					return null;
-				}
-
-				function process_el(current) {
-					if (current.tagName === "A") {
-						var is_photo = true;
-
-						var match = current.href.match(/^[a-z]+:\/\/(?:[^/]+\.)?vk\.com\/+photo(-?[0-9]+_[0-9]+)\/*(?:[?#].*)?$/);
-						if (!match) {
-							var onclick = current.getAttribute("onclick");
-							if (onclick) {
-								match = onclick.match(/^return\s+showPhoto\(["'](-?[0-9]+_[0-9]+)["']\s*,\s*["']([^'"]+)["']/);
-								if (!match) {
-									match = onclick.match(/^return\s+showVideo\(["'](-?[0-9]+_[0-9]+)["']\s*,\s*["']([^'"]+)["']/);
-									if (match) {
-										is_photo = false;
-									}
-								}
-							}
-						}
-
-						if (match) {
-							if (is_photo) {
-								request_photo(match[1], match[2], function(obj) {
-									if (!obj) {
-										options.cb(null);
-									} else {
-										options.cb(process_photo(obj));
-									}
-								});
-							} else {
-								request_video(match[1], match[2], function(obj) {
-									if (!obj) {
-										options.cb(null);
-									} else {
-										options.cb(process_video(obj));
-									}
-								});
-							}
-
-							return true;
-						}
-					}
-
-					return false;
-				}
-
-				var current = options.element;
-				if (current.children && current.children.length === 1) {
-					if (process_el(current.children[0])) {
+					var match = current.href.match(/^[a-z]+:\/\/(?:[^/]+\.)?vk\.[a-z]+\/+(?:photo|video)(-?[0-9]+_[0-9]+)\/*(?:[?#].*)?$/);
+					if (match) {
 						return {
-							waiting: true
-						};
-					}
-				}
-
-				//current = options.element;
-				while (current) {
-					if (process_el(current)) {
-						return {
-							waiting: true
+							url: current.href,
+							is_pagelink: true
 						};
 					}
 
-					current = current.parentElement;
+					var onclick = current.getAttribute("onclick");
+					if (onclick) {
+						match = onclick.match(/^return\s+showPhoto\(["'](-?[0-9]+_[0-9]+)["']\s*,\s*["']([^'"]+)["']/);
+						if (match) {
+							let url = "https://" + vkdomain + "/photo" + match[1];
+							if (match[2])
+								url += "?list=" + match[2];
+
+							return {
+								url,
+								is_pagelink: true
+							};
+						}
+
+						match = onclick.match(/^return\s+showVideo\(["'](-?[0-9]+_[0-9]+)["']\s*,\s*["']([^'"]+)["']/);
+						if (match) {
+							let url = "https://" + vkdomain + "/video" + match[1];
+							if (match[2])
+								url += "?list=" + match[2];
+
+							return {
+								url,
+								is_pagelink: true
+							};
+						}
+					}
 				}
 
-				return src;
-			})();
+				return null;
+			};
 
-			if (newsrc && newsrc !== src)
-				return newsrc;
+			let current = options.element;
+			if (current.children && current.children.length === 1) {
+				newsrc = process_vk_el(current.children[0]);
+				if (newsrc)
+					return newsrc;
+			}
+
+			while (current) {
+				newsrc = process_vk_el(current);
+				if (newsrc)
+					return newsrc;
+
+				current = current.parentElement;
+			}
 		}
 
 		if (domain_nosub === "vkuservideo.net") {
@@ -91024,9 +91748,23 @@ var $$IMU_EXPORT$$;
 			// https://mobile.agoravox.fr/local/cache-vignettes/L640xH1642/map_develop_f936-7cba8.png -- 3500x1642
 			// https://www.agoravox.fr/IMG/jpg/22_mars.jpg -- 3307x2362 (interchangeable with mobile.)
 			// thanks to anonymous for reporting:
-			// www.monde-diplomatique.fr/local/cache-vignettes/L890xH664/679.hrmedias-37fb7.png
 			// https://musees-reims.fr/local/cache-vignettes/L380xH464/0add185c-195a-49ea-8017-6734a3107019-d947f.jpg
 			//   https://musees-reims.fr/local/cache-vignettes/L837xH1023/0add185c-195a-49ea-8017-6734a3107019-089db.jpg
+		}
+
+		if (domain_nowww === "monde-diplomatique.fr" ||
+			// thanks to anonymous:
+			// https://mondiplo.com/local/cache-vignettes/L672xH438/transcaucasie-trz-d8b88.jpg?1609578063
+			//   https://mondiplo.com/IMG/jpg/transcaucasie-trz.jpg
+			domain_nowww === "mondiplo.com") {
+			// thanks to anonymous:
+			// https://www.monde-diplomatique.fr/local/cache-vignettes/L890xH784/12_2275.hr-7b7ae.png?1750953756
+			//   https://www.monde-diplomatique.fr/IMG/png/12_2275.hr.png
+			// https://www.monde-diplomatique.fr/local/cache-vignettes/L890xH555/ii-23-749e6.jpg?1757272836
+			//   https://www.monde-diplomatique.fr/IMG/jpg/ii-23.jpg
+			// https://www.monde-diplomatique.fr/local/cache-vignettes/L890xH664/679.hrmedias-37fb7.png
+			//   https://www.monde-diplomatique.fr/IMG/png/679.hrmedias.png
+			return src.replace(/\/local\/+cache-vignettes\/+L[0-9]+xH[0-9]+\/+([^/]+)-[0-9a-f]{5}\.([a-z]+)(?:[?#].*)?$/, "/IMG/$2/$1.$2");
 		}
 
 		if (domain === "pictures.topspeed.com") {
@@ -91537,6 +92275,8 @@ var $$IMU_EXPORT$$;
 			 domain_nowww === "fotokiz.com" ||
 			 // thanks to elvisef on github: https://github.com/qsniyg/maxurl/issues/628
 			 domain_nowww === "silverpic.com" ||
+			 // thanks to anonymous for reporting:
+			 domain_nowww === "silverpic.net" ||
 			 // thanks to elvisef on github: https://github.com/qsniyg/maxurl/issues/628
 			 domain_nowww === "picdollar.com" ||
 			 // thanks to elvisef on github: https://github.com/qsniyg/maxurl/issues/628
@@ -91549,34 +92289,62 @@ var $$IMU_EXPORT$$;
 			 //   https://www.picbaron.com/img/uu5si5rhdliptxsqhap3eekotqhlfdh2r2iqvhsrsi/metart_loxima_elizabet_high_0040.jpg
 			 domain_nowww === "picbaron.com")
 			&& options.do_request && options.cb) {
+			let query_domain = domain_nosub;
+			if (query_domain === "silverpic.com")
+				query_domain = "silverpic.net";
+
 			newsrc = website_query({
-				website_regex: /^[a-z]+:\/\/[^/]+\/+([a-z0-9]{5,})\/+[^/]*\.html(?:[?#].*)?$/,
-				query_for_id: function(id) {
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([a-z0-9]{5,})\/+([^/]*)\.html(?:[?#].*)?$/,
+				query_for_id: function(id, match) {
 					return {
 						method: "POST",
-						url: "https://" + domain_nosub + "/" + id + "/.html",
+						url: "https://" + query_domain + "/" + id + "/" + match[2] + ".html",
 						data: "op=view&id=" + id + "&pre=1&next=Continue+to+image...",
 						headers: {
-							Origin: "https://" + domain_nosub,
+							Origin: "https://" + query_domain,
 							Referer: pageurl,
 							"Content-Type": "application/x-www-form-urlencoded"
 						},
+						imu_cookies: {
+							"file_code": id,
+							"fcode": id
+						}
 					};
 				},
 				process: function(done, resp, cache_key) {
-					var match = resp.responseText.match(/<img\s+src=["']((?:https?:)?\/\/[^/]+\/+img\/+[0-9a-z]{10,}\/+.*?)['"]\s+class=["']pic["']/);
+					var match = resp.responseText.match(/<img\s+src=["']((?:(?:https?:)?\/\/[^/]+)?\/+img\/+[0-9a-z]{10,}\/+[^"']+)['"]\s+(?:class=["']pic["']|alt=)/);
 					if (!match) {
 						console_error(cache_key, "Unable to find match for", resp);
 						return done(null, false);
 					}
 
 					return done({
-						url: urljoin(url, match[1], true),
+						url: urljoin(resp.finalUrl, decode_entities(match[1]), true),
 						is_original: true
 					}, 60*60);
 				}
 			});
 			if (newsrc) return newsrc;
+
+			if (options.element) {
+				// often embedded in forums, but we usually need the page link to find the full image
+				var el = common_functions["get_link_el_matching"](options.element, function(el) {
+					let a_domain = get_domain_nosub(get_domain_from_url(el.href));
+					if (a_domain === domain_nosub || a_domain === query_domain)
+						return false;
+
+					if (/^[a-z]+:\/\/[^/]+\/+([a-z0-9]{5,})\/+[^/?#]+\.html(?:[?#].*)?$/.test(el.href)) {
+						return true;
+					}
+				});
+
+				if (el && el.href !== src) {
+					return {
+						url: el.href,
+						is_pagelink: true
+					};
+				}
+			}
 
 			// other possible servers (from google)
 			// imagebake.com pixes.ws dostore.xyz imgxxx.me
@@ -91585,6 +92353,8 @@ var $$IMU_EXPORT$$;
 			// https://imgbaron.com/i/00087/8r1hprs298m6_t.jpg
 			//   https://imgbaron.com/8r1hprs298m6/.html
 			//   https://imgbaron.com/img/zdnt43lf4uzsmgawy3zy6kfqp4smlrlag3lwb5bdjq/egh_0003.JPG
+
+			// fixme: this doesn't work for most sites anymore
 			match = src.match(/\/i\/+[0-9]+\/+([0-9a-z]+)_t\./);
 			if (match) {
 				return {
@@ -96241,13 +97011,15 @@ var $$IMU_EXPORT$$;
 
 		if (host_domain_nowww === "redgifs.com" && options.element && !src) {
 			if (options.element.tagName === "VIDEO") {
-				let parent = common_functions["get_parent_el_matching"](options.element, x => (x.classList.contains("Video") || x.classList.contains("GifPreview") || x.classList.contains("PlayerV2")));
+				let parent = common_functions["get_parent_el_matching"](options.element, x => (x.classList.contains("Video") || x.classList.contains("GifPreview") || x.classList.contains("PlayerV2") || x.classList.contains("tileItem")));
 				if (parent) {
 					let poster = parent.querySelector("img.Video-Poster");
 					if (!poster)
 						poster = parent.querySelector("img.Player-Poster");
 					if (!poster)
 						poster = parent.querySelector("img.PlayerV2-Poster");
+					if (!poster)
+						poster = parent.querySelector("img.thumbnail");
 					if (poster) {
 						return poster.src;
 					}
@@ -99094,6 +99866,77 @@ var $$IMU_EXPORT$$;
 				};
 		}
 
+		if (domain_nowww === "snapchat.com") {
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+(@[^/]+\/+spotlight\/+[-_0-9a-zA-Z=%]+)(?:[?#].*)?$/,
+				query_for_id: "https://www.snapchat.com/${id}",
+				process: function(done, resp, cache_key) {
+					let match = resp.responseText.match(/<script id="__NEXT_DATA__"[^>]*>(.*?)<\/script>/);
+					if (!match) {
+						console_error(cache_key, "Unable to find next match for", resp);
+						return done(null, false);
+					}
+
+					let props = JSON_parse(match[1]);
+					let feed = props.props.pageProps.spotlightFeed.spotlightStories;
+
+					let storyid_match = resp.finalUrl.match(/\/spotlight\/+([^/.]+)(?:[?#].*)?$/);
+					if (!storyid_match) {
+						console_error(cache_key, "Unable to find storyId from", resp);
+						return done(null, false);
+					}
+
+					let storyid = decodeURIComponent(storyid_match[1]);
+
+					let storyobj = null;
+					for (let story of feed) {
+						if (story.story.storyId.value !== storyid)
+							continue;
+
+						storyobj = story;
+						break;
+					}
+
+					if (!storyobj) {
+						console_error(cache_key, "Unable to find story from", {resp, props, feed});
+						return done(null, false);
+					}
+
+					let baseobj = {
+						extra: {
+							author_username: storyobj.metadata.videoMetadata.creator.personCreator.username,
+							created_date: parse_int(storyobj.metadata.videoMetadata.uploadDateMs)
+						},
+						headers: {
+							Referer: "https://www.snapchat.com/"
+						}
+					};
+
+					let urls = [];
+
+					urls.push({
+						url: storyobj.metadata.videoMetadata.contentUrl,
+						video: true
+					});
+
+					urls.push(storyobj.metadata.videoMetadata.thumbnailUrl);
+
+					return done(fillobj_urls(urls, baseobj), 60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (host_domain_nosub === "snapchat.com") {
+			newsrc = common_functions["get_pagelink_host_el_matching"](options, {
+				url_match: /^[a-z]+:\/\/[^/]+\/+(@[^/]+\/+spotlight\/+[-_0-9a-zA-Z=%]+)(?:[?#].*)?$/,
+				el_match: function(x) {
+					return x.getAttribute("data-testid") === "storyWebPlayer";
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
 		if (domain === "cf-st.sc-cdn.net") {
 			// https://cf-st.sc-cdn.net/aps/bolt/aHR0cHM6Ly9jZi1zdC5zYy1jZG4ubmV0L2JvbHQtcHJvZC1zMy11cy1lYXN0LTEvTTBlNTFuVmhfMHJGQkx3eWtBZ041ekxxbmpVUUNZ._RS0,90_FMjpeg
 			//   https://cf-st.sc-cdn.net/bolt-prod-s3-us-east-1/M0e51nVh_0rFBLwykAgN5zLqnjUQCY
@@ -100848,6 +101691,14 @@ var $$IMU_EXPORT$$;
 			//   = {"bucket":"serverlessimagehandlersourceprivacy","key":"2025-3-19/fbf65b95-d063-4525-a82f-7cb9c4f678fc-638780020246468129--Privacy.png","edits":{"resize":{"height":1080,"fit":"cover"},"overlayWith":{"bucket":"serverlessimagehandlersourceprivacy","key":"watermark/privacy.png","options":{"gravity":"southeast"}}}}
 			domain === "image.privacy.com.br" ||
 			// thanks to anonymous for reporting:
+			// https://d21ld3wfckjpu2.cloudfront.net/eyJidWNrZXQiOiJhcHBsZXRpY2t0Ym94Iiwia2V5IjoiYXNzZXRzXC9tb3ZpZUltYWdlc1wvRk84UGtLanYyUS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOm51bGwsImhlaWdodCI6MjUwLCJmaXQiOiJjb3ZlciJ9fSwidG9Gb3JtYXQiOiJ3ZWJwIn0=
+			//   https://d21ld3wfckjpu2.cloudfront.net/eyJidWNrZXQiOiJhcHBsZXRpY2t0Ym94Iiwia2V5IjoiYXNzZXRzL21vdmllSW1hZ2VzL0ZPOFBrS2p2MlEuanBnIiwidG9Gb3JtYXQiOiJ3ZWJwIn0=
+			//   https://d21ld3wfckjpu2.cloudfront.net/eyJidWNrZXQiOiJhcHBsZXRpY2t0Ym94Iiwia2V5IjoiYXNzZXRzL21vdmllSW1hZ2VzL0ZPOFBrS2p2MlEuanBnIn0= -- 3600x5363
+			//   https://appleticktbox.s3.amazonaws.com/assets/movieImages/FO8PkKjv2Q.jpg
+			// atob:
+			//   = {"bucket":"appleticktbox","key":"assets\/movieImages\/FO8PkKjv2Q.jpg","edits":{"resize":{"width":null,"height":250,"fit":"cover"}},"toFormat":"webp"}
+			domain === "d21ld3wfckjpu2.cloudfront.net" ||
+			// thanks to anonymous for reporting:
 			// https://images.ams-prd.blv.cloud/eyJidWNrZXQiOiJpbWFnZXMtcHJkLTFvNHV6OXpieHd6cDF1Ym0iLCJrZXkiOiJkYTkwNjE5Yy0yOGVkLTRjMDYtOTkzNi03Y2EzNGE1NjI1MzQiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjM2MCwiaGVpZ2h0IjozNjB9fX0=
 			//   https://images.ams-prd.blv.cloud/eyJidWNrZXQiOiJpbWFnZXMtcHJkLTFvNHV6OXpieHd6cDF1Ym0iLCJrZXkiOiJkYTkwNjE5Yy0yOGVkLTRjMDYtOTkzNi03Y2EzNGE1NjI1MzQifQ==
 			// atob:
@@ -100863,7 +101714,8 @@ var $$IMU_EXPORT$$;
 					"cdn.gamerch.com/gamerch-img-contents": "https://cdn.gamerch.com/contents/",
 					"img.tumblbug.com/tumblbug-img-assets": "https://img.tumblbug.com/",
 					"d193frjqb908ar.cloudfront.net/milesplit": "https://milesplit.s3.amazonaws.com/",
-					"images.locable.com/impact-production": "https://impact-production.s3.amazonaws.com/"
+					"images.locable.com/impact-production": "https://impact-production.s3.amazonaws.com/",
+					"d21ld3wfckjpu2.cloudfront.net/appleticktbox": "https://appleticktbox.s3.amazonaws.com/",
 					//"d193frjqb908ar.cloudfront.net/files.milesplit.us": ""
 				};
 
@@ -100882,7 +101734,13 @@ var $$IMU_EXPORT$$;
 					let decoded = base64_decode(match[2]);
 					var json = JSON_parse(decoded);
 
+					// second time around remove format conversion altogether
+					if (!json.edits)
+						delete json.toFormat;
+
 					delete json.edits;
+					if (json.toFormat === "webp")
+						delete json.toFormat;
 
 					let urls = [];
 
@@ -101264,6 +102122,16 @@ var $$IMU_EXPORT$$;
 			//   https://as2.ftcdn.net/jpg/01/48/39/83/1000_F_148398310_NQEzSr9fzbmfo0ZOcQjBhwQCFtSlwiS9.jpg -- watermark, 667x1000
 			// https://as2.ftcdn.net/v2/jpg/05/68/13/59/500_F_568135900_NtbQJET5LBJ7o2DE0OGjYj1yXct5njRZ.jpg
 			//   https://as2.ftcdn.net/v2/jpg/05/68/13/59/1000_F_568135900_NtbQJET5LBJ7o2DE0OGjYj1yXct5njRZ.jpg
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3542119446
+			// https://t4.ftcdn.net/jpg/16/01/69/83/360_F_1601698322_D4xCObvRjnDXGHoJv3Q4rWDNdY8Bt3I0.webp
+			//   https://t4.ftcdn.net/jpg/16/01/69/83/1000_F_1601698322_D4xCObvRjnDXGHoJv3Q4rWDNdY8Bt3I0.webp
+			//   https://t4.ftcdn.net/jpg/16/01/69/83/1000_F_1601698322_D4xCObvRjnDXGHoJv3Q4rWDNdY8Bt3I0.jpg
+			// https://t4.ftcdn.net/jpg/15/37/92/27/240_F_1537922790_wWEcVNOQDbAyuECuDtFYqs74mEDhrmh0.jpg
+			//   https://t4.ftcdn.net/jpg/15/37/92/27/1000_F_1537922790_wWEcVNOQDbAyuECuDtFYqs74mEDhrmh0.jpg
+			newsrc = src.replace(/\.webp$/, ".jpg");
+			if (newsrc !== src)
+				return newsrc;
+
 			match = src.match(/:\/\/[^/]+\/+(?:v2\/+)?[^/]+\/+(?:[0-9]{2}\/+){4}([0-9]+)_F_([0-9]+)_[^/_.]+\.[^/.]+(?:[?#].*)?$/);
 			if (match) {
 				id = match[2];
@@ -101272,18 +102140,24 @@ var $$IMU_EXPORT$$;
 
 				newsrc = src;
 
-				// TODO: support watermark/smaller
+				let problems = {};
+
+				// TODO: support smaller (1000->360)
 				if (match[1] === "160" || match[1] === "240") {
 					newsrc = src.replace(regex, "$1360$2");
 				} else if (match[1] === "500") {
 					newsrc = src.replace(regex, "$11000$2");
+				} else if (match[1] === "360") {
+					newsrc = src.replace(regex, "$11000$2");
+					problems = {watermark: true}
 				}
 
 				return {
 					url: newsrc,
 					extra: {
 						page: "https://stock.adobe.com/" + id
-					}
+					},
+					problems
 				};
 			}
 		}
@@ -102353,6 +103227,8 @@ var $$IMU_EXPORT$$;
 			domain_nowww === "pqham.com" ||
 			// /bkg/
 			domain_nowww === "z6bha.com" ||
+			// /bkg/
+			domain_nowww === "ico3c.com" ||
 			domain_nowww === "filemoon.to" ||
 			domain_nowww === "filemoon.sx") {
 			newsrc = website_query({
@@ -102710,6 +103586,17 @@ var $$IMU_EXPORT$$;
 					return done(fillobj_urls(urls, {
 						extra: {page: resp.finalUrl}
 					}), 60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (host_domain_nowww === "strmup.to" ||
+			host_domain_nowww === "streamup.ws") {
+			newsrc = common_functions["get_pagelink_host_el_matching"](options, {
+				url_match: /^[a-z]+:\/\/[^/]+\/+([0-9a-zA-Z]{5,})(?:[?#].*)?$/,
+				el_match: function (x) {
+					return x.tagName === "DIV" && x.id === "jwplayer";
 				}
 			});
 			if (newsrc) return newsrc;
@@ -109543,7 +110430,7 @@ var $$IMU_EXPORT$$;
 				website_regex: /^[a-z]+:\/\/[^/]+\/+video\/+([0-9]+)(?:[?#].*)?$/,
 				query_for_id: "https://ok.ru/video/${id}",
 				process: function(done, resp, cache_key) {
-					var vidmeta = resp.responseText.match(/<div data-module="OKVideo" data-options="({[^"]+?})"/);
+					var vidmeta = resp.responseText.match(/<div data-module="OKVideo"[^>]* data-options="({[^"]+?})"/);
 					if (!vidmeta) {
 						console_error(cache_key, "Unable to find video metadata for", resp);
 						return done(null, false);
@@ -111207,12 +112094,15 @@ var $$IMU_EXPORT$$;
 			// thanks to GoblinLegislator on github: https://github.com/qsniyg/maxurl/issues/613
 			// https://i8.amplience.net/t/jpl/jd_product_list?plu=jd_146327_bl&qlt=92&w=363&h=363&v=1&fmt=webp
 			//   https://i8.amplience.net/i/jpl/jd_146327_bl
+			//
+			// thanks to anonymous for reporting:
+			// https://i8.amplience.net/i/Lindex/3005634_7325_PS_MF/bla-stringtrosa-i-spets?w=1600&h=2133&fmt=auto&qlt=70&fmt.jp2.qlt=50&sm=c
 			if (/\/t\/+jpl\/+jd_product_list\?/.test(src)) {
 				var queries = get_queries(src);
 				if (queries.plu) {
 					return urljoin(src, "/i/jpl/" + queries.plu, true);
 				}
-			} else if (/\/i\/+jpl\//.test(src)) {
+			} else if (/\/i\/+/.test(src)) {
 				return src.replace(/\?.*/, "");
 			}
 		}
@@ -114404,6 +115294,10 @@ var $$IMU_EXPORT$$;
 
 		if (domain_nowww === "donationcoder.com" ||
 			// thanks to anonymous for reporting:
+			// https://www.szenenight.de/images/igallery/resized/01.11.2025-bayernfesthalle-6769/bayernzelt-251101-1-2300-2000-100-wm-right_bottom-100-watermarklogo2023png.jpg
+			//   https://www.szenenight.de/images/igallery/original/01.11.2025-bayernfesthalle-6769/bayernzelt-251101-1.jpg -- 5184x3456
+			domain_nowww === "szenenight.de" ||
+			// thanks to anonymous for reporting:
 			// https://www.coni.it/images/igallery/resized/attilio-pavesi-2008/pavesiattilio1_20221202_1477010967-1600-1000-80.jpg
 			//   https://www.coni.it/images/igallery/original/attilio-pavesi-2008/pavesiattilio1_20221202_1477010967.jpg
 			domain_nowww === "coni.it") {
@@ -114412,7 +115306,7 @@ var $$IMU_EXPORT$$;
 			//   https://www.donationcoder.com/images/igallery/original/301-400/mmb4_01-378.png
 			// https://www.donationcoder.com/images/igallery/resized/201-300/urlsnoop_Screenshot_main-289-600-300-95.gif
 			//   https://www.donationcoder.com/images/igallery/original/201-300/urlsnoop_Screenshot_main-289.gif
-			newsrc = src.replace(/(\/images\/+igallery\/+)resized\/+([^/]+\/+[^/]+)-[0-9]+-[0-9]+-[0-9]{1,3}(?:-c)?\./, "$1original/$2.");
+			newsrc = src.replace(/(\/images\/+igallery\/+)resized\/+([^/]+\/+[^/]+)-[0-9]+-[0-9]+-[0-9]{1,3}(?:-c|-wm-[a-z_]+-[0-9]+-[^-/.?#]+)*\./, "$1original/$2.");
 			if (newsrc !== src)
 				return newsrc;
 
@@ -114748,6 +115642,13 @@ var $$IMU_EXPORT$$;
 			// thanks to in-the-halfway on github for reporting: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3263767906
 			// https://images.wsj.net/im-07568388 -- 1280x1919
 			//   https://images.wsj.net/im-07568388?width=6300 -- 4473x6706
+			// https://images.wsj.net/im-05735641?width=1920 -- 1920x1282
+			//   https://images.wsj.net/im-05735641?width=4327 -- 4327x2888
+			// https://images.wsj.net/im-50205919?width=1920
+			//   https://images.wsj.net/im-50205919?width=4329 -- 4329x2887
+			//   anything higher results in 400
+			// https://images.wsj.net/im-84582760?width=780
+			//   https://images.wsj.net/im-84582760?width=4426 -- 4425x2823
 			//   anything higher results in 400
 			// thanks to anonymous for reporting:
 			// https://images.wsj.net/im-42167859?width=9999
@@ -114763,6 +115664,50 @@ var $$IMU_EXPORT$$;
 			newsrc = keep_queries(src, ["width"]);
 			if (newsrc !== src)
 				return newsrc;
+
+			if (!/\/im-[0-9]+\/*(?:[?#].*)?$/.test(src))
+				return src;
+
+			if (options.do_request && options.cb) {
+				let basesrc = src.replace(/[?#].*$/, "");
+				let cache_key = "wsj_image:" + basesrc;
+
+				let calc_safe_wsj_width = function(ratio) {
+					// technically it's 2888 but due to rounding errors, let's play it safe
+					return (2887 * ratio) | 0;
+				}
+
+				let do_wsj_query = true;
+				if (api_cache.has(cache_key)) {
+					let ratio = api_cache.get(cache_key);
+					let new_width = calc_safe_wsj_width(ratio);
+
+					if (oldwidth >= new_width)
+						do_wsj_query = false;
+				}
+
+				if (do_wsj_query) {
+					api_cache.fetch(cache_key, function(ratio) {
+						if (!ratio)
+							return options.cb(null);
+
+						let width = calc_safe_wsj_width(ratio);
+						if (width < oldwidth)
+							return options.cb(null);
+
+						return options.cb(basesrc + "?width=" + width);
+					}, function(done, resp, cache_key) {
+						get_image_size(basesrc, function(x, y) {
+							if (!x || !y)
+								return done(null, false);
+
+							return done(x / y, 6*60*60);
+						});
+					});
+
+					return {waiting: true};
+				}
+			}
 
 			if (oldwidth < 6300)
 				return src.replace(/(\/im-[0-9]+)\/*(?:[?#].*)?$/, "$1?width=6300");
@@ -114875,19 +115820,42 @@ var $$IMU_EXPORT$$;
 						return done(null, false);
 					}
 
-					let match = resp.html.match(/\ssrc="(https?:\/\/[^/]+\/+[0-9]+\/+[0-9]+_[0-9a-zA-Z]+\.[a-z]+\?[^"]+)"/);
-					if (!match) {
+					let matches = match_all(resp.html, /\ssrc="(https?:\/\/[^/]+\/+[0-9]+\/+[0-9]+(?:_[0-9]+)?_[0-9a-zA-Z]+\.[a-z]+\?[^"]+)"/);
+					if (!matches || !matches.length) {
 						console_error(cache_key, "Unable to find src match from", resp);
 						return done(null, false);
 					}
 
-					done(decode_entities(match[1]), 30); // 60 second expiry
+					let urls = [];
+					for (let match of matches) {
+						urls.push(decode_entities(match[1]));
+					}
+
+					done(urls, 30); // 60 second expiry
 				});
 			};
 
+			// cookie: POIPIKU_CONTENTS_VIEW_MODE=1 for mature
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9]+\/+[0-9]+)\.html/,
 				query_for_id: "https://poipiku.com/${id}.html",
+				override_cb: function(cb, data) {
+					let wanted_image = null;
+
+					let queries = common_functions["parse_imu_hash"](src);
+					if (queries && queries.image) wanted_image = queries.image;
+
+					if (!wanted_image) return cb(data);
+
+					common_functions["update_album_info_links"](data, function(x) {
+						let match = x.match(/\/[0-9]+_0*([0-9]+)_[0-9a-zA-Z]+\.[^/?#]+(?:[?#].*)?$/);
+						if (match)
+							return match[1] === wanted_image;
+						return false;
+					});
+
+					cb(data);
+				},
 				process: function(done, resp, cache_key, match) {
 					let full_id = match[1];
 					let idmatch = full_id.match(/^([0-9]+)\/+([0-9]+)$/);
@@ -114899,13 +115867,29 @@ var $$IMU_EXPORT$$;
 					let is_loggedin = /toggleSwitchUserList/.test(resp.responseText);
 
 					if (is_loggedin) {
-						query_poipiku(id, td, function(url) {
-							if (!url) {
+						query_poipiku(id, td, function(urls) {
+							if (!urls) {
 								return done(null, false);
 							}
 
+							let links:Array<InfoAlbumInfoLink> = [];
+							for (let url of urls) {
+								links.push({
+									url,
+									is_current: false
+								});
+							}
+
+							links[0].is_current = true;
+
+							let album_info:InfoAlbumInfo = {
+								type: "links",
+								links
+							};
+
 							return done(common_functions["fill_ldjson"]({
-								url,
+								url: urls[0],
+								album_info,
 								headers: {
 									Referer: page
 								},
@@ -114924,10 +115908,20 @@ var $$IMU_EXPORT$$;
 		}
 
 		if (domain === "cdn.poipiku.com") {
-			match = src.match(/\/0*([0-9]+)\/+0*([0-9]+)_[0-9a-zA-Z]+\.[a-z]+_[0-9]+\.[a-z]+/);
-			if (match) {
+			// https://cdn.poipiku.com/img/R-18.png_640.jpg
+			if (/\/img\/+R-18\.[a-z]+(?:_[^/]+)(?:[?#].*)?$/.test(src))
 				return {
-					url: "https://poipiku.com/" + match[1] + "/" + match[2] + ".html",
+					url: src,
+					bad: "mask"
+				};
+
+			match = src.match(/\/0*([0-9]+)\/+0*([0-9]+)(?:_0*([0-9]+))?_[0-9a-zA-Z]+\.[a-z]+_[0-9]+\.[a-z]+/);
+			if (match) {
+				let hash = "";
+				if (match[3])
+					hash = "#imu-image=" + match[3]
+				return {
+					url: "https://poipiku.com/" + match[1] + "/" + match[2] + ".html" + hash,
 					is_pagelink: true
 				};
 			}
@@ -115026,13 +116020,21 @@ var $$IMU_EXPORT$$;
 			// thanks to haarp on github: https://github.com/qsniyg/maxurl/issues/1446
 			// https://img.kleinanzeigen.de/api/v1/prod-ads/images/e1/e12e4005-6d25-4e2a-b6c2-f465a8a4b865?rule=$_35.AUTO
 			//   https://img.kleinanzeigen.de/api/v1/prod-ads/images/e1/e12e4005-6d25-4e2a-b6c2-f465a8a4b865?rule=$_57.AUTO -- 1028x1600
+			// https://img.kleinanzeigen.de/api/v1/prod-ads/images/69/69e38ea5-80d1-404e-a35e-685eeb0ebfc7?rule=$_57.AUTO -- 1199x1600, upscaled?
 			domain === "img.kleinanzeigen.de") {
 			// thanks to ABCFE on discord: https://github.com/qsniyg/maxurl/issues/1068
 			// https://img.ebay-kleinanzeigen.de/api/v1/prod-ads/images/86/86687f14-c485-41ea-a0fe-8afd446babe9?rule=$_59.JPG -- https://www.ebay-kleinanzeigen.de/s-anzeige/canon-imagerunner-drucker/2211175347-225-3120
 			//   https://img.ebay-kleinanzeigen.de/api/v1/prod-ads/images/86/86687f14-c485-41ea-a0fe-8afd446babe9?rule=$_57.JPG
 			var queries = get_queries(src);
 			queries.rule = queries.rule.replace(/\d+/, "57");
-			return add_queries(src, queries);
+			newsrc = add_queries(src, queries);
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					problems: {
+						possibly_upscaled: true
+					}
+				};
 		}
 
 		if (domain_nosub === "bntnews.co.kr" ||
@@ -116432,9 +117434,12 @@ var $$IMU_EXPORT$$;
 			// thanks to anonymous for reporting:
 			// https://www.leparisien.fr/resizer/sDkSebGhfs2bRpSIfh4dt2McTdQ=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/RZYJLHQX2NDXZAQRBG3AC45VRY.jpg
 			//   https://cloudfront-eu-central-1.images.arcpublishing.com/leparisien/RZYJLHQX2NDXZAQRBG3AC45VRY.jpg
+			// https://www.leparisien.fr/resizer/LxbS58vccNrxFL5JZf5-jJgwWD0=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/OTP3HZNDAUAHMXQNFQPQ6IMDGU.jpg
+			//   https://arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/OTP3HZNDAUAHMXQNFQPQ6IMDGU.jpg
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/leparisien/OTP3HZNDAUAHMXQNFQPQ6IMDGU.jpg
 			return src
 				.replace(/^[a-z]+:\/\/[^/]+\/+resizer\/+[^/]+=\/+(?:.*?\/)?(cloudfront-[^/]+\.images\.arcpublishing\.com\/.*)/, "https://$1")
-				.replace(/^[a-z]+:\/\/[^/]+\/+resizer\/+[^/]+=\/+arc-anglerfish-([^/]+)-prod-([^/]+)\/+public\/+/, "https://cloudfront-$1.images.arcpublishing.com/$2/");
+				.replace(/^[a-z]+:\/\/[^/]+\/+resizer\/+[^/]+=\/+(?:.*?\/)?arc-anglerfish-([^/]+)-prod-([^/]+?)(?:\.s3\.amazonaws\.com)?\/+public\/+/, "https://cloudfront-$1.images.arcpublishing.com/$2/");
 		}
 
 		if (domain_nosub === "arcpublishing.com" && /\.cdn\./.test(domain) ||
@@ -116602,6 +117607,20 @@ var $$IMU_EXPORT$$;
 			// https://www.lavenir.net/resizer/v2/BEIRNDRB3NGK5GV4SN5O4ZJJFU.jpg?auth=828d7a1d8d1f7b90f3bf555aebdcc28b868204a4b99eb42ba5781bc81b6b5c59&width=1620&height=1732&quality=85&focal=1417%2C1515
 			//   https://cloudfront-eu-central-1.images.arcpublishing.com/ipmgroup/BEIRNDRB3NGK5GV4SN5O4ZJJFU.jpg
 			domain_nowww === "lavenir.net" ||
+			// thanks to anonymous for reporting:
+			// https://img.asmedia.epimg.net/resizer/v2/M4KREZGNR5EO5CNJVPO3EBW2ZY.jpg?auth=0c996af35c1870f5c3c2ed1a88b885a25d98bdc3846d609fa2d6a12612e0ec1d&width=644&height=362&smart=true
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/M4KREZGNR5EO5CNJVPO3EBW2ZY.jpg
+			// https://img.asmedia.epimg.net/resizer/v2/https%3A%2F%2Fcloudfront-eu-central-1.images.arcpublishing.com%2Fdiarioas%2FZSQ4GOJAEZBOPF5DRWACJI446A.jpg?auth=17d1f7ff434ab55b63637af664625d8652190067e5357eb09c9bd1f3015c42b4&width=175&height=175&smart=true
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZSQ4GOJAEZBOPF5DRWACJI446A.jpg
+			domain === "img.asmedia.epimg.net" ||
+			// thanks to anonymous for reporting:
+			// https://www.publimetro.com.mx/resizer/v2/WAPEVHHKWNCYFHXFS7JQZPMVPQ.jpg?auth=5f989eb133888bab92d1e960bb527c99b211a3e0153ab0bc99dff1e2e6d8e452&smart=true&quality=50&width=2560&height=1440
+			//   https://cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/WAPEVHHKWNCYFHXFS7JQZPMVPQ.jpg
+			domain_nowww === "publimetro.com.mx" ||
+			// thanks to fyhtma on github for reporting: https://github.com/qsniyg/maxurl/issues/1511
+			// https://www.thenationalnews.com/resizer/v2/Q3ARCJBQOS54IHHQ3A5TAXKBSY.jpg?smart=true&auth=d6b896a7f215ac86ad162ae8e6283c7b138c1515a5a25d1dbd662d591bfbc426&width=800&height=450
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/thenational/Q3ARCJBQOS54IHHQ3A5TAXKBSY.jpg
+			domain_nowww === "thenationalnews.com" ||
 			// thanks to roi:
 			// https://www.theglobeandmail.com/resizer/v2/MIMBGW3UORBLZMMTL2GASZ75JE.JPG?auth=c570680e25c89027c795085ce398d06291485e026f2830e996db3e2d9a71d3d8&width=900&quality=80
 			//   https://cloudfront-us-east-1.images.arcpublishing.com/tgam/MIMBGW3UORBLZMMTL2GASZ75JE.JPG
@@ -116661,6 +117680,12 @@ var $$IMU_EXPORT$$;
 				info = {folder: "archetype", loc: "us-east-1"};
 			else if (domain_nowww === "lavenir.net")
 				info = {folder: "ipmgroup", loc: "eu-central-1"};
+			else if (domain === "img.asmedia.epimg.net")
+				info = {folder: "diarioas", loc: "eu-central-1"};
+			else if (domain_nowww === "publimetro.com.mx")
+				info = {folder: "metroworldnews", loc: "us-east-1"};
+			else if (domain_nowww === "thenationalnews.com")
+				info = {folder: "thenational", loc: "eu-central-1"};
 
 			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+resizer\/+v2\/+([^?#/]+)(?:[?#].*)?$/, "https://cloudfront-" + info.loc + ".images.arcpublishing.com/" + info.folder + "/$1");
 			if (newsrc !== src)
@@ -116681,11 +117706,15 @@ var $$IMU_EXPORT$$;
 			return src.replace(/\/@@images\/.*/, "");
 		}
 
-		if (domain_nowww === "lqj.ch") {
+		if (domain_nowww === "lqj.ch" ||
+			// thanks to anonymous for reporting:
+			// https://media.lenouvelliste.ch/media/image/138/nf_normal_4_3/688157584-highres.jpg.webp
+			//   https://media.lenouvelliste.ch/media/image/138/688157584-highres.jpg
+			domain === "media.lenouvelliste.ch") {
 			// thanks to roi:
 			// https://www.lqj.ch/media/image/15/large_3_2/67b663ae-ee6b-4f64-b324-96392949a20e.jpg.webp
 			//   https://www.lqj.ch/media/image/15/67b663ae-ee6b-4f64-b324-96392949a20e.jpg -- 3832x2554
-			return src.replace(/(\/media\/+image\/+[0-9]+\/+)[^/]+\/+([-0-9a-f]{20,}\.[^/.]+)(?:\.webp)?(?:[?#].*)?$/, "$1$2");
+			return src.replace(/(\/media\/+image\/+[0-9]+\/+)[^/]+\/+([^/.?#]+\.[^/.]+)(?:\.webp)?(?:[?#].*)?$/, "$1$2");
 		}
 
 		if (domain_nowww === "interfax-russia.ru") {
@@ -117857,6 +118886,9 @@ var $$IMU_EXPORT$$;
 				website_regex: /^https?:\/\/[^/]+\/+(?:t\/+|@[^/]+\/+post\/+)([-_A-Za-z0-9]+)\/*(?:[?#].*)?$/,
 				run: function(cb, match) {
 					threads_query_post_by_shortcode(match[1], function(result) {
+						if (!result)
+							return cb(null);
+
 						let baseobj = {
 							extra: {
 								page: "https://www.threads.net/t/" + result.code,
@@ -119992,11 +121024,130 @@ var $$IMU_EXPORT$$;
 			return src.replace(/(\/products\/+ui\/+[^/.?#]+)_(?:large|extralarge)\./, "$1.");
 		}
 
-		if (domain === "cdn.passes.com") {
+		if (domain === "cdn.passes.com" ||
+			domain_nowww === "cdnpasses.com") {
 			// thanks to newuser999 on discord for reporting:
 			// https://cdn.passes.com/profile/media/61bbf5f7-871e-41ef-809d-9aff2391a1af/profile-thumbnail.jpeg
 			//   https://cdn.passes.com/profile/media/61bbf5f7-871e-41ef-809d-9aff2391a1af/profile-image.jpeg
-			return src.replace(/(\/profile\/+media\/+[-0-9a-f]{10,}\/+profile)-thumbnail\./, "$1-image.");
+			newsrc = src.replace(/(\/profile\/+media\/+[-0-9a-f]{10,}\/+profile)-(?:thumbnail|tiny)\./, "$1-image.");
+			if (newsrc !== src)
+				return newsrc;
+		}
+
+		if (host_domain_nowww === "passes.com" && options.element) {
+			let react_propname = null;
+			let get_react_props = function(el) {
+				if (react_propname in el)
+					return el[react_propname];
+
+				for (let prop in el) {
+					if (/^__reactProps\$[0-9a-z]+$/.test(prop)) {
+						react_propname = prop;
+						return el[prop];
+					}
+				}
+			};
+
+			let get_urls_for_passes_contents = function(contents):BigImageInfoMulti {
+				let urls = [];
+
+				let sc = contents.signedContent;
+
+				if (sc.signedUrlOriginal) {
+					urls.push(sc.signedUrlOriginal);
+				}
+
+				if (contents.contentType !== "image" && sc.signedUrlDash) {
+					urls.push({
+						url: sc.signedUrlDash,
+						video: "dash"
+					});
+				}
+
+				if (contents.contentType !== "image" && sc.signedUrlHls) {
+					urls.push({
+						url: sc.signedUrlHls,
+						video: "hls"
+					});
+				}
+
+				if (sc.signedUrlLg)
+					urls.push(sc.signedUrlLg);
+
+				if (sc.signedUrlMd)
+					urls.push(sc.signedUrlMd);
+
+				if (sc.signedUrlSm)
+					urls.push(sc.signedUrlSm);
+
+				if (sc.signedUrlThumbnail)
+					urls.push(sc.signedUrlThumbnail);
+
+				return urls;
+			}
+
+			let passes_post_to_obj = function(post):BigImageInfoMulti {
+				//console_log("passes", post);
+
+				let baseobj:BigImageInfoSObject = {
+					extra: {
+						page: "https://www.passes.com/" + post.creator.username + "/" + post.postId,
+						caption: post.text,
+						created_date: post.createdAt.getTime() // FIXME: only works for react
+					}
+				};
+
+				baseobj.headers = {
+					Referer: baseobj.extra.page
+				};
+
+				if (post.editedAt) {
+					baseobj.extra.updated_date = post.editedAt.getTime();
+				}
+
+				if (post.contents.length > 1) {
+					console_warn("Unhandled contents.length>1 for post:", {post});
+				}
+
+				if (post.contents.length < 1) {
+					console_warn("No contents for post:", {post})
+					return null;
+				}
+
+				let urls = get_urls_for_passes_contents(post.contents[0]);
+
+				return fillobj_urls(urls, baseobj);
+			}
+
+			if (get_react_props(options.element) && !src) {
+				let parent = options.element.parentElement;
+				let post = null;
+				while (parent) {
+					let props = get_react_props(parent);
+					if (props && props.children && props.children.props) {
+						if (is_array(props.children.props.children)) {
+							for (let childprop of props.children.props.children) {
+								if (!childprop || typeof childprop !== "object")
+									continue;
+
+								if (childprop.props && childprop.props.post && childprop.props.post.postId) {
+									post = childprop.props.post;
+									break;
+								}
+							}
+						}
+
+						if (post)
+							break;
+					}
+
+					parent = parent.parentElement;
+				}
+
+				if (post) {
+					return passes_post_to_obj(post);
+				}
+			}
 		}
 
 		if (domain_nowww === "weaudition.com") {
@@ -124206,7 +125357,11 @@ var $$IMU_EXPORT$$;
 			return src.replace(/(\/galleries\/+[^/]+\/+[^/]+)_thm\./, "$1_std.");
 		}
 
-		if (domain === "cdn.barbora.lt") {
+		if (domain === "cdn.barbora.lt" ||
+			// thanks to anonymous for reporting:
+			// https://cdn.barbora.lv/products/21872f25-637c-45a2-8ed6-ceb77b4ec176_s.png
+			//   https://cdn.barbora.lv/products/21872f25-637c-45a2-8ed6-ceb77b4ec176.png
+			domain === "cdn.barbora.lv") {
 			// thanks to anonymous for reporting:
 			// https://cdn.barbora.lt/products/8152618f-b195-4bcc-b3a5-73fd725bb0d8_s.png
 			//   https://cdn.barbora.lt/products/8152618f-b195-4bcc-b3a5-73fd725bb0d8.png
@@ -127096,6 +128251,579 @@ var $$IMU_EXPORT$$;
 			return src.replace(/(\/stores\/+[0-9]+\/+[0-9]+\/+[0-9]+\/+products\/+[^/]+)-[0-9]+-[0-9]+\./, "$1.");
 		}
 
+		if (domain_nowww === "thediplomat.com") {
+			// thanks to anonymous for reporting:
+			// https://thediplomat.com/wp-content/uploads/2025/10/sizes/medium/thediplomat_2025-10-24-044631.jpg
+			//   https://thediplomat.com/wp-content/uploads/2025/10/thediplomat_2025-10-24-044631.jpg
+			newsrc = src.replace(/(\/wp-content\/+uploads\/+[0-9]{4}\/+[0-9]{2}\/+)sizes\/+[a-z]+\/+/, "$1");
+			if (newsrc !== src)
+				return newsrc;
+		}
+
+		if (domain_nowww === "liter.kz") {
+			// thanks to anonymous for reporting:
+			// https://liter.kz/cache/imagine/1200/uploads/news/2024/06/21/6675312b52484711442455.png
+			//   https://liter.kz/uploads/news/2024/06/21/6675312b52484711442455.png
+			return src.replace(/\/cache\/+imagine\/+[0-9]+\/+uploads\//, "/uploads/");
+		}
+
+		if (domain_nowww === "recess.nl") {
+			// thanks to anonymous for reporting:
+			// https://www.recess.nl//Files/10/279000/279766/ProductPhotos/1920x1080/1507898282.jpg
+			//   https://www.recess.nl//Files/10/279000/279766/ProductPhotos/2560x/1507898282.jpg
+			return src.replace(/(\/Files\/+[0-9]+\/+[0-9]+\/+[0-9]+\/+ProductPhotos\/+)[0-9]+x[0-9]+\/+/, "$12560x/");
+		}
+
+		if (domain === "media.icfcdn.com") {
+			// thanks to anonymous for reporting:
+			// https://media.icfcdn.com/6d97a9/84/123004281/722cdc22af1b4b3cb8ab15cd26b7bdfe/thumbnail.jpg
+			//   https://media.icfcdn.com/6d97a9/84/123004281/722cdc22af1b4b3cb8ab15cd26b7bdfe/media.mp4
+			newsrc = src.replace(/(\/[0-9a-f]{20,}\/+)(?:thumbnail|preview)\.[a-z]+(?:[?#].*)?$/, "$1media.mp4");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					video: true
+				};
+		}
+
+		if (domain_nowww === "kwiky.com") {
+			let query_kwiky_csrf = function(cb) {
+				api_query("kwiky_csrf", {
+					url: "https://kwiky.com/api/state/v1/preload",
+					headers: {
+						Accept: "*/*",
+						"Referer": "https://kwiky.com/"
+					},
+					imu_mode: "xhr"
+				}, cb, function(done, resp, cache_key) {
+					let match = resp.responseText.match(/meta\.content\s*=\s*'([^']+)';/);
+					if (!match) {
+						console_error(cache_key, "Unable to fetch XSRF header from", resp);
+						return done(null, false);
+					}
+
+					return done(match[1], 10*60); // expires in 15 minutes
+				});
+			};
+
+			let query_kwiky_quickie = function(id, cb) {
+				query_kwiky_csrf(function(csrf) {
+					if (!csrf)
+						return cb(null);
+
+					api_query("kwiky:" + id, {
+						url: "https://kwiky.com/api/v1/gateway/v1/quickies/metadata?quickieIds=" + id,
+						headers: {
+							Accept: "application/json, text/plain, */*",
+							Referer: "https://kwiky.com/",
+							"X-Gateway": base64_decode("IDc2ZDU5ZTA0LTk3ZmEtNGNlZC1hYTk5LWI4NmZmYWY3NTZhMg==").substr(1),
+							"X-Xsrf-Token": csrf
+						},
+						imu_mode: "xhr",
+						json: true
+					}, cb, function(done, resp, cache_key) {
+						if (typeof resp !== "object") {
+							console_error(cache_key, "Invalid response", resp)
+							return done(null, false);
+						}
+
+						let quickie = null;
+						for (let qid in resp) {
+							if (qid === id) {
+								quickie = resp[qid];
+							}
+
+							api_cache.set("kwiky:" + qid, resp[qid], 6*60*60);
+						}
+
+						return done(quickie, quickie ? 6*60*60 : false);
+					});
+				});
+			};
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+videos\?(?:.*&)?kwikyId=([^&#]+)/,
+				run: function(cb, match) {
+					let id = match[1];
+					query_kwiky_quickie(id, function(data) {
+						if (!data)
+							return cb(null);
+
+						let urls = [
+							{
+								url: data.media.url,
+								video: true
+							},
+							data.media.thumbUrl
+						];
+
+						let baseobj:BigImageInfoSObject = {
+							extra: {
+								updated_date: data.updated,
+								author_username: data.creator.name,
+								caption: data.media.description,
+								page: "https://kwiky.com/videos?kwikyId=" + id + "&index=0"
+							}
+						};
+
+						cb(fillobj_urls(urls, baseobj));
+					});
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (domain_nowww === "fap.onl") {
+			// thanks to anonymous for reporting:
+			// https://fap.onl/uploads/preview/2025/11/Fap_1e3e5996faa2559010a390253a4dfe08_middle.webp
+			//   https://fap.onl/uploads/photos/2025/11/Fap_1e3e5996faa2559010a390253a4dfe08.webp
+			return src.replace(/\/uploads\/+preview(\/+[0-9]{4}\/+[0-9]{1,2}\/+[A-Za-z]+_[0-9a-f]{10,})_[a-z]+\./, "/uploads/photos$1.");
+		}
+
+		if (domain === "media.realapp.com") {
+			// thanks to anonymous for reporting:
+			// https://media.realapp.com/assets/players/default/small/45d8339910c9d12aed722c80a0dba50c.webp
+			//   https://media.realapp.com/assets/players/default/large/45d8339910c9d12aed722c80a0dba50c.webp
+			return src.replace(/(\/assets\/+players\/+[^/]+\/+)(?:small|medium)\/+/, "$1large/");
+		}
+
+		if (domain === "proassetspdlcom.cdnstatics2.com") {
+			// thanks to anonymous for reporting:
+			// https://bookfilmrights.planetadelibros.com/book/the-invisible-girl/266985
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/208cd743-9590-4284-b27b-3203de292443/m_175_310/portada_la-chica-invisible_blue-jeans_201901171508.webp
+			//   https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/208cd743-9590-4284-b27b-3203de292443/d_1200_1200/portada_la-chica-invisible_blue-jeans_201901171508.webp -- 789x1200
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/208cd743-9590-4284-b27b-3203de292443/d_360_620/portada_la-chica-invisible_blue-jeans_201901171508.webp
+			//   https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/208cd743-9590-4284-b27b-3203de292443/d_1200_1200/portada_la-chica-invisible_blue-jeans_201901171508.webp -- 789x1200
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/208cd743-9590-4284-b27b-3203de292443/p_360_620/portada_la-chica-invisible_blue-jeans_201901171508.webp
+			//   https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/208cd743-9590-4284-b27b-3203de292443/d_1200_1200/portada_la-chica-invisible_blue-jeans_201901171508.webp -- 789x1200
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/267/original/portada_la-chica-invisible_blue-jeans_201901171508.jpg -- 2000x3042
+			//
+			// other:
+			// https://www.planetadelibros.com/libro-el-jardin-dormido/433148
+			//   https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/434/original/433149_portada_el-jardin-dormido_carla-gracia_202510171041.jpg
+			// https://www.planetadelibros.com/libro-gente-que-conocemos-en-vacaciones/378425
+			//   https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/434/original/portada_gente-que-conocemos-en-vacaciones-ed-pelicula_emily-henry_202510101337.jpg
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/378/original/portada_ardiendo-por-ti-los-bianchi-1_moruena-estringana_202307171103.jpg
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/seleccion_editorial/cabecera_mobile/6bb1c6bd-df8a-4281-882d-49ce87c8e22c-390x300-se_tolkien.jpg
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/434/original/portada_ande-ande-ande-la-mari-morena_megan-maxwell_202510151821.jpg
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/414/original/413078_portada_gokurakugai-n-02_blanca-mira_202410010916.jpg
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/autores/thumbs/240b3b7f-0efa-4e71-b877-4d2c06bbffcd/d_380_380_crop/000053936_1_1copyAriadnaArnes_202509221712.webp
+			newsrc = src.replace(/(\/libros\/+thumbs\/+[-0-9a-f]{10,}\/+)[mdp]_[0-9]{3}_[0-9]{3}\/+/, "$1d_1200_1200/");
+			if (newsrc !== src)
+				return newsrc;
+		}
+
+		if (host_domain_nosub === "planetadelibros.com" && domain === "proassetspdlcom.cdnstatics2.com") {
+			// https://proassetspdlcom.cdnstatics2.com/usuaris/libros/thumbs/5bf87506-2218-4675-a1d6-12a2e4cfc485/m_175_310/la-chica-invisible_9788408184782_3d.webp
+			//   https://proassetspdlcom.cdnstatics2.com/usuaris/libros/fotos/267/original/la-chica-invisible_9788408184782_3d.png
+			match = src.match(/\/usuaris\/+libros\/+thumbs\/+[-0-9a-f]{10,}\/+[^/]+\/+([^/]+)\.[a-z]+(?:[?#].*)?$/);
+			if (match) {
+				let matches = match_all(options.document.documentElement.innerHTML, /\/usuaris\/libros\/fotos\/[0-9]+\/original\/([^/\"\s.]+)\.[a-z]+/);
+				for (let smatch of matches) {
+					if (smatch[1] === match[1]) {
+						return smatch[0];
+					}
+				}
+			}
+		}
+
+		if (domain === "starzone.ragalahari.com") {
+			// thanks to anonymous for reporting:
+			// https://starzone.ragalahari.com/nov2025/hd/chandini-chowdary-at-sp-success-meet/chandini-chowdary-at-sp-success-meet1t.jpg
+			//   https://starzone.ragalahari.com/nov2025/hd/chandini-chowdary-at-sp-success-meet/chandini-chowdary-at-sp-success-meet1.jpg
+			// https://starzone.ragalahari.com/oct2022/hd/chandini-chowdary-talasha-mens-store/chandini-chowdary-talasha-mens-store3t.jpg
+			//   https://starzone.ragalahari.com/oct2022/hd/chandini-chowdary-talasha-mens-store/chandini-chowdary-talasha-mens-store3.jpg -- 1920x2880
+			return src.replace(/(\/[a-z]+[0-9]{4}\/+hd\/+[^/]+\/+[^/]+[0-9]+)t\./, "$1.");
+		}
+
+		if (domain === "d1ldvf68ux039x.cloudfront.net" ||
+			// https://d2cto119c3bgok.cloudfront.net/thumbs/photos/2510/9350547/1000w_q95.jpg
+			//   https://d34w7g4gy10iej.cloudfront.net/photos/2510/9350547.jpg -- 2797x4195
+			domain === "d2cto119c3bgok.cloudfront.net") {
+			// https://api.dvidshub.net/docs/asset_api/
+			// thanks to bruceschaff on github: https://github.com/qsniyg/maxurl/issues/1510
+			// https://d1ldvf68ux039x.cloudfront.net/thumbs/photos/2510/9350547/1000w_q95.jpg
+			//   https://d34w7g4gy10iej.cloudfront.net/photos/2510/9350547.jpg
+			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+.*\/(photos\/+[0-9]{4}\/+[0-9]+)\/+[^/]+(\.[a-z]+)(?:[?#].*)?$/, "https://d34w7g4gy10iej.cloudfront.net/$1$2");
+			if (newsrc !== src) {
+				match = src.match(/\/photos\/+[0-9]{4}\/+([0-9]+)\/+/);
+				let page = null;
+				if (match) {
+					page = "https://www.dvidshub.net/image/" + match[1] + "/";
+				}
+
+				return {
+					url: newsrc,
+					extra: {
+						page
+					}
+				};
+			}
+		}
+
+		if (domain_nowww === "bilietai.lt") {
+			// thanks to anonymous for reporting:
+			// https://www.bilietai.lt/imageGenerator/concertShort/60df5ab0ec92d32451a7ecc856569f83.webp
+			//   https://www.bilietai.lt/imageGenerator/galleryFullImage/60df5ab0ec92d32451a7ecc856569f83
+			// https://www.bilietai.lt/imageGenerator/eventDetails/b3cd2661e829642c77ea9c6d7a6b4545.webp
+			//   https://www.bilietai.lt/imageGenerator/galleryFullImage/60df5ab0ec92d32451a7ecc856569f83
+			// https://www.bilietai.lt/imageGenerator/galleryFullImage/b3cd2661e829642c77ea9c6d7a6b4545.webp
+			//   https://www.bilietai.lt/imageGenerator/galleryFullImage/b3cd2661e829642c77ea9c6d7a6b4545
+			return {
+				url: src
+					.replace(/(\/imageGenerator\/+[^/]+\/+[0-9a-f]{10,})\.webp(?:[?#].*)?$/, "$1")
+					.replace(/(\/imageGenerator\/+)(?:concertShort|eventDetails)\/+/, "$1galleryFullImage/"),
+				head_wrong_contenttype: true // no content-type if extension is missing
+			};
+		}
+
+		if (domain_nosub === "notrecinema.com" && host_domain_nowww === "notrecinema.com" && options.element) {
+			if (options.element.tagName === "IMG" && options.element.parentElement && options.element.parentElement.tagName === "A" && options.element.parentElement.href && /\/images\/+cache\//.test(options.element.parentElement.href)) {
+				return options.element.parentElement.href;
+			}
+		}
+
+		if (domain_nosub === "notrecinema.com") {
+			// thanks to anonymous for reporting:
+			// https://f.notrecinema.com/images/films/vign/222000/vign_222999.jpg
+			//   https://f.notrecinema.com/images/films/v2/222000/v2_222999.jpg
+			return src.replace(/(\/images\/+films\/+)vign\/+([0-9]+\/+)vign_/, "$1v2/$2v2_");
+		}
+
+		if (domain_nosub === "vcdn.biz" && /^s[0-9]*\./.test(domain)) {
+			// thanks to anonymous for reporting:
+			// https://s2.vcdn.biz/static/f/10529611481/image.jpg/pt/r386x544x4
+			//   https://s2.vcdn.biz/static/f/10529611481/image.jpg
+			return src.replace(/(\/static\/+[^/]+\/+[0-9]+\/+[^/]+)\/+pt\/.*/, "$1");
+		}
+
+		if (domain === "photos.peopleimages.com") {
+			// thanks to anonymous for reporting:
+			// https://photos.peopleimages.com/picture/202302/2646340-doctor-vision-or-black-woman-in-eye-exam-consultation-or-assessment-for-eyesight-at-optometrist-office.-mature-or-senior-optician-helping-a-customer-testing-or-checking-iris-or-retina-visual-health-fit_400_400.jpg
+			//   https://photos.peopleimages.com/picture/202302/2646340-doctor-vision-or-black-woman-in-eye-exam-consultation-or-assessment-for-eyesight-at-optometrist-office.-mature-or-senior-optician-helping-a-customer-testing-or-checking-iris-or-retina-visual-health-zoom_90.jpg
+			return src.replace(/(\/picture\/+[0-9]{6}\/+[0-9]+-[^/?#]+)-fit_400_400\./, "$1-zoom_90.");
+		}
+
+		if (domain_nowww === "bsh.de") {
+			// thanks to anonymous for reporting:
+			// https://www.bsh.de/DE/THEMEN/Offshore/Offshore-Vorhaben/Windparks/_Anlagen/Bilder/Fundamentarten_von_Offshore-Windenergieanlagen_Bild.jpg?__blob=wide&v=2
+			//   https://www.bsh.de/DE/THEMEN/Offshore/Offshore-Vorhaben/Windparks/_Anlagen/Bilder/Fundamentarten_von_Offshore-Windenergieanlagen_Bild.jpg?__blob=poster&v=2
+			return src.replace(/([?&]__blob=)wide([&#].*)?$/, "$1poster$2");
+		}
+
+		if (domain_nowww === "videa.hu") {
+			// https://gist.github.com/farhadi/2185197
+			// modified to use array instead of string
+			function rc4(str, key) {
+				var s = [], j = 0, x, res = [];
+				for (var i = 0; i < 256; i++) {
+					s[i] = i;
+				}
+				for (i = 0; i < 256; i++) {
+					j = (j + s[i] + key[i % key.length]) % 256;
+					x = s[i];
+					s[i] = s[j];
+					s[j] = x;
+				}
+				i = 0;
+				j = 0;
+				for (var y = 0; y < str.length; y++) {
+					i = (i + 1) % 256;
+					j = (j + s[i]) % 256;
+					x = s[i];
+					s[i] = s[j];
+					s[j] = x;
+					res.push(str[y] ^ s[(s[i] + s[j]) % 256]);
+				}
+				return res;
+			}
+
+			let str_to_arr = function(str:string):Array<number> {
+				let result = [];
+
+				for (let i = 0; i < str.length; i++) {
+					result.push(str.charCodeAt(i));
+				}
+
+				return result;
+			};
+
+			let decode_utf8 = function(arr:Array<number>):string {
+				let decoder = new TextDecoder("utf-8");
+				let encoded = new Uint8Array(arr);
+				return decoder.decode(encoded);
+			};
+
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+player\?(?:.*&)?f=([0-9.]+)(?:[&#].*)?$/,
+				query_for_id: function(id, match) {
+					return {
+						url: "https://videa.hu/player?f=" + id + "&enableJsApi=1&videoFinishedEvent=1&versionChangeCompleteEvent=1&enableAnimGif=1&enableSnapshotApi=1&lang=en&s=%7B%22loc%22%3A1%7D",
+						imu_mode: "iframe",
+						headers: {
+							Referer: "",
+							"Sec-Fetch-Mode": "navigate",
+							"Sec-Fetch-Site": "same-origin"
+						}
+					};
+				},
+				process: function(done, resp, cache_key, match) {
+					let fileid = match[1];
+
+					let xtmatch = resp.responseText.match(/var _xt\s*=\s*"([^"]+)";/);
+					if (!xtmatch) {
+						console_error(cache_key, "Unable to find _xt match for", resp);
+						return done(null, false);
+					}
+
+					let xt = xtmatch[1];
+
+					let rand_seed = get_random_text(8, "both");
+					let algo_seed = base64_decode("IHhIYjBadk1FNXE4Q0Jjb1FpNkFuZ2VyRHUzRkdPOWZrVWx3UG1MVllfUlR6ajJoSklTNE5hc1hXS3kxdGQ3cA==").substr(1);
+
+					let str1 = xt.substr(0, 32);
+					let str2 = xt.substr(32);
+
+					let remapped_seed_arr = [];
+					for (let i = 0; i < str1.length; i++) {
+						remapped_seed_arr.push(str2[i + 31 - string_indexof(algo_seed, str1[i] || "")] || "");
+					}
+
+					let remapped_seed = remapped_seed_arr.join("");
+
+					api_query("videahu_xml:" + fileid, {
+						url: "https://videa.hu/player/xml?platform=desktop&f=" + fileid + "&lang=en&s=%257B%2522loc%2522%253A1%257D&_s=" + rand_seed + "&_t=" + remapped_seed.substr(0, 16) + "&start=0",
+						imu_mode: "xhr",
+						headers: {
+							"Accept": "*/*",
+							"Cache-Control": "no-cache",
+							Referer: resp.finalUrl,
+							"Sec-Fetch-Dest": "empty",
+							"Sec-Fetch-Mode": "cors",
+							"Sec-Fetch-Site": "same-origin",
+							"Pragma": "no-cache"
+						}
+					}, function(xmlstr) {
+						let baseobj = {
+							extra: {
+								page: resp.finalUrl
+							}
+						};
+
+						let urls = [];
+
+						let xmlmatch = xmlstr.match(/<title>([^<]*)<\/title>/);
+						if (xmlmatch)
+							baseobj.extra.caption = decode_entities(xmlmatch[1]);
+
+						let videosources = [];
+
+						let videosource_matches = match_all(xmlstr, /(<video_source[^>]*>)([^<]*)<\/video_source>/);
+						for (let videosourcematch of videosource_matches) {
+							let parsed = parse_tag_def(videosourcematch[1]);
+
+							videosources.push({
+								name: parsed.args["name"],
+								width: (parsed.args["width"]|0)||1,
+								height: (parsed.args["height"]|0)||1,
+								url: decode_entities(videosourcematch[2]),
+								expiry: parsed.args["exp"]
+							});
+						}
+
+						videosources = videosources.sort((a, b) => {
+							return (b.width * b.height) - (a.width * a.height);
+						});
+
+						let hashvalue_matches = match_all(xmlstr, /<hash_value_([a-z0-9]+)>([^<]+)<\/hash_value_/);
+						for (let hashvaluematch of hashvalue_matches) {
+							let name = hashvaluematch[1];
+							let hash = decode_entities(hashvaluematch[2]);
+
+							for (let videosource of videosources) {
+								if (videosource.name === name) {
+									videosource.hash = hash;
+								}
+							}
+						}
+
+						for (let videosource of videosources) {
+							if (videosource.hash && videosource.expiry) {
+								urls.push({
+									url: urljoin(resp.finalUrl, videosource.url, true) + "?md5=" + encodeURIComponent(videosource.hash) + "&expires=" + videosource.expiry,
+									video: true,
+									headers: {
+										Accept: "*/*",
+										Origin: "https://videa.hu",
+										Referer: "https://videa.hu/",
+										"Sec-Fetch-Dest": "empty",
+										"Sec-Fetch-Mode": "cors",
+										"Sec-Fetch-Site": "same-site"
+									}
+								});
+							}
+						}
+
+						return done(fillobj_urls(urls, baseobj), 60*60);
+					}, function(done, resp, cache_key) {
+						var headers_list = parse_headers(resp.responseHeaders);
+						var headers = headers_list_to_dict(headers_list);
+
+						let response = resp.responseText.replace(/\s/g, "");
+						let decoded = base64_decode(response);
+
+						done(decode_utf8(rc4(str_to_arr(decoded), str_to_arr(remapped_seed.substr(16) + rand_seed + headers["x-videa-xs"]))), 60*60);
+					});
+				}
+			});
+			if (newsrc) return newsrc;
+
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+(videok\/+.*-[0-9A-Za-z]{5,})(?:[?#].*)?$/,
+				query_for_id: "https://videa.hu/${id}",
+				process: function(done, resp, cache_key) {
+					let playermatch = resp.responseText.match(/"(\/player\?(?:.*&)?f=[.0-9]{5,}[^"]+)"/);
+					if (!playermatch) {
+						console_error(cache_key, "Unable to find player match from", resp);
+						return done(null, false);
+					}
+
+					return done({
+						url: urljoin(resp.finalUrl, decode_entities(playermatch[1]), true),
+						is_pagelink: true
+					}, 6*60*60);
+				}
+			});
+			if (newsrc) return newsrc;
+		}
+
+		if (host_domain === "d2cuv8hz4jn1gx.cloudfront.net" && options.element) {
+			// thanks to anonymous for reporting:
+			if (!src && options.element.tagName === "VIDEO") {
+				let parent = common_functions["get_parent_el_matching"](options.element, x => {
+					return x.tagName === "DIV" && x.classList.contains("dplayer") && x.hasAttribute("data-config");
+				});
+
+				if (parent) {
+					let config = JSON_parse(decode_entities(parent.getAttribute("data-config")));
+					if (config.video && config.video.url) {
+						if (config.video.type !== "hls") {
+							console_warn("Unhandled video type:", config.video);
+						} else {
+							return {
+								url: config.video.url,
+								video: "hls"
+							};
+						}
+					}
+				}
+			}
+		}
+
+		if (domain_nowww === "kvetinace-365.cz") {
+			// thanks to anonymous for reporting:
+			// https://www.kvetinace-365.cz/gallery/products/thumbs/webp/45575.webp
+			//   https://www.kvetinace-365.cz/gallery/products/middle/webp/45575.webp
+			newsrc = src.replace(/(\/gallery\/+products\/+)thumbs\/+/, "$1middle/");
+			if (newsrc !== src)
+				return newsrc;
+
+			// https://www.kvetinace-365.cz/gallery/products/middle/webp/41404.webp
+			//   https://www.kvetinace-365.cz/gallery/products/middle/41404.png
+			// https://www.kvetinace-365.cz/gallery/products/middle/webp/opus-raw-couple-silver-65x53cm-6opsc65rs-1.webp
+			//   https://www.kvetinace-365.cz/gallery/products/middle/opus-raw-couple-silver-65x53cm-6opsc65rs-1.jpg
+			return add_extensions(src.replace(/(\/gallery\/+products\/+[a-z]+\/+)webp\/+([^/.?#]+)\.webp(?:[?#].*)?$/, "$1$2.png"));
+		}
+
+		if (domain_nowww === "qooza.jp") {
+			// thanks to fireattack on discord:
+			// https://qooza.jp/media/cache/resize/rc/kqHIvDu1/html/upload/save_image/1125123039_692522df2c4e9.jpg
+			//   https://qooza.jp/html/upload/save_image/1125123039_692522df2c4e9.jpg
+			return src.replace(/\/media\/+cache\/+resize\/.*(\/html\/+upload\/)/, "$1");
+		}
+
+		if (domain_nowww === "nashchelyabinsk.ru") {
+			// thanks to anonymous for reporting:
+			// https://nashchelyabinsk.ru/media/main_images/b6a787dd4bc74acf874429829c748f51.low.jpg
+			//   https://nashchelyabinsk.ru/media/main_images/b6a787dd4bc74acf874429829c748f51.normal.jpg
+			//   https://nashchelyabinsk.ru/media/main_images/b6a787dd4bc74acf874429829c748f51.jpg
+			return src.replace(/(\/media\/+main_images\/+[0-9a-f]{10,})\.(?:low|normal)\./, "$1.");
+		}
+
+		if (domain === "static.ngs.ru") {
+			// thanks to anonymous:
+			// https://static.ngs.ru/news/99/preview/f7491b793cf285e8bb69efa0fa61334772747009_1200.JPG
+			//   https://static.ngs.ru/news/99/preview/f7491b793cf285e8bb69efa0fa61334772747009_0.JPG -- 3000x2000
+			return src.replace(/(\/news\/+[0-9]+\/+preview\/+[0-9a-f]{10,})_[0-9]+\./, "$1_0.")
+		}
+
+		if (domain === "photos.wikimapia.org") {
+			// thanks to anonymous for reporting:
+			// https://photos.wikimapia.org/p/00/06/43/51/30_75.jpg
+			//   https://photos.wikimapia.org/p/00/06/43/51/30_full.jpg -- 1200x706
+			// https://photos.wikimapia.org/p/00/06/43/51/30_big.jpg
+			//   https://photos.wikimapia.org/p/00/06/43/51/30_full.jpg
+			// https://photos.wikimapia.org/p/00/01/22/67/89_75.jpg
+			//   https://photos.wikimapia.org/p/00/01/22/67/89_big.jpg -- 138x166, full is 404
+			return src
+				.replace(/(\/p\/+(?:[0-9]{2}\/+)+[0-9]+)_big\./, "$1_full.")
+				.replace(/(\/p\/+(?:[0-9]{2}\/+)+[0-9]+)_75\./, "$1_big.");
+		}
+
+		if (domain_nowww === "fototerra.ru") {
+			// thanks to anonymous for reporting:
+			// https://fototerra.ru/photo/Russia/Samara/thumb-269469.jpg
+			//   https://fototerra.ru/photo/Russia/Samara/large-269469.jpg -- 1200x800
+			//   https://fototerra.ru/photo/Russia/Samara/image269469.jpg -- 1200x800
+			// https://fototerra.ru/photo/Ukraina/Molochansk/small-273309.jpg
+			//   https://fototerra.ru/photo/Ukraina/Molochansk/large-273309.jpg -- 1200x800
+			//   https://fototerra.ru/photo/Ukraina/Molochansk/image273309.jpg -- 2500x1667
+			return src
+				.replace(/(\/photo\/+[^/]+\/+[^/]+\/+)large-([0-9]+\.)/, "$1image$2")
+				.replace(/(\/photo\/+[^/]+\/+[^/]+\/+)medium-/, "$1large-")
+				.replace(/(\/photo\/+[^/]+\/+[^/]+\/+)(?:thumb|small)-/, "$1medium-");
+		}
+
+		if (domain_nowww === "lff.lv") {
+			// thanks to anonymous for reporting:
+			// https://lff.lv/files/images_comet/82/2/_resized/8224d8613094e05f08f332dbe8a8a7f64e5a62f2_140_0.jpg
+			//   https://lff.lv/files/images_comet/82/2/8224d8613094e05f08f332dbe8a8a7f64e5a62f2.jpg
+			// https://lff.lv/files/images/_resized/0000033226_800_640_cut.jpg
+			//   https://lff.lv/files/images/0000033226.jpg
+			return src.replace(/(\/files\/+images(?:_comet\/+[0-9a-f]+\/+[0-9a-f]+)?\/+)_resized\/+([^/.?#]+)_[0-9]+_[0-9]+(?:_cut)?\./, "$1$2.");
+		}
+
+		if (domain === "images.thefacecdn.com") {
+			// thanks to sn3akyb3ar on github: https://github.com/qsniyg/maxurl/issues/1523
+			// https://images.thefacecdn.com/images/THE_FACE_ISSUE_25_AMELIA_WEB3.jpg
+			//   https://files.thefacecdn.com/images/THE_FACE_ISSUE_25_AMELIA_WEB3.jpg -- 2452x3254
+			// thanks to remlap
+			// https://images.thefacecdn.com/images/The-Face_ZAMAR_OliviaRodrigo_1-4x5.jpg?fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.5&w=2800 -- upscaled
+			//   https://files.thefacecdn.com/images/The-Face_ZAMAR_OliviaRodrigo_1-4x5.jpg -- 1400x1750
+			return src.replace(/^[a-z]+:\/\/images(\.[^/]+\/+images\/+[^/?#]+)(?:[?#].*)?$/, "https://files$1");
+		}
+
+		if ((domain_nosub === "chiikawawallpaper.com" ||
+			 // https://r2.chiikawa-wallpaper.com/wallpaper/wallpaper/4k/e587c34a5f1aa97723770963e2231b47-1920.jpg
+			 //   https://r2.chiikawa-wallpaper.com/wallpaper/wallpaper/4k/e587c34a5f1aa97723770963e2231b47.jpg
+			 domain_nosub === "chiikawa-wallpaper.com") && /^r[0-9]*\./.test(domain)) {
+			// thanks to anonymous for reporting:
+			// https://r2.chiikawawallpaper.com/wallpaper/wallpaper/4k/e29eb665403969dc92cf6aeb142490c0-1920.jpg
+			//   https://r2.chiikawawallpaper.com/wallpaper/wallpaper/4k/e29eb665403969dc92cf6aeb142490c0.jpg -- 4776x3336
+			// https://r2.chiikawawallpaper.com/wallpaper/wallpaper/4k/20250903210203_61808a85c7815fc6a7f4212a5f6de281-400.jpg
+			//   https://r2.chiikawawallpaper.com/wallpaper/wallpaper/4k/20250903210203_61808a85c7815fc6a7f4212a5f6de281.jpg
+			return src.replace(/(\/wallpaper\/+wallpaper\/+[^/]+\/+(?:[0-9]+_)?[0-9a-f]{10,})-[0-9]+\./, "$1.");
+		}
+
+		if (domain_nowww === "linuxmint.com") {
+			// thanks to anonymous for reporting:
+			// https://linuxmint.com/web/img/screenshots/thumb_c10.jpg
+			//   https://linuxmint.com/web/img/screenshots/c10.jpg
+			return src.replace(/(\/web\/+img\/+screenshots\/+)thumb_/, "$1");
+		}
+
+
 
 
 
@@ -127498,6 +129226,7 @@ var $$IMU_EXPORT$$;
 			//   http://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/6/E/zcnswkRpeKAea9Br0GAw/julia-mestre-analogicas-bianca-baker-8.jpg -- timeout
 			// https://s3.glbimg.com/v1/AUTH_35862ca5c6ab48b992baf1f1b4f7062e/extra-globo-com/incoming/23692053-008-29d/w480h720-PROP/39932577_1502.2000simone-marinhoext-sxgretchen345352000021520280952.jpg
 			// https://s3.glbimg.com/v1/AUTH_35862ca5c6ab48b992baf1f1b4f7062e/extra-globo-com/incoming/14689287-b03-e29/w448/stll-ricardo-roqueo-casamento-de-gorete-125.jpg
+			// https://s2-ge.glbimg.com/NcJdlDpK0Iet0rk63PpINvO7D7k=/0x640:4000x5738/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/l/5/5uBFAdS9Clb0TlPHeBBQ/hig-7710.jpg
 			(domain_nosub === "glbimg.com" && /^s[0-9]*\./.test(domain)) ||
 			// https://i.amz.mshcdn.com/vWTWthC534bzcGDk15NwrBy-dd4=/fit-in/1200x9600/https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com%2Fuploads%2Fcard%2Fimage%2F54484%2FGettyImages-520238014.jpg
 			//   https://blueprint-api-production.s3.amazonaws.com/uploads/card/image/54484/GettyImages-520238014.jpg
@@ -128104,6 +129833,10 @@ var $$IMU_EXPORT$$;
 			// https://ru.viomi.com/upload/resize_cache/iblock/afc/3yj9jd912hjxilml8zuxdbfgs9eni9jn/940_940_1/Viomi_V5_Pro_Black_Gallery_03.jpg
 			//   https://ru.viomi.com/upload/iblock/afc/3yj9jd912hjxilml8zuxdbfgs9eni9jn/Viomi_V5_Pro_Black_Gallery_03.jpg
 			domain === "ru.viomi.com" ||
+			// thanks to anonymous for reporting:
+			// https://nsknews.info/upload/resize_cache/iblock/129/gd17tmnko6nybv86x968twxldkx0s773/1440_518_0/photo_5292061602247020585_y.jpg
+			//   https://nsknews.info/upload/iblock/129/gd17tmnko6nybv86x968twxldkx0s773/photo_5292061602247020585_y.jpg
+			domain_nowww === "nsknews.info" ||
 			// https://www.sb.by/upload/resize_cache/slam.image/iblock/2bb/855_2000_1/2bb028a9c7ce97a07fc667b3bd54f00c.JPG
 			//   https://www.sb.by/upload/iblock/2bb/2bb028a9c7ce97a07fc667b3bd54f00c.JPG
 			src.match(/:\/\/[^/]*\/upload\/+resize_cache\/+(?:[^/]*\/+)?iblock\/+[0-9a-f]{3}\/+[0-9]+_[0-9]+_/) ||
@@ -128300,7 +130033,10 @@ var $$IMU_EXPORT$$;
 			//   https://bkimg.cdn.bcebos.com/pic/3b87e950352ac65c1038460fc9b9a5119313b07e1c3e
 			// https://bkimg.cdn.bcebos.com/pic/4d086e061d950a7b0208ada7389a75d9f2d3572c6336?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto
 			//   https://bkimg.cdn.bcebos.com/pic/4d086e061d950a7b0208ada7389a75d9f2d3572c6336
-			domain === "bkimg.cdn.bcebos.com" ||
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3556805286
+			// https://ksv-video-picture.cdn.bcebos.com/188183fe6dac329de94f479c12f0064a00cdd6e0.jpg?x-bce-process=image%2Fresize%2Cm_lfit%2Cw_640%2Ch_360%2Climit_1%2Fformat%2Cf_auto%2Fquality%2Cq_80
+			//   https://ksv-video-picture.cdn.bcebos.com/188183fe6dac329de94f479c12f0064a00cdd6e0.jpg
+			(domain_nosub === "bcebos.com" && /\.cdn\./.test(domain)) ||
 			// https://image.gcores.com/94817587-8003-4734-82d6-23c1a0b6894e.png?x-oss-process=style/original_hsat2x
 			//   https://image.gcores.com/94817587-8003-4734-82d6-23c1a0b6894e.png -- upscaled though?
 			// thanks to anonymous for reporting:
@@ -128587,6 +130323,10 @@ var $$IMU_EXPORT$$;
 			// https://framemark.vam.ac.uk/collections/2019LJ4813/full/220,/0/default.jpg
 			//   https://framemark.vam.ac.uk/collections/2019LJ4813/full/full/0/default.jpg
 			domain === "framemark.vam.ac.uk" ||
+			// thanks to JayCubby-enwiki on github: https://github.com/qsniyg/maxurl/issues/1512
+			// https://media.artmuseum.princeton.edu/iiif/3/web_images/y711small/full/!800,800/0/default.webp
+			//   https://media.artmuseum.princeton.edu/iiif/3/web_images/y711small/full/max/0/default.jpg
+			domain === "media.artmuseum.princeton.edu" ||
 			// thanks to FreemenMuaddib for a ton of information regarding IIIF: https://greasyfork.org/en/forum/discussion/74977/support-for-iiif-zoomable-images
 			/\/(?:iiif|loris)\/+(?:.*\/)?[^/]+\/+(?:full|square|(?:pct:)?[0-9.]+(?:,[0-9.]+){3})\/+(?:full|max|[0-9.]+,|,[0-9.]+|!?[0-9.]+,[0-9.]+|pct:[0-9.]+)\/+!?[0-9.]+\/+(?:color|gray|bitonal|default|native)\.(?:jpg|tif|png|gif|jp2|pdf|webp)(?:[?#].*)?$/.test(src)) {
 			// first is region:
@@ -128618,20 +130358,33 @@ var $$IMU_EXPORT$$;
 			if (newsrc !== src)
 				return newsrc;
 
+			newsrc = src.replace(/\.webp(?:[?#].*)?$/, ".jpg");
+			if (newsrc !== src)
+				return newsrc;
+
 			// https://lakeimagesweb.artic.edu/iiif/2/08baefe5-1f78-bc4b-db7b-4f53d2edcc29/full/!800,800/0/default.jpg
 			//   https://lakeimagesweb.artic.edu/iiif/2/08baefe5-1f78-bc4b-db7b-4f53d2edcc29/full/full/0/default.jpg
 			// http://gallica.bnf.fr/iiif/ark:/12148/btv1b6000531z/f1/0,0,1024,1024/256,256/0/native.jpg
 			//   http://gallica.bnf.fr/iiif/ark:/12148/btv1b6000531z/f1/full/full/0/native.jpg
 			var prefix = "(?:iiif|loris)";
-			if (domain === "iiif.library.ubc.ca" || domain === "iiif.library.utoronto.ca" || domain === "iiif.wellcomecollection.org") {
+			if (domain === "iiif.library.ubc.ca" ||
+				domain === "iiif.library.utoronto.ca" ||
+				domain === "iiif.wellcomecollection.org") {
 				obj.head_wrong_contenttype = true; // text/html
 				prefix = "image";
 			} else if (domain === "framemark.vam.ac.uk") {
 				prefix = "collections";
+			} else if (domain === "media.artmuseum.princeton.edu") {
+				obj.head_wrong_contentlength = true;
 			}
 
 			regex = new RegExp("(/" + prefix + "/.*?/)[^/]+/[^/]+/[^/]+/([^/]+\\.[^/.]*)$");
-			newsrc = src.replace(regex, "$1full/full/0/$2");
+
+			if (domain === "media.artmuseum.princeton.edu")
+				newsrc = src.replace(regex, "$1full/max/0/$2");
+			else
+				newsrc = src.replace(regex, "$1full/full/0/$2");
+
 			if (newsrc !== src)
 				return fillobj_urls([newsrc], obj);
 		}
@@ -132066,6 +133819,10 @@ var $$IMU_EXPORT$$;
 
 	var infobox_timer = null;
 	var show_image_infobox = function(text) {
+		// happens on reddit image pages for some reason
+		if (!document.body)
+			return;
+
 		var div = document_createElement("div");
 		div.style.backgroundColor = "#fffabb";
 		// apparently this can be white in some cases: https://github.com/qsniyg/maxurl/issues/849#issuecomment-888695580 (thanks to ayunami2000 for reporting)
@@ -132084,7 +133841,7 @@ var $$IMU_EXPORT$$;
 			document.body.removeChild(div);
 
 			if (infobox_timer) {
-				clearTimeout(infobox_timer);
+				clear_timeout(infobox_timer);
 				infobox_timer = null;
 			}
 		};
@@ -132095,7 +133852,7 @@ var $$IMU_EXPORT$$;
 			if (infobox_timer || settings.redirect_infobox_timeout <= 0)
 				return;
 
-			infobox_timer = setTimeout(function() {
+			infobox_timer = set_timeout(function() {
 				document.body.removeChild(div);
 			}, settings.redirect_infobox_timeout * 1000);
 		};
@@ -132613,10 +134370,11 @@ var $$IMU_EXPORT$$;
 					console_log("Original page: " + newhref[0].extra.page);
 				}
 
-				if (newurl === page_url)
+				if (!newurl || typeof newurl !== "string")
 					return;
 
-				if (!newurl)
+				// don't redirect for protocol changes, can lead to infinite loop (thanks to Froktime for reporting: https://github.com/qsniyg/maxurl/issues/1517)
+				if (newurl.replace(/^[a-z]+:\/\//, "") === page_url.replace(/^[a-z]+:\/\//, ""))
 					return;
 
 				if (_nir_debug_)
@@ -133291,7 +135049,7 @@ var $$IMU_EXPORT$$;
 					if (changed || new_changed) {
 						console_log("Settings imported");
 
-						setTimeout(function() {
+						set_timeout(function() {
 							do_options();
 						}, 1);
 					} else {
@@ -133606,6 +135364,14 @@ var $$IMU_EXPORT$$;
 			return null;
 		};
 
+		var get_option_transname = function(name:string):string {
+			let match = name.match(/^(.*)( \(#[0-9]+\))$/);
+			if (!match)
+				return _(name);
+
+			return _(match[1]) + match[2];
+		};
+
 		var fill_requirements = function(reason, div) {
 			div.textContent = "";
 
@@ -133640,7 +135406,7 @@ var $$IMU_EXPORT$$;
 					var option_cat = null;
 					if (single_reason.setting in settings_meta) {
 						option_meta = settings_meta[single_reason.setting];
-						option_name = _(option_meta.name);
+						option_name = get_option_transname(option_meta.name);
 
 						option_cat = option_meta.category || null;
 						if (option_cat) {
@@ -133783,9 +135549,9 @@ var $$IMU_EXPORT$$;
 			saved_el.classList.remove("fadeout");
 
 			if (saved_timeout)
-				clearTimeout(saved_timeout);
+				clear_timeout(saved_timeout);
 
-			saved_timeout = setTimeout(function() {
+			saved_timeout = set_timeout(function() {
 				saved_el.classList.add("fadeout");
 			}, 2000);
 		}
@@ -133980,7 +135746,7 @@ var $$IMU_EXPORT$$;
 			table.appendChild(tr);
 
 			var name = document_createElement("strong");
-			md_to_html(name, _(meta.name));
+			md_to_html(name, get_option_transname(meta.name));
 
 			var description = _(meta.description);
 			if (meta.description_userscript && is_userscript)
@@ -134497,7 +136263,6 @@ var $$IMU_EXPORT$$;
 							sub_cancel_btn.style = "display:inline-block";
 						}
 					};
-					sub_record_btn.onmousedown = do_record;
 
 					var sub_cancel_btn = document_createElement("button");
 					sub_cancel_btn.innerText = _("Cancel");
@@ -134510,7 +136275,14 @@ var $$IMU_EXPORT$$;
 						sub_cancel_btn.style = "display:none";
 						sub_key_td.innerText = get_trigger_key_texts(values)[index];
 					};
-					sub_cancel_btn.onmousedown = do_cancel;
+
+					if ("onpointerdown" in sub_record_btn) {
+						sub_record_btn.onpointerdown = do_record;
+						sub_cancel_btn.onpointerdown = do_cancel;
+					} else {
+						sub_record_btn.onmousedown = do_record;
+						sub_cancel_btn.onmousedown = do_cancel;
+					}
 
 					var sub_remove_btn = document_createElement("button");
 					//sub_remove_btn.innerText = "—";
@@ -135251,7 +137023,7 @@ var $$IMU_EXPORT$$;
 
 				// run in timeout to prevent this from further delaying initial page load times
 				// takes ~2-3ms. not huge, but still significant
-				setTimeout(function() {
+				set_timeout(function() {
 					for (var setting in settings) {
 						GM_addValueChangeListener(setting, function(name, oldValue, newValue, remote) {
 							if (remote === false)
@@ -135600,7 +137372,12 @@ var $$IMU_EXPORT$$;
 		var a = new FileReader();
 		a.onload = function(e) {
 			try {
-				cb(e.target.result);
+				let result = e.target.result as string;
+				// https://gidstats.com/fighters/alex_pereira.html
+				// data:image/webp; charset="utf-8";base64,...
+				// due to: Content-Type: image/webp; charset="utf-8"
+				result = result.replace(/^(data:[^;]+;)\s*charset=[^;]+;/, "$1");
+				cb(result);
 			} catch (e) {
 				console_error(e);
 				console_error(e.stack);
@@ -136218,6 +137995,8 @@ var $$IMU_EXPORT$$;
 			//headers.Origin = url_domain;
 		}
 
+		headers = finalize_imu_headers(headers);
+
 		var handled = false;
 		var onload_cb = function(resp) {
 			if (handled) {
@@ -136795,7 +138574,7 @@ var $$IMU_EXPORT$$;
 		if (i % count !== (count - 1)) {
 			func();
 		} else {
-			setTimeout(func, 0);
+			set_timeout(func, 0);
 		}
 	};
 
@@ -136963,6 +138742,10 @@ var $$IMU_EXPORT$$;
 			return get_single_setting_raw(get_tprofile_setting(setting));
 		}
 
+		let pointerevents_supported = function(el:Element|HTMLDocument):boolean {
+			return ("onpointerdown" in el) && ("onpointerup" in el) && ("onpointermove" in el);
+		};
+
 		function update_waiting() {
 			if (!waitingel)
 				return;
@@ -137047,7 +138830,7 @@ var $$IMU_EXPORT$$;
 				waitingel.style.display = "none";
 		};
 
-		// camhub.cc (ublock origin blocks any setTimeout'd function with 'stop' in the name)
+		// camhub.cc (ublock origin blocks any set_timeout'd function with 'stop' in the name)
 		function dont_wait_anymore() {
 			stop_waiting();
 		}
@@ -137061,10 +138844,10 @@ var $$IMU_EXPORT$$;
 			start_waiting(void 0, "not-allowed");
 
 			if (not_allowed_timer) {
-				clearTimeout(not_allowed_timer);
+				clear_timeout(not_allowed_timer);
 			}
 
-			not_allowed_timer = setTimeout(function() {
+			not_allowed_timer = set_timeout(function() {
 				not_allowed_timer = null;
 
 				if (waitingel_cursor === "not-allowed")
@@ -137100,7 +138883,7 @@ var $$IMU_EXPORT$$;
 
 		var clear_resetpopup_timeout = function() {
 			if (resetpopup_timeout) {
-				clearTimeout(resetpopup_timeout);
+				clear_timeout(resetpopup_timeout);
 				resetpopup_timeout = null;
 			}
 		};
@@ -137111,7 +138894,7 @@ var $$IMU_EXPORT$$;
 
 			clear_resetpopup_timeout();
 
-			resetpopup_timeout = setTimeout(resetpopups, settings.mouseover_auto_close_popup_time * 1000);
+			resetpopup_timeout = set_timeout(resetpopups, settings.mouseover_auto_close_popup_time * 1000);
 		};
 
 		var removepopups_timer = null;
@@ -137135,7 +138918,7 @@ var $$IMU_EXPORT$$;
 			});
 
 			if (removepopups_timer) {
-				clearTimeout(removepopups_timer);
+				clear_timeout(removepopups_timer);
 				removepopups_timer = null;
 			}
 		}
@@ -137148,7 +138931,7 @@ var $$IMU_EXPORT$$;
 			}
 
 			if (removemask_timer) {
-				clearTimeout(removemask_timer);
+				clear_timeout(removemask_timer);
 				removemask_timer = null;
 			}
 		};
@@ -137182,7 +138965,7 @@ var $$IMU_EXPORT$$;
 					}
 
 					if (!removepopups_timer) {
-						removepopups_timer = setTimeout(removepopups, settings.mouseover_fade_time);
+						removepopups_timer = set_timeout(removepopups, settings.mouseover_fade_time);
 					}
 				} else {
 					// FIXME: this is called for each popup
@@ -137197,7 +138980,7 @@ var $$IMU_EXPORT$$;
 					set_important_style(mask_el, "opacity", 0);
 
 					if (!removemask_timer) {
-						removemask_timer = setTimeout(remove_mask, settings.mouseover_mask_fade_time);
+						removemask_timer = set_timeout(remove_mask, settings.mouseover_mask_fade_time);
 					}
 				} else {
 					remove_mask();
@@ -137257,7 +139040,7 @@ var $$IMU_EXPORT$$;
 			}
 
 			if (!delay_mouseonly && delay_handle) {
-				clearTimeout(delay_handle);
+				clear_timeout(delay_handle);
 				delay_handle = null;
 			}
 		}
@@ -137521,7 +139304,7 @@ var $$IMU_EXPORT$$;
 						};
 						worker.postMessage(sab);
 
-						setTimeout(function() {
+						set_timeout(function() {
 							revoke_objecturl(objurl);
 						}, 10);
 					});
@@ -138286,7 +140069,7 @@ var $$IMU_EXPORT$$;
 							return success();
 						} else {
 							// in case the buffering event doesn't run
-							setTimeout(function() {
+							set_timeout(function() {
 								if (ran_success)
 									return;
 
@@ -139062,7 +140845,7 @@ var $$IMU_EXPORT$$;
 
 				var found_filename_from_url = false;
 				if (newobj.filename.length === 0 && !is_data) {
-					newobj.filename = url.replace(/.*\/([^?#/]*)(?:[?#].*)?$/, "$1");
+					newobj.filename = url.replace(/^[^?#]*\/([^?#/]*)(?:[?#].*)?$/, "$1");
 					found_filename_from_url = true;
 
 					// Disable as there's no use for this
@@ -139455,7 +141238,7 @@ var $$IMU_EXPORT$$;
 							if (!popup_el_automatic) {
 								set_important_style(mask, "opacity", 0);
 								// this is needed in order to make the transition happen
-								setTimeout(function() {
+								set_timeout(function() {
 									set_important_style(mask, "opacity", old_mask_opacity);
 								}, 1);
 							} else {
@@ -139529,14 +141312,14 @@ var $$IMU_EXPORT$$;
 						set_important_style(outerdiv, "transition", temp_transition_string);
 
 						if (temp_transition_effects.length > 0) {
-							setTimeout(function() {
+							set_timeout(function() {
 								set_important_style(outerdiv, "transition", orig_transition_string);
 							}, settings.mouseover_fade_time);
 						}
 					}
 
-					// setTimeout is needed in order to make the transition happen
-					setTimeout(function() {
+					// set_timeout is needed in order to make the transition happen
+					set_timeout(function() {
 						set_important_style(outerdiv, "opacity", 1);
 						set_important_style(outerdiv, "transform", "scale(1)");
 					}, 1);
@@ -139711,7 +141494,7 @@ var $$IMU_EXPORT$$;
 				};
 
 				var check_img_visibility = function() {
-					setTimeout(function() {
+					set_timeout(function() {
 						var computed = get_computed_style(img);
 						if (computed.display !== "none") {
 							return;
@@ -140118,7 +141901,7 @@ var $$IMU_EXPORT$$;
 				} else {
 					set_lefttop([x - imgw/2, y - imgh/2]);
 
-					setTimeout(function() {
+					set_timeout(function() {
 						set_lefttop(initialpos);
 					}, 1);
 				}
@@ -140700,7 +142483,7 @@ var $$IMU_EXPORT$$;
 						images_total.appendChild(images_total_input);
 
 						// https://stackoverflow.com/a/19498477
-						setTimeout(function() {
+						set_timeout(function() {
 							images_total_input.select();
 							images_total_input.setSelectionRange(0, images_total_input.value.length);
 						}, 100);
@@ -140737,6 +142520,7 @@ var $$IMU_EXPORT$$;
 						set_el_all_initial(images_total_input);
 						set_important_style(images_total_input, "display", "none");
 						set_important_style(images_total_input, "background-color", "white");
+						set_important_style(images_total_input, "color", "black");
 						set_important_style(images_total_input, "font-family", sans_serif_font);
 						set_important_style(images_total_input, "font-size", galleryinput_fontsize);
 						set_important_style(images_total_input, "padding", "1px");
@@ -140781,7 +142565,7 @@ var $$IMU_EXPORT$$;
 						var downloadbtn = addbtn({
 							id: "downloadbtn",
 							text: download_glyph,
-							title: _("Download (" + get_trigger_key_text(settings.mouseover_download_key) + ")"),
+							title: _("Download") + " (" + get_trigger_key_text(settings.mouseover_download_key) + ")",
 							action: {type: "download"},
 							pos: "top-left",
 							containers: containers
@@ -140794,7 +142578,7 @@ var $$IMU_EXPORT$$;
 						var downloadbtn = addbtn({
 							id: "gallerydlbtn",
 							text: "\u21CA",
-							title: _("Gallery Download (" + get_trigger_key_text(settings.mouseover_gallery_download_key) + ")"),
+							title: _("Gallery Download") + " (" + get_trigger_key_text(settings.mouseover_gallery_download_key) + ")",
 							action: {type: "download_gallery"},
 							pos: "top-left",
 							containers: containers
@@ -140992,7 +142776,7 @@ var $$IMU_EXPORT$$;
 									update_imagestotal();
 								});
 
-								setTimeout(update_imagestotal, 1);
+								set_timeout(update_imagestotal, 1);
 							}
 						}
 					};
@@ -141140,7 +142924,7 @@ var $$IMU_EXPORT$$;
 						img.style.cursor = "none";
 					} else {
 						if (popup_hidecursor_timer) {
-							clearTimeout(popup_hidecursor_timer);
+							clear_timeout(popup_hidecursor_timer);
 							popup_hidecursor_timer = null;
 						}
 
@@ -141166,7 +142950,7 @@ var $$IMU_EXPORT$$;
 						popup_hidecursor_func(false);
 
 						if (settings.mouseover_hide_cursor) {
-							popup_hidecursor_timer = setTimeout(function() {
+							popup_hidecursor_timer = set_timeout(function() {
 								popup_hidecursor_func(true);
 							}, settings.mouseover_hide_cursor_after);
 						}
@@ -141180,6 +142964,14 @@ var $$IMU_EXPORT$$;
 					dragstartY = e.clientY;
 					dragoffsetX = dragstartX - parseFloat(outerdiv.style.left);
 					dragoffsetY = dragstartY - parseFloat(outerdiv.style.top);
+
+					if (e.type === "pointerdown" && "pointerId" in e) {
+						try {
+							a.setPointerCapture(e.pointerId);
+						} catch (e) {
+							console.error(e);
+						}
+					}
 				}
 
 				// TODO: allow this to be live-reloaded
@@ -141726,7 +143518,7 @@ var $$IMU_EXPORT$$;
 					can_close_popup[1] = true;
 				}
 
-				setTimeout(function() {
+				set_timeout(function() {
 					dont_wait_anymore();
 				}, 1);
 
@@ -143228,7 +145020,7 @@ var $$IMU_EXPORT$$;
 			}
 
 			if (delay_handle) {
-				clearTimeout(delay_handle);
+				clear_timeout(delay_handle);
 				delay_handle = null;
 			}
 		}
@@ -144052,7 +145844,7 @@ var $$IMU_EXPORT$$;
 
 			if (delay && !delay_mouseonly && !options.automatic) {
 				start_progress(source.el);
-				delay_handle = setTimeout(function() {
+				delay_handle = set_timeout(function() {
 					if (delay_handle_triggering)
 						return;
 
@@ -144917,7 +146709,7 @@ var $$IMU_EXPORT$$;
 						if (domains_timeout[domain] === null) {
 							// wrap in closure to capture domain for the callback
 							(function(domain) {
-								domains_timeout[domain] = setTimeout(function() {
+								domains_timeout[domain] = set_timeout(function() {
 									domains_timeout[domain] = null;
 									next_img();
 								}, wait_delay + 1);
@@ -145124,21 +146916,39 @@ var $$IMU_EXPORT$$;
 			var sources = [];
 			var source_el_set = new_set();
 
-			var _find_source = function(source) {
+			var _find_source = function(source_el:Element) {
 				for (let src of sources) {
-					if (src.el === source.el)
+					if (src.el === source_el)
 						return src;
 				}
 
 				return null;
 			};
 
-			var add_source = function(source) {
-				if (!source.el)
+			let get_source = function(source, el?:Element) {
+				if (!el)
+					el = source.el;
+
+				if (!el)
 					return false;
 
-				if (set_has(source_el_set, source.el))
-					return _find_source(source) || source;
+				if (set_has(source_el_set, el))
+					return _find_source(el) || source;
+
+				if (el.parentElement) {
+					return get_source(source, el.parentElement);
+				}
+
+				return false;
+			}
+
+			// removing child sources and checking for parents is needed for https://telugumopo.com/anu-emmanuel/
+			var add_source = function(source) {
+				let found_source = get_source(source);
+				if (found_source)
+					return found_source;
+
+				remove_child_sources(source.el);
 
 				sources.push(source);
 				set_add(source_el_set, source.el);
@@ -145146,15 +146956,31 @@ var $$IMU_EXPORT$$;
 				return source;
 			};
 
-			var remove_source = function(source) {
-				let found_source = _find_source(source);
+			let remove_child_sources = function(el:Element) {
+				for (let i = 0; i < el.children.length; i++) {
+					remove_source_el(el.children[i]);
+				}
+			};
+
+			let remove_source_el = function(el) {
+				let found_source = _find_source(el);
 				if (found_source) {
 					let index = array_indexof(sources, found_source);
 					if (index >= 0)
 						sources.splice(index, 1);
+
+					if (found_source._outline_el && found_source._outline_el.parentElement) {
+						found_source._outline_el.parentElement.removeChild(found_source._outline_el);
+					}
 				}
 
-				set_remove(source_el_set, source.el);
+				set_remove(source_el_set, el);
+
+				remove_child_sources(el);
+			};
+
+			var remove_source = function(source) {
+				return remove_source_el(source.el);
 			};
 
 			let reposition_source_outlines = function() {
@@ -145282,8 +147108,15 @@ var $$IMU_EXPORT$$;
 					our_mode = options.mode;
 				}
 
+				if (options.is_mousemove) {
+					if (our_mode === "add" && current_mode === "remove")
+						our_mode = "remove";
+					if (our_mode === "remove" && current_mode === "add")
+						our_mode = "add";
+				}
+
 				if (options.add_gallery) {
-					setTimeout(() => {
+					set_timeout(() => {
 						get_gallery_elements(function(els) {
 							for (const el of els) {
 								if (el === source._real_el)
@@ -145308,9 +147141,6 @@ var $$IMU_EXPORT$$;
 
 					// toggle
 					remove_source(source);
-					if (source._outline_el) {
-						source._outline_el.parentElement.removeChild(source._outline_el);
-					}
 
 					if (current_mode === "unk")
 						current_mode = "remove";
@@ -145345,7 +147175,7 @@ var $$IMU_EXPORT$$;
 					current_mode = "add";
 			};
 
-			our_addEventListener(maskel, "mousedown", function(e) {
+			let mousedown_cb = function(e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
 				e.stopPropagation();
@@ -145364,9 +147194,9 @@ var $$IMU_EXPORT$$;
 					is_mousemove: false,
 					add_gallery
 				});
-			}, {capture: true});
+			};
 
-			our_addEventListener(maskel, "mouseup", function(e) {
+			let mouseup_cb = function(e) {
 				if (current_mode === "none")
 					return;
 
@@ -145375,9 +147205,9 @@ var $$IMU_EXPORT$$;
 				e.stopPropagation();
 
 				current_mode = "none";
-			}, {capture: true});
+			};
 
-			our_addEventListener(maskel, "mousemove", function(e) {
+			let mousemove_cb = function(e) {
 				if (current_mode === "none")
 					return;
 
@@ -145396,7 +147226,17 @@ var $$IMU_EXPORT$$;
 					mouseY: e.clientY,
 					is_mousemove: true
 				});
-			}, {capture: true});
+			};
+
+			if (pointerevents_supported(maskel)) {
+				our_addEventListener(maskel, "pointerdown", mousedown_cb, {capture: true});
+				our_addEventListener(maskel, "pointerup", mouseup_cb, {capture: true});
+				our_addEventListener(maskel, "pointermove", mousemove_cb, {capture: true});
+			} else {
+				our_addEventListener(maskel, "mousedown", mousedown_cb, {capture: true});
+				our_addEventListener(maskel, "mouseup", mouseup_cb, {capture: true});
+				our_addEventListener(maskel, "mousemove", mousemove_cb, {capture: true});
+			}
 
 			document.documentElement.appendChild(base_maskel);
 		};
@@ -145628,6 +147468,8 @@ var $$IMU_EXPORT$$;
 				//our_vars.filename = our_vars.filename_noext + our_vars.ext;
 				filename = get_filename_from_format(settings.gallery_zip_filename_format, our_vars);
 
+				filename = fixup_filename(filename);
+
 				if (!filename) filename = "download";
 				if (!/\.zip$/i.test(filename)) filename += ".zip";
 			};
@@ -145782,6 +147624,8 @@ var $$IMU_EXPORT$$;
 					fill_obj_filename(obj, origurl, data.data.respdata, our_source.el);
 					filename = obj.filename;
 
+					filename = fixup_filename(filename);
+
 					// this should hopefully not happen
 					if (use_download && !filename)
 						filename = "download";
@@ -145839,6 +147683,7 @@ var $$IMU_EXPORT$$;
 					images: els,
 					all_els_ok: true,
 					browser_viewable: false,
+					support_plainlinks: true,
 					replace_image_func: function(options, our_source, cb, domain_processed_cb, progress_cb) {
 						//console_log(our_source);
 
@@ -146128,11 +147973,11 @@ var $$IMU_EXPORT$$;
 				delay_el = e.target;
 				update_mouse_from_event(e);
 
-				delay_handle = setTimeout(function() {
+				delay_handle = set_timeout(function() {
 					delay_el = null;
 
 					if (delay_handle) {
-						clearTimeout(delay_handle);
+						clear_timeout(delay_handle);
 						delay_handle = null;
 					}
 
@@ -146160,7 +148005,7 @@ var $$IMU_EXPORT$$;
 
 			if (mouseover_mouse_enabled() && settings.mouseover_trigger_mouseover && delay_handle) {
 				if (delay_el === e.target) {
-					clearTimeout(delay_handle);
+					clear_timeout(delay_handle);
 					delay_handle = null;
 				}
 			}
@@ -147610,6 +149455,7 @@ var $$IMU_EXPORT$$;
 			our_addEventListener(document, 'keydown', tabactive_cb);
 			our_addEventListener(document, 'wheel', tabactive_cb);
 			our_addEventListener(document, 'mousemove', tabactive_cb);
+			our_addEventListener(document, 'pointermove', tabactive_cb);
 
 			var wheel_cb = function(event) {
 				if (settings.scroll_override_page && popups_active && popup_wheel_cb) {
@@ -147678,7 +149524,7 @@ var $$IMU_EXPORT$$;
 						timeout = 1;
 
 					if (!last_remote_mousemove_timer) {
-						last_remote_mousemove_timer = setTimeout(function() {
+						last_remote_mousemove_timer = set_timeout(function() {
 							if (!("remote_info" in last_remote_mousemove_event)) {
 								last_remote_mousemove_event.remote_info = get_frame_info();
 							}
@@ -147703,11 +149549,34 @@ var $$IMU_EXPORT$$;
 			mouseAbsY = event.pageY;
 		};
 
+		let fill_touchmove_event = function(event) {
+			if (event.touches && event.touches.length > 0) {
+				let touch:Touch = event.touches[0];
+
+				event.clientX = touch.clientX;
+				event.clientY = touch.clientY;
+				event.pageX = touch.pageX;
+				event.pageY = touch.pageY;
+				event.screenX = touch.screenX;
+				event.screenY = touch.screenY;
+			}
+		}
+
 		var mousemove_cb = function(event) {
 			mousepos_initialized = true;
 
 			// https://stackoverflow.com/a/7790764
 			event = event || window.event;
+
+			if (event.type === "touchmove") {
+				fill_touchmove_event(event);
+
+				if (dragstart) {
+					// preventDefault to prevent scolling while dragging, should find better way
+					// dragstart is checked to prevent scroll lockup on mobile
+					event.preventDefault();
+				}
+			}
 
 			update_mouse_from_event(event);
 
@@ -147729,7 +149598,7 @@ var $$IMU_EXPORT$$;
 					// FIXME: why was this not in if (popups_active)?
 					// The reason for putting it here is that if the mouse moves (even within jitter thresh) after a single popup is open, it will cancel the popup request
 					if (delay_handle) {
-						clearTimeout(delay_handle);
+						clear_timeout(delay_handle);
 						delay_handle = null;
 
 						if (false && waiting)
@@ -147841,7 +149710,7 @@ var $$IMU_EXPORT$$;
 							Math_abs(mouseY - mouseDelayY) < trigger_mouse_jitter_thresh)
 							return;
 
-						clearTimeout(delay_handle);
+						clear_timeout(delay_handle);
 						delay_handle = null;
 					}
 
@@ -147857,7 +149726,7 @@ var $$IMU_EXPORT$$;
 					}
 
 					if (!settings.mouseover_trigger_mouseover) {
-						delay_handle = setTimeout(function() {
+						delay_handle = set_timeout(function() {
 							if (!popup_mouse_head())
 								return;
 
@@ -147868,7 +149737,10 @@ var $$IMU_EXPORT$$;
 			}
 		};
 
-		onload(() => our_addEventListener(document, 'mousemove', mousemove_cb));
+		onload(() => {
+			our_addEventListener(document, 'mousemove', mousemove_cb);
+			our_addEventListener(document, 'touchmove', mousemove_cb, { passive: false });
+		});
 
 		(function() {
 			register_menucommand("Report issue", github_issues_page);
