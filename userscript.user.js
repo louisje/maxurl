@@ -77,7 +77,7 @@ var __assign = (this && this.__assign) || function() {
 // @description:zh-TW 為10,000多個網站查找更大或原始圖像
 // @description:zh-HK 為10,000多個網站查找更大或原始圖像
 // @namespace         http://tampermonkey.net/
-// @version           2025.11.1
+// @version           2025.11.2
 // @author            qsniyg
 // @homepageURL       https://qsniyg.github.io/maxurl/options.html
 // @supportURL        https://github.com/qsniyg/maxurl/issues
@@ -218,7 +218,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 	//var greasyfork_update_url = "https://greasyfork.org/scripts/36662-image-max-url/code/Image%20Max%20URL.user.js";
 	var github_issues_page = "https://github.com/qsniyg/maxurl/issues";
 	var imu_icon = "https://raw.githubusercontent.com/qsniyg/maxurl/b5c5488ec05e6e2398d4e0d6e32f1bbad115f6d2/resources/logo_256.png";
-	var current_version = "2025.11.1";
+	var current_version = "2025.11.2";
 	var imagetab_ok_override = false;
 	var has_ffmpeg_lib = true;
 	// -- Currently this is unused, it'll be used in a future release (to workaround the 1MB and 2MB limits for OUJS and Greasyfork respectively) --
@@ -18817,9 +18817,11 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		if (real_regex !== regex) {
 			if (!matched.groups)
 				matched.groups = {};
-			array_foreach(regex.groups, function(group, i) {
-				matched.groups[group] = matched[i + 1];
-			});
+			if (regex.groups) {
+				array_foreach(regex.groups, function(group, i) {
+					matched.groups[group] = matched[i + 1];
+				});
+			}
 		}
 		return matched;
 	};
@@ -18840,14 +18842,25 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		if (!options.do_request || !options.cb) {
 			return page_nullobj;
 		}
+		var get_id_from_match = function(match) {
+			var id = match[1];
+			if (match.groups && match.groups.id) {
+				id = match.groups.id;
+			}
+			return id;
+		};
 		var hostresp = null;
 		if (options.allow_hostresp_for_match && options.bigimage_options && options.bigimage_options.host_url && options.bigimage_options.document) {
 			var doc = options.bigimage_options.document;
 			var host_url = options.bigimage_options.host_url;
+			var website_match_id = get_id_from_match(website_match);
 			for (var _i = 0, _a = options.website_regex; _i < _a.length; _i++) {
 				var regex = _a[_i];
 				var website_match2 = compat_match(host_url, regex);
 				if (website_match2) {
+					var website_match2_id = get_id_from_match(website_match2);
+					if (website_match2_id !== website_match_id)
+						continue;
 					hostresp = {
 						finalUrl: host_url,
 						responseText: doc.documentElement.outerHTML
@@ -18880,10 +18893,11 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		}
 		if (!options.run) {
 			options.run = function(cb, website_match, options) {
-				var id = website_match[1];
+				/*var id = website_match[1];
 				if (website_match.groups && website_match.groups.id) {
 					id = website_match.groups.id;
-				}
+				}*/
+				var id = get_id_from_match(website_match);
 				var fill_string_vars = function(str) {
 					return str
 						.replace(/\${id}/g, id)
@@ -24768,12 +24782,38 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			console_error("Unable to parse <video> tag", videomatch[0]);
 			return null;
 		}
+		var add_new_source = function(sources_array, source) {
+			var found = null;
+			for (var _i = 0, sources_array_1 = sources_array; _i < sources_array_1.length; _i++) {
+				var org = sources_array_1[_i];
+				if (org.url === source.url) {
+					found = org;
+					break;
+				}
+			}
+			if (!found) {
+				sources_array.push(source);
+				return;
+			}
+			for (var key in source) {
+				if (!(key in found)) {
+					found[key] = source[key];
+				}
+			}
+			if (source.args && found.args) {
+				for (var key in source.args) {
+					if (!(key in found.args))
+						found.args[key] = source.args[key];
+				}
+			}
+		};
 		var add_source = function(parsed) {
-			parsed.name = parsed.args.res || parsed.args.title || parsed.args.label || null;
+			parsed.name = parsed.args.res || parsed.args.size || parsed.args.title || parsed.args.label || null;
 			parsed.url = parsed.args.src;
 			if (parsed.args.type)
 				parsed.type = parsed.args.type;
-			sources.video.push(parsed);
+			add_new_source(sources.video, parsed);
+			//sources.video.push(parsed);
 		};
 		var sources = {
 			video: [],
@@ -24897,6 +24937,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			options.thumbnail = true;
 		if (!("overwrite_mode" in options))
 			options.overwrite_mode = "none";
+		if (!("ldjson" in options))
+			options.ldjson = true;
 		var baseobj = deepcopy(options.baseobj);
 		if (!baseobj.extra)
 			baseobj.extra = {};
@@ -24905,7 +24947,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		urls = urls;
 		var ldjson = {};
 		var ldjsonmatch = resp.responseText.match(/<script[^>]* type="application\/ld\+json"[^>]*>\s*([\s\S]*?)\s*<\/script>/i);
-		if (ldjsonmatch) {
+		if (ldjsonmatch && options.ldjson) {
 			try {
 				ldjson = JSON_parse(ldjsonmatch[1]);
 			} catch (e) {
@@ -25059,6 +25101,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		};
 		// todo: should this be in get_videotag_sources instead?
 		sources.video.sort(function(a, b) {
+			// hanime1.me
+			if (a.args.size && b.args.size) {
+				return compare_qualities(a.args.size, b.args.size);
+			}
 			if (a.args.res && b.args.res) {
 				return compare_qualities(a.args.res, b.args.res);
 			}
@@ -32573,6 +32619,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// thanks to anonymous for reporting:
 			// https://assets-eu-01.kc-usercontent.com/d5eab2ce-d0cf-0106-dfb7-ff2154f01a04/c7f6c0f7-e176-4e4c-824f-85ec8843ec22/corporate%20documents%20%282%29%20%281%29.jpg?fm=webp&q=80&auto=format
 			(domain_nosub === "kc-usercontent.com" && /^assets-[a-z]+-[0-9]+\./.test(domain)) ||
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1491
+			// https://www.supla.fi/
+			// https://data.richie.app/editions-eu-images/issue/6/7/5/issue_6752fc6a-1947-46f8-aaf1-54e9ab3069d4_issue/master_preview_master_cover.png?mode=stretch&width=276&height=405&format=jpeg
+			domain === "data.richie.app" ||
 			// http://us.jimmychoo.com/dw/image/v2/AAWE_PRD/on/demandware.static/-/Sites-jch-master-product-catalog/default/dw70b1ebd2/images/rollover/LIZ100MPY_120004_MODEL.jpg?sw=245&sh=245&sm=fit
 			// https://www.aritzia.com/on/demandware.static/-/Library-Sites-Aritzia_Shared/default/dw3a7fef87/seasonal/ss18/ss18-springsummercampaign/ss18-springsummercampaign-homepage/hptiles/tile-wilfred-lrg.jpg
 			src.match(/\/demandware\.static\//) ||
@@ -32713,6 +32763,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://cassette.sphdigital.com.sg/image/straitstimes/4aae8e425e225b1060aa13a7df7190f9f8477df2d8f4d061634db5198fbcee61?w=1200 -- 1920x1080, upscaled
 			//   https://cassette.sphdigital.com.sg/image/straitstimes/4aae8e425e225b1060aa13a7df7190f9f8477df2d8f4d061634db5198fbcee61 -- 1140x760
 			(domain === "cassette.sphdigital.com.sg" && /\/image\/+[^/]+\/+/.test(src)) ||
+			// thanks to Liz on discord:
+			// https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/78961122/2/?bust=1761462631&width=1080 -- 415
+			//   https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/78961122/2/
+			(domain === "dl5zpyw5k3jeb.cloudfront.net" && string_indexof(src, "/photos/") >= 0) ||
 			// thanks to MinuteAd8502 on github: https://github.com/qsniyg/maxurl/issues/874
 			// https://img01.ztat.net/article/spp-media-p1/369ffb094cae4443bee45519929dddb8/4269d8d79cfe418888fdc155bf1a8e2e.jpg?imwidth=762
 			//   https://img01.ztat.net/article/spp-media-p1/369ffb094cae4443bee45519929dddb8/4269d8d79cfe418888fdc155bf1a8e2e.jpg -- 1801x2600
@@ -35288,7 +35342,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 				},
 				referer_ok: {
 					same_domain: true
-				}
+				},
+				can_head: false // 405
 			};
 			newsrc = src.replace(/(:\/\/[^/]+\/+)[0-9]+\/+/, "$1")
 				.replace(/\/((?:v[0-9]*-)?[0-9a-f]+)(?:_[^/._]*)?(\.[^/.]*)$/, "/$1_r$2");
@@ -35615,8 +35670,11 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			//   https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iOj.Ej7SONXU.jpg
 			// https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iwz58xG2kzHs.webp
 			//   https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iwz58xG2kzHs.jpg
+			// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3448443681
+			// https://assets.bwbx.io/images/users/iqjWHBFdfxIU/im2s_QIBipro.webp
+			//   https://assets.bwbx.io/images/users/iqjWHBFdfxIU/im2s_QIBipro.jpg
 			return src
-				.replace(/(\/images\/+users\/+[0-9a-zA-Z.]+\/+[0-9a-zA-Z.]+)\.webp(?:[?$].*)?$/, "$1.jpg")
+				.replace(/(\/images\/+users\/+[0-9a-zA-Z.]+\/+[_0-9a-zA-Z.]+)\.webp(?:[?$].*)?$/, "$1.jpg")
 				.replace(/(\/images\/+users\/+[^/]+\/+[^/]+)\/+v[0-9]+\/+[-01]+x[-01]+(\.[a-z]+)(?:[?#].*)?$/, "$1$2")
 				.replace(/\/[-0-9]*x[-0-9]*(\.[^/]*)$/, "/-1x-1$1");
 		}
@@ -38194,6 +38252,12 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 					bad: "mask"
 				};
 			}
+			// thanks to iotaOmicron on github: https://github.com/qsniyg/maxurl/issues/1496
+			// https://cdn.shopify.com/s/files/1/1165/9188/files/Bombas_logo_300_537a0c29-5f02-4d45-ba53-bdae09f5e12a_112x112.png.webp
+			//   https://cdn.shopify.com/s/files/1/1165/9188/files/Bombas_logo_300_537a0c29-5f02-4d45-ba53-bdae09f5e12a.png
+			newsrc = src.replace(/(\.[a-z]+)\.webp(?:[?#].*)?$/, "$1");
+			if (newsrc !== src)
+				return newsrc;
 			// https://cdn.shopify.com/s/files/1/0947/6410/products/a2178934757_10_1024x1024.jpeg?v=1458824230
 			//   https://cdn.shopify.com/s/files/1/0947/6410/products/a2178934757_10_x1024.jpeg?v=1458824230
 			//   https://cdn.shopify.com/s/files/1/0947/6410/products/a2178934757_10.jpeg?v=1458824230
@@ -40241,7 +40305,12 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		if (domain === "vz.cnwimg.com") {
 			// https://vz.cnwimg.com/thumbc-300x300/wp-content/uploads/2012/03/coco.jpg
 			// https://vz.cnwimg.com/thumb-300x170/wp-content/uploads/2018/01/GettyImages-127497645.jpg
-			return src.replace(/\/thumb[a-z]*-[0-9]+x[0-9]+\//, "/");
+			// https://vz.cnwimg.com/thumb-900x/wp-content/uploads/2023/08/GettyImages-1422337660.jpg
+			//   https://vz.cnwimg.com/thm/f3--bJ0OONeSvrfLEFqQuF3L6eo=/900x/center/top/filters:format(webp)/2023/08/GettyImages-1422337660.jpg
+			//   https://vz.cnwimg.com/wp-content/uploads/2023/08/GettyImages-1422337660.jpg
+			return src
+				.replace(/\/thm\/.*?\/([0-9]{4}\/+[0-9]{2}\/)/, "/wp-content/uploads/$1")
+				.replace(/\/thumb[a-z]*-[0-9]+x[0-9]*\//, "/");
 		}
 		if (domain_nowww === "coleman-rayner.com" &&
 			string_indexof(src, "/watermark/insertwm.php?") >= 0) {
@@ -46496,7 +46565,12 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			domain === "222.186.12.239") {
 			// http://gongl8.com/uploadfile/2018/0228/thumb_0_300_20180228054831686.jpg
 			//   http://gongl8.com/uploadfile/2018/0228/20180228054831686.jpg
-			newsrc = src.replace(/(\/[0-9]{4}\/+[0-9]{4}\/+)thumb_[0-9]+_(?:[0-9]+_){0,2}([0-9]{8,})(?:_watermark)?(\.[^/.]+)(?:[?#].*)?$/, "$1$2$3");
+			newsrc = src
+				// thanks to in-the-halfway on github: https://github.com/qsniyg/maxurl/issues/1461#issuecomment-3448443681
+				// https://image11.m1905.cn/uploadfile/2015/0720/20150720092909884208_watermark.jpg
+				//   https://image11.m1905.cn/uploadfile/2015/0720/20150720092909884208.jpg
+				.replace(/(\/[0-9]{4}\/+[0-9]{4}\/+)([0-9]{8,})_watermark(\.[^/.]+)(?:[?#].*)?$/, "$1$2$3")
+				.replace(/(\/[0-9]{4}\/+[0-9]{4}\/+)thumb_[0-9]+_(?:[0-9]+_){0,2}([0-9]{8,})(?:_watermark)?(\.[^/.]+)(?:[?#].*)?$/, "$1$2$3");
 			if (newsrc !== src)
 				return newsrc;
 			//newsrc = src.replace(/\/(?:thumb_[0-9]+_[0-9]+_(?:[0-9]+_)?)?([0-9]+)(?:_watermark)?(\.[^/.]*)$/, "/$1$2");
@@ -58008,6 +58082,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://static.gamespot.com/uploads/scale_small/1365/13658182/2673733-geralt_yennefer-size_1920x1200.jpg
 			//   https://static.gamespot.com/uploads/original/1365/13658182/2673733-geralt_yennefer-size_1920x1200.png
 			domain === "static.gamespot.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.gamespot.com/a/uploads/screen_tiny/1601/16018044/4569876-phyre-bloodlines-2.jpg
+			//   https://www.gamespot.com/a/uploads/original/1601/16018044/4569876-phyre-bloodlines-2.jpg
+			domain_nowww === "gamespot.com" ||
 			// thanks to synthtech on github https://github.com/qsniyg/maxurl/issues/115
 			// https://comicvine1.cbsistatic.com/uploads/scale_small/13/136525/5341716-1.jpg
 			//   https://comicvine1.cbsistatic.com/uploads/original/13/136525/5341716-1.jpg
@@ -58018,7 +58096,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			domain_nosub === "cbsistatic.com") {
 			// https://static.comicvine.com/uploads/square_small/6/67663/6449136-800.jpg
 			//   https://static.comicvine.com/uploads/original/6/67663/6449136-800.jpg
-			newsrc = src.replace(/(:\/\/[^/]+\/+)uploads\/+[^/]+\/+((?:mig\/+(?:[0-9]\/+){4}|[0-9]+\/+[0-9]+\/+)[0-9]+(?:-[^/]+)?\.)/, "$1uploads/original/$2");
+			newsrc = src.replace(/(:\/\/[^/]+\/+(?:a\/+)?)uploads\/+[^/]+\/+((?:mig\/+(?:[0-9]\/+){4}|[0-9]+\/+[0-9]+\/+)[0-9]+(?:-[^/]+)?\.)/, "$1uploads/original/$2");
 			if (newsrc !== src)
 				return add_extensions(newsrc);
 			//return src.replace(/\/uploads\/[^/]*\//, "/uploads/original/");
@@ -58840,6 +58918,40 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 					is_pagelink: true
 				};
 			}
+		}
+		if (domain_nowww === "58pics.top") {
+			// thanks to anonymous for reporting:
+			// https://58pics.top/i/loader.svg
+			if (/\/i\/+loader\.svg(?:[?#].*)?$/.test(src))
+				return {
+					url: src,
+					bad: "mask"
+				};
+		}
+		if (domain_nowww === "tbporner.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([^/]+)\/*(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/${id}/",
+				process: function(done, resp, cache_key) {
+					var embed_matches = match_all(resp.responseText, /\sdata-embed="([^"]+)"[\s>]/);
+					if (!embed_matches) {
+						console_error(cache_key, "Unable to find data-embed matches for", resp);
+						return done(null, false);
+					}
+					var urls = [];
+					for (var _i = 0, embed_matches_1 = embed_matches; _i < embed_matches_1.length; _i++) {
+						var match_3 = embed_matches_1[_i];
+						urls.push({
+							url: decode_entities(match_3[1]),
+							is_pagelink: true
+						});
+					}
+					return done(urls, 6 * 60 * 60);
+				}
+			});
+			if (newsrc)
+				return newsrc;
 		}
 		if (domain === "static.cinemagia.ro") {
 			// https://static.cinemagia.ro/img/resize/db/actor/33/04/29/andrea-duro-731111l-thumbnail_gallery.jpg
@@ -70640,6 +70752,20 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 				};
 			}
 		}
+		if (domain_nowww === "simpshub.com") {
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9a-z]{4,}-[-0-9a-z]+)(?:[?#].*)?$/,
+				query_for_id: "https://" + domain + "/${id}",
+				process: function(done, resp, cache_key) {
+					var obj = common_functions["get_videotag_obj"](resp);
+					if (!obj)
+						return done(null, false);
+					done(obj, obj ? 60 * 60 : false);
+				}
+			});
+			if (newsrc)
+				return newsrc;
+		}
 		if (domain_nowww === "kosova-sot.info" ||
 			// https://www.botasot.info/media/botasot.info/images/2019/August/21/auto_beberexzha1566420677.jpg
 			//   https://www.botasot.info/media/botasot.info/images/2019/August/21/beberexzha1566420677.jpg
@@ -72861,7 +72987,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			return src.replace(/(\/b?photo\/+[^/]*\/+)(?:[0-9]+s|[a-z]+)(\.[^/.]*)(?:[?#].*)?$/, "$1o$2");
 		}
 		if (domain_nosub === "rtbf.be" &&
-			domain.match(/^(?:[^/]*\.)?static\./)) {
+			domain.match(/^(?:[^/]*\.)?static(?:-content)?\./)) {
 			// https://ds1.static.rtbf.be/article/image/370x208/9/9/d/2c558eb620568fd46b8389a716515716-1555355693.jpg
 			//   https://ds1.static.rtbf.be/article/image/original/9/9/d/2c558eb620568fd46b8389a716515716-1555355693.jpg
 			// https://ds1.static.rtbf.be/pictureGallery/album/23889/thumb/f9e31c7ff7d5ca38a36b0b127a888f73-1490188572.png
@@ -72871,6 +72997,9 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// thanks to anonymous for reporting:
 			// https://ds.static.rtbf.be/article/image/770xAuto/2/0/0/f0f254331b4693742ea6cc1379b84e73-1573051205.jpg
 			//   https://ds.static.rtbf.be/article/image/original/2/0/0/f0f254331b4693742ea6cc1379b84e73-1573051205.jpg
+			// thanks to biziclop on github: https://github.com/qsniyg/maxurl/issues/1495
+			// https://static-content.rtbf.be/article/image/180xAuto/0/d/1/bc924bb7b878fad220858dbe4609c6e8-1582335108.jpg
+			//   https://static-content.rtbf.be/article/image/original/0/d/1/bc924bb7b878fad220858dbe4609c6e8-1582335108.jpg
 			// other:
 			// https://ds1.static.rtbf.be/image/media/object/default/16x9/1248x702/b/7/d/b7d43072ff68bb791ed0813b56e7e498.jpg
 			return src
@@ -85127,8 +85256,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 					}
 					var images = [];
 					for (var _i = 0, matches_4 = matches; _i < matches_4.length; _i++) {
-						var match_3 = matches_4[_i];
-						images.push(urljoin(resp.finalUrl, decode_entities(match_3[1]), true));
+						var match_4 = matches_4[_i];
+						images.push(urljoin(resp.finalUrl, decode_entities(match_4[1]), true));
 					}
 					images.sort(function(a, b) {
 						if (/\.webp$/.test(a))
@@ -91976,6 +92105,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			domain_nowww === "djx10.org" ||
 			// /bkg/
 			domain_nowww === "pqham.com" ||
+			// /bkg/
+			domain_nowww === "z6bha.com" ||
 			domain_nowww === "filemoon.to" ||
 			domain_nowww === "filemoon.sx") {
 			newsrc = website_query({
@@ -92145,6 +92276,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		}
 		if (domain_nowww === "luluvdoo.com" ||
 			domain_nowww === "luluvid.com" ||
+			domain_nowww === "lulustream.com" ||
 			domain_nowww === "luluvdo.com") {
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+(?:[de]\/+)?([0-9a-z]{5,})(?:[?#].*)?$/,
@@ -92173,6 +92305,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 				return newsrc;
 		}
 		if (domain_nowww === "bigwarp.cc" ||
+			domain_nowww === "bigwarp.pro" ||
 			domain_nowww === "bigwarp.io") {
 			newsrc = website_query({
 				website_regex: /^[a-z]+:\/\/[^/]+\/+(?:embed-)?([0-9a-z]{5,})(?:\.html)?(?:[?#].*)?$/,
@@ -92182,6 +92315,32 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 					if (!obj)
 						return done(null, false);
 					return done(obj, 60 * 60);
+				}
+			});
+			if (newsrc)
+				return newsrc;
+		}
+		if (domain_nowww === "elktube.com") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([^/]{10,})(?:\/+(?:[?#].*)?)?$/,
+				query_for_id: "https://" + domain + "/${id}/",
+				process: function(done, resp, cache_key) {
+					var match = resp.responseText.match(/"single_video_url":\s*"([^".]+)/);
+					if (!match) {
+						console_error("Unable to find single_video_url match for", resp);
+						return done(null, false);
+					}
+					var newurl = base64_decode(match[1]);
+					return done({
+						url: newurl,
+						headers: {
+							Referer: resp.finalUrl
+						},
+						extra: {
+							page: resp.finalUrl
+						}
+					}, 6 * 60 * 60);
 				}
 			});
 			if (newsrc)
@@ -92322,6 +92481,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			domain_nowww === "xenolyzb.com" ||
 			domain_nowww === "tryzendm.com" ||
 			domain_nowww === "ghbrisk.com" ||
+			domain_nowww === "cdnvids.top" ||
+			domain_nowww === "cdnstream.top" ||
 			domain_nowww === "streamwish.to") {
 			// streamwish:
 			// domains 1: hgplaycdn.com habetar.com yuguaab.com guxhag.com auvexiug.com xenolyzb.com tryzendm.com
@@ -92330,7 +92491,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			if (domain_nowww === "streamwish.to")
 				query_domain = "guxhag.com";
 			newsrc = website_query({
-				website_regex: /^[a-z]+:\/\/[^/]+\/+((?:[fe]\/+)?[0-9a-z]{5,})(?:[?#].*)?$/,
+				website_regex: /^[a-z]+:\/\/[^/]+\/+((?:(?:[fe]|embed)\/+)?[0-9a-z]{5,})(?:[?#].*)?$/,
 				query_for_id: "https://" + query_domain + "/${id}",
 				process: function(done, resp, cache_key) {
 					var unpacked = common_functions["unpack_packer"](resp.responseText);
@@ -92338,6 +92499,7 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 						console_error(cache_key, "Unable to unpack", decoded, "for", resp);
 						return done(null, false);
 					}
+					// "hls3":..., "hls2":..., "hls4":...
 					var linksmatch = unpacked.match(/links\s*=\s*({"hls[0-9]*":.*?});/);
 					if (!linksmatch) {
 						console_error(cache_key, "Unable to find links match for", { resp: resp, unpacked: unpacked });
@@ -101217,7 +101379,11 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			//   https://images.tori.fi/api/v1/imagestori/images/5994569715.jpg?rule=original -- 1280x960
 			return src.replace(/(\/api\/+v1\/+imagestori\/+images\/+[0-9]+\.[a-z]+)(?:[?#].*)?$/, "$1?rule=original");
 		}
-		if (domain === "img.tori.net") {
+		if (domain === "img.tori.net" ||
+			// thanks to anonymous for reporting:
+			// https://images.finncdn.no/dynamic/1280w/9d/9d80f3c4-0788-4c3d-8e6d-62b1b4c32f7f
+			//   https://images.finncdn.no/dynamic/original/9d/9d80f3c4-0788-4c3d-8e6d-62b1b4c32f7f -- 3024x4032
+			domain === "images.finncdn.no") {
 			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/759#issuecomment-3289519077
 			// https://img.tori.net/dynamic/142w/item/30107652/5ec45473-daf7-495c-9f42-8a5c12c6a9f0
 			//   https://img.tori.net/dynamic/original/item/30107652/5ec45473-daf7-495c-9f42-8a5c12c6a9f0
@@ -102739,8 +102905,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			//   https://d2rxqglyhdohqf.cloudfront.net/ph/43319daed7d17b750558c19cb8b08913/2x/683400886.jpg -- 1999x1335
 			//   https://d2rxqglyhdohqf.cloudfront.net/ph/43319daed7d17b750558c19cb8b08913/3x/683400886.jpg -- 3000x2003
 			var regex_2 = /(\/ph\/+[0-9a-f]{30,}\/+)(?:m|l|xl|2x|3x)\/+/;
-			var match_4 = src.match(regex_2);
-			if (match_4) {
+			var match_5 = src.match(regex_2);
+			if (match_5) {
 				return replace_sizes(src, [
 					src.replace(regex_2, "$13x/"),
 					src.replace(regex_2, "$12x/"),
@@ -102809,9 +102975,9 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// other:
 			// https://d348imysud55la.cloudfront.net/thumbnails/1362051420.thumbnail-500.png
 			//   https://api.vrchat.cloud/api/1/file/file_99ec2ba7-7efd-47df-811d-502a5ae1a3dd/1/file
-			var match_5 = src.match(/\/thumbnails\/+(file_[-0-9a-f]{20,})\.[0-9a-f]{30,}\.([0-9]+)\./);
-			if (match_5)
-				return "https://api.vrchat.cloud/api/1/file/" + match_5[1] + "/" + match_5[2] + "/file";
+			var match_6 = src.match(/\/thumbnails\/+(file_[-0-9a-f]{20,})\.[0-9a-f]{30,}\.([0-9]+)\./);
+			if (match_6)
+				return "https://api.vrchat.cloud/api/1/file/" + match_6[1] + "/" + match_6[2] + "/file";
 		}
 		if (domain === "api.vrchat.cloud") {
 			// thanks to CetaceanNation on github: https://github.com/qsniyg/maxurl/issues/995
@@ -102836,10 +103002,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		}
 		if (domain_nowww === "ow.ly") {
 			// http://ow.ly/i/1ceGd
-			var match_6 = src.match(/\/i\/+([A-Za-z0-9]+)(?:[?#].*)?$/);
-			if (match_6) {
+			var match_7 = src.match(/\/i\/+([A-Za-z0-9]+)(?:[?#].*)?$/);
+			if (match_7) {
 				return [
-					{ url: "https://static.ow.ly/photos/original/" + match_6[1] + ".jpg" },
+					{ url: "https://static.ow.ly/photos/original/" + match_7[1] + ".jpg" },
 					{ url: src, is_pagelink: true }
 				];
 			}
@@ -103101,6 +103267,79 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://cdn-icons-png.freepik.com/256/4173/4173082.png?semt=ais_hybrid
 			//   https://cdn-icons-png.freepik.com/512/4173/4173082.png?semt=ais_hybrid
 			return src.replace(/(:\/\/[^/]+\/+)(?:16|32|64|128|256)\/+/, "$1512/");
+		}
+		if (domain_nowww === "poipiku.com") {
+			var query_poipiku_1 = function(id, td, cb) {
+				api_query("poipiku:" + id + ":" + td, {
+					url: "https://poipiku.com/f/ShowIllustDetailF.jsp",
+					method: "POST",
+					data: "ID=" + id + "&TD=" + td + "&AD=-1&PAS=",
+					imu_mode: "xhr",
+					json: true,
+					headers: {
+						Accept: "application/json, text/javascript, */*; q=0.01",
+						"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+						"Origin": "https://poipiku.com",
+						"Referer": "https://poipiku.com/" + id + "/" + td + ".html",
+						"X-Requested-With": "XMLHttpRequest"
+					}
+				}, cb, function(done, resp, cache_key) {
+					if (!resp)
+						return done(null, false);
+					if (resp.error_code !== 0 || resp.result !== 1 || !resp.html) {
+						console_error(cache_key, "Invalid response", resp);
+						return done(null, false);
+					}
+					var match = resp.html.match(/\ssrc="(https?:\/\/[^/]+\/+[0-9]+\/+[0-9]+_[0-9a-zA-Z]+\.[a-z]+\?[^"]+)"/);
+					if (!match) {
+						console_error(cache_key, "Unable to find src match from", resp);
+						return done(null, false);
+					}
+					done(decode_entities(match[1]), 30); // 60 second expiry
+				});
+			};
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+([0-9]+\/+[0-9]+)\.html/,
+				query_for_id: "https://poipiku.com/${id}.html",
+				process: function(done, resp, cache_key, match) {
+					var full_id = match[1];
+					var idmatch = full_id.match(/^([0-9]+)\/+([0-9]+)$/);
+					var id = idmatch[1];
+					var td = idmatch[2];
+					var page = resp.finalUrl;
+					var is_loggedin = /toggleSwitchUserList/.test(resp.responseText);
+					if (is_loggedin) {
+						query_poipiku_1(id, td, function(url) {
+							if (!url) {
+								return done(null, false);
+							}
+							return done(common_functions["fill_ldjson"]({
+								url: url,
+								headers: {
+									Referer: page
+								},
+								extra: {
+									page: page
+								}
+							}, resp, { ldjson: false }), 30);
+						});
+					} else {
+						console_warn(cache_key, "Not logged in");
+						return done(common_functions["fill_ldjson"]([], resp, { ldjson: false }), 60 * 60);
+					}
+				}
+			});
+			if (newsrc)
+				return newsrc;
+		}
+		if (domain === "cdn.poipiku.com") {
+			match = src.match(/\/0*([0-9]+)\/+0*([0-9]+)_[0-9a-zA-Z]+\.[a-z]+_[0-9]+\.[a-z]+/);
+			if (match) {
+				return {
+					url: "https://poipiku.com/" + match[1] + "/" + match[2] + ".html",
+					is_pagelink: true
+				};
+			}
 		}
 		if (domain === "img.poipiku.com") {
 			// thanks to contextnerror on github: https://github.com/qsniyg/maxurl/issues/1043
@@ -103832,9 +104071,9 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			if (options.element.tagName === "IMG" && options.element.parentElement && options.element.parentElement.tagName === "A") {
 				var parent_onclick = options.element.parentElement.getAttribute("onclick");
 				if (parent_onclick) {
-					var match_7 = parent_onclick.match(/displaySingleImage\('([^']+)'/);
-					if (match_7) {
-						return match_7[1].replace(/^.*?mediapool/, "/mediapool");
+					var match_8 = parent_onclick.match(/displaySingleImage\('([^']+)'/);
+					if (match_8) {
+						return match_8[1].replace(/^.*?mediapool/, "/mediapool");
 					}
 				}
 			}
@@ -103867,11 +104106,11 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			//   https://dthezntil550i.cloudfront.net/4b/latest/4b2112261505098280008769655/d5b22a94-4864-45d5-96e7-cbca9e0043f4.png
 			// https://dthezntil550i.cloudfront.net/mc/latest/mc2201180726215920008769655/440_330/a4b13098-2685-4346-b48a-1ebce125c6b0.png
 			//   https://dthezntil550i.cloudfront.net/mc/latest/mc2201180726215920008769655/a4b13098-2685-4346-b48a-1ebce125c6b0.png
-			var match_8 = src.match(/\/[0-9a-z]{2}\/+[a-z]+\/+([0-9a-z]{2}[0-9]+)\//);
+			var match_9 = src.match(/\/[0-9a-z]{2}\/+[a-z]+\/+([0-9a-z]{2}[0-9]+)\//);
 			var extra_1 = null;
-			if (match_8) {
+			if (match_9) {
 				extra_1 = {
-					page: "https://medibang.com/picture/" + match_8[1] + "/"
+					page: "https://medibang.com/picture/" + match_9[1] + "/"
 				};
 			}
 			return {
@@ -104078,10 +104317,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://imgcdn.powr-media.com/extend:1:ce/enlarge:1/resize:fill/w:240/h:360/gravity:ce/czM6Ly91bnJlZWxtZWRpYS9wcm9kL3NhbGVtbm93L3Bvc3RlcnMvYTYyMTg3ZTItMTExNi00ZWIzLWI4YmEtMjgzMDJkMWI2MTcx
 			//   s3://unreelmedia/prod/salemnow/posters/a62187e2-1116-4eb3-b8ba-28302d1b6171
 			//   https://unreelmedia.s3.amazonaws.com/prod/salemnow/posters/a62187e2-1116-4eb3-b8ba-28302d1b6171 -- 2000x2999
-			var match_9 = src.match(/:\/\/[^/]+\/+(?:[a-z]+:[^/]+\/+)*([^/.?#]{20,})/);
-			if (match_9) {
+			var match_10 = src.match(/:\/\/[^/]+\/+(?:[a-z]+:[^/]+\/+)*([^/.?#]{20,})/);
+			if (match_10) {
 				try {
-					var decoded_4 = base64_decode(match_9[1]);
+					var decoded_4 = base64_decode(match_10[1]);
 					var match1_1 = decoded_4.match(/^s3:\/\/([a-z]+)\/+(prod\/.*)$/);
 					if (match1_1) {
 						return "https://" + match1_1[1] + ".s3.amazonaws.com/" + match1_1[2];
@@ -104632,6 +104871,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://www.militarytimes.com/resizer/v2/27S4PPUVYJA5TCOLVXBBLQ3PZU.jpg?auth=f96c777a972e9ce6970bed510d25d5a83a0ada3486c81899bb67922e4eb28000&width=1024&height=683
 			//   https://cloudfront-us-east-1.images.arcpublishing.com/archetype/27S4PPUVYJA5TCOLVXBBLQ3PZU.jpg
 			domain_nowww === "militarytimes.com" ||
+			// thanks to anonymous for reporting:
+			// https://www.lavenir.net/resizer/v2/BEIRNDRB3NGK5GV4SN5O4ZJJFU.jpg?auth=828d7a1d8d1f7b90f3bf555aebdcc28b868204a4b99eb42ba5781bc81b6b5c59&width=1620&height=1732&quality=85&focal=1417%2C1515
+			//   https://cloudfront-eu-central-1.images.arcpublishing.com/ipmgroup/BEIRNDRB3NGK5GV4SN5O4ZJJFU.jpg
+			domain_nowww === "lavenir.net" ||
 			// thanks to roi:
 			// https://www.theglobeandmail.com/resizer/v2/MIMBGW3UORBLZMMTL2GASZ75JE.JPG?auth=c570680e25c89027c795085ce398d06291485e026f2830e996db3e2d9a71d3d8&width=900&quality=80
 			//   https://cloudfront-us-east-1.images.arcpublishing.com/tgam/MIMBGW3UORBLZMMTL2GASZ75JE.JPG
@@ -104688,6 +104931,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 				info_2 = { folder: "sankei", loc: "ap-northeast-1" };
 			else if (domain_nowww === "militarytimes.com")
 				info_2 = { folder: "archetype", loc: "us-east-1" };
+			else if (domain_nowww === "lavenir.net")
+				info_2 = { folder: "ipmgroup", loc: "eu-central-1" };
 			newsrc = src.replace(/^[a-z]+:\/\/[^/]+\/+resizer\/+v2\/+([^?#/]+)(?:[?#].*)?$/, "https://cloudfront-" + info_2.loc + ".images.arcpublishing.com/" + info_2.folder + "/$1");
 			if (newsrc !== src)
 				return newsrc;
@@ -105322,8 +105567,8 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 				var newsrcs = add_full_extensions(newsrc, ["png", "jpg", "jpeg"]);
 				var videosrc = newsrc.replace(/^[a-z]+:\/\/i([0-9]*)\.[^/]+\/+([^/]+)\.[a-z]+$/, "https://media-files$1.bunkr.la/$2.mp4");
 				if (videosrc !== newsrc) {
-					var match_10 = parse_int(videosrc.match(/:\/\/media-files([0-9]*)\./)[1]);
-					if (match_10 < 12 || isNaN(match_10)) {
+					var match_11 = parse_int(videosrc.match(/:\/\/media-files([0-9]*)\./)[1]);
+					if (match_11 < 12 || isNaN(match_11)) {
 						videosrc = videosrc.replace(/\.bunkr\.la\//, ".bunkr.ru/");
 					}
 					newsrcs.unshift({
@@ -106211,10 +106456,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 		if (host_domain_nowww === "goodillustration.com" && options.element) {
 			if (options.element.tagName === "IMG" &&
 				options.element.parentElement && options.element.parentElement.tagName === "A" && options.element.parentElement.id) {
-				var match_11 = options.element.parentElement.id.match(/^gallery-photo-([0-9]+)$/);
-				if (match_11) {
+				var match_12 = options.element.parentElement.id.match(/^gallery-photo-([0-9]+)$/);
+				if (match_12) {
 					return {
-						url: "https://www.goodillustration.com/show-picture/id=" + match_11[1] + "/",
+						url: "https://www.goodillustration.com/show-picture/id=" + match_12[1] + "/",
 						is_pagelink: true
 					};
 				}
@@ -110769,6 +111014,46 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			if (newsrc)
 				return newsrc;
 		}
+		if (domain_nowww === "hanime1.me") {
+			// thanks to anonymous for reporting:
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+watch\?(?:.*&)?v=([0-9]+)(?:[&?#].*)?$/,
+				query_for_id: "https://" + domain + "/watch?v=${id}",
+				allow_hostresp_for_match: true,
+				process: function(done, resp, cache_key) {
+					var obj = common_functions["get_videotag_obj"](resp, {
+						videotag: true
+					});
+					done(obj, obj ? 60 * 60 : false);
+				}
+			});
+			if (newsrc)
+				return newsrc;
+		}
+		if (domain === "vdownload.hembed.com") {
+			// https://vdownload.hembed.com/image/icon/card_doujin_background.jpg?secure=...
+			if (/\/image\/+icon\/+card_doujin_background\./.test(src))
+				return {
+					url: src,
+					bad: "mask"
+				};
+			// https://vdownload.hembed.com/image/thumbnail/[0-9]+l.jpg?secure=base64,timestamp
+			match = src.match(/\/image\/+thumbnail\/+([0-9]+)[a-z]*\./);
+			if (match) {
+				return {
+					url: "https://hanime1.me/watch?v=" + match[1],
+					is_pagelink: true
+				};
+			}
+		}
+		if (host_domain_nowww === "hanime1.me" && options.element) {
+			if (options.element.tagName === "A" && options.element.parentElement && options.element.parentElement.tagName === "DIV") {
+				var parentel = options.element.parentElement;
+				if (parentel.classList.contains("multiple-link-wrapper")) {
+					return parentel.querySelector('img[src*=thumbnail]');
+				}
+			}
+		}
 		if (domain_nowww === "pornrecs.com") {
 			// thanks to anonymous for reporting:
 			newsrc = website_query({
@@ -110914,6 +111199,14 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			});
 			if (newsrc)
 				return newsrc;
+			// https://allmy.cam/(?:chaturbate|stripchat)/[0-9]{8}/[username]_[0-9]{12}_preview.jpg
+			match = src.match(/:\/\/[^/]+\/+([^/]+)\/+[0-9]{8}\/+([^/.]+)_preview\./);
+			if (match) {
+				return {
+					url: "https://" + domain + "/video/" + match[1] + "_" + match[2],
+					is_pagelink: true
+				};
+			}
 		}
 		if (domain_nowww === "topcamvideos.com") {
 			// thanks to anonymous for reporting:
@@ -111106,10 +111399,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 					}
 					var url = null;
 					for (var _i = 0, videomatches_1 = videomatches; _i < videomatches_1.length; _i++) {
-						var match_12 = videomatches_1[_i];
-						if (match_12[1] !== urlmatch[1])
+						var match_13 = videomatches_1[_i];
+						if (match_13[1] !== urlmatch[1])
 							continue;
-						url = decode_entities(match_12[2]);
+						url = decode_entities(match_13[2]);
 					}
 					if (!url) {
 						console_error(cache_key, "Unable to find video URL from", { resp: resp, videomatches: videomatches, urlmatch: urlmatch });
@@ -112690,7 +112983,11 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			if (newsrc)
 				return newsrc;
 		}
-		if (domain === "u-static.fotor.com") {
+		if (domain === "u-static.fotor.com" ||
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1455#issuecomment-3423429759
+			// https://u-static.haozhaopian.net/uid_0ebbc2c7d87940bda04eb2b9d6f9b301/aiextender/54a5f8ea8b1f494ba2f19b9f1e29910e.jpg@358w_448h_1l.src
+			//   https://u-static.haozhaopian.net/uid_0ebbc2c7d87940bda04eb2b9d6f9b301/aiextender/54a5f8ea8b1f494ba2f19b9f1e29910e.jpg
+			domain === "u-static.haozhaopian.net") {
 			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1455
 			// https://u-static.fotor.com/uid_143c50f5e0d94f9090c81ec9c8ca45a9/ai-extender/31e933c9d4864365963f1dcff340a63e.jpg@358w_448h_1l.src
 			//   https://u-static.fotor.com/uid_143c50f5e0d94f9090c81ec9c8ca45a9/ai-extender/31e933c9d4864365963f1dcff340a63e.jpg
@@ -113805,6 +114102,173 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 				};
 			}
 		}
+		if (domain === "images.inkl.com") {
+			// thanks to anonymous for reporting:
+			// https://images.inkl.com/s3/article/lead_image/22614743/168711145af3bd4e679df4bfe9ea814bY29udGVudHNlYXJjaGFwaSwxNzYwOTAzMzM4-2.82054799.jpg
+			// https://images.inkl.com/s3/article/lead_image/22616238/qTQf2H4RPN3x2EDq7cLdSV-1280-80.jpg?w=800
+			newsrc = src.replace(/\?.*$/, "");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					can_head: false
+				};
+			// https://images.inkl.com/s3/article/lead_image/22614152/8dnFAKWWnTYPnTWj5mA3rd-1280-80.jpg
+			//   https://cdn.mos.cms.futurecdn.net/8dnFAKWWnTYPnTWj5mA3rd.jpg
+			match = src.match(/\/[0-9]+\/+([0-9a-zA-Z]{10,}-[0-9]+-[0-9]+\.[a-z]+)(?:[?#].*)?$/);
+			if (match) {
+				return "https://cdn.mos.cms.futurecdn.net/" + match[1];
+			}
+		}
+		if (domain_nowww === "supla.fi") {
+			var query_supla_podcast_1 = function(id, cb) {
+				api_query("supla:" + id, {
+					url: "https://appdata.richie.fi/books/feeds/v3/Nelonen/podcast_episode/" + id + ".json",
+					imu_mode: "xhr",
+					headers: {
+						Origin: "https://www.supla.fi",
+						Referer: "https://appdata.richie.fi/",
+						"Sec-Fetch-Dest": "empty",
+						"Sec-Fetch-Mode": "cors",
+						"Sec-Fetch-Site": "cross-site"
+					},
+					json: true
+				}, cb, function(done, resp, cache_key) {
+					if (!resp)
+						return done(null, false);
+					if (!resp.data) {
+						console_error(cache_key, "Invalid response", resp);
+						return done(null, false);
+					}
+					if (!resp.data.audio_url) {
+						console_error(cache_key, "No audio_url in resp", resp);
+						return done(null, false);
+					}
+					var urls = [
+						{
+							url: resp.data.audio_url,
+							media_info: {
+								type: "audio"
+							}
+						}
+					];
+					if (resp.data.cover_url)
+						urls.push(resp.data.cover_url);
+					var baseobj = {
+						extra: {
+							caption: resp.data.title
+						}
+					};
+					if (resp.data.publication_date)
+						baseobj.extra.created_date = new Date(resp.data.publication_date).getTime();
+					if (resp.data.last_modified)
+						baseobj.extra.updated_date = new Date(resp.data.last_modified).getTime();
+					baseobj.extra.page = "https://www.supla.fi/episode/" + id;
+					return done(fillobj_urls(urls, baseobj), 6 * 60 * 60);
+				});
+			};
+			newsrc = website_query({
+				website_regex: /^[a-z]+:\/\/[^/]+\/+episode\/+([-0-9a-f]{20,})(?:[?#].*)?$/,
+				run: function(cb, match) {
+					query_supla_podcast_1(match[1], cb);
+				}
+			});
+			if (newsrc)
+				return newsrc;
+		}
+		if (domain === "ak-d.tripcdn.com") {
+			// thanks to anonymous for reporting:
+			// https://ak-d.tripcdn.com/images/1mi1e224x8yfplftp5A1B_W_640_0_R5_Q80.jpg?proc=source/trip
+			//   https://ak-d.tripcdn.com/images/1mi1e224x8yfplftp5A1B.jpg?proc=source/trip
+			return src.replace(/(\/images\/+[0-9a-zA-Z]+)(?:_(?:W_[0-9]+_[0-9]+|[A-Z][0-9]+))*\./, "$1.");
+		}
+		if (domain === "dvqlxo2m2q99q.cloudfront.net" ||
+			// https://dkemhji6i1k0x.cloudfront.net/000_clients/3743908/page/w1000-0r1a3782-bw-dd6265.jpg -- 1400x1845
+			//   https://dkemhji6i1k0x.cloudfront.net/000_clients/3743908/page/0r1a3782-bw-dd6265.jpg -- 1459x1920
+			domain === "dkemhji6i1k0x.cloudfront.net" ||
+			// https://dif1tzfqclj9f.cloudfront.net/000_clients/3326234/page/w400-adriana-2-e00078.jpg
+			//   https://dif1tzfqclj9f.cloudfront.net/000_clients/3326234/page/adriana-2-e00078.jpg -- 1371x1920
+			//   https://dvqlxo2m2q99q.cloudfront.net/000_clients/3326234/page/adriana-2-e00078.jpg -- 404
+			domain === "dif1tzfqclj9f.cloudfront.net") {
+			// www.portfoliobox.com
+			// thanks to anonymous for reporting:
+			// https://dvqlxo2m2q99q.cloudfront.net/000_clients/1130292/page/h400-1130292VcTjtSiC.jpg
+			//   https://dvqlxo2m2q99q.cloudfront.net/000_clients/1130292/page/h800-1130292VcTjtSiC.jpg -- 848x960
+			//   https://dvqlxo2m2q99q.cloudfront.net/000_clients/1130292/page/1130292VcTjtSiC.jpg -- 848x960
+			// https://dvqlxo2m2q99q.cloudfront.net/000_clients/3326234/page/w400-antra-35-ba1dcd.jpg -- 600x777
+			//   https://dvqlxo2m2q99q.cloudfront.net/000_clients/3326234/page/antra-35-ba1dcd.jpg -- 1483x1920
+			return src.replace(/(\/[0-9]+\/+page\/+)[wh][0-9]+-([^/.?#]+\.)/, "$1$2");
+		}
+		if (domain_nowww === "worthplaying.com") {
+			// thanks to anonymous for reporting:
+			// https://worthplaying.com/wpimages/p/a/pacificdrive/thumbs/572102.jpg
+			//   https://worthplaying.com/wpimages/p/a/pacificdrive/572102.jpg
+			return src.replace(/(\/wpimages\/+.\/+.\/+[^/]+\/+)thumbs\/+/, "$1");
+		}
+		if (domain === "im.tiscali.cz") {
+			// thanks to anonymous for reporting:
+			// https://im.tiscali.cz/press/2025/10/26/1800425-profimedia-1047686898-base_1x1.webp.432
+			//   https://im.tiscali.cz/press/2025/10/26/1800425-profimedia-1047686898-base_1x1.webp
+			// https://im.tiscali.cz/press/2025/10/26/1800425-profimedia-1047686898-base_16x9.webp.720
+			//   https://im.tiscali.cz/press/2025/10/26/1800425-profimedia-1047686898-base_16x9.webp
+			return src.replace(/(\/[0-9]{4}\/+[0-9]{2}\/+[0-9]{2}\/+[^/?#]+)\.[0-9]+(?:[?#].*)?$/, "$1");
+		}
+		if (domain === "media.altchar.com") {
+			// thanks to anonymous for reporting:
+			// https://media.altchar.com/prod/images/gm_small_thumbnail/4e9be3b58665-the-outer-worlds-2-review.jpg
+			//   https://media.altchar.com/prod/images/gm_medium_thumbnail/4e9be3b58665-the-outer-worlds-2-review.jpg
+			//   https://media.altchar.com/prod/images/gm_large_thumbnail/4e9be3b58665-the-outer-worlds-2-review.jpg
+			//   https://media.altchar.com/prod/images/gm_featured_image/4e9be3b58665-the-outer-worlds-2-review.jpg
+			// https://media.altchar.com/prod/images/gm_article_embed_image/0b9d1d4ee52a-project-tal-screenshot.jpg
+			//   https://media.altchar.com/prod/images/gm_featured_image/0b9d1d4ee52a-project-tal-screenshot.jpg
+			// other:
+			// https://media.altchar.com/prod/images/1200_672/gm-9ca91fb1-69fb-4e19-804a-8ad376add15f-gwent-price-of-power-harvest-of-sorrow-expansion-pack-now-live.jpg
+			// https://media.altchar.com/prod/images/1200_672/gm-187e2b8b-3d2a-4f70-a08f-b4f153982496-review-header1.jpg
+			return src.replace(/(\/prod\/+images\/+)gm_(?:(?:small|medium|large)_thumbnail|article_embed_image)\/+/, "$1gm_featured_image/");
+		}
+		if (domain === "cdn.staticneo.com") {
+			// thanks to anonymous for reporting:
+			// https://cdn.staticneo.com/size/166x85/1/n/9/vampire_the_masquerade_bloodlines_2_banner_display.jpg
+			//   https://cdn.staticneo.com/n/9/vampire_the_masquerade_bloodlines_2_banner_display.jpg
+			newsrc = src.replace(/\/size\/+[0-9]+x[0-9]+\/+[0-9]+\/+/, "/");
+			if (newsrc !== src)
+				return newsrc;
+		}
+		if (domain_nowww === "picturesheffield.com") {
+			// thanks to anonymous for reporting:
+			// https://www.picturesheffield.com/imagefiles/jpgs_sheffield3//a09264.jpg
+			//   https://www.picturesheffield.com/imagefiles/jpgl_sheffield3//a09264.jpg
+			newsrc = src.replace(/(\/imagefiles\/+jpg)s(_sheffield[0-9]*\/)/, "$1l$2");
+			if (newsrc !== src)
+				return newsrc;
+			newsrc = src.replace(/(\/imagefiles\/+jpg)l(_sheffield[0-9]*\/)/, "$1h$2");
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					problems: { watermark: true }
+				};
+		}
+		if (domain === "imgd.aeplcdn.com") {
+			// thanks to anonymous for reporting:
+			// https://imgd.aeplcdn.com/227x128/n/cw/ec/187341/f-900-gs-left-rear-three-quarter.jpeg?isig=0&q=80
+			//   https://imgd.aeplcdn.com/0x0/n/cw/ec/187341/f-900-gs-left-rear-three-quarter.jpeg?isig=0
+			// https://imgd.aeplcdn.com/1920x1080/n/cw/ec/1/versions/bmw-f-900-gs-standard1726492463383.jpg?q=40
+			newsrc = remove_queries(src, ["q"]);
+			if (newsrc !== src)
+				return {
+					url: newsrc,
+					head_wrong_contenttype: true
+				};
+			return {
+				url: src.replace(/(:\/\/[^/]+\/+)[0-9]+x[0-9]+\/+/, "$10x0/"),
+				head_wrong_contenttype: true
+			};
+		}
+		if (domain_nosub === "mitiendanube.com") {
+			// thanks to fyhtma on github: https://github.com/qsniyg/maxurl/issues/1497
+			// https://acdn-us.mitiendanube.com/stores/001/407/992/products/img_1964-1aa0bb37bcdca519c217438920813664-1024-1024.jpeg
+			//   https://acdn-us.mitiendanube.com/stores/001/407/992/products/img_1964-1aa0bb37bcdca519c217438920813664.jpeg -- 3205x3205
+			return src.replace(/(\/stores\/+[0-9]+\/+[0-9]+\/+[0-9]+\/+products\/+[^/]+)-[0-9]+-[0-9]+\./, "$1.");
+		}
 		// -- general rules --
 		if (src.match(/\/ImageGen\.ashx\?/)) {
 			// http://www.lookalikes.info/umbraco/ImageGen.ashx?image=/media/97522/nick%20hewer%20-%20mark%20brown.jpeg&width=250&constrain=true
@@ -114233,6 +114697,10 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://thumbor.prod.telkku.com/K1JqkZZkguGs907eNMpPAcyd8dQ=/612x382/smart/filters:quality(86):format(jpeg)/img.prod.telkku.com/program-images/e08ca21b311e0468718db7a420ad6983.jpg
 			//   http://img.prod.telkku.com/program-images/e08ca21b311e0468718db7a420ad6983.jpg
 			domain === "thumbor.prod.telkku.com" ||
+			// thanks to anonymous for reporting:
+			// https://thumb.canalplus.pro/http/unsafe/340x452/filters:quality(80)/r.dcs.redcdn.pl/http/o2/n/edytorEPG/mycanal/11630000/P_11636955.jpg
+			//   https://n-25-31.dcs.redcdn.pl/file/o2/n/edytorEPG/mycanal/11630000/P_11636955.jpg
+			domain === "thumb.canalplus.pro" ||
 			src.match(/:\/\/[^/]*\/thumbor\/[^/]*=\//) ||
 			// https://www.orlandosentinel.com/resizer/tREpzmUU7LJX1cbkAN-unm7wL0Y=/fit-in/800x600/top/filters:fill(black)/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/XC6HBG2I4VHTJGGCOYVPLBGVSM.jpg
 			//   http://arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/XC6HBG2I4VHTJGGCOYVPLBGVSM.jpg
@@ -114673,10 +115141,21 @@ var __generator = (this && this.__generator) || function(thisArg, body) {
 			// https://i.know.cf/imgwi/f/f8/Peyton_Roi_List.JPG/240px-Peyton_Roi_List.JPG
 			//   https://i.know.cf/imgwi/f/f8/Peyton_Roi_List.JPG
 			domain === "i.know.cf" ||
+			// thanks to anonymous for reporting:
+			// https://cdn.staticneo.com/w/spongebob/thumb/SpongeBob_SquarePants_Sheldon_J._Plankton_Transparent_PNG.png/300px-SpongeBob_SquarePants_Sheldon_J._Plankton_Transparent_PNG.png
+			//   https://cdn.staticneo.com/w/spongebob/SpongeBob_SquarePants_Sheldon_J._Plankton_Transparent_PNG.png
+			// https://cdn.staticneo.com/ew/thumb/1/16/SQ-GiantHorse1.jpg/730px-SQ-GiantHorse1.jpg
+			//   https://cdn.staticneo.com/ew/1/16/SQ-GiantHorse1.jpg
+			domain === "cdn.staticneo.com" ||
 			// http://oyster.ignimgs.com/mediawiki/apis.ign.com/best-of-2017-awards/thumb/8/86/Anime.jpg/610px-Anime.jpg
 			//   http://oyster.ignimgs.com/mediawiki/apis.ign.com/best-of-2017-awards/8/86/Anime.jpg
 			src.match(/\/thumb\/+[0-9a-f]\/+[0-9a-f]{2}\/+[^/]*\.[^/]*\/+(?:lossless-page[0-9]+-)?[0-9]+px-[^/]*(?:[?#].*)?$/)) {
 			newsrc = src.replace(/\/(?:thumb\/+(archive\/+)?)?(.)\/+(..)\/+([^/]*)\/+(?:lossless-page[0-9]+-)?[0-9]+px-.*?$/, "/$1$2/$3/$4");
+			if (newsrc !== src)
+				return newsrc;
+			// https://cdn.staticneo.com/w/spongebob/thumb/SpongeBob_SquarePants_Sheldon_J._Plankton_Transparent_PNG.png/300px-SpongeBob_SquarePants_Sheldon_J._Plankton_Transparent_PNG.png
+			//   https://cdn.staticneo.com/w/spongebob/SpongeBob_SquarePants_Sheldon_J._Plankton_Transparent_PNG.png
+			newsrc = src.replace(/\/(?:thumb\/+(archive\/+)?)?([^/]*)\/+(?:lossless-page[0-9]+-)?[0-9]+px-[^/]+(?:[?#].*)?$/, "/$1$2");
 			if (newsrc !== src)
 				return newsrc;
 		}
