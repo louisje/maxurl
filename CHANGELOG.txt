@@ -1,3 +1,28 @@
+2026.2.0
+
+New features:
+
+ * Support for ~145 new websites (using ~75 new rules)
+ * Add option to support opening a new popup when an existing popup is already active (disabled by default, thanks to pendrive for the idea)
+
+Improvements:
+
+ * Various improvements/fixes to existing rules (including Discord, Flickr)
+ * Add generic video.js rule
+ * Disable update check for AMO builds by default (#1542, thanks to alexolog for reporting)
+ * Support shadow DOM for galleries
+
+Bugfixes:
+
+ * Don't pop up for # sources
+ * Fix HLS/DASH previews when content-type is invalid
+ * Fix HLS/DASH stream downloads crashing when individual chunks fail
+ * Workaround data URL crash for Violentmonkey
+
+Special thanks to achingfigment, fireattack, KyuJuEX099, Froktime, Tenome, rudolphos, pendrive, alexolog, liamengland1, sunshinespecialist, James Joint, in-the-halfway, pleg, Flash, fyhtma, karpuzikov, ValiumBear, n0099 for their contributions and reports for this release
+
+---
+
 2025.12.1
 
 New features:
