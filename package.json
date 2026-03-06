@@ -1,10 +1,14 @@
 {
-  "name": "image-max-url",
+  "name": "@louisje/image-max-url",
   "version": "2026.2.0",
   "author": "qsniyg",
   "license": "Apache-2.0",
   "private": false,
+  "repository": "https://github.com/louisje/maxurl.git",
   "main": "userscript.user.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "bin": {
     "maxurl": "index.js"
   },
